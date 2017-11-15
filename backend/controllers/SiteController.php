@@ -41,7 +41,7 @@ class SiteController extends Controller
     }
 
 
-    //mycomment
+    //mycomments
     /**
      * @inheritdoc
      */
