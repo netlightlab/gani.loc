@@ -40,13 +40,7 @@ class SiteController extends Controller
         ];
     }
 
-    //4e eto bl9
-    //mycomments
-    //mycomments2
-    //mycomments3
-    //mycomments61
-    //mycomments4
-    //mycomments5
+   
     /**
      * @inheritdoc
      */
