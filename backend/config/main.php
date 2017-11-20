@@ -37,6 +37,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=mypr',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ],
 
         /*'urlManager' => [
             'enablePrettyUrl' => true,

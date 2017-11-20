@@ -27,7 +27,7 @@ class SiteController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
