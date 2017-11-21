@@ -196,10 +196,21 @@ class User extends ActiveRecord implements IdentityInterface
                 ....
             }
     */
-    public function getUsersRole($login){
+    public function getUsersRole($login) {
         $id = static::findOne(['username' => $login])->id;
         $db = new DbManager();
         $role = $db->getRolesByUser($id);
         return $role;
+    }
+
+    /*
+     * Находим пользователя по email
+     *
+     */
+
+    public static function findByEmail($email) {
+        return static::findOne([
+            'email' => $email
+        ]);
     }
 }
