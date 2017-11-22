@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 
-class PersonalController extends Controller
+class ProfileController extends Controller
 {
     public function behaviors()
     {
@@ -52,6 +52,6 @@ class PersonalController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('personal');
+        return $this->render('profile');
     }
 }
