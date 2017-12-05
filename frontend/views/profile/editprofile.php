@@ -73,6 +73,7 @@ if(isset($model->image) && file_exists(Yii::getAlias('@webroot', $model->image))
             <div class="form-group">
                 <?= Html::submitButton('Сохранить изменения', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 <a href="index.php?r=profile%2Findex" class="btn btn-primary">Вернуться назад</a>
+                <?= Html::a("Вернуться", ["profile/index"], ["class" => "btn btn-primary", "onclick" => "asdasdas"])?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

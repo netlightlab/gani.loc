@@ -58,4 +58,9 @@ class UserInfo extends ActiveRecord
     public function getUserInfo($userId){
         return static::find()->where(["users_id" => $userId])->asArray()->all();
     }
+
+    public static function getAvatar($id){
+        $avatar = static::find()->where(["users_id" => $id])->asArray()->one();
+        return $avatar->user_photo;
+    }
 }

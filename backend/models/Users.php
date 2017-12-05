@@ -35,7 +35,7 @@ class Users extends ActiveRecord
     public function getUsersRoleById($id){
         $query = (new Query())->from($this->usersRoleTable)
                 ->where(['user_id' => $id])
-                ->all();
+                ->one();
         return $query;
     }
 

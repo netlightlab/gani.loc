@@ -8,6 +8,7 @@
 
 namespace backend\controllers;
 
+use backend\models\EditUser;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -61,9 +62,17 @@ class UsersController extends Controller
 
     public function actionEdit($id)
     {
-        $users = new Users();
-        $userById = $users->editUserById($id);
-        $usersRole = $users->getUsersRoleById($id);
-        return $this->render("edituser", ["user" => $userById, "role" => $usersRole]);
+        $model = new EditUser();
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->edit()){
+                Yii::$app->session->setFlash("success", "Сохранено");
+            }else{
+                Yii::$app->session->setFlash("error", "Ошибка");
+            }
+        }
+
+        return $this->render("edituser", [
+            "model" => $model,
+        ]);
     }
 }

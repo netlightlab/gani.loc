@@ -3,6 +3,8 @@
 /yii_test
 /yii_test.bat
 
+.db backup
+
 # phpstorm project files
 .idea
 
