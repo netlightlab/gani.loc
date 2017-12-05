@@ -13,6 +13,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
+use frontend\models\Profile;
+use yii\web\UploadedFile;
+use yii\web\User;
 
 
 class ProfileController extends Controller
@@ -54,11 +57,12 @@ class ProfileController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('profile');
-    }
-
-    public function actionProfile(){
-        return $this->render('myprofile');
+        $usersLogin = Profile::getUserLogin();
+        $usersInfo = Profile::getUserInfo();
+        return $this->render('profile', [
+            'UsersInfo' => $usersInfo,
+            'UsersLogin' => $usersLogin,
+        ]);
     }
 
     public function actionEditprofile() {
@@ -78,7 +82,6 @@ class ProfileController extends Controller
 
         return $this->render('editprofile', [
             'model' => $model,
-//            'asd' => $model->getUserInfo(),
         ]);
     }
 }

@@ -25,8 +25,13 @@ use yii\rbac\DbManager;
  * @property string $city
  * @property string $phone
  * @property string $information
+ * @property string $bdate
+ * @property string $country
+ * @property string $adres
+ * @property string $mailindex
+ * @property string $surname
+ * @property string $user_photo
  */
-
 
 class UserInfo extends ActiveRecord
 {
