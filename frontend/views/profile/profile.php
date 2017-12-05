@@ -40,7 +40,9 @@ echo Nav::widget([
             <h3>ВАШ ПРОФИЛЬ</h3>
         </div>
         <div class="col-md-8">
-            <table width="100%;" cellspacing="5" cellpadding="5">
+            <table width="100%;" cellspacing="5" cellpadding="5" style="    background: #fdfbfb;
+    border: 1px solid #f3f3f3;
+    margin-bottom: 15px;">
                 <tr style="background: #f3f3f3;">
                     <td style="padding: 5px;"><strong>Имя пользователя</strong></td>
                     <td style="padding: 5px;"><span><?= isset($UsersLogin['username']) ? $UsersLogin['username'] : "Пусто" ?></span></td>
@@ -88,8 +90,8 @@ echo Nav::widget([
             <img src="../images/users/<?= $UsersLogin['id'] ?>/<?= $UsersInfo['user_photo']?>" alt="" style="    min-width: 265px;
     max-width: 370px;
     width: 100%;
-    min-height: 300px;
-    max-height: 300px;
+    min-height: 280px;
+    max-height: 280px;
     height: 100%;" />
         </div>
         <div class="col-md-12">
