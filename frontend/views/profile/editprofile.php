@@ -17,6 +17,7 @@ if(isset($model->image) && file_exists(Yii::getAlias('@webroot', $model->image))
 }
 
 ?>
+
 <div class="site-signup">
     <?php $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">

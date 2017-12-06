@@ -207,7 +207,6 @@ class EditUser extends Model
     }
 
     protected function getId() {
-        //return Yii::$app->user->id;
         return $_GET['id'];
     }
 
@@ -220,17 +219,17 @@ class EditUser extends Model
     public function uploadFile() {
         $model = new EditUser();
         $user_photo = UploadedFile::getInstance($model, 'user_photo');
-        if($user_photo->name != $model->user_photo->name){
+        if($user_photo->name != $model->user_photo->name) {
             if ($model->load($_POST)) {
-                    $model->user_photo = $user_photo;
-                    if ($model->validate()) {
-                        $path = FileHelper::createDirectory('../images/users/' . $this->getId() . '/');
-                        $dir = Yii::getAlias('@frontend/images/users/' . $this->getId() . '/');
-                        $user_photo->saveAs($dir . $model->user_photo->name);
-                        return $user_photo->name;
-                    }
+                $model->user_photo = $user_photo;
+                if ($model->validate()) {
+                    FileHelper::createDirectory('../images/users/' . $this->getId() . '/');
+                    $dir = Yii::getAlias('@frontend/images/users/' . $this->getId() . '/');
+                    $user_photo->saveAs($dir . $model->user_photo->name);
+                    return $user_photo->name;
+                }
             }
-        }else{
+        } else {
             return $model->user_photo;
         }
     }

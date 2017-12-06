@@ -86,9 +86,9 @@ echo Nav::widget([
             </table>
             <a href="index.php?r=profile%2Feditprofile" class="btn btn-primary">Изменить данные</a>
         </div>
-        <div class="col-md-4" style="border: 1px solid #f1f0f0; padding: 10px;">
+        <div class="col-md-4" style="border: 1px solid #f1f0f0; padding: 10px; text-align: center;">
             <img src="../images/users/<?= $UsersLogin['id'] ?>/<?= $UsersInfo['user_photo']?>" alt="" style="    min-width: 265px;
-    max-width: 370px;
+    max-width: 300px;
     width: 100%;
     min-height: 280px;
     max-height: 280px;
