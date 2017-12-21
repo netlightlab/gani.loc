@@ -3,12 +3,12 @@
  * Created by PhpStorm.
  * User: user
  * Date: 21.12.2017
- * Time: 13:32
+ * Time: 18:03
  */
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 ?>
+
 
 
 <?php $form = ActiveForm::begin(['id' => 'form-page-create' , 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -17,5 +17,5 @@ use yii\bootstrap\ActiveForm;
 <?= $form->field($model, 'url')->textInput()->label('ЧПУ') ?>
 <?= $form->field($model, 'active')->checkbox()->label('Активно') ?>
 <?= $form->field($model, 'show')->checkbox()->label('Показать в меню') ?>
-<?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
+<?= Html::submitButton('Обновить', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

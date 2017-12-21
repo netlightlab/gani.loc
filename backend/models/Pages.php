@@ -7,52 +7,57 @@
  */
 
 namespace backend\models;
-
 use frontend\models\Page;
+use yii\db\ActiveRecord;
+use Yii;
 
-class Pages extends Page
+/**
+ * Pages model
+ *
+ * @property integer $id
+ * @property string $content
+ * @property string $title
+ * @property integer $active
+ * @property integer $show
+ * @property string $url
+ */
+
+class Pages extends ActiveRecord
 {
-    public $active = true;
-    public $show = true;
+    public static function tableName() {
+        return '{{%page}}';
+    }
 
     public function rules()
     {
         return [
-            ['title', 'trim'],
-            ['title', 'required'],
-            ['active', 'boolean'],
-            ['show', 'boolean'],
+            [['title','url'], 'trim'],
+            [['title','content'], 'required'],
+            [['active','show'], 'boolean'],
         ];
     }
 
-    public function signup()
+    public function attributeLabels()
     {
-        if ($this->validate()) {
-            $user = new User();
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->setPassword($this->password);
-            $user->generateAuthKey();
-            //$user->save(false);
-            $user->save(false);
-
-            $auth = Yii::$app->authManager;
-            $authorRole = $auth->getRole('user');
-            $auth->assign($authorRole, $user->getId());
-
-            return $user;
-        }
-
-        return null;
+        return [
+            'title' => 'title',
+            'content' => 'content',
+            'background' => 'background',
+            'url' => 'url',
+            'show' => 'show',
+            'active' => 'active',
+        ];
     }
 
     public function getPages(){
         return self::find()->select("id, title")->asArray()->all();
     }
 
-    public function create(){
-        if ($this->validate()) {
-            
+    public function getPage(){
+        if(Yii::$app->request->get('id')){
+            return self::find()->where(["id" => Yii::$app->request->get('id')])->one();
+        }else{
+            return false;
         }
     }
 }
