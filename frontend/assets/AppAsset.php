@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'common/assets/vendors/jquery.min.js',
         'common/js/bootstrap.min.js',
+        'common/js/fixed_bar.js',
         'https://code.jquery.com/jquery-3.2.1.slim.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js',
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',

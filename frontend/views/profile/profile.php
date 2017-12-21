@@ -1,15 +1,26 @@
 <?php
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
+use common\widgets\Alert;
 
 $this->title = 'Личный кабинет';
-//$this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<h2 class="pt-5 pb-2" style="color: #fff" align="center">Приветствуем вас <span style="color: orange; font-size: 2.5rem;"><?= Yii::$app->user->identity->username ?></span> на нашем сайте!</h2>
-<h5 class="pb-5" style="color: #fff" align="center">Это Ваш личный кабинет. Здесь вы можете отслеживать статус своего заказа, просматривать список желаний и менять сведения о себе</h5>
-<!--</div>-->
-<!--</header>-->
+<section class="section-header" style="background: url('../common/img/header/profile.jpg')">
+    <h2 class="pt-5 pb-2" style="color: #fff" align="center">Приветствуем вас <span style="color: orange; font-size: 3rem;"><?= Yii::$app->user->identity->username ?></span> на нашем сайте!</h2>
+    <h5 class="pb-5" style="color: #fff" align="center">Это Ваш личный кабинет. Здесь вы можете отслеживать статус своего заказа, просматривать список желаний и менять сведения о себе</h5>
+</section>
 
 <div class="container-fluid m-0 p-0">
+    <div class="row p-0 m-0">
+        <div class="col-md-12 p-0 m-0">
+            <?php $this->params['breadcrumbs'][] = $this->title; ?>
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= Alert::widget() ?>
+        </div>
+    </div>
     <div class="row m-0 p-0">
         <div class="col-md-2 p-0 m-0 left-menu-lk" style="background: #2e2e2e; border-bottom: 2px solid white;">
             <ul class="left-menu mr-auto">

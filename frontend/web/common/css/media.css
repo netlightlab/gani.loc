@@ -46,11 +46,9 @@
 		position: fixed;
 	    top: 0;
 	    left: 0;
-	    width: 100%;
-	    background: -webkit-linear-gradient(right, #556b77, #6b797e);
-	    background: -o-linear-gradient(right, #556b77, #6b797e);
-	    background: linear-gradient(to left, #556b77, #6b797e);
-	    	z-index: 99999;
+	    width: 100%;	   
+	    background: #2e2e2e;
+	    z-index: 99999;
 	}
 
 	.nav-item { text-align: left; }

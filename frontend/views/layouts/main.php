@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use yii\helpers\Url;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\bootstrap\NavBar;
@@ -12,6 +13,7 @@ use yii\bootstrap\Nav;
 use frontend\models\Menu;
 
 AppAsset::register($this);
+$context = $this->context;
 ?>
 <?php $this->beginPage() ?>
 
@@ -26,17 +28,16 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <script src="/gani.loc/frontend/web/common/assets/vendors/jquery.min.js"></script>
-    <script src="/gani.loc/frontend/web/common/assets/owlcarousel/owl.carousel.js"></script>
+    <script src="common/assets/vendors/jquery.min.js"></script>
+    <script src="common/assets/owlcarousel/owl.carousel.js"></script>
 </head>
 <body>
 
-<header>
+<header class="fixed-bar">
     <div class="container">
         <div class="row pt-3 pb-3"><!-- NAVBAR -->
             <div class="col-md-2 col-xs-2 text-left d-flex justify-content-center align-items-center d-none">
-                <?= Html::a(Html::img('common/img/header/logo.png' ), ['site/index']) ?>
-                <!--<img src="">-->
+                <?= Html::a(Html::img('@web/common/img/header/logo.png' ), ['site/index']) ?>
             </div>
             <div class="col-md-8 col-xs-8 text-center">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-menu-mobile">
@@ -128,10 +129,7 @@ AppAsset::register($this);
 
 
 <?php $this->beginBody() ?>
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    <?= Alert::widget() ?>
+
     <?= $content ?>
 
 
@@ -157,18 +155,17 @@ AppAsset::register($this);
                 <input class="search-input-footer" type="text" name="search" required placeholder="Поиск">
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">
-                <p><img src="common/img/footer/phone.png">&nbsp;&nbsp;&nbsp;+7 (701) - 470 - 00 - 14</p>
-                <a href="#">info@tourcenter.online</a>
+                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;+7 (701) - 470 - 00 - 14</p>
+                <a href="#">info@KazTravel.online</a>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 d-flex justify-content-center align-items-center">
-                <a href="#"><img src="common/img/footer/vk.png"></a>
-                <a href="#"><img src="common/img/footer/face.png"></a>
-                <a href="#"><img src="common/img/footer/mail.png"></a>
+                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?></a>
+                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/face.png' ), ['site/index']) ?></a>
+                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/mail.png' ), ['site/index']) ?></a>
             </div>
         </div>
     </div>
 </footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -1,23 +1,41 @@
 header {
-	//background-image: url('../img/header/header_fon.jpg');
-	//background-color: #fff;
     background: transparent;
-	background-size: cover;
 	position: fixed;
-	z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 99999;
+    transition: 250ms;
 }
 
-header::before {
+.section-header,
+.section-header-main {
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+    position: relative;
+    background-size: cover !important;
+    z-index: 1;
+}
+
+.section-header::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.12);
+    z-index: -9999;
+}
+
+.section-header-main::before {
 	content: '';
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
-	//background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.5);
 	z-index: -9999;
 }
 
@@ -44,6 +62,8 @@ input[type="checkbox"]:checked + span:before {
     margin: 0px 5px 0px 5px;
     pointer-events: none;
 }
+
+label { cursor: pointer; }
 
 
 .navbar-nav {
@@ -730,24 +750,27 @@ footer { background: #2e2e2e; }
     margin: 15px;
     padding: 15px;
     width: 340px;
-    background: hsla(0, 0%, 0%, .5);
+    background: hsla(0, 0%, 0%, .8);
     padding-top: 30px;
     padding-bottom: 30px;    
 }
 
-#login-form label {
+#login-form label,
+#form-signup label {
     display: inline-block;
     margin-bottom: .5rem;
     color: #fff;
     font-weight: 500;
 }
 
+#form-signup input,
 #login-form input {
     background: rgba(255, 255, 255, .09);
     border: 1.5px solid #fac727;
     color: #fff;
 }
 
+#form-signup input,
 #login-form input::placeholder {
     color: #fff;
 }
@@ -801,4 +824,40 @@ footer { background: #2e2e2e; }
     padding: 5px;
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
+}
+
+.breadcrumb {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 5px;
+    list-style: none;
+    background-color: #2e2e2e;
+    padding-left: 15px;
+    margin: 0;
+    color: #fff;
+    border-radius: 0px;
+    position: relative;
+}
+
+.breadcrumb li a {
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.breadcrumb li.active {
+    background: transparent !important;
+    color: #00f3ff !important;
+}
+
+.breadcrumb li::before {
+    content: '/';
+    color: gray;
+}
+
+.breadcrumb li::after{
+    content: '';
+    background: red;
 }

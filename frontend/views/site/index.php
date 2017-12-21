@@ -7,7 +7,7 @@ $this->title = 'KazTravel';
 use yii\helpers\Html;
 
 ?>
-<section class="pb-5" style="background: url('common/img/header/header_fon.jpg')">
+<section class="section-header-main" style="background: url('common/img/header/header_fon.jpg')">
 <div class="container">
     <!--<div class="row">-->
         <div class="row header-description-block"> <!-- HEADER DESCRIPTION -->
