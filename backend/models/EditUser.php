@@ -207,7 +207,7 @@ class EditUser extends Model
     }
 
     protected function getId() {
-        return $_GET['id'];
+        return Yii::$app->request->get('id');
     }
 
     public function getUserInfo(){

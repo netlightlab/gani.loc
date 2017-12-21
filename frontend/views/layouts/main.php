@@ -35,7 +35,8 @@ AppAsset::register($this);
     <div class="container">
         <div class="row pt-3 pb-3"><!-- NAVBAR -->
             <div class="col-md-2 col-xs-2 text-left d-flex justify-content-center align-items-center d-none">
-                <img src="common/img/header/logo.png">
+                <?= Html::a(Html::img('common/img/header/logo.png' ), ['site/index']) ?>
+                <!--<img src="">-->
             </div>
             <div class="col-md-8 col-xs-8 text-center">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-menu-mobile">

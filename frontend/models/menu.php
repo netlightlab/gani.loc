@@ -18,7 +18,7 @@ class Menu extends Page
         foreach($values as $value){
             if($value['show'] == 1){
                 echo Html::tag('li',
-                        Html::a($value['title'], ['site/page&id='.$value['id']], ['class' => 'nav-link']),
+                        Html::a($value['title'], ['site/page', 'id' => $value['id']], ['class' => 'nav-link']),
                     ["class" => "nav-item"]);
             }
         }

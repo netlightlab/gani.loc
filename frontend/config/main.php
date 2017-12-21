@@ -10,7 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'homeUrl' => '/',
+    //'homeUrl' => '/',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'authManager' => [
@@ -18,7 +18,7 @@ return [
         ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            'baseUrl' => '',
+            //'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -64,11 +64,19 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => false,
+            //'suffix' => '.html',
             'rules' => [
-                '<controller>/<action>' => '<controller>/<action>',
+                '' => 'site/index',
+                '<action>'=>'site/<action>',
             ],
         ],
+        'assetManager' => [
+            'basePath' => '@webroot/assets',
+            'baseUrl' => '@web/assets'
+        ],
+        'request' => [
+            'baseUrl' => ''
+        ]
     ],
     'params' => $params,
 ];

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 ?>
 <section class="pb-5" style="background: url('common/img/header/header_fon.jpg')">
 <div class="container">
-    <div class="row">
+    <!--<div class="row">-->
         <div class="row header-description-block"> <!-- HEADER DESCRIPTION -->
             <div class="col-md-12 col-xs-12 text-center">
                 <span class="header-description">ТУРЫ ПО КАЗАХСТАНУ</span>
@@ -62,7 +62,7 @@ use yii\helpers\Html;
                 <label for="c9"><input type="checkbox" hidden id="c9"><span></span>Развлекательные мероприятия</label><br>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </div>
 </section>
 

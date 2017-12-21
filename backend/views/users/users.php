@@ -5,6 +5,8 @@
  * Date: 20.11.2017
  * Time: 18:01
  */
+
+use yii\helpers\Html;
 ?>
 <div class="container">
     <div class="row">
@@ -16,7 +18,7 @@
         </div>
         <? foreach($users as $user){ ?>
             <div class="col-xs-6">
-                <a href="<?='index.php?r=users%2Fedit&id='.$user['id']?>"><?=$user['username']?></a>
+                <?= Html::a($user['username'], ["users/edit", "id" => $user['id']]) ?>
             </div>
             <div class="col-xs-6">
                 &nbsp;
