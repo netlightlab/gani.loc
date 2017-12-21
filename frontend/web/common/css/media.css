@@ -1,0 +1,79 @@
+@media screen and (max-width: 768px) {
+	.header-description { font-size: 2rem; }
+	.header-description-block { padding: 0; }
+	/*.tour-block-search:before{ width: 30%; }*/
+	.popular { flex-direction: column; }
+	.about-preim { flex-direction: column; }
+	.jungle-icon img { width: 25px; height: 25px; }
+	.kupatsya-icon img { width: 25px; height: 25px; }
+	.smile-icon img { width: 25px; height: 25px; }
+	.babies-icon img { width: 25px; height: 25px; }
+	.fish-icon img { width: 25px; height: 25px; }
+	.sport-icon img { width: 25px; height: 25px; }
+	.shrine-icon img { width: 25px; height: 25px; }
+	.sanatoriy-icon img { width: 25px; height: 25px; }
+	.photo-icon img { width: 25px; height: 25px; }
+
+	.jungle-icon a,
+	.kupatsya-icon a,
+	.smile-icon a,
+	.babies-icon a,
+	.fish-icon a,
+	.sport-icon a,
+	.photo-icon a,
+	.shrine-icon a,
+	.sanatoriy-icon a{
+		color: #fff;
+		font-weight: 600; 
+		text-decoration: none; 
+		border-bottom: 1px solid #fff; 
+		font-size: 10px;
+	}	
+
+	.bg-vopros { padding: 15px; }
+	.input-vopros input + input { margin-left: 0px;}
+	.input-vopros { flex-direction: column; }
+	.foot-navigation ul {
+		flex-direction: column
+	}	
+
+}
+
+@media (min-width: 320px) and (max-width: 993px) {
+	/*menu*/
+	body { margin-top: 36px; }
+	.navbar {
+		position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    background: -webkit-linear-gradient(right, #556b77, #6b797e);
+	    background: -o-linear-gradient(right, #556b77, #6b797e);
+	    background: linear-gradient(to left, #556b77, #6b797e);
+	    	z-index: 99999;
+	}
+
+	.nav-item { text-align: left; }
+	.navbar-dark .navbar-nav .nav-link { padding-left: 15px; }
+	.navbar::before {
+		content: '';
+    	background: url(../img/header/logo.png) no-repeat;
+    	background-size: contain;
+    	width: 50%;
+    	height: 40px;    	
+	}
+	.d-none { display: none !important }
+	.mobile-registration { display: inherit !important; }
+	.profile-menu {
+	    width: 100%;
+    	list-style: none;
+    	padding: 0;
+    	margin: 0;
+    	display: flex !important;
+    	justify-content: flex-start !important;
+    	align-items: left !important;
+	}
+	.navbar-nav {
+		margin-top: 15px;
+	}
+}

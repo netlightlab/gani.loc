@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\Page;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -148,6 +149,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -208,6 +210,22 @@ class SiteController extends Controller
 
         return $this->render('resetPassword', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionPage($id)
+    {
+        $page = new Page();
+        $data = $page->data();
+        $title = $page->title;
+        $content = $page->content;
+        $background = $page->background;
+
+        return $this->render('page', [
+            "title" => $title,
+            "content" => $content,
+            "background" => $background,
+            "data" => $data,
         ]);
     }
 }
