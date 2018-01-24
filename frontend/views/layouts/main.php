@@ -33,9 +33,72 @@ $context = $this->context;
 </head>
 <body>
 
-<header class="fixed-bar">
+<header class="">
+    <div id="top_line">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-xs-2 pb-2 d-flex align-items-center">
+                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
+                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/face.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
+                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/mail.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
+                </div>
+                <div class="col-md-10 pb-2 top_line-box">
+                    <ul class="profile-menu d-flex justify-content-center align-items-center">
+                        <li class="profile-button">
+                            <?php
+                            if (Yii::$app->user->isGuest) {
+                                echo Html::a("Войти", ["site/login"], ["class" => "nav-link"]).Html::img('common/img/header/enter_profile.png');
+                            } else {
+                                echo Html::a("Кабинет", ["profile/index"], ["class" => "nav-link"]);
+                            }
+                            ?>
+                        </li>
+                        <li class="profile-button">
+                            <?php
+                            if (Yii::$app->user->isGuest) {
+                                echo Html::a("Регистрация", ["site/signup"], ["class" => "nav-link"]).Html::img('common/img/header/register_profile.png');
+                            } else {
+                                echo
+                                    Html::beginForm(['/site/logout'], 'post')
+                                    . Html::submitButton(
+                                        'ВЫХОД (' . Yii::$app->user->identity->username . ')',
+                                        ['class' => 'nav-link exit-account']
+                                    )
+                                    . Html::endForm();
+                            }
+                            ?>
+                        </li>
+                       <!-- <li class="profile-button">
+                            <select class="top_line-currency">
+                                <option selected>₸ KZT</option>
+                                <option>ք RUB</option>
+                                <option>€ EUR</option>
+                                <option>$ USD</option>
+                            </select>
+                        </li>-->
+                        <li class="profile-button">
+                            <select class="top_line-currency">
+                                <option selected>АЛМАТЫ</option>
+                                <option>ШЫМКЕНТ</option>
+                                <option>ТАРАЗ</option>
+                                <option>АСТАНА</option>
+                                <option>АКТОБЕ</option>
+                            </select>
+                        </li>
+                        <li class="profile-button">
+                            <select class="top_line-currency lang">
+                                <option selected>РУССКИЙ</option>
+                                <option>КАЗАХСКИЙ</option>
+                                <option>ENGLISH</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
-        <div class="row pt-3 pb-3"><!-- NAVBAR -->
+        <div class="row"><!-- NAVBAR -->
             <div class="col-md-2 col-xs-2 text-left d-flex justify-content-center align-items-center d-none">
                 <?= Html::a(Html::img('@web/common/img/header/logo.png' ), ['site/index']) ?>
             </div>
@@ -97,29 +160,8 @@ $context = $this->context;
             </div>
             <div class="col-md-2 col-xs-2 text-right d-flex justify-content-end align-items-center d-none">
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
-                    <li class="profile-button pl-0 pr-4">
-                    <?php
-                    if (Yii::$app->user->isGuest) {
-                        echo Html::a("Войти", ["site/login"], ["class" => "nav-link"]).Html::img('common/img/header/enter_profile.png');
-                    } else {
-                        echo Html::a("Кабинет", ["profile/index"], ["class" => "nav-link"]);
-                    }
-                    ?>
-                    </li>
-                    <li class="profile-button pl-0 pr-4">
-                        <?php
-                        if (Yii::$app->user->isGuest) {
-                            echo Html::a("Регистрация", ["site/signup"], ["class" => "nav-link"]).Html::img('common/img/header/register_profile.png');
-                        } else {
-                            echo
-                                Html::beginForm(['/site/logout'], 'post')
-                                . Html::submitButton(
-                                    'Выход (' . Yii::$app->user->identity->username . ')',
-                                    ['class' => 'nav-link exit-account']
-                                )
-                                . Html::endForm();
-                        }
-                        ?>
+                    <li class="profile-button pl-0 pr-4" style="border-right: none;">
+                        <?= Html::a('Поиск', ['site/index']) ?>
                     </li>
                 </ul>
             </div>
@@ -138,11 +180,11 @@ $context = $this->context;
         <div class="row">
             <div class="col-md-12 foot-navigation">
                 <ul class="pt-3 pb-3">
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">О компании</a></li>
-                    <li><a href="#">Туры</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Как купить</a></li>
+                    <li><a class="pt-2 pb-2" href="#">Главная</a></li>
+                    <li><a class="pt-2 pb-2" href="#">О компании</a></li>
+                    <li><a class="pt-2 pb-2" href="#">Туры</a></li>
+                    <li><a class="pt-2 pb-2" href="#">Новости</a></li>
+                    <li><a class="pt-2 pb-2" href="#">Как купить</a></li>
                 </ul>
             </div>
         </div>

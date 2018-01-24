@@ -59,9 +59,18 @@ class ProfileController extends Controller
     {
         $usersLogin = Profile::getUserLogin();
         $usersInfo = Profile::getUserInfo();
+        $model = new EditProfile();
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->edit()){
+                Yii::$app->session->setFlash("success", "Сохранено");
+            }else{
+                Yii::$app->session->setFlash("error", "Ошибка");
+            }
+        }
         return $this->render('profile', [
             'UsersInfo' => $usersInfo,
             'UsersLogin' => $usersLogin,
+            'model' => $model,
         ]);
     }
 

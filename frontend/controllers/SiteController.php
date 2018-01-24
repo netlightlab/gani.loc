@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use frontend\models\Page;
+use frontend\models\SignupCompany;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -226,6 +227,21 @@ class SiteController extends Controller
             "content" => $content,
             "background" => $background,
             "data" => $data,
+        ]);
+    }
+
+    public function actionSignup_company(){
+        $model = new SignupCompany();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+//                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+//                }
+            }
+        }
+
+        return $this->render('signupcompany', [
+            'model' => $model,
         ]);
     }
 }
