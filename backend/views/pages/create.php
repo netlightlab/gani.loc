@@ -11,11 +11,8 @@ use yii\bootstrap\ActiveForm;
 ?>
 
 
-<?php $form = ActiveForm::begin(['id' => 'form-page-create' , 'options' => ['enctype' => 'multipart/form-data']]); ?>
-<?= $form->field($model, 'title')->textInput(['placeholder' => 'Например: О нас'])->label('Название') ?>
-<?= $form->field($model, 'content')->textarea()->label('Текст') ?>
-<?= $form->field($model, 'url')->textInput()->label('ЧПУ') ?>
-<?= $form->field($model, 'active')->checkbox()->label('Активно') ?>
-<?= $form->field($model, 'show')->checkbox()->label('Показать в меню') ?>
-<?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
-<?php ActiveForm::end(); ?>
+<h1><?= Html::encode($this->title) ?></h1>
+
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>

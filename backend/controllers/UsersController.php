@@ -10,11 +10,13 @@ namespace backend\controllers;
 
 use backend\models\EditUser;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Users;
 use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 
 
 class UsersController extends Controller
@@ -54,15 +56,17 @@ class UsersController extends Controller
     }
 
     public function actionIndex(){
-        $users = new Users();
-        $result = $users->getAllUsers();
-
-        return $this->render("users", ["users" => $result]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Users::find(),
+        ]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
-    public function actionEdit($id)
+    public function actionUpdate($id)
     {
-        $model = new EditUser();
+        /*$model = new EditUser();
         if ($model->load(Yii::$app->request->post())) {
             if($model->edit()){
                 Yii::$app->session->setFlash("success", "Сохранено");
@@ -73,6 +77,33 @@ class UsersController extends Controller
 
         return $this->render("edituser", [
             "model" => $model,
+        ]);*/
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success", "Сохранено");
+            return $this->redirect(['index', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
         ]);
     }
+
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        Yii::$app->session->setFlash("success", "Пользователь был удален");
+        return $this->redirect(['index']);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Users::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('Запрашиваемая страница не существует');
+    }
+
 }

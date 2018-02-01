@@ -1,13 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 21.12.2017
- * Time: 13:18
- */
+
 use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Страницы';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= Html::a("Создать", ["pages/create"]) ?>
-<? foreach($links as $link): ?>
-    <?= Html::a($link['title'], ['pages/edit', 'id' => $link['id']]) ?>
-<? endforeach; ?>
+<div class="pages-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+
+            'id',
+            'title',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+</div>

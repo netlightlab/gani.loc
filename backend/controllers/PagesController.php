@@ -11,26 +11,70 @@ namespace backend\controllers;
 
 use backend\models\Pages;
 use yii\web\Controller;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 class PagesController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex(){
-        $model = new Pages();
-        $data = $model->getPages();
+        $dataProvider = new ActiveDataProvider([
+            'query' => Pages::find(),
+        ]);
         return $this->render('index', [
-            "links" => $data,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionCreate(){
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success", "Сохранено");
+            return $this->redirect(['index', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCreate()
+    {
         $model = new Pages();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if($model->save(false)){
-                Yii::$app->session->setFlash("success", "Сохранено");
-            }else{
-                Yii::$app->session->setFlash("error", "Ошибка");
-            }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success", "Страница создана");
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -38,18 +82,26 @@ class PagesController extends Controller
         ]);
     }
 
-    public function actionEdit(){
-        $model = new Pages();
-        $model = $model->getPage();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if($model->save(false)){
-                Yii::$app->session->setFlash("success", "Сохранено");
-            }else{
-                Yii::$app->session->setFlash("error", "Ошибка");
-            }
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Pages::findOne($id)) !== null) {
+            return $model;
         }
-        return $this->render('edit',[
-            "model" => $model
+
+        throw new NotFoundHttpException('Запрашиваемая страница не существует');
+    }
+
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 }

@@ -10,6 +10,10 @@ namespace backend\models;
 use frontend\models\Page;
 use yii\db\ActiveRecord;
 use Yii;
+use yii\web\UploadedFile;
+use yii\helpers\FileHelper;
+use backend\models\UploadFile;
+
 
 /**
  * Pages model
@@ -19,6 +23,7 @@ use Yii;
  * @property string $title
  * @property integer $active
  * @property integer $show
+ * @property string $background
  * @property string $url
  */
 
@@ -40,12 +45,12 @@ class Pages extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'title' => 'title',
-            'content' => 'content',
-            'background' => 'background',
+            'title' => 'Заголовок',
+            'content' => 'Текст',
+            'background' => 'Изображение',
             'url' => 'url',
-            'show' => 'show',
-            'active' => 'active',
+            'show' => 'Показать',
+            'active' => 'Активно',
         ];
     }
 
@@ -59,5 +64,10 @@ class Pages extends ActiveRecord
         }else{
             return false;
         }
+    }
+
+
+    public function uploadFile() {
+
     }
 }
