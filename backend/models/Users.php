@@ -17,6 +17,10 @@ class Users extends ActiveRecord
 {
     //public $user;
 
+    public static function tableName() {
+        return '{{%user}}';
+    }
+
     private $rolesTable = '{{%auth_item}}';
     protected $usersRoleTable = '{{%auth_assignment}}';
     private $userTable = '{{%user}}';
