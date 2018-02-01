@@ -28,5 +28,5 @@ $(document).ready(function(){
 
 });
 
-// hljs.configure({tabReplace: '  '});
-// hljs.initHighlightingOnLoad();
+hljs.configure({tabReplace: '  '});
+hljs.initHighlightingOnLoad();

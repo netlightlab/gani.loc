@@ -213,4 +213,8 @@ class User extends ActiveRecord implements IdentityInterface
             'email' => $email
         ]);
     }
+
+    public static function getUserInfo() {
+        return static::find()->where(["id" => Yii::$app->user->id])->asArray()->all();
+    }
 }

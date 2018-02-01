@@ -48,6 +48,18 @@
 
 	.registr-description { margin-top: 60px; }
 
+	/* NAV TABS PROFILE */
+	.cabinet-nav li .nav-link span {
+		display: none;
+	}
+	.cabinet-nav li .nav-link img {
+		padding-right: 0;
+	}
+	.tab-content {
+		padding: 5px;
+	}
+	/* end */
+
 }
 
 @media (min-width: 320px) and (max-width: 993px) {

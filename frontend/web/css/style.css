@@ -219,7 +219,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 #reviewStars-input label, 
 #reviewStars-input label:hover, 
 #reviewStars-input label:hover ~ label {
-	background: url('../img/tour-hit/star.png') no-repeat;
+	background: url('../common/img/tour-hit/star.png') no-repeat;
     background-size: 15px 30px;
 }
 
@@ -548,7 +548,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 }
 
 .bg-zayavka {
-	background-image: url('../img/zayavka/back-image.jpg');
+	background-image: url('../common/img/zayavka/back-image.jpg');
 	background-size: cover;
 }
 
@@ -562,7 +562,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 
 .bg-vopros::after{
 	content: "";
-	background: url('../img/zayavka/svertka.png') no-repeat;
+	background: url('../common/img/zayavka/svertka.png') no-repeat;
 	width: 100px;
 	height: 100px;
 	position: absolute;
@@ -623,7 +623,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 
 .beforeAndAfter::before {
     content: "";
-    background: url(../img/zayavka/port.png) no-repeat;
+    background: url(../common/img/zayavka/port.png) no-repeat;
     width: 320px;
     height: 426px;
     position: absolute;
@@ -631,7 +631,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 
 .beforeAndAfter::after {
     content: "";
-    background: url(../img/zayavka/port2.png) no-repeat;
+    background: url(../common/img/zayavka/port2.png) no-repeat;
     width: 320px;
     height: 426px;
     position: absolute;
@@ -853,51 +853,44 @@ footer { background: #2e2e2e; }
     padding: 0;
     list-style: none;
     display: flex;
+    justify-content: center;
 }
 
-.cabinet-nav-item {
-    margin-left: .5rem;
-    margin-right: .5rem;
-}
-
-.cabinet-nav-item:first-child {
-    margin-left: 0px;
-}
-
-.cabinet-nav-link {
-    background: #f6f6f6;
-    width: 100%;
-    min-width: 140px;
-    text-align: center;
+.cabinet-nav li .nav-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-decoration: none !important;
-    padding: 5px 10px 5px 10px;
-    transition: 250ms;
-    border: 1px solid #cccccc;
 }
 
-.cabinet-btn-active { 
-    background: #fff !important; 
-    border-bottom: transparent;
+.cabinet-nav li .nav-link img {
+    padding-right: 8px;
 }
 
-.cabinet-nav-link img {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 40px;
-    height: 20px;
+.tab-content {
+    background: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 40px;
 }
 
-.cabinet-nav-link:hover {
-    box-shadow: 0px 0px 8px 3px #e8e8e8;
+.tab-content p,
+.tab-content h1,
+.tab-content h2,
+.tab-content h3,
+.tab-content h4,
+.tab-content h5 {
+    margin: 0;
 }
+
+.tab-content>.active {
+    background: transparent;
+}
+
 
 .profile-info {
     border: 1px solid #f1f0f0;
     padding: 10px;
-    height: 100%;
 }
 
 .profile-info table {
@@ -916,7 +909,16 @@ footer { background: #2e2e2e; }
 .profile-icon {
     border: 1px solid #f1f0f0;
     padding: 10px;
-    height: 100%;
+    overflow: hidden;
+}
+
+.profile-icon img {
+    width: 100%;
+    transition: .3s;
+}
+
+.profile-icon img:hover {
+    transform: scale(1.2);
 }
 
 .profile-more-info {
@@ -925,6 +927,32 @@ footer { background: #2e2e2e; }
     width: 100%;
     display: block;
     min-height: 140px;
+}
+
+.btn-refresh-profile {
+    border: none;
+    font-family: inherit;
+    color: #fff;
+    width: 100%;
+    background: #85c99d;
+    cursor: pointer;
+    padding: 12px 20px;
+    outline: none;
+    font-size: 12px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.btn-refresh-profile:hover {
+    background: #2e2e2e;
 }
 
 .parallax-header-description {

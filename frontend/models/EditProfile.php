@@ -17,12 +17,13 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\HttpException;
 use yii\web\UploadedFile;
+use common\models\User;
 
 
 class EditProfile extends Model
 {
     public $user_name;
-    public $users_id;
+//    public $users_id;
     public $phone;
     public $city;
     public $information;
@@ -97,8 +98,8 @@ class EditProfile extends Model
     {
         if ($this->validate()) {
             if ($this->getUserInfo()) {
-                $user = UserInfo::findOne(['users_id' => $this->getId()]);
-                $user->users_id = $this->getId();
+                $user = User::findOne(['id' => $this->getId()]);
+//                $user->users_id = $this->getId();
                 $user->user_name = $this->user_name;
                 $user->phone = $this->phone;
                 $user->city = $this->city;
@@ -111,8 +112,8 @@ class EditProfile extends Model
                 $user->user_photo = $this->uploadFile();
                 $user->save();
             } else {
-                $user = new UserInfo();
-                $user->users_id = $this->getId();
+                $user = new User();
+//                $user->users_id = $this->getId();
                 $user->user_name = $this->user_name;
                 $user->phone = $this->phone;
                 $user->city = $this->city;
@@ -135,9 +136,7 @@ class EditProfile extends Model
     }
 
     public function getUserInfo(){
-        $userInfo = new UserInfo();
-        $result = $userInfo->getUserInfo($this->getId());
-        return $result;
+        return User::getUserInfo();
     }
 
     public function uploadFile() {
@@ -147,8 +146,8 @@ class EditProfile extends Model
             if ($model->load($_POST)) {
                 $model->user_photo = $user_photo;
                 if ($model->validate()) {
-                    FileHelper::createDirectory('../images/users/' . $this->getId() . '/');
-                    $dir = Yii::getAlias('@frontend/images/users/' . $this->getId() . '/');
+                    FileHelper::createDirectory('common/users/' . $this->getId() . '/');
+                    $dir = Yii::getAlias('common/users/' . $this->getId() . '/');
                     $user_photo->saveAs($dir . $model->user_photo->name);
                     return $user_photo->name;
                 }

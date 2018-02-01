@@ -15,7 +15,7 @@ use yii\filters\AccessControl;
 use Yii;
 use frontend\models\Profile;
 use yii\web\UploadedFile;
-use yii\web\User;
+use common\models\User;
 
 
 class ProfileController extends Controller
@@ -57,8 +57,8 @@ class ProfileController extends Controller
      */
     public function actionIndex()
     {
-        $usersLogin = Profile::getUserLogin();
-        $usersInfo = Profile::getUserInfo();
+        $usersInfo = User::findOne(['id' => Yii::$app->user->id]);
+        $userEdit = new EditProfile();
         $model = new EditProfile();
         if ($model->load(Yii::$app->request->post())) {
             if($model->edit()){
@@ -69,7 +69,7 @@ class ProfileController extends Controller
         }
         return $this->render('profile', [
             'UsersInfo' => $usersInfo,
-            'UsersLogin' => $usersLogin,
+            'UserEdit' => $userEdit,
             'model' => $model,
         ]);
     }

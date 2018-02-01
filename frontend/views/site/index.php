@@ -507,7 +507,10 @@ use yii\helpers\Html;
         </div>
     </div>
 </section>
-<script>
+
+<?php
+
+$script = <<<JS
     var owl = $('.owl-carousel');
     owl.owlCarousel({
         margin: 10,
@@ -524,4 +527,8 @@ use yii\helpers\Html;
             }
         }
     })
-</script>
+JS;
+
+$this->registerJs($script);
+
+?>

@@ -28,8 +28,8 @@ $context = $this->context;
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <script src="common/assets/vendors/jquery.min.js"></script>
-    <script src="common/assets/owlcarousel/owl.carousel.js"></script>
+<!--    <script src="common/assets/vendors/jquery.min.js"></script>-->
+<!--    <script src="common/assets/owlcarousel/owl.carousel.js"></script>-->
 </head>
 <body>
 
