@@ -38,8 +38,7 @@ $this->title = 'Регистрация';
 </section>
 <section class="pt-5 pb-5" style="background: #f9f9f9;">
     <div class="container" style="background: #fff; border: 1px solid #cccccc;">
-        <?php $form = ActiveForm::begin(['id' => 'form-signup-company']); ?>
-
+        <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-left pt-3">
@@ -167,12 +166,12 @@ $this->title = 'Регистрация';
                     <?= $form->field($model, 'email')->textInput(['placeholder' => 'Например: info@kaztravel.kz'])->label('E-mail*') ?>
                 </div>
                 <div class="col-md-6">
-                    <?= $form->field($model, 'password_repeat')->passwordInput()->label('ПАРОЛЬ*') ?>
+                    <?= $form->field($model, 'password')->passwordInput()->label('ПАРОЛЬ*') ?>
                 </div>
             </div>
             <div class="row">
                 <div class="offset-md-6 col-md-6">
-                    <?= $form->field($model, 'password')->passwordInput()->label('ПОДТВЕРДИТЬ ПАРОЛЬ*') ?>
+                    <?= $form->field($model, 'repassword')->passwordInput()->label('ПОДТВЕРДИТЬ ПАРОЛЬ*') ?>
                 </div>
             </div>
             <div class="row">

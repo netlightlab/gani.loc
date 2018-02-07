@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Cities;
 use frontend\models\EditProfile;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -61,7 +62,8 @@ class ProfileController extends Controller
         $userEdit = new EditProfile();
         $model = new EditProfile();
         if ($model->load(Yii::$app->request->post())) {
-            if($model->edit()){
+            if($model->edit() && $model->editSettings()){
+                $this->refresh();
                 Yii::$app->session->setFlash("success", "Сохранено");
             }else{
                 Yii::$app->session->setFlash("error", "Ошибка");

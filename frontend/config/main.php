@@ -18,7 +18,7 @@ return [
         ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            //'baseUrl' => '',
+            'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -64,7 +64,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            //'suffix' => '.html',
+//            'suffix' => '.html',
             'rules' => [
                 '' => 'site/index',
                 '<action>'=>'site/<action>',
@@ -74,9 +74,6 @@ return [
             'basePath' => '@webroot/assets',
             'baseUrl' => '@web/assets'
         ],
-        'request' => [
-            'baseUrl' => ''
-        ]
     ],
     'params' => $params,
 ];

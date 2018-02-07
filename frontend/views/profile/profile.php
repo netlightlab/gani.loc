@@ -5,6 +5,9 @@ use common\widgets\Alert;
 use yii\helpers\Url;
 use yii\bootstrap\Tabs;
 use yii\widgets\ActiveForm;
+use common\models\Cities;
+
+$cities = new Cities();
 
 $this->title = 'Личный кабинет';
 
@@ -48,23 +51,34 @@ $this->title = 'Личный кабинет';
                     <div id="orders" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                                <span style="color: red;">на стадий разработки</span>
+<!--                                <span style="color: red;">на стадий разработки</span>-->
                             </div>
                         </div>
                     </div>
                     <div id="wishlist" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                                <span style="color: red;">на стадий разработки</span>
+<!--                                <span style="color: red;">на стадий разработки</span>-->
                             </div>
                         </div>
                     </div>
                     <div id="settings" class="tab-pane set-tab-content">
+                        <?php $form = ActiveForm::begin(['id' => 'form-signup-edit', 'options' => ['enctype' => 'multipart/form-data']]); ?>
                         <div class="row">
-                            <div class="col-md-12">
-                                <span style="color: red;">на стадий разработки</span>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'oldpassword')->label('СТАРЫЙ ПАРОЛЬ') ?>
+                                <?= $form->field($model, 'password')->label('НОВЫЙ ПАРОЛЬ') ?>
+                                <?= $form->field($model, 'repassword')->label('ПОДТВЕРДИТЕ НОВЫЙ ПАРОЛЬ') ?>
+                                <?= Html::submitButton('Обновить пароль', ['class' => 'btn-refresh-profile', 'name' => 'signup-edit']) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'oldpassword')->label('СТАРЫЙ EMAIL') ?>
+                                <?= $form->field($model, 'password')->label('НОВЫЙ EMAIL') ?>
+                                <?= $form->field($model, 'repassword')->label('ПОДТВЕРДИТЕ НОВЫЙ EMAIL') ?>
+                                <?= Html::submitButton('Обновить email', ['class' => 'btn-refresh-profile', 'name' => 'signup-edit']) ?>
                             </div>
                         </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
                     <div id="profile" class="tab-pane set-tab-content active">
                         <div class="row">
@@ -78,50 +92,50 @@ $this->title = 'Личный кабинет';
                                     <table width="100%;" cellspacing="5" cellpadding="5">
                                         <tr>
                                             <td><strong>Отображаемое имя</strong></td>
-                                            <td><span><?= isset($UsersLogin['username']) ? $UsersLogin['username'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['username'] ? $UsersInfo['username'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Имя</strong></td>
-                                            <td><span><?= isset($UsersInfo) ? $UsersInfo['user_name'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['user_name'] ? $UsersInfo['user_name'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Фамилия</strong></td>
-                                            <td><?= isset($UsersInfo['surname']) ? $UsersInfo['surname'] : "Пусто" ?></td>
+                                            <td><?= $UsersInfo['surname'] ? $UsersInfo['surname'] : "Не заполнено" ?></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Номер телефона</strong></td>
-                                            <td><span><?= isset($UsersInfo) ? $UsersInfo['phone'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['phone'] ? $UsersInfo['phone'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Дата рождения</strong></td>
-                                            <td><span><?= isset($UsersInfo['bdate']) ? $UsersInfo['bdate'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['bdate'] ? $UsersInfo['bdate'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Страна</strong></td>
-                                            <td><span><?= isset($UsersInfo['country']) ? $UsersInfo['country'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['country'] ? $cities->getCountriesName($UsersInfo['country']) : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Город</strong></td>
-                                            <td><span><?= isset($UsersInfo['city']) ? $UsersInfo['city'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['city'] ? $UsersInfo['city'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Адрес</strong></td>
-                                            <td><span><?= isset($UsersInfo['adres']) ? $UsersInfo['adres'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['adres'] ? $UsersInfo['adres'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Почтовый индекс</strong></td>
-                                            <td><span><?= isset($UsersInfo['mailindex']) ? $UsersInfo['mailindex'] : "Пусто" ?></span></td>
+                                            <td><span><?= $UsersInfo['mailindex'] ? $UsersInfo['mailindex'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>EMAIL</strong></td>
-                                            <td><span><?= $UsersLogin['email'] ?></span></td>
+                                            <td><span><?= $UsersInfo['email'] ?></span></td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="profile-icon">
-                                    <?= isset($UsersInfo['user_photo']) ? Html::img('@web/common/users/'.$UsersInfo['id'].'/'.$UsersInfo['user_photo']) : Html::img('@web/common/users/no-image.png') ?>
+                                    <?= $UsersInfo['user_photo'] ? Html::img('@web/common/users/'.$UsersInfo['id'].'/'.$UsersInfo['user_photo']) : Html::img('@web/common/users/no-image.png') ?>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +154,11 @@ $this->title = 'Личный кабинет';
                                 <span style="cursor: pointer; width: auto;" class="btn-refresh-profile" onclick="$('#profile_form').toggle();">Изменить данные</span>
                             </div>
                         </div>
-                            <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr style="margin-top: 30px !important; width: 100%;">
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <?php $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -160,6 +178,8 @@ $this->title = 'Личный кабинет';
                                         </div>
                                         <div class="col-md-6 col-xs-6">
                                             <?= $form->field($model, 'bdate')->label('Дата рождения')->textInput(['placeholder' => 'Например: 17.02.1940']) ?>
+                                        </div>
+                                        <div class="col-md-12">
                                             <hr style="margin: 0 !important; width: 100%;">
                                         </div>
                                         <div class="col-md-12 py-3">
@@ -175,17 +195,16 @@ $this->title = 'Личный кабинет';
                                             <?= $form->field($model, 'mailindex')->textInput(['placeholder' => 'Например: 99999'])->label('Почтовый индекс') ?>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
-                                            <?= $form->field($model, 'country')->dropDownList([
-                                                'Казахстан',
-                                                'Россия',
-                                            ])->label('Страна') ?>
+                                            <?= $form->field($model, 'country')->dropDownList($cities->getCountriesList())->label('Страна') ?>
+                                        </div>
+                                        <div class="col-md-12">
                                             <hr style="margin: 0 !important; width: 100%;">
                                         </div>
                                         <div class="col-md-12 py-3">
                                             <h4>Редактировать информацию</h4>
                                         </div>
                                         <div class="col-md-12">
-                                            <?= $form->field($model, 'information')->textarea(['rows' => '5'])->textarea(['placeholder' => 'Например: Ищу супервыгодные туры'])->label('О себе') ?>
+                                            <?= $form->field($model, 'information')->textarea(['placeholder' => 'Например: Ищу супервыгодные туры', 'rows' => '5'])->label('О себе') ?>
                                             <hr style="margin: 0 !important; width: 100%;">
                                         </div>
                                         <div class="col-md-12 py-3">

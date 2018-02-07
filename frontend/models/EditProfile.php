@@ -33,6 +33,11 @@ class EditProfile extends Model
     public $mailindex;
     public $surname;
     public $user_photo;
+    public $password;
+    public $repassword;
+    public $oldpassword;
+    public $confpassword;
+    public $email;
 
     function __construct()
     {
@@ -51,6 +56,8 @@ class EditProfile extends Model
                 $this->adres = $arr['adres'];
                 $this->country = $arr['country'];
                 $this->user_photo = $arr['user_photo'];
+                $this->confpassword = $arr['password_hash'];
+                $this->email = $arr['email'];
             }
         }
     }
@@ -62,11 +69,9 @@ class EditProfile extends Model
     {
         return [
             ['user_name', 'trim'],
-            ['user_name', 'required', 'message' => 'Не заполнено поле!'],
             ['user_name', 'string', 'min' => 2, 'max' => 255],
 
             ['phone', 'trim'],
-            ['phone', 'required', 'message' => 'Не заполнено поле!'],
 
             ['adres', 'trim'],
 
@@ -77,15 +82,19 @@ class EditProfile extends Model
             ['country', 'trim'],
 
             ['city', 'trim'],
-            ['city', 'required', 'message' => 'Не заполнено поле!'],
 
             ['information', 'trim'],
 
             ['surname', 'trim'],
-            ['surname', 'required', 'message' => 'Не заполнено поле!'],
             ['surname', 'string', 'min' => 2, 'max' => 255],
 
             ['user_photo', 'file', 'extensions' => 'png, jpg'],
+
+            ['email', 'trim'],
+
+            ['password', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['repassword', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('app', "Пароли не совпадают")],
         ];
     }
 
@@ -124,6 +133,20 @@ class EditProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
+                $user->save();
+            }
+
+            return true;
+        }
+    }
+
+    public function editSettings() {
+        if ($this->validate()) {
+            if ($this->getUserInfo()) {
+                $user = User::findOne(['id' => $this->getId()]);
+                $pass = Yii::$app->security->generatePasswordHash($this->password);
+                $user->password_hash = $pass;
+                $user->email = $this->email;
                 $user->save();
             }
 

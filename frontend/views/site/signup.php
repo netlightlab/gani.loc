@@ -66,9 +66,7 @@ $this->title = 'Регистрация';
                     </div>
                 </div>
                 <div class="offset-md-3 col-md-6 pb-3">
-                    <div class="registr-partner-btn">
-                        <?= Html::a('Регистрация для партнера',['signup_company']) ?>
-                    </div>
+                    <?= Html::a('Регистрация для партнера',['signup_company'], ['class' => 'registr-partner-btn']) ?>
                 </div>
             </div>
         <?php ActiveForm::end(); ?>

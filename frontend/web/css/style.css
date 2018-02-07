@@ -866,6 +866,14 @@ footer { background: #2e2e2e; }
     padding-right: 8px;
 }
 
+.cabinet-nav li .active img {
+    filter: hue-rotate(280deg);
+}
+
+.cabinet-nav li .active span {
+    color: #0a9a24;
+}
+
 .tab-content {
     background: #fff;
     border-left: 1px solid #ddd;
@@ -1036,16 +1044,12 @@ header.sticky #top_line {
     background: #fa2727;
     border: none;
     height: 45px;
-    color: #fff;
     font-weight: 600;
     font-size: 18px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.registr-partner-btn a {
     color: #fff;
     text-decoration: none !important;
 }
@@ -1053,9 +1057,6 @@ header.sticky #top_line {
 .registr-partner-btn:hover {
     background: #ffffff;
     border: 1px solid #fa2727;
-}
-
-.registr-partner-btn:hover a {
     color: #fa2727;
 }
 
@@ -1066,4 +1067,8 @@ header.sticky #top_line {
     border-top: 2px solid #fac727;
     border-bottom: 2px solid #fac727;
     margin-top: 120px;
+}
+
+.help-block {
+    color: red;
 }

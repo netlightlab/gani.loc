@@ -4,6 +4,9 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use yii\db\ActiveRecord;
+use yii\db\Connection;
+use yii\rbac\DbManager;
 
 
 /**
@@ -17,7 +20,6 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     private $_user;
-
 
     /**
      * @inheritdoc
@@ -45,12 +47,33 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Не верный email или пароль');
+        $partner = new SignupCompany();
+        $usr = new User();
+
+        $rolePartn = $partner->getUsersRole($this->email);
+        $roleUser = $usr->getUserRole($this->email);
+
+        if ($rolePartn['partner']) {
+            if (!$this->hasErrors()) {
+                $user = $this->getPartner();
+                if (!$user || !$user->validatePassword($this->password)) {
+                    $this->addError($attribute, 'Не верный email или пароль');
+                }
+            }
+        } elseif ($roleUser['user']) {
+            if (!$this->hasErrors()) {
+                $user = $this->getUser();
+                if (!$user || !$user->validatePassword($this->password)) {
+                    $this->addError($attribute, 'Не верный email или пароль');
+                }
             }
         }
+//        if (!$this->hasErrors()) {
+//            $user = $this->getUser();
+//            if (!$user || !$user->validatePassword($this->password)) {
+//                $this->addError($attribute, 'Не верный email или пароль');
+//            }
+//        }
     }
 
     /**
@@ -60,10 +83,23 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        $partner = new SignupCompany();
+        $user = new User();
+
+        $rolePartn = $partner->getUsersRole($this->email);
+        $roleUser = $user->getUserRole($this->email);
+
+        if ($rolePartn['partner']) {
+            if ($this->validate()) {
+//                echo "<script>alert('LOGIN PARTNER');</script>";
+                return Yii::$app->user->login($this->getPartner(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            }
+        } elseif($roleUser['user']) {
+            if ($this->validate()) {
+//                echo "<script>alert('LOGIN USER');</script>";
+                return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+           }
         }
-        
         return false;
     }
 
@@ -76,6 +112,19 @@ class LoginForm extends Model
     {
         if ($this->_user === null) {
             $this->_user = User::findByEmail($this->email);
+        }
+        return $this->_user;
+    }
+
+    /**
+     * Finds user by [[usermail]]
+     *
+     *
+     */
+    protected function getPartner()
+    {
+        if ($this->_user === null) {
+            $this->_user = SignupCompany::findByEmail($this->email);
         }
         return $this->_user;
     }

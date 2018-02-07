@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use frontend\models\SignupCompany;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -216,5 +217,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function getUserInfo() {
         return static::find()->where(["id" => Yii::$app->user->id])->asArray()->all();
+    }
+
+    public function getUserRole($email) {
+        $id = static::findOne(['email' => $email])->id;
+        $db = new DbManager();
+        $role = $db->getRolesByUser($id);
+        return $role;
     }
 }

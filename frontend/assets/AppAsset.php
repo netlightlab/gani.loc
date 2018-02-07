@@ -12,20 +12,16 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'common/assets/owlcarousel/assets/owl.carousel.min.css',
         'css/style.css',
         'css/media.css',
         'https://fonts.googleapis.com/css?family=Lato:300,400,700,400italic,300italic',
-        'common/assets/owlcarousel/assets/owl.carousel.min.css',
     ];
     public $js = [
-//        'common/assets/vendors/jquery.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js',
         'js/bootstrap.min.js',
         'js/fixed_bar.js',
         'common/assets/owlcarousel/owl.carousel.js',
-//        'common/assets/js/app.js',
-//        'common/assets/owlcarousel/owl.carousel.js',
-
     ];
     public $depends = [
         'yii\web\YiiAsset',
