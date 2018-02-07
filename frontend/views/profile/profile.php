@@ -2,8 +2,6 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-use yii\helpers\Url;
-use yii\bootstrap\Tabs;
 use yii\widgets\ActiveForm;
 use common\models\Cities;
 
@@ -63,22 +61,24 @@ $this->title = 'Личный кабинет';
                         </div>
                     </div>
                     <div id="settings" class="tab-pane set-tab-content">
-                        <?php $form = ActiveForm::begin(['id' => 'form-signup-edit', 'options' => ['enctype' => 'multipart/form-data']]); ?>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'oldpassword')->label('СТАРЫЙ ПАРОЛЬ') ?>
-                                <?= $form->field($model, 'password')->label('НОВЫЙ ПАРОЛЬ') ?>
-                                <?= $form->field($model, 'repassword')->label('ПОДТВЕРДИТЕ НОВЫЙ ПАРОЛЬ') ?>
-                                <?= Html::submitButton('Обновить пароль', ['class' => 'btn-refresh-profile', 'name' => 'signup-edit']) ?>
+                                <h4 class="pb-3">Изменить пароль</h4>
+                                <?php $form = ActiveForm::begin(['id' => 'change-password', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+                                    <?= $form->field($model, 'password')->label('НОВЫЙ ПАРОЛЬ')->textInput(['required' => 'required', 'type' => 'password']) ?>
+                                    <?= $form->field($model, 'repassword')->label('ПОДТВЕРДИТЕ НОВЫЙ ПАРОЛЬ')->textInput(['required' => 'required', 'type' => 'password']) ?>
+                                    <?= Html::submitButton('Обновить пароль', ['class' => 'btn-refresh-profile', 'name' => 'signup-edit']) ?>
+                                <?php ActiveForm::end(); ?>
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($model, 'oldpassword')->label('СТАРЫЙ EMAIL') ?>
-                                <?= $form->field($model, 'password')->label('НОВЫЙ EMAIL') ?>
-                                <?= $form->field($model, 'repassword')->label('ПОДТВЕРДИТЕ НОВЫЙ EMAIL') ?>
-                                <?= Html::submitButton('Обновить email', ['class' => 'btn-refresh-profile', 'name' => 'signup-edit']) ?>
+                                <h4 class="pb-3">Изменить email адрес</h4>
+                                <?php $form = ActiveForm::begin(['id' => 'change-email', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+                                    <?= $form->field($model, 'email')->label('НОВЫЙ EMAIL')->textInput(['value' => '', 'required' => 'required', 'type' => 'email']) ?>
+                                    <?= $form->field($model, 'confemail')->label('ПОДТВЕРДИТЕ НОВЫЙ EMAIL')->textInput(['value' => '', 'required' => 'required', 'type' => 'email']) ?>
+                                    <?= Html::submitButton('Обновить email', ['class' => 'btn-refresh-profile', 'name' => 'change-email']) ?>
+                                <?php ActiveForm::end(); ?>
                             </div>
                         </div>
-                        <?php ActiveForm::end(); ?>
                     </div>
                     <div id="profile" class="tab-pane set-tab-content active">
                         <div class="row">

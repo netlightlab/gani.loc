@@ -9,13 +9,9 @@
 namespace frontend\models;
 
 use common\models\UserInfo;
-use yii\db\ActiveRecord;
 use Yii;
 use yii\base\model;
-use yii\db\Query;
-use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
-use yii\web\HttpException;
 use yii\web\UploadedFile;
 use common\models\User;
 
@@ -23,7 +19,6 @@ use common\models\User;
 class EditProfile extends Model
 {
     public $user_name;
-//    public $users_id;
     public $phone;
     public $city;
     public $information;
@@ -35,9 +30,8 @@ class EditProfile extends Model
     public $user_photo;
     public $password;
     public $repassword;
-    public $oldpassword;
-    public $confpassword;
     public $email;
+    public $confemail;
 
     function __construct()
     {
@@ -56,7 +50,6 @@ class EditProfile extends Model
                 $this->adres = $arr['adres'];
                 $this->country = $arr['country'];
                 $this->user_photo = $arr['user_photo'];
-                $this->confpassword = $arr['password_hash'];
                 $this->email = $arr['email'];
             }
         }
@@ -91,9 +84,11 @@ class EditProfile extends Model
             ['user_photo', 'file', 'extensions' => 'png, jpg'],
 
             ['email', 'trim'],
+            ['confemail', 'trim'],
+            ['confemail', 'compare', 'compareAttribute' => 'email', 'message' => Yii::t('app','Email не совпадает')],
 
-            ['password', 'required', 'message' => 'Поле не может быть пустым!'],
-            ['repassword', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['password', 'trim'],
+            ['repassword', 'trim'],
             ['repassword', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('app', "Пароли не совпадают")],
         ];
     }
@@ -108,7 +103,6 @@ class EditProfile extends Model
         if ($this->validate()) {
             if ($this->getUserInfo()) {
                 $user = User::findOne(['id' => $this->getId()]);
-//                $user->users_id = $this->getId();
                 $user->user_name = $this->user_name;
                 $user->phone = $this->phone;
                 $user->city = $this->city;
@@ -119,35 +113,26 @@ class EditProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
-                $user->save();
-            } else {
-                $user = new User();
-//                $user->users_id = $this->getId();
-                $user->user_name = $this->user_name;
-                $user->phone = $this->phone;
-                $user->city = $this->city;
-                $user->information = $this->information;
-                $user->bdate = $this->bdate;
-                $user->adres = $this->adres;
-                $user->country = $this->country;
-                $user->mailindex = $this->mailindex;
-                $user->surname = $this->surname;
-                $user->user_photo = $this->uploadFile();
-                $user->save();
-            }
-
-            return true;
-        }
-    }
-
-    public function editSettings() {
-        if ($this->validate()) {
-            if ($this->getUserInfo()) {
-                $user = User::findOne(['id' => $this->getId()]);
                 $pass = Yii::$app->security->generatePasswordHash($this->password);
                 $user->password_hash = $pass;
                 $user->email = $this->email;
-                $user->save();
+                $user->save(false);
+            } else {
+                $user = new User();
+                $user->user_name = $this->user_name;
+                $user->phone = $this->phone;
+                $user->city = $this->city;
+                $user->information = $this->information;
+                $user->bdate = $this->bdate;
+                $user->adres = $this->adres;
+                $user->country = $this->country;
+                $user->mailindex = $this->mailindex;
+                $user->surname = $this->surname;
+                $user->user_photo = $this->uploadFile();
+                $pass = Yii::$app->security->generatePasswordHash($this->password);
+                $user->password_hash = $pass;
+                $user->email = $this->email;
+                $user->save(false);
             }
 
             return true;
@@ -179,5 +164,4 @@ class EditProfile extends Model
             return $model->user_photo;
         }
     }
-
 }
