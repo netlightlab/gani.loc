@@ -28,8 +28,8 @@ $context = $this->context;
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <script src="common/assets/vendors/jquery.min.js"></script>
-    <script src="common/assets/owlcarousel/owl.carousel.js"></script>
+<!--    <script src="common/assets/vendors/jquery.min.js"></script>-->
+<!--    <script src="common/assets/owlcarousel/owl.carousel.js"></script>-->
 </head>
 <body>
 
@@ -110,50 +110,6 @@ $context = $this->context;
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <?= Menu::showMenu() ?>
-                            <!--<li class="nav-item active">
-                                <?/*= Html::a("Главная", ["site/index"], ["class" => "nav-link"])*/?>
-                            </li>
-                            <li class="nav-item">
-                                <?/*= Html::a("О компании", ["site/page/id=1"], ["class" => "nav-link"])*/?>
-                            </li>
-                            <li class="nav-item">
-                                <?/*= Html::a("Туры", ["index"], ["class" => "nav-link"])*/?>
-                            </li>
-                            <li class="nav-item">
-                                <?/*= Html::a("Новости", ["index"], ["class" => "nav-link"])*/?>
-                            </li>
-                            <li class="nav-item">
-                                <?/*= Html::a("Как купить", ["index"], ["class" => "nav-link"])*/?>
-                            </li>
-                            <li class="nav-item mobile-registration">
-                                <ul class="profile-menu d-flex justify-content-center align-items-center">
-                                    <li class="profile-button pl-0 pr-4">
-                                        <?php
-/*                                        if (Yii::$app->user->isGuest) {
-                                            echo Html::a("Войти", ["site/login"], ["class" => "nav-link"]).Html::img('common/img/header/enter_profile.png');
-                                        } else {
-                                            echo Html::a("Кабинет", ["profile/index"], ["class" => "nav-link"]);
-                                        }
-                                        */?>
-                                    </li>
-                                    <li class="profile-button pl-0 pr-4">
-                                        <?php
-/*                                        if (Yii::$app->user->isGuest) {
-                                            echo Html::a("Регистрация", ["site/signup"], ["class" => "nav-link"]).Html::img('common/img/header/register_profile.png');
-                                        } else {
-                                            echo
-                                                Html::beginForm(['/site/logout'], 'post')
-                                                . Html::submitButton(
-                                                    'Выход (' . Yii::$app->user->identity->username . ')',
-                                                    ['class' => 'nav-link exit-account']
-                                                )
-                                                . Html::endForm();
-
-                                        }
-                                        */?>
-                                    </li>
-                                </ul>
-                            </li>-->
                         </ul>
                     </div>
                 </nav>

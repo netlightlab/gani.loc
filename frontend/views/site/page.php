@@ -31,7 +31,6 @@ $this->title = $title;
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
-                <?= Alert::widget() ?>
             </div>
         </div>
     </div>
@@ -41,6 +40,7 @@ $this->title = $title;
     <div class="container">
         <div class="row">
             <div class="col-md-12 pt-5 pb-5">
+                <?= Alert::widget() ?>
                 <?= $content ?>
             </div>
         </div>

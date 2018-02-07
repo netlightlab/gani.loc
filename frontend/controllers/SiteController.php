@@ -5,6 +5,7 @@ use frontend\models\Page;
 use frontend\models\SignupCompany;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\rbac\DbManager;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -14,6 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\User;
 
 /**
  * Site controller
@@ -242,6 +244,7 @@ class SiteController extends Controller
 
         return $this->render('signupcompany', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
 }

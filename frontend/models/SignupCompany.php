@@ -1,10 +1,7 @@
 <?php
 namespace frontend\models;
 
-use common\models\User;
-use yii\base\Model;
 use Yii;
-use yii\web\HttpException;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -33,19 +30,23 @@ use yii\rbac\DbManager;
  * @property integer $city_phone_2
  * @property integer $city_phone_3
  * @property string $email
- * @property string $password
  * @property string $id_tour
+ * @property string $password_hash
+ * @property string $password write-only password
  */
-class SignupCompany extends ActiveRecord
+class SignupCompany extends ActiveRecord implements IdentityInterface
 {
-    private $_user;
-    public $password_repeat;
 
+    public $repassword;
+    public $password;
+
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return '{{%partner}}';
     }
-
     /**
      * @inheritdoc
      */
@@ -107,41 +108,26 @@ class SignupCompany extends ActiveRecord
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
 
-            ['password, password_repeat', 'required', 'on' => 'create'],
-            ['password', 'compare', 'compareAttribute' => 'password_repeat', 'on' => array('create', 'update')],
-            ['password_repeat', 'safe'],
-
-
-            //['password', 'required', 'message' => 'Поле не может быть пустым!'],
-//            ['password', 'compare'],
-//            ['password', 'string', 'min' => 6],
-//            ['password, password_repeat', 'required', 'on' => 'create'],
-//            ['password, password_repeat', 'length', 'min' => 6, 'max' => 30, 'on' => array('create', 'update')],
-//            ['password', 'compare', 'compareAttribute' => 'password_repeat', 'on' => array('create', 'update')],
-//            ['password, password_repeat', 'length', 'min' => 8, 'max' => 30],
-//            ['password', 'required', 'on' => 'update'],
-//            ['password', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли не совпадают, попробуйте снова.', 'on' => 'update'],
-//            ['password', 'string', 'min' => 6],
+            ['password', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['repassword', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('app', "Пароли не совпадают")],
         ];
     }
 
-//    /**
-//     * Signs user up.
-//     *
-//     * @return User|null the saved model or null if saving fails
-//     */
+    /**
+     * Signs user up.
+     *
+     */
 
     public function signup()
     {
         if ($this->validate()) {
-
-            $user = new User();
+            $this->setPassword($this->password);
+            $this->save(false);
 
             $auth = Yii::$app->authManager;
-            $authorRole = $auth->getRole('user');
-            $auth->assign($authorRole, 9999);
-
-            $this->save();
+            $authorRole = $auth->getRole('partner');
+            $auth->assign($authorRole, $this->getId());
 
             return true;
         }
@@ -149,51 +135,53 @@ class SignupCompany extends ActiveRecord
         return null;
     }
 
-//    public function getId()
-//    {
-//        return $this->getPrimaryKey();
-//    }
-//
-//    public function login()
-//    {
-//        if ($this->validate()) {
-//            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-//        }
-//
-//        return false;
-//    }
-//
-//    protected function getUser(){
-//        if ($this->_user === null) {
-//            $this->_user = self::findByEmail($this->email);
-//        }
-//        return $this->_user;
-//    }
-//
-//    protected static function findByEmail($email){
-//        return static::findOne([
-//            'email' => $email
-//        ]);
-//    }
+    /**
+     * @inheritdoc
+     */
+    public function getId() {
+        return $this->getPrimaryKey();
+    }
 
-//    public function signup()
-//    {
-//        if ($this->validate()) {
-//            $user = new User();
-//            $user->username = $this->username;
-//            $user->email = $this->email;
-//            $user->setPassword($this->password);
-//            $user->generateAuthKey();
-//            //$user->save(false);
-//            $user->save(false);
-//
-//            $auth = Yii::$app->authManager;
-//            $authorRole = $auth->getRole('user');
-//            $auth->assign($authorRole, $user->getId());
-//
-//            return $user;
-//        }
-//
-//        return null;
-//    }
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public static function findIdentity($id) {}
+    public static function findIdentityByAccessToken($token, $type = null) {}
+    public function getAuthKey() {}
+    public function validateAuthKey($authKey) {}
+
+    /* Получаем объект роли
+     * по email пользователя
+     */
+
+    public function getUsersRole($email) {
+        $id = static::findOne(['email' => $email])->id;
+        $db = new DbManager();
+        $role = $db->getRolesByUser($id);
+        return $role;
+    }
+
+    public static function findByEmail($email) {
+        return static::findOne([
+            'email' => $email
+        ]);
+    }
 }

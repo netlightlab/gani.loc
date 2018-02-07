@@ -1,3 +1,7 @@
+if ($(window).scrollTop() > 40) {
+	$("header").css("background", "#2e2e2e");
+    $("header").addClass("sticky");
+}
 $(window).scroll(function(){
     if ($(window).scrollTop() > 40 ){
         $("header").css("background", "#2e2e2e");
