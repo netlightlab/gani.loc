@@ -4,27 +4,20 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use common\models\User;
-use yii\db\ActiveRecord;
-use yii\db\Connection;
-use yii\rbac\DbManager;
-
 
 /**
  * Login form
  */
 class LoginForm extends Model
 {
-//    public $username;
     public $email;
     public $password;
     public $rememberMe = true;
-
     private $_user;
 
     /**
      * @inheritdoc
      */
-
     public function rules()
     {
         return [
@@ -47,33 +40,12 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        $partner = new SignupCompany();
-        $usr = new User();
-
-        $rolePartn = $partner->getUsersRole($this->email);
-        $roleUser = $usr->getUserRole($this->email);
-
-        if ($rolePartn['partner']) {
-            if (!$this->hasErrors()) {
-                $user = $this->getPartner();
-                if (!$user || !$user->validatePassword($this->password)) {
-                    $this->addError($attribute, 'Не верный email или пароль');
-                }
-            }
-        } elseif ($roleUser['user']) {
-            if (!$this->hasErrors()) {
-                $user = $this->getUser();
-                if (!$user || !$user->validatePassword($this->password)) {
-                    $this->addError($attribute, 'Не верный email или пароль');
-                }
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            if (!$user || !$user->validatePassword($this->password)) {
+                $this->addError($attribute, 'Не верный email или пароль');
             }
         }
-//        if (!$this->hasErrors()) {
-//            $user = $this->getUser();
-//            if (!$user || !$user->validatePassword($this->password)) {
-//                $this->addError($attribute, 'Не верный email или пароль');
-//            }
-//        }
     }
 
     /**
@@ -88,7 +60,6 @@ class LoginForm extends Model
 
         $rolePartn = $partner->getUsersRole($this->email);
         $roleUser = $user->getUserRole($this->email);
-
         if ($rolePartn['partner']) {
             if ($this->validate()) {
 //                echo "<script>alert('LOGIN PARTNER');</script>";

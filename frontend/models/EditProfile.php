@@ -113,9 +113,6 @@ class EditProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
-                $pass = Yii::$app->security->generatePasswordHash($this->password);
-                $user->password_hash = $pass;
-                $user->email = $this->email;
                 $user->save(false);
             } else {
                 $user = new User();
@@ -129,9 +126,6 @@ class EditProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
-                $pass = Yii::$app->security->generatePasswordHash($this->password);
-                $user->password_hash = $pass;
-                $user->email = $this->email;
                 $user->save(false);
             }
 
