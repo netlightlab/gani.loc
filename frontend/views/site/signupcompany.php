@@ -97,7 +97,7 @@ $this->title = 'Регистрация';
                     <?= $form->field($model, 'additional_street')->textInput(['placeholder' => 'Например: Заезд со стороны Шашкина не доезжая Бц Каспии'])->label('ДОПОЛНИТЕЛЬНЫЕ СВЕДЕНИЯ ОБ АДРЕСЕ') ?>
                 </div>
                 <div class="col-md-4">
-                    <?= $form->field($model, 'postcode')->textInput(['placeholder' => 'Например: 050000'])->label('ПОЧТОВЫЙ ИНДЕКС') ?>
+                    <?= $form->field($model, 'mailindex')->textInput(['placeholder' => 'Например: 050000'])->label('ПОЧТОВЫЙ ИНДЕКС') ?>
                 </div>
             </div>
             <div class="row">

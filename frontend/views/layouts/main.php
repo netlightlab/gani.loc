@@ -4,16 +4,12 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
-use yii\helpers\Url;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
-use yii\bootstrap\NavBar;
-use yii\bootstrap\Nav;
 use frontend\models\Menu;
 
 AppAsset::register($this);
 $context = $this->context;
+
 ?>
 <?php $this->beginPage() ?>
 
@@ -27,9 +23,6 @@ $context = $this->context;
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-
-<!--    <script src="common/assets/vendors/jquery.min.js"></script>-->
-<!--    <script src="common/assets/owlcarousel/owl.carousel.js"></script>-->
 </head>
 <body>
 

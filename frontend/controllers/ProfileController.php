@@ -14,9 +14,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
-use frontend\models\Profile;
 use yii\web\UploadedFile;
 use common\models\User;
+use yii\validators\CompareValidator;
 
 
 class ProfileController extends Controller
@@ -59,10 +59,9 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $usersInfo = User::findOne(['id' => Yii::$app->user->id]);
-        $userEdit = new EditProfile();
         $model = new EditProfile();
         if ($model->load(Yii::$app->request->post())) {
-            if($model->edit() && $model->editSettings()){
+            if($model->edit()){
                 $this->refresh();
                 Yii::$app->session->setFlash("success", "Сохранено");
             }else{
@@ -71,7 +70,6 @@ class ProfileController extends Controller
         }
         return $this->render('profile', [
             'UsersInfo' => $usersInfo,
-            'UserEdit' => $userEdit,
             'model' => $model,
         ]);
     }

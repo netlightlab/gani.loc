@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\rbac\DbManager;
+use yii\web\User;
 
 /**
  * SignupCompany model
@@ -19,7 +20,7 @@ use yii\rbac\DbManager;
  * @property string $about_company
  * @property string $street
  * @property string $additional_street
- * @property integer $postcode
+ * @property integer $mailindex
  * @property string $fio
  * @property string $position_company
  * @property string $website
@@ -33,9 +34,16 @@ use yii\rbac\DbManager;
  * @property string $id_tour
  * @property string $password_hash
  * @property string $password write-only password
+ * @property string $password_reset_token
+ * @property string $auth_key
+ * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
  */
 class SignupCompany extends ActiveRecord implements IdentityInterface
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
 
     public $repassword;
     public $password;
@@ -45,7 +53,7 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%partner}}';
+        return '{{%user}}';
     }
     /**
      * @inheritdoc
@@ -53,6 +61,9 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 
             ['name_company', 'trim'],
             ['name_company', 'required', 'message' => 'Поле не может быть пустым!'],
@@ -74,7 +85,7 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
             ['street', 'trim'],
             ['street', 'required', 'message' => 'Поле не может быть пустым!'],
             ['additional_street', 'trim'],
-            ['postcode', 'trim'],
+            ['mailindex', 'trim'],
 
             ['fio', 'trim'],
             ['fio', 'required', 'message' => 'Поле не может быть пустым!'],
@@ -115,6 +126,16 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
      * Signs user up.
      *
      */
@@ -122,9 +143,9 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
     public function signup()
     {
         if ($this->validate()) {
+            $this->auth_key = Yii::$app->security->generateRandomString();
             $this->setPassword($this->password);
             $this->save(false);
-
             $auth = Yii::$app->authManager;
             $authorRole = $auth->getRole('partner');
             $auth->assign($authorRole, $this->getId());
@@ -163,10 +184,21 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
-    public static function findIdentity($id) {}
-    public static function findIdentityByAccessToken($token, $type = null) {}
-    public function getAuthKey() {}
-    public function validateAuthKey($authKey) {}
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
 
     /* Получаем объект роли
      * по email пользователя
@@ -183,5 +215,29 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
         return static::findOne([
             'email' => $email
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
     }
 }
