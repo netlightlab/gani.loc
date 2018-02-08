@@ -39,6 +39,7 @@ use yii\web\User;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $role
  */
 class SignupCompany extends ActiveRecord implements IdentityInterface
 {
@@ -62,7 +63,8 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
     {
         return [
 
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'default', 'value' => 0],
+            ['role', 'default', 'value' => 'partner'],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 
             ['name_company', 'trim'],

@@ -42,7 +42,7 @@ $context = $this->context;
                             if (Yii::$app->user->isGuest) {
                                 echo Html::a("Войти", ["site/login"], ["class" => "nav-link"]).Html::img('common/img/header/enter_profile.png');
                             } else {
-                                echo Html::a("Кабинет", ["profile/index"], ["class" => "nav-link"]);
+                                echo Menu::showCab();
                             }
                             ?>
                         </li>

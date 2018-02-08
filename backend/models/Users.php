@@ -15,25 +15,57 @@ use yii\rbac\DbManager;
 
 class Users extends ActiveRecord
 {
-    public $user_name;
-//    public $users_id;
-    public $phone;
-    public $city;
-    public $information;
-    public $bdate;
-    public $country;
-    public $adres;
-    public $mailindex;
-    public $surname;
-    public $user_photo;
-    public $password;
-    public $repassword;
-    public $oldpassword;
-    public $confpassword;
-    public $email;
+
 
     public static function tableName() {
         return '{{%user}}';
+    }
+
+    public function rules()
+    {
+        return [
+            ['user_name', 'trim'],
+            ['user_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['phone', 'trim'],
+
+            ['adres', 'trim'],
+
+            ['bdate', 'trim'],
+
+            ['mailindex', 'trim'],
+
+            ['country', 'trim'],
+
+            ['city', 'trim'],
+
+            ['information', 'trim'],
+
+            ['surname', 'trim'],
+            ['surname', 'string', 'min' => 2, 'max' => 255],
+
+            ['user_photo', 'file', 'extensions' => 'png, jpg'],
+
+            ['email', 'trim'],
+           /* ['confemail', 'trim'],
+            ['confemail', 'compare', 'compareAttribute' => 'email', 'message' => Yii::t('app','Email не совпадает')],
+
+            ['password', 'trim'],
+            ['repassword', 'trim'],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('app', "Пароли не совпадают")],*/
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Город',
+            'country_parent' => 'Страна',
+        ];
     }
 
     private $rolesTable = '{{%auth_item}}';

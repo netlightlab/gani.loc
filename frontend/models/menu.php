@@ -10,6 +10,9 @@ namespace frontend\models;
 
 
 use yii\helpers\Html;
+use Yii;
+use common\models\User;
+use yii\rbac\DbManager;
 
 class Menu extends Page
 {
@@ -29,5 +32,11 @@ class Menu extends Page
 
 
         return $data;
+    }
+
+    public static function showCab(){
+        $user = new DbManager();
+        $usersRole = key($user->getAssignments(Yii::$app->user->id));
+        return Html::a("Кабинет", ["{$usersRole}/index"], ["class" => "nav-link"]);
     }
 }

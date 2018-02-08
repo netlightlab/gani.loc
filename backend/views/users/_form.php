@@ -68,7 +68,7 @@ use mihaildev\elfinder\ElFinder;
             <div class="col-md-12">
                 <div class="form-group">
                     <?= Html::submitButton('Сохранить изменения', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                    <a href="index.php?r=users%2Findex" class="btn btn-primary">Вернуться назад</a>
+                    <?= Html::a('Вернуться назад', ['users/index'], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
             <?php ActiveForm::end(); ?>

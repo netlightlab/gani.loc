@@ -17,12 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <? print_r($asd) ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
 
             'id',
-            'username',
+            'email',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

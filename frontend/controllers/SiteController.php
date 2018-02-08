@@ -247,4 +247,6 @@ class SiteController extends Controller
             'user' => $user,
         ]);
     }
+
+
 }

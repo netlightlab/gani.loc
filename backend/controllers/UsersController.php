@@ -9,8 +9,10 @@
 namespace backend\controllers;
 
 use backend\models\EditUser;
+use Codeception\Module\Db;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\rbac\DbManager;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -56,11 +58,16 @@ class UsersController extends Controller
     }
 
     public function actionIndex(){
+        $role = new DbManager();
+
+        $ro = $role->getUserIdsByRole('user');
+
         $dataProvider = new ActiveDataProvider([
             'query' => Users::find(),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'asd' => $ro
         ]);
     }
 
@@ -92,7 +99,11 @@ class UsersController extends Controller
 
     public function actionDelete($id)
     {
+        $auth = new DbManager();
+        $auth->deleteUserAuth($id);
+
         $this->findModel($id)->delete();
+
         Yii::$app->session->setFlash("success", "Пользователь был удален");
         return $this->redirect(['index']);
     }

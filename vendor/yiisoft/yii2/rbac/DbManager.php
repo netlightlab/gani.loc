@@ -1051,4 +1051,12 @@ class DbManager extends BaseManager
     {
         return !isset($userId) || $userId === '';
     }
+
+    public function deleteUserAuth($id){
+        $this->db->createCommand()
+            ->delete($this->assignmentTable, ['user_id' => $id])
+            ->execute();
+
+        return true;
+    }
 }
