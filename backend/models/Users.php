@@ -15,7 +15,22 @@ use yii\rbac\DbManager;
 
 class Users extends ActiveRecord
 {
-    //public $user;
+    public $user_name;
+//    public $users_id;
+    public $phone;
+    public $city;
+    public $information;
+    public $bdate;
+    public $country;
+    public $adres;
+    public $mailindex;
+    public $surname;
+    public $user_photo;
+    public $password;
+    public $repassword;
+    public $oldpassword;
+    public $confpassword;
+    public $email;
 
     public static function tableName() {
         return '{{%user}}';
