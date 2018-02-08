@@ -56,7 +56,7 @@ use Codeception\Lib\Driver\Iron;
  *          Hard-coding your credentials can be dangerous, because it is easy to accidentally commit your credentials
  *          into an SCM repository, potentially exposing your credentials to more people than intended.
  *          It can also make it difficult to rotate credentials in the future.
- * * profile - AWS credential profile
+ * * user - AWS credential user
  *           - it should be located in ~/.aws/credentials file
  *           - eg:  [default]
  *                  aws_access_key_id = YOUR_AWS_ACCESS_KEY_ID
@@ -104,14 +104,14 @@ use Codeception\Lib\Driver\Iron;
  *              'secret': 'your-secret-key',
  *              'region': 'us-west-2'
  *
- * #### Example AWS SQS using profile credentials
+ * #### Example AWS SQS using user credentials
  *
  *     modules:
  *        enabled: [Queue]
  *        config:
  *           Queue:
  *              'type': 'aws',
- *              'profile': 'project1', //see documentation
+ *              'user': 'project1', //see documentation
  *              'region': 'us-west-2'
  *
  * #### Example AWS SQS running on Amazon EC2 instance

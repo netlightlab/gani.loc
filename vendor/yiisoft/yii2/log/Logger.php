@@ -316,9 +316,9 @@ class Logger extends Component
             self::LEVEL_WARNING => 'warning',
             self::LEVEL_INFO => 'info',
             self::LEVEL_TRACE => 'trace',
-            self::LEVEL_PROFILE_BEGIN => 'profile begin',
-            self::LEVEL_PROFILE_END => 'profile end',
-            self::LEVEL_PROFILE => 'profile',
+            self::LEVEL_PROFILE_BEGIN => 'user begin',
+            self::LEVEL_PROFILE_END => 'user end',
+            self::LEVEL_PROFILE => 'user',
         ];
 
         return isset($levels[$level]) ? $levels[$level] : 'unknown';

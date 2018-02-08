@@ -269,11 +269,11 @@ EOF;
      */
     public function grabFacebookTestUserName()
     {
-        if (!array_key_exists('profile', $this->testUser)) {
-            $this->testUser['profile'] = $this->facebook->getTestUserInfo($this->grabFacebookTestUserAccessToken());
+        if (!array_key_exists('user', $this->testUser)) {
+            $this->testUser['user'] = $this->facebook->getTestUserInfo($this->grabFacebookTestUserAccessToken());
         }
 
-        return $this->testUser['profile']['name'];
+        return $this->testUser['user']['name'];
     }
 
     /**

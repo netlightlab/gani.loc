@@ -58,7 +58,7 @@ use yii\helpers\VarDumper;
  * yii fixture/generate user
  *
  * //generate fixtures from several templates, for example:
- * yii fixture/generate user profile team
+ * yii fixture/generate user user team
  * ~~~
  *
  * In the code above "users" is template name, after this command run, new file named same as template
@@ -210,7 +210,7 @@ class FixtureController extends \yii\console\controllers\FixtureController
      * yii fixture/generate user --count=5 --language=ru_RU
      *
      * //generate several fixtures
-     * yii fixture/generate user profile team
+     * yii fixture/generate user user team
      * ~~~
      * 
      * @throws \yii\base\InvalidParamException

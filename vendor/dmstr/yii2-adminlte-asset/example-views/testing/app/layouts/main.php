@@ -107,7 +107,7 @@ dmstr\web\AdminLteAsset::register($this);
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="<?= \yii\helpers\Url::to(['/user/settings/profile']) ?>"
+                                        <a href="<?= \yii\helpers\Url::to(['/user/settings/user']) ?>"
                                            class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">

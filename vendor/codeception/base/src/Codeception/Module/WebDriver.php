@@ -226,7 +226,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *              window_size: 1024x768
  *              capabilities:
  *                  unexpectedAlertBehaviour: 'accept'
- *                  firefox_profile: '~/firefox-profiles/codeception-profile.zip.b64'
+ *                  firefox_profile: '~/firefox-profiles/codeception-user.zip.b64'
  * ```
  *
  * ## Usage
@@ -466,10 +466,10 @@ class WebDriver extends CodeceptionModule implements
         if (file_exists($firefox_profile) === false) {
             throw new ModuleConfigException(
                 __CLASS__,
-                "Firefox profile does not exist under given path " . $firefox_profile
+                "Firefox user does not exist under given path " . $firefox_profile
             );
         }
-        // Set firefox profile as capability
+        // Set firefox user as capability
         $this->capabilities['firefox_profile'] = file_get_contents($firefox_profile);
     }
 

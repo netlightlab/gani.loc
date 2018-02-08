@@ -27,7 +27,7 @@ use yii\base\InvalidConfigException;
 class TimelinePanel extends Panel
 {
     /**
-     * @var array Color indicators item profile.
+     * @var array Color indicators item user.
      *
      * - keys: percentages of time request
      * - values: hex color
@@ -158,7 +158,7 @@ class TimelinePanel extends Panel
     }
 
     /**
-     * Color indicators item profile,
+     * Color indicators item user,
      * key: percentages of time request, value: hex color
      * @return array
      */

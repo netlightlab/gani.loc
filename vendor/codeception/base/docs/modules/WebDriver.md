@@ -177,7 +177,7 @@ Example (`acceptance.suite.yml`)
              window_size: 1024x768
              capabilities:
                  unexpectedAlertBehaviour: 'accept'
-                 firefox_profile: '~/firefox-profiles/codeception-profile.zip.b64'
+                 firefox_profile: user
 ```
 
 ## Usage

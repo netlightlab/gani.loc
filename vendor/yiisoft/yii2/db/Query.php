@@ -612,7 +612,7 @@ PATTERN;
     /**
      * Sets the FROM part of the query.
      * @param string|array|Expression $tables the table(s) to be selected from. This can be either a string (e.g. `'user'`)
-     * or an array (e.g. `['user', 'profile']`) specifying one or several table names.
+     * or an array (e.g. `['user', 'user']`) specifying one or several table names.
      * Table names can contain schema prefixes (e.g. `'public.user'`) and/or table aliases (e.g. `'user u'`).
      * The method will automatically quote the table names unless it contains some parenthesis
      * (which means the table is given as a sub-query or DB expression).
@@ -628,8 +628,8 @@ PATTERN;
      * Here are some examples:
      *
      * ```php
-     * // SELECT * FROM  `user` `u`, `profile`;
-     * $query = (new \yii\db\Query)->from(['u' => 'user', 'profile']);
+     * // SELECT * FROM  `user` `u`, `user`;
+     * $query = (new \yii\db\Query)->from(['u' => 'user', 'user']);
      *
      * // SELECT * FROM (SELECT * FROM `user` WHERE `active` = 1) `activeusers`;
      * $subquery = (new \yii\db\Query)->from('user')->where(['active' => true])

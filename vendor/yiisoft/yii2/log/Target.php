@@ -164,7 +164,7 @@ abstract class Target extends Component
      *
      * The parameter can be either an array of interested level names or an integer representing
      * the bitmap of the interested level values. Valid level names include: 'error',
-     * 'warning', 'info', 'trace' and 'profile'; valid level values include:
+     * 'warning', 'info', 'trace' and 'user'; valid level values include:
      * [[Logger::LEVEL_ERROR]], [[Logger::LEVEL_WARNING]], [[Logger::LEVEL_INFO]],
      * [[Logger::LEVEL_TRACE]] and [[Logger::LEVEL_PROFILE]].
      *
@@ -186,7 +186,7 @@ abstract class Target extends Component
             'warning' => Logger::LEVEL_WARNING,
             'info' => Logger::LEVEL_INFO,
             'trace' => Logger::LEVEL_TRACE,
-            'profile' => Logger::LEVEL_PROFILE,
+            'user' => Logger::LEVEL_PROFILE,
         ];
         if (is_array($levels)) {
             $this->_levels = 0;

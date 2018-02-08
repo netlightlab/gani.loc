@@ -272,7 +272,7 @@ class RestTest extends Unit
             '[{"user":"Blacknoir","age":27,"tags":["wed-dev","php"]},'
             . '{"user":"John Doe","age":27,"tags":["web-dev","java"]}]'
         );
-        $this->module->dontSeeResponseJsonMatchesJsonPath('$[*].profile');
+        $this->module->dontSeeResponseJsonMatchesJsonPath('$[*].user');
     }
 
     public function testDontSeeResponseJsonMatchesXpath()
@@ -313,7 +313,7 @@ class RestTest extends Unit
             . '{"user":"John Doe","age":27,"tags":["web-dev","java"]}]'
         );
         $this->module->seeResponseIsJson();
-        $this->module->seeResponseJsonMatchesJsonPath('$[*].profile');
+        $this->module->seeResponseJsonMatchesJsonPath('$[*].user');
     }
     
     

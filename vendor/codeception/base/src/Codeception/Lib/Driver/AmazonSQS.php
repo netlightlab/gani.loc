@@ -25,8 +25,8 @@ class AmazonSQS implements Queue
             $params['credentials'] = new Credentials($config['key'], $config['secret']);
         }
 
-        if (! empty($config['profile'])) {
-            $params['profile'] = $config['profile'];
+        if (! empty($config['user'])) {
+            $params['user'] = $config['user'];
         }
 
         if (! empty($config['version'])) {

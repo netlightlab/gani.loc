@@ -223,7 +223,7 @@ And do assertions:
 <?php
 $I->see('Welcome, john');
 $I->see('Logged in successfully', '.notice');
-$I->seeCurrentUrlEquals('/profile/john');
+$I->seeCurrentUrlEquals('user');
 ```
 
 Framework modules also contain additional methods to access framework internals. For instance, Laravel5, Phalcon,

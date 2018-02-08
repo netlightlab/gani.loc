@@ -9,7 +9,7 @@
 namespace frontend\controllers;
 
 use common\models\Cities;
-use frontend\models\EditProfile;
+use frontend\models\UserProfile;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -19,7 +19,7 @@ use common\models\User;
 use yii\validators\CompareValidator;
 
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     public function behaviors()
     {
@@ -59,7 +59,7 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $usersInfo = User::findOne(['id' => Yii::$app->user->id]);
-        $model = new EditProfile();
+        $model = new UserProfile();
         if ($model->load(Yii::$app->request->post())) {
             if($model->edit()){
                 $this->refresh();
@@ -68,14 +68,14 @@ class ProfileController extends Controller
                 Yii::$app->session->setFlash("error", "Ошибка");
             }
         }
-        return $this->render('profile', [
+        return $this->render('user', [
             'UsersInfo' => $usersInfo,
             'model' => $model,
         ]);
     }
 
     public function actionEditprofile() {
-        $model = new EditProfile();
+        $model = new UserProfile();
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->edit()){

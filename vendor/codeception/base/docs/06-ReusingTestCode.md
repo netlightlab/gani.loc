@@ -220,7 +220,7 @@ class UserCest
     function showUserProfile(\Step\Acceptance\Admin $I)
     {
         $I->loginAsAdmin();
-        $I->amOnPage('/admin/profile');
+        $I->amOnPage('user');
         $I->see('Admin Profile', 'h1');
     }
 }
@@ -335,7 +335,7 @@ use Page\Login as LoginPage;
 $I = new AcceptanceTester($scenario);
 $loginPage = new LoginPage($I);
 $loginPage->login('bill evans', 'debby');
-$I->amOnPage('/profile');
+$I->amOnPage('user');
 $I->see('Bill Evans Profile', 'h1');
 ```
 
@@ -351,7 +351,7 @@ class UserCest
     function showUserProfile(AcceptanceTester $I, \Page\Login $loginPage)
     {
         $loginPage->login('bill evans', 'debby');
-        $I->amOnPage('/profile');
+        $I->amOnPage('user');
         $I->see('Bill Evans Profile', 'h1');
     }
 }

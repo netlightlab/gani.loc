@@ -96,7 +96,7 @@ icons:
       - person
       - man
       - head
-      - profile
+      - user
     categories:
       - Web Application Icons
 
@@ -2415,7 +2415,7 @@ icons:
     created:    2.0
     filter:
       - doctor
-      - profile
+      - user
       - medical
       - nurse
     categories:
@@ -3811,7 +3811,7 @@ icons:
       - woman
       - user
       - person
-      - profile
+      - user
     categories:
       - Web Application Icons
 
@@ -3823,7 +3823,7 @@ icons:
       - man
       - user
       - person
-      - profile
+      - user
     categories:
       - Web Application Icons
 

@@ -338,7 +338,7 @@ class Command extends Component
      * array with array keys being the parameter names, and array values the corresponding parameter values,
      * e.g. `[':name' => 'John', ':age' => 25]`. By default, the PDO type of each value is determined
      * by its PHP type. You may explicitly specify the PDO type by using an array: `[value, type]`,
-     * e.g. `[':name' => 'John', ':profile' => [$profile, \PDO::PARAM_LOB]]`.
+     * e.g. `[':name' => 'John', ':user' => [$user, \PDO::PARAM_LOB]]`.
      * @return $this the current command being executed
      */
     public function bindValues($values)

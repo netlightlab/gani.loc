@@ -131,7 +131,7 @@ class DbPanel extends Panel
     }
 
     /**
-     * Calculates given request profile timings.
+     * Calculates given request user timings.
      *
      * @return array timings [token, category, timestamp, traces, nesting level, elapsed time]
      */
@@ -153,7 +153,7 @@ class DbPanel extends Panel
     }
 
     /**
-     * Returns all profile logs of the current request for this panel. It includes categories such as:
+     * Returns all user logs of the current request for this panel. It includes categories such as:
      * 'yii\db\Command::query', 'yii\db\Command::execute'.
      * @return array
      */

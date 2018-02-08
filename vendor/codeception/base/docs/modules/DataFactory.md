@@ -28,7 +28,7 @@ $fm->define(User::class)->setDefinitions([
    'email'  => Faker::email(),
    'body'   => Faker::text(),
 
-   // generate a profile and return its Id
+   user
    'profile_id' => 'factory|Profile'
 );
 ```
@@ -84,10 +84,10 @@ public function _beforeSuite()
          // get real company from database
          'company' => $em->getRepository(Company::class)->find(),
 
-         // let's generate a profile for each created user
+         user
          // receive an entity and set it via `setProfile` method
          // UserProfile factory should be defined as well
-         'profile' => 'entity|'.UserProfile::class
+         'user' => 'entity|'.UserProfile::class
      ]);
 }
 ```

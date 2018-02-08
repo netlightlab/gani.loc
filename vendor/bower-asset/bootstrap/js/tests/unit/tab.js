@@ -36,10 +36,10 @@ $(function () {
     assert.expect(2)
     var tabsHTML = '<ul class="tabs">'
         + '<li><a href="#home">Home</a></li>'
-        + '<li><a href="#profile">Profile</a></li>'
+        + '<li><a href="#user">Profile</a></li>'
         + '</ul>'
 
-    $('<ul><li id="home"/><li id="profile"/></ul>').appendTo('#qunit-fixture')
+    $('<ul><li id="home"/><li id="user"/></ul>').appendTo('#qunit-fixture')
 
     $(tabsHTML).find('li:last a').bootstrapTab('show')
     assert.strictEqual($('#qunit-fixture').find('.active').attr('id'), 'profile')
@@ -52,10 +52,10 @@ $(function () {
     assert.expect(2)
     var pillsHTML = '<ul class="pills">'
         + '<li><a href="#home">Home</a></li>'
-        + '<li><a href="#profile">Profile</a></li>'
+        + '<li><a href="#user">Profile</a></li>'
         + '</ul>'
 
-    $('<ul><li id="home"/><li id="profile"/></ul>').appendTo('#qunit-fixture')
+    $('<ul><li id="home"/><li id="user"/></ul>').appendTo('#qunit-fixture')
 
     $(pillsHTML).find('li:last a').bootstrapTab('show')
     assert.strictEqual($('#qunit-fixture').find('.active').attr('id'), 'profile')
@@ -114,7 +114,7 @@ $(function () {
 
     var tabsHTML = '<ul class="tabs">'
         + '<li><a href="#home">Home</a></li>'
-        + '<li><a href="#profile">Profile</a></li>'
+        + '<li><a href="#user">Profile</a></li>'
         + '</ul>'
 
     $(tabsHTML)
@@ -145,7 +145,7 @@ $(function () {
 
     var tabsHTML = '<ul class="tabs">'
         + '<li><a href="#home">Home</a></li>'
-        + '<li><a href="#profile">Profile</a></li>'
+        + '<li><a href="#user">Profile</a></li>'
         + '</ul>'
 
     $(tabsHTML)
@@ -170,16 +170,16 @@ $(function () {
 
     var tabsHTML = '<ul class="tabs">'
         + '<li><a href="#home">Home</a></li>'
-        + '<li><a href="#profile">Profile</a></li>'
+        + '<li><a href="#user">Profile</a></li>'
         + '</ul>'
 
     $(tabsHTML)
       .find('li:first a')
         .on('hide.bs.tab', function (e) {
-          assert.strictEqual(e.relatedTarget.hash, '#profile', 'references correct element as relatedTarget')
+          assert.strictEqual(e.relatedTarget.hash, '#user', 'references correct element as relatedTarget')
         })
         .on('hidden.bs.tab', function (e) {
-          assert.strictEqual(e.relatedTarget.hash, '#profile', 'references correct element as relatedTarget')
+          assert.strictEqual(e.relatedTarget.hash, '#user', 'references correct element as relatedTarget')
           done()
         })
         .bootstrapTab('show')
@@ -192,7 +192,7 @@ $(function () {
     assert.expect(8)
     var tabsHTML = '<ul class="nav nav-tabs">'
         + '<li class="active"><a href="#home" toggle="tab" aria-expanded="true">Home</a></li>'
-        + '<li><a href="#profile" toggle="tab" aria-expanded="false">Profile</a></li>'
+        + '<li><a href="#user" toggle="tab" aria-expanded="false">Profile</a></li>'
         + '</ul>'
     var $tabs = $(tabsHTML).appendTo('#qunit-fixture')
 

@@ -16,7 +16,7 @@ use yii\web\UploadedFile;
 use common\models\User;
 
 
-class EditProfile extends Model
+class UserProfile extends Model
 {
     public $user_name;
     public $phone;
@@ -113,6 +113,9 @@ class EditProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
+                $user->auth_key = Yii::$app->security->generateRandomString();
+                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                $user->email = $this->email;
                 $user->save(false);
             } else {
                 $user = new User();
@@ -126,6 +129,9 @@ class EditProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
+                $user->auth_key = Yii::$app->security->generateRandomString();
+                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                $user->email = $this->email;
                 $user->save(false);
             }
 
@@ -142,7 +148,7 @@ class EditProfile extends Model
     }
 
     public function uploadFile() {
-        $model = new EditProfile();
+        $model = new UserProfile();
         $user_photo = UploadedFile::getInstance($model, 'user_photo');
         if($user_photo->name != $model->user_photo->name) {
             if ($model->load($_POST)) {

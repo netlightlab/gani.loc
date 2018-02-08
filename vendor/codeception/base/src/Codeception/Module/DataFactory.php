@@ -38,7 +38,7 @@ use League\FactoryMuffin\Stores\RepositoryStore;
  *    'email'  => Faker::email(),
  *    'body'   => Faker::text(),
  *
- *    // generate a profile and return its Id
+ *    // generate a user and return its Id
  *    'profile_id' => 'factory|Profile'
  *]);
  * ```
@@ -94,10 +94,10 @@ gst * You should create this directory manually and create PHP files in it with 
  *          // get real company from database
  *          'company' => $em->getRepository(Company::class)->find(),
  *
- *          // let's generate a profile for each created user
+ *          // let's generate a user for each created user
  *          // receive an entity and set it via `setProfile` method
  *          // UserProfile factory should be defined as well
- *          'profile' => 'entity|'.UserProfile::class
+ *          'user' => 'entity|'.UserProfile::class
  *      ]);
  * }
  * ```

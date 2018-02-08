@@ -40,7 +40,7 @@ class Link extends BaseObject
      */
     public $templated = false;
     /**
-     * @var string a URI that hints about the profile of the target resource.
+     * @var string a URI that hints about the user of the target resource.
      */
     public $profile;
     /**

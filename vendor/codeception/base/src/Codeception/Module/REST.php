@@ -774,7 +774,7 @@ EOF;
      * // response: {name: john, email: john@gmail.com}
      * $I->seeResponseContainsJson(array('name' => 'john'));
      *
-     * // response {user: john, profile: { email: john@gmail.com }}
+     * // response {user: john, user: { email: john@gmail.com }}
      * $I->seeResponseContainsJson(array('email' => 'john@gmail.com'));
      *
      * ?>
