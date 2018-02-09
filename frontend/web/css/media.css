@@ -60,11 +60,16 @@
 	}
 	/* end */
 
+	.parallax-header-text h2 { font-size: 32px; }
+	.nav-link { padding: .5rem;}
+	.parallax-header-text { margin-top: 60px; }
+
 }
 
 @media (min-width: 320px) and (max-width: 993px) {
 	/*menu*/
 	body { margin-top: 36px; }
+	header {padding: 0;}
 	.navbar {
 		position: fixed;
 	    top: 0;
@@ -82,7 +87,7 @@
 	.navbar-dark .navbar-nav .nav-link { padding-left: 15px; }
 	.navbar::before {
 		content: '';
-    	background: url(../img/header/logo.png) no-repeat;
+    	background: url(../common/img/header/logo.png) no-repeat;
     	background-size: contain;
     	width: 50%;
     	height: 40px;    	

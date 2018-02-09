@@ -85,13 +85,17 @@ label {
 	justify-content: center;
 }
 
-.navbar-dark .navbar-nav .nav-link { color: #fff; font-weight: 600; }
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: 350ms;
+}
 
 .active { background: #20679f; }
 .navbar-dark .navbar-nav .nav-link:focus { color: #fff; }
 .navbar-dark .navbar-nav .nav-link:hover {
-	background: #20679f;
-	color: #fff;
+	color: #ff5252;
 }
 
 .profile-menu {
@@ -757,7 +761,6 @@ footer { background: #2e2e2e; }
 .exit-account {
     border: none !important;
     background: none !important;
-    min-width: 145px !important;
     color: #fac727 !important;
     font-weight: 600 !important;
     text-decoration: none !important;
@@ -963,28 +966,6 @@ footer { background: #2e2e2e; }
     background: #2e2e2e;
 }
 
-.parallax-header-description {
-    font-size: 48px;4
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    margin-top: 60px;
-}
-
-.parallax-header-description::before,
-.parallax-header-description::after {
-    display: inline-block;
-    width: 50px;
-    height: 1px;
-    content: '';
-    vertical-align: middle;
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.parallax-header-description::before { margin-right: 10px;}
-.parallax-header-description::after { margin-left: 10px;}
-
 .pages-content {
     background: #f9f9f9;
 }
@@ -1071,4 +1052,42 @@ header.sticky #top_line {
 
 .help-block {
     color: red;
+}
+
+.parallax-header-text {
+    margin-top: 120px;
+    text-align: center;
+}
+
+.parallax-header-text h2 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 48px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.parallax-header-text h2:before,
+.parallax-header-text h2:after {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 2px;
+    vertical-align: middle;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.parallax-header-text h2:before {
+    margin-right: 10px;
+}
+
+.parallax-header-text h2:after {
+    margin-left: 10px;
+}
+
+.parallax-header-text p {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
 }

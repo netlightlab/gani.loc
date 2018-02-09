@@ -19,12 +19,14 @@ $countries = new Countries();
 $this->title = 'Личный кабинет';
 ?>
 
-<section class="section-header" style="background: url('../common/img/header/profile.jpg')">
+<section class="section-header" style="background: url('../common/img/header/parallax-partner-cabinet.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="pt-5 pb-2" style="color: #fff" align="center">Приветствуем вас <span style="color: orange; font-size: 3rem;"><?= Yii::$app->user->identity->username ?></span> на нашем сайте!</h2>
-                <h5 class="pb-5" style="color: #fff;     text-shadow: 0px 6px 3px #6f6f6f;" align="center">Это Ваш личный кабинет. Здесь вы можете отслеживать статус своего заказа, просматривать список желаний и менять сведения о себе</h5>
+                <div class="parallax-header-text">
+                    <h2>ПРИВЕТСТВУЕМ!</h2>
+                    <p>Личный кабинет тур компаний <?= $UsersInfo['name_company'] ?></p>
+                </div>
             </div>
         </div>
     </div>
@@ -49,23 +51,31 @@ $this->title = 'Личный кабинет';
             <div class="col-md-12">
                 <?= Alert::widget() ?>
                 <ul id="w1" class="cabinet-nav nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link" href="#statistics" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/stats.png"><span>Статистика</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="#orders" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/list.png"><span>Заказы</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#my_tours" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/like.png"><span>Мои туры/развлечения</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#my_tours" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/tours.png"><span>Мои туры/развлечения</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/locked.png"><span>Настройки</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/user.png"><span>Профиль</span></a></li>
                 </ul>
                 <div class="tab-content">
+                    <div id="statistics" class="tab-pane set-tab-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                                                <span style="color: red;">на стадий разработки</span>
+                            </div>
+                        </div>
+                    </div>
                     <div id="orders" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                                <!--                                <span style="color: red;">на стадий разработки</span>-->
+                                                                <span style="color: red;">на стадий разработки</span>
                             </div>
                         </div>
                     </div>
                     <div id="my_tours" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                                <!--                                <span style="color: red;">на стадий разработки</span>-->
+                            <?= Html::a('Добавить тур', ['tours/add'], ['class' => 'btn-refresh-profile', 'style' => 'text-decoration: none !important']) ?>
                             </div>
                         </div>
                     </div>

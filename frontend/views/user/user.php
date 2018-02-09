@@ -14,8 +14,10 @@ $this->title = 'Личный кабинет';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="pt-5 pb-2" style="color: #fff" align="center">Приветствуем вас <span style="color: orange; font-size: 3rem;"><?= Yii::$app->user->identity->username ?></span> на нашем сайте!</h2>
-                <h5 class="pb-5" style="color: #fff;     text-shadow: 0px 6px 3px #6f6f6f;" align="center">Это Ваш личный кабинет. Здесь вы можете отслеживать статус своего заказа, просматривать список желаний и менять сведения о себе</h5>
+                <div class="parallax-header-text">
+                    <h2>ПРИВЕТСТВУЕМ ВАС <?= Yii::$app->user->identity->username ?>!</h2>
+                    <p>Это Ваш личный кабинет. Здесь вы можете отслеживать статус своего заказа, просматривать список желаний и менять сведения о себе</p>
+                </div>
             </div>
         </div>
     </div>

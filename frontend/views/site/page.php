@@ -18,7 +18,9 @@ $this->title = $title;
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="parallax-header-description pt-5 pb-5"><?= $title ?></h2>
+                <div class="parallax-header-text">
+                    <h2><?= $title ?></h2>
+                </div>
             </div>
         </div>
     </div>

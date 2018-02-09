@@ -54,7 +54,7 @@ $context = $this->context;
                                 echo
                                     Html::beginForm(['/site/logout'], 'post')
                                     . Html::submitButton(
-                                        'ВЫХОД (' . Yii::$app->user->identity->username . ')',
+                                        'ВЫЙТИ',
                                         ['class' => 'nav-link exit-account']
                                     )
                                     . Html::endForm();
