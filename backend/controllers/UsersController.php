@@ -63,7 +63,7 @@ class UsersController extends Controller
         $ro = $role->getUserIdsByRole('user');
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Users::find(),
+            'query' => Users::find()->where(['!=', 'role', 'admin']),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,

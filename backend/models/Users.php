@@ -65,6 +65,7 @@ class Users extends ActiveRecord
             'id' => 'ID',
             'name' => 'Город',
             'country_parent' => 'Страна',
+            'role' => 'Роль',
         ];
     }
 
