@@ -139,15 +139,15 @@ $context = $this->context;
         </div>
         <div class="row pt-3 pb-3">
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
-                <p class="copyright">© KazTravel.kz 2016 - 2017</p>
+                <p class="copyright">© Eltourism.kz 2016 - 2017</p>
                 <a href="#">Договор публичной оферты</a>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <input class="search-input-footer" type="text" name="search" required placeholder="Поиск">
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">
-                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;+7 (701) - 470 - 00 - 14</p>
-                <a href="#">info@KazTravel.online</a>
+                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;+7 (___) - ___ - __ - __</p>
+                <a href="#">info@eltourism.kz</a>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 d-flex justify-content-center align-items-center">
                 <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?></a>

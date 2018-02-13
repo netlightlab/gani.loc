@@ -104,7 +104,7 @@ $this->title = 'Создание тура';
                                 <?= $form->field($model, 'mini_image')->fileInput()->label('') ?>
                             </div>
                             <div class="col-md-6  py-4">
-                                <p style="margin-bottom:2rem;">ЗАГРУЗКА ИЗОБРАЖЕНИЯ (800 X 533)<span style="color: red;">*</span></p>
+                                <p style="margin-bottom:2rem;">ЗАГРУЗКА ИЗОБРАЖЕНИЯ (1600 X 450)<span style="color: red;">*</span></p>
                                 <?= $form->field($model, 'back_image')->fileInput()->label('') ?>
                             </div>
                             <div class="col-md-12">
@@ -173,6 +173,11 @@ $this->title = 'Создание тура';
                                 <?= $form->field($model, 'dot_place_addr')->label('ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ ПО АДРЕСУ ТОЧКИ СБОРА')->textInput() ?>
                             </div>
                             <div class="col-md-12">
+                                <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+                                <p style="font-size: 11px;">УКАЖИТЕ ТОЧКУ СБОРА НА КАРТЕ*</p>
+                                <div id="map"></div>
+                            </div>
+                            <div class="col-md-12">
                                 <h4>Что входит:</h4>
                             </div>
                             <div class="col-md-12">
@@ -218,3 +223,75 @@ $this->title = 'Создание тура';
         </div>
     </div>
 </section>
+
+<?php
+
+$js = <<< JS
+
+ymaps.ready(init);
+
+function init() {
+    var myPlacemark,
+        myMap = new ymaps.Map('map', {
+            center: [55.753994, 37.622093],
+            zoom: 9
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+
+    // Слушаем клик на карте.
+    myMap.events.add('click', function (e) {
+        var coords = e.get('coords');
+
+        // Если метка уже создана – просто передвигаем ее.
+        if (myPlacemark) {
+            myPlacemark.geometry.setCoordinates(coords);
+        }
+        // Если нет – создаем.
+        else {
+            myPlacemark = createPlacemark(coords);
+            myMap.geoObjects.add(myPlacemark);
+            // Слушаем событие окончания перетаскивания на метке.
+            myPlacemark.events.add('dragend', function () {
+                getAddress(myPlacemark.geometry.getCoordinates());
+            });
+        }
+        getAddress(coords);
+    });
+
+    // Создание метки.
+    function createPlacemark(coords) {
+        return new ymaps.Placemark(coords, {
+            iconCaption: 'поиск...'
+        }, {
+            preset: 'islands#violetDotIconWithCaption',
+            draggable: true
+        });
+    }
+
+    // Определяем адрес по координатам (обратное геокодирование).
+    function getAddress(coords) {
+        myPlacemark.properties.set('iconCaption', 'поиск...');
+        ymaps.geocode(coords).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+
+            myPlacemark.properties
+                .set({
+                    // Формируем строку с данными об объекте.
+                    iconCaption: [
+                        // Название населенного пункта или вышестоящее административно-территориальное образование.
+                        firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
+                        // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+                        firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                    ].filter(Boolean).join(', '),
+                    // В качестве контента балуна задаем строку с адресом объекта.
+                    balloonContent: firstGeoObject.getAddressLine()
+                });
+        });
+    }
+}
+
+
+JS;
+$this->registerJs($js);
+?>

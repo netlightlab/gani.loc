@@ -81,7 +81,7 @@ class SiteController extends Controller
     }
 
     public function getMainTours() {
-        return Tours::find()->select('id, mini_image, price, name')->limit(6)->all();
+        return Tours::find()->select('id, mini_image, price, name')->limit(9)->all();
     }
 
     /**

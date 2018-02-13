@@ -77,18 +77,21 @@ use yii\helpers\Html;
         </div>
         <div class="row">
             <?php foreach ($model as $tour):?>
-                <div class="col-md-4 col-sm-6 my-3">
-                    <div class="boxTour-hit">
-                        <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                        <div class="tour-img">
-                            <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image), ['/tours/view','id' => $tour->id]) ?>
-                            <div class="tour-info">
-                                <span>Category:</span>
-                                <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
+                <div id="tour" class="col-md-4 col-sm-6 my-3">
+                    <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
+                        <div class="boxTour-hit">
+                            <div class="hit-sale"><b>Хит</b><br>Продаж</div>
+                            <div class="tour-img">
+                                <?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?>
+                                <div class="tour-info">
+                                    <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
+                                    <p>подробнее</p>
+                                    <h4>Category</h4>
+                                </div>
                             </div>
+                            <h5><?= $tour->name ?></h5>
                         </div>
-                        <h5><?= Html::a($tour->name, ['/tours/view','id' => $tour->id]) ?></h5>
-                    </div>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -233,10 +236,8 @@ use yii\helpers\Html;
                 <span>наши</span>
                 <span class="about-preim-description">ОТЗЫВЫ</span>
             </div>
-
             <div class="col-md-12">
                 <div class="owl-carousel">
-
                     <div class="item">
                         <div class="FIO">Титова Тамара Васильевна</div>
                         <div class="date-otziv">02.11.11</div>
