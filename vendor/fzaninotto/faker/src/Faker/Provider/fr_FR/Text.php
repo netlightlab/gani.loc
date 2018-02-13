@@ -1084,7 +1084,7 @@ Jusqu'au soir, on mangea. Quand on était trop fatigué d'être
 assis, on allait se promener dans les cours ou jouer une partie de
 bouchon dans la grange; puis on revenait à table. Quelques-uns,
 vers la fin, s'y endormirent et ronflèrent. Mais, au café, tout se
-ranima; alors on entama des chansons, on fit des tours de force,
+ranima; alors on entama des chansons, on fit des my-tours de force,
 on portait des poids, on passait sous son pouce, on essayait à
 soulever les charrettes sur ses épaules, on disait des gaudrioles;
 on embrassait les dames. Le soir, pour partir, les chevaux gorgés
@@ -4194,7 +4194,7 @@ pantoufles à chauffer. Ses gilets maintenant ne manquaient plus de
 doublure, ni ses chemises de boutons, et même il y avait plaisir à
 considérer dans l'armoire tous les bonnets de coton rangés par
 piles égales. Elle ne rechignait plus, comme autrefois, à faire
-des tours dans le jardin; ce qu'il proposait était toujours
+des my-tours dans le jardin; ce qu'il proposait était toujours
 consenti, bien qu'elle ne devinât pas les volontés auxquelles elle
 se soumettait sans un murmure; -- et lorsque Léon le voyait au
 coin du feu, après le dîner, les deux mains sur son ventre, les
@@ -13255,7 +13255,7 @@ qui expliquât les choses à Bovary. Laquelle?
 Cependant la nourrice était bien longue à revenir. Mais, comme il
 n'y avait point d'horloge dans la chaumière, Emma craignait de
 s'exagérer peut-être la longueur du temps. Elle se mit à faire des
-tours de promenade dans le jardin, pas à pas; elle alla dans le
+my-tours de promenade dans le jardin, pas à pas; elle alla dans le
 sentier le long de la haie, et s'en retourna vivement, espérant
 que la bonne femme serait rentrée par une autre route. Enfin,
 lasse d'attendre, assaillie de soupçons qu'elle repoussait, ne

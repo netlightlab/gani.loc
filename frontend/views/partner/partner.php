@@ -75,8 +75,30 @@ $this->title = 'Личный кабинет';
                     <div id="my_tours" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                            <?= Html::a('Добавить тур', ['tours/add'], ['class' => 'btn-refresh-profile', 'style' => 'text-decoration: none !important']) ?>
+                            <?= Html::a('Добавить тур', ['my-tours/add'], ['class' => 'btn-refresh-profile', 'style' => 'text-decoration: none !important; display: block;']) ?>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                                <h3>Список ваших туров/развлечений</h3>
+                                <hr>
+                            </div>
+                            <?php foreach ($tours as $tour):?>
+                                <div class="col-md-4 col-sm-6 my-3">
+                                    <div class="boxTour-hit">
+                                        <div class="hit-sale"><b>Хит</b><br>Продаж</div>
+                                        <div class="tour-img">
+                                            <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image), ['/tours/view','id' => $tour->id]) ?>
+                                            <div class="tour-info">
+                                                <span>Category:</span>
+                                                <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
+                                            </div>
+                                        </div>
+                                        <h5><?= Html::a($tour->name, ['/tours/view','id' => $tour->id]) ?></h5>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div id="settings" class="tab-pane set-tab-content">

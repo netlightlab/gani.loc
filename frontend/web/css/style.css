@@ -297,49 +297,65 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 }
 
 .boxTour-hit {
-    padding: 5px;
+    padding: 2px;
     position: relative;
     border: 1px solid #d1d1d1;
     height: 100%;
     box-shadow: 0px 0px 10px 1px #d1d1d1;
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;}
-
-.boxTour-hit img {
-	width: 100%;
 }
 
-.tour-hit-btn {
-	position: absolute;
-    bottom: -20px;
-    width: 65%;
-    cursor: pointer;
-    background: linear-gradient(to top, #184e79, #1e7ccb);
-    border: none;
-    border-radius: 6px;
-    color: #fff;
+.boxTour-hit h5 {
+    margin: 0;
+    padding: 15px 5px;
     font-weight: bold;
-    transition: .4s;
+    text-transform: uppercase;
 }
 
-.tour-hit-btn span {
-	color: #aed0eb;
-    font-weight: normal;
+.boxTour-hit h5 a {
+    text-decoration: none !important;
+    color: #2e2e2e;
 }
 
-.tour-hit-btn span + span {
-	color: #fff;
-	font-weight: bold;
-	position: relative;
-	font-size: 18px;
+.tour-img {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
-.tour-hit-btn:hover {
-    background: linear-gradient(to left, #195688, #1ab0f5, #1c73bb);
-    box-shadow: 0px 0px 5px #1c6fb4;
+.tour-img img {
+    width: 100%;
+    z-index:-1;
+    transition: 500ms;
+}
+
+.tour-img img:hover{
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.tour-info {
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 5px 5px 5px;
+    background: linear-gradient(to top,black 25%,transparent 100%);
+}
+
+.tour-info span {
+    color: #fff;
+    font-size:20px;
+}
+
+.tour-info span + span {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 900;
+    font-family: Open-Sans,sans-serif;
 }
 
 .hit-sale {
@@ -348,6 +364,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
     font-size: 12px;
     top: 20px;
     left: -8px;
+    z-index: 1;
     padding: 0px 12px 0px 12px;
 }
 
@@ -357,7 +374,6 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
     height: 0;
     border-top: 8px solid transparent;
     border-right: 8px solid black;
-    border-bottom: 8px solid transparent;
     position: absolute;
     top: -7px;
     left: 0;
@@ -943,7 +959,7 @@ footer { background: #2e2e2e; }
 .btn-refresh-profile {
     border: none;
     font-family: inherit;
-    color: #fff;
+    color: #fff !important;
     width: 100%;
     background: #85c99d;
     cursor: pointer;
@@ -1090,4 +1106,50 @@ header.sticky #top_line {
     color: #fff;
     font-weight: 600;
     font-size: 18px;
+}
+
+.parallax-tour {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 20px;
+    background: linear-gradient(to top,black,transparent);
+}
+
+.parallax-tour-price,
+.parallax-tour-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.parallax-tour-description {
+    align-items: flex-start;
+}
+
+.parallax-tour-price {
+    align-items: flex-end;
+}
+
+.parallax-tour-description h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+}
+
+.parallax-tour-price p {
+    margin: 0;
+    color: #00dcff;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.parallax-tour-description span,
+.parallax-tour-price span {
+    color: #fff;
+    font-weight: 400;
 }

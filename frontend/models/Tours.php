@@ -8,14 +8,8 @@
 
 namespace frontend\models;
 
-use common\models\User;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
-use yii\rbac\DbManager;
 use Yii;
-use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -42,6 +36,7 @@ use yii\web\UploadedFile;
  * @property string $w_included
  * @property integer $status
  * @property integer $price
+ * @property string $official_name
  */
 class Tours extends ActiveRecord
 {
@@ -63,7 +58,6 @@ class Tours extends ActiveRecord
 
             ['status', 'default', 'value' => 1],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-
             ['user_id', 'trim'],
             ['country_id', 'trim'],
             ['place_id', 'trim'],
@@ -84,40 +78,35 @@ class Tours extends ActiveRecord
             ['dot_place_addr', 'trim'],
             ['w_included', 'trim'],
             ['price', 'trim'],
+            ['official_name', 'trim'],
 
         ];
     }
 
-    public function addTour() {
+    public function addTour(){
         if ($this->validate()) {
             $this->user_id = Yii::$app->user->id;
-            $this->back_image = $this->uploadFile('back_image');
-            $this->mini_image = $this->uploadFile('mini_image');
-            $this->gallery = $this->uploadFile('gallery');
-            $this->save(false);
+            $this->back_image = $this->getUploadFileName('back_image');
+            $this->mini_image = $this->getUploadFileName('mini_image');
+            $this->gallery = $this->getUploadFileName('gallery');
+            $this->save();
             return true;
-        }
+        };
     }
 
-    public function uploadFile($file) {
+    public function getUploadFileName($file) {
         $model = new Tours();
-        $user_photo = UploadedFile::getInstance($model, $file);
-        if($user_photo->name) {
+        $image = UploadedFile::getInstance($model, $file);
+
+        if ($image->name) {
             if ($model->load($_POST)) {
-                $model->back_image = $user_photo;
+                $model->$file = $image;
                 if ($model->validate()) {
-                    FileHelper::createDirectory('common/users/' . Yii::$app->user->id . '/' . 'tour_image' . '/');
-                    $dir = Yii::getAlias('common/users/' . Yii::$app->user->id . '/' . 'tour_image' . '/');
-                    $user_photo->saveAs($dir . $user_photo->name);
-                    return $user_photo->name;
+                    return $image->name;
                 }
             }
         } else {
             return false;
         }
-    }
-
-    public function getTour($id) {
-        $db_tour = new DbManager();
     }
 }

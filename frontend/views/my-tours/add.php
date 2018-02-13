@@ -152,7 +152,7 @@ $this->title = 'Создание тура';
                                 <hr style="10px 0">
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($model, 'price_child_free')->label('ОФИЦИАЛЬНОЕ НАЗВАНИЕ ОБЪЕКТА* ')->textInput() ?>
+                                <?= $form->field($model, 'official_name')->label('ОФИЦИАЛЬНОЕ НАЗВАНИЕ ОБЪЕКТА* ')->textInput() ?>
                             </div>
                             <div class="col-md-4">
                                 <?= $form->field($model, 'country_id')->dropDownList($cities->getCountriesList())->label('СТРАНА*') ?>

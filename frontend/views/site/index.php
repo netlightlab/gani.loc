@@ -76,195 +76,21 @@ use yii\helpers\Html;
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-1.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Кольсальские озера</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
+            <?php foreach ($model as $tour):?>
+                <div class="col-md-4 col-sm-6 my-3">
+                    <div class="boxTour-hit">
+                        <div class="hit-sale"><b>Хит</b><br>Продаж</div>
+                        <div class="tour-img">
+                            <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image), ['/tours/view','id' => $tour->id]) ?>
+                            <div class="tour-info">
+                                <span>Category:</span>
+                                <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
+                            </div>
+                        </div>
+                        <h5><?= Html::a($tour->name, ['/tours/view','id' => $tour->id]) ?></h5>
                     </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 14 000 <span>₸</span></button>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-2.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Боровое озеро</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 53 000 <span>₸</span></button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-3.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Чарынский каньон</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 24 000 <span>₸</span></button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-1.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Кольсальские озера</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 14 000 <span>₸</span></button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-1.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Кольсальские озера</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 14 000 <span>₸</span></button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-2.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Боровое озеро</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 53 000 <span>₸</span></button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-3.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Чарынский каньон</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 24 000 <span>₸</span></button>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="boxTour-hit">
-                    <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                    <img src="common/img/tour-hit/image-1.jpg">
-                    <h5 align="center" class="pt-2 pb-0">Кольсальские озера</h5>
-                    <div id="reviewStars-input">
-                        <input id="star-4" type="radio" name="reviewStars" checked/>
-                        <label title="gorgeous" for="star-4"></label>
-
-                        <input id="star-3" type="radio" name="reviewStars" />
-                        <label title="good" for="star-3"></label>
-
-                        <input id="star-2" type="radio" name="reviewStars" />
-                        <label title="regular" for="star-2"></label>
-
-                        <input id="star-1" type="radio" name="reviewStars" />
-                        <label title="poor" for="star-1"></label>
-
-                        <input id="star-0" type="radio" name="reviewStars" />
-                        <label title="bad" for="star-0"></label>
-                    </div>
-                    <button class="tour-hit-btn pt-1 pb-1" type="submit"><span>от</span> 14 000 <span>₸</span></button>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         <!-- POPULAR TOUR END -->
         <!-- CATEGORY TOUR -->
