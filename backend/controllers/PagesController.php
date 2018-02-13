@@ -87,7 +87,22 @@ class PagesController extends Controller
     {
         $model = new Pages();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $file = UploadedFile::getInstance($model, 'background');
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            $model->background = $file;
+
+            $model->save(false);
+
+            FileHelper::createDirectory('uploads/pages/' . $model->id . '/');
+            $folder = Yii::getAlias('uploads/pages/' . $model->id);
+
+            if($file){
+                $model->background = $file;
+                $model->background->saveAs($folder .'/'. $model->background->baseName . '.' . $model->background->extension);
+            }
+
             Yii::$app->session->setFlash("success", "Страница создана");
             return $this->redirect(['index', 'id' => $model->id]);
         }
