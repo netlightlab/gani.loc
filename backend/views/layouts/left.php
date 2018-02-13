@@ -35,6 +35,8 @@
                     ['label' => 'Страницы', 'icon' => 'newspaper-o','url' => ['/pages/index']],
                     ['label' => 'Страны', 'icon' => 'map','url' => ['/countries/index']],
                     ['label' => 'Города', 'icon' => 'map','url' => ['/cities/index']],
+                    ['label' => 'Категории', 'icon' => 'map','url' => ['/categories/index']],
+                    ['label' => 'Туры', 'icon' => 'map','url' => ['/tours/index']],
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
