@@ -2,22 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: admin
- * Date: 08.02.2018
- * Time: 16:31
+ * Date: 09.02.2018
+ * Time: 15:53
  */
 
 namespace frontend\controllers;
 
-use frontend\models\PartnerProfile;
+use frontend\models\Tours;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
-use common\models\User;
-use frontend\models\Tours;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 
-class PartnerController extends Controller
+class MyToursController extends Controller
 {
     public function behaviors()
     {
@@ -27,7 +27,7 @@ class PartnerController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['partner'],
                     ],
                 ],
             ],
@@ -54,27 +54,28 @@ class PartnerController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionAdd()
     {
-        $usersInfo = User::findOne(['id' => Yii::$app->user->id]);
-        $model = new PartnerProfile();
-        $tours = $this->getUserTours(Yii::$app->user->id);
+        $model = new Tours();
+        $image1 = UploadedFile::getInstance($model, 'back_image');
+        $image2 = UploadedFile::getInstance($model, 'mini_image');
+        $image3 = UploadedFile::getInstance($model, 'gallery');
         if ($model->load(Yii::$app->request->post())) {
-            if($model->edit()){
+            if($model->addTour()){
                 $this->refresh();
-                Yii::$app->session->setFlash("success", "Сохранено");
+                FileHelper::createDirectory('common/tour_img/' .$model->id. '/');
+                $dir = Yii::getAlias('common/tour_img/' .$model->id. '/');
+                Yii::$app->session->setFlash("success", "Тур успешно добавлен");
+                $image1->saveAs($dir . $image1->name);
+                $image2->saveAs($dir . $image2->name);
+                $image3->saveAs($dir . $image3->name);
             }else{
                 Yii::$app->session->setFlash("error", "Ошибка");
-            }
-        }
-        return $this->render('partner', [
-            'UsersInfo' => $usersInfo,
-            'model' => $model,
-            'tours' => $tours,
-        ]);
-    }
+            };
+        };
 
-    public function getUserTours($id) {
-        return Tours::find()->where(['user_id' => $id])->select('id, name, price, mini_image')->all();
+        return $this->render('add', [
+            'model' => $model,
+        ]);
     }
 }

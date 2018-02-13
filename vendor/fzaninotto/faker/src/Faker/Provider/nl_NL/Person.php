@@ -168,7 +168,7 @@ class Person extends \Faker\Provider\Person
         'van Stralen', 'van der Strigt', 'de Strigter', 'Strijker', 'Strik', 'Stuivenberg', 'Suijker', 'van Suinvorde',
         'van Susa', 'de Swart', 'Symons', 'Takkelenburg', 'Tammerijn', 'Tamsma', 'Terry', 'den Teuling', 'Teunissen',
         'Texier', 'Thatcher', 'The Elder', 'Thomas', 'Thout', 'Tielemans', 'Tillmanno', 'Timmerman', 'Timmermans',
-        'Tins', 'Tirie', 'Totwiller', 'van tours', 'van Tuijl', 'Tuithof', 'Uittenbosch', 'Ulrich',
+        'Tins', 'Tirie', 'Totwiller', 'van my-tours', 'van Tuijl', 'Tuithof', 'Uittenbosch', 'Ulrich',
         'Uphaus', 'Uphuis', 'Uphus', 'VI', 'Vaessen', 'Vallenduuk', 'Van Bragt', 'Vandenbergh',
         'Vastenhouw', 'Veenendaal', 'Vegt', 'van der Veiver', 'Velderman', 'van Velthoven', 'Veltman', 'van Velzen',
         'van de Ven', 'van Venrooy', 'Verbeeck', 'Verbeek', 'Verboom', 'Verbruggen', 'Verda', 'van Verdun', 'Vergeer',

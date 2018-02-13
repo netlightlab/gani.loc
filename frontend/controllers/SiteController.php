@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use frontend\models\Page;
 use frontend\models\SignupCompany;
+use frontend\models\Tours;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -74,7 +75,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            'model' => $this->getMainTours(),
+        ]);
+    }
+
+    public function getMainTours() {
+        return Tours::find()->select('id, mini_image, price, name')->limit(6)->all();
     }
 
     /**
@@ -242,7 +249,6 @@ class SiteController extends Controller
 
         return $this->render('signupcompany', [
             'model' => $model,
-            'user' => $user,
         ]);
     }
 
