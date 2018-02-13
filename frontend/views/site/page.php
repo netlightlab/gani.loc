@@ -14,7 +14,7 @@ $this->title = $title;
 
 ?>
 
-<section class="section-header" style="background: url('common/img/header/<?= $background ?>')">
+<section class="section-header" style="background: url('/backend/web/uploads/page/<?= $background ?>')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

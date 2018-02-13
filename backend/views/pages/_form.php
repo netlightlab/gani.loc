@@ -18,7 +18,8 @@ use mihaildev\elfinder\ElFinder;
 <?php $form = ActiveForm::begin(['id' => 'form-page-create' , 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')->textInput(['placeholder' => 'Например: О нас'])->label('Название') ?>
 <? if($model->background): ?>
-    <img width="200px" src="/common/img/header/<?= $model->background ?>" alt="">
+    <!--<img width="200px" src="@web/uploads/pages/2/<?/*= $model->background */?>" alt="">-->
+    <?= Html::img('/backend/web/uploads/pages/'. $model->id .'/'. $model->background, ['width' => 200]) ?>
 <? endif; ?>
 <?= $form->field($model, 'background')->fileInput()->label('Изображение') ?>
 <?= $form->field($model, 'content')->widget(CKEditor::className(),[

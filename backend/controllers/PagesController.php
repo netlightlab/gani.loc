@@ -10,12 +10,14 @@ namespace backend\controllers;
 
 
 use backend\models\Pages;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class PagesController extends Controller
 {
@@ -58,7 +60,20 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $file = UploadedFile::getInstance($model, 'background');
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            FileHelper::createDirectory('uploads/pages/' . $id . '/');
+            $folder = Yii::getAlias('uploads/pages/' . $id);
+
+            if($file){
+                $model->background = $file;
+                $model->background->saveAs($folder .'/'. $model->background->baseName . '.' . $model->background->extension);
+            }
+
+            $model->save(false);
+
             Yii::$app->session->setFlash("success", "Сохранено");
             return $this->redirect(['index', 'id' => $model->id]);
         }

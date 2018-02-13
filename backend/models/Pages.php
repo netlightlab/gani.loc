@@ -7,12 +7,10 @@
  */
 
 namespace backend\models;
-use frontend\models\Page;
 use yii\db\ActiveRecord;
 use Yii;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
-use backend\models\UploadFile;
 
 
 /**
@@ -66,8 +64,8 @@ class Pages extends ActiveRecord
         }
     }
 
-
-    public function uploadFile() {
+    public function fileUpload(){
 
     }
+
 }
