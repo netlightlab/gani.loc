@@ -21,10 +21,40 @@ $context = $this->context;
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Туры и экскурсии по Казахстану по лучшим ценам! | <?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
+<!---->
+<?php //
+//if ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=1') {
+//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
+//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
+//                <source src="/common/kolsay.webm">
+//              </video>';
+//    } elseif ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=2') {
+//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
+//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
+//                <source src="/common/kolsay.webm">
+//              </video>';
+//    } elseif ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=3') {
+//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
+//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
+//                <source src="/common/kolsay.webm">
+//              </video>';
+//    } elseif ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=4') {
+//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
+//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
+//                <source src="/common/kolsay.webm">
+//              </video>';
+//    } else {
+//        echo "<div style='position: absolute;overflow: hidden;height: 588px;width: 100%;''> ";
+//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
+//                <source src="/common/main.webm">
+//              </video>';
+//    }
+//?>
+
 
 <header class="">
     <div id="top_line">
@@ -89,7 +119,7 @@ $context = $this->context;
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
     <div class="container">
         <div class="row"><!-- NAVBAR -->
             <div class="col-md-2 col-xs-2 text-left d-flex justify-content-center align-items-center d-none">
@@ -117,7 +147,7 @@ $context = $this->context;
         </div> <!-- NAVBAR -->
     </div>
 </header>
-
+</div>
 
 <?php $this->beginBody() ?>
 

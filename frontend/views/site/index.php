@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'KazTravel';
+$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
 
 use yii\helpers\Html;
 
@@ -94,15 +94,16 @@ use yii\helpers\Html;
                     </a>
                 </div>
             <?php endforeach; ?>
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <?= Html::a('Все туры', ['tours/index'], ['class' => 'btn-all']) ?>
+            </div>
         </div>
         <!-- POPULAR TOUR END -->
         <!-- CATEGORY TOUR -->
-        <div class="row">
             <div class="col-md-12 col-xs-12 category">
                 <span class="category-description">КАТЕГОРИЯ</span>
                 <span>тура</span>
             </div>
-        </div>
         <!-- CATEGORY TOUR END -->
     </div>
 </section>

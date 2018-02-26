@@ -1218,3 +1218,198 @@ a.btn_map:hover {
     width: 100%;
     height: 350px;
 }
+
+.btn-all {
+    background: #4e9ad6;
+    width: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    color: #fff !important;
+    position: relative;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    text-decoration: none !important;
+    transition: 350ms;
+    padding-left: 30px;
+}
+
+.btn-all:hover {
+    background: #2E2E2E;
+}
+
+.btn-all::after {
+    content: '';
+    background-image: url('/common/img/tour-hit/eye.png');
+    width: 32px;
+    height:32px;
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+    left: 50%;
+    margin-left: -70px;
+}
+
+.alltours_box {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    background: #fff;
+}
+
+.alltours_box .col-md-2,
+.alltours_box .col-sm-2 {
+    border-left: 1px solid rgba(0, 0, 0, .1);
+}
+
+.alltours_box hr { margin: 5px 0; }
+
+.alltours_description {
+    margin: 10px 0;
+}
+
+.alltours_description a {
+    text-decoration: none !important;
+}
+
+.alltours_description h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2e2e2e;
+    font-weight: bold;
+}
+
+.alltours_img-list {
+    overflow: hidden;
+    border-right: 1px solid rgba(0, 0, 0, .1);
+    text-align: center;
+    position: relative;
+}
+
+.alltours_img-list span {
+    position: absolute;
+    color: #fff;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+    text-align: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.alltours_img-list a img {
+    width: 100%;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    -webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+}
+
+.alltours_img-list a:hover img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.alltours_price-list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alltours_price-list small {
+    margin-bottom: 10px;
+    color: gray;
+    font-family: cursive;
+}
+
+.alltours_btn-info {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #4e9ad6;
+    color: #fff !important;
+    height: 40px;
+    text-decoration: none !important;
+    font-weight: bold;
+    text-transform: UPPERCASE;
+    font-size: 11px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px #4e9ad6;
+    transition: 350ms;
+}
+
+.alltours_btn-info:hover {
+    background: #2E2E2E;
+}
+
+#filter {
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 1px 3px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.filter_show {
+    width: 100%;
+    position: relative;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    padding-left: 42px;
+    font-size: 13px;
+    color: #2a2a2a !important;
+    text-decoration: none !important;
+    font-weight: 500;
+}
+
+.filter_show:after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .5em solid;
+    border-right: .5em solid transparent;
+    border-bottom: 0;
+    border-left: .5em solid transparent;
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    transition: 450ms;
+    transform: rotate(-90deg);
+    margin-top: -3px;
+}
+
+.filter_show img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    transition: 450ms;
+    margin-top: 8px;
+    margin-left: 3px;
+}
+
+.filter_show[aria-expanded="true"] img {
+    transform: rotate(90deg);
+}
+
+.filter_show[aria-expanded="true"]:after {
+    transform: rotate(0deg);
+}
+
+.filter-block h6 {
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+    padding: 15px 0 0 0;
+    font-size:13px;
+    font-weight: 500;
+}

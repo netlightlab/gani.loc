@@ -143,7 +143,7 @@ $this->title = 'Создание тура';
                                 <hr style="10px 0">
                             </div>
                             <div class="col-md-4">
-<!--                                --><?//= $form->field($model, 'price_child_free')->label('ВОЗРАСТ РЕБЕНКА ОТ')->textInput() ?>
+								<?= $form->field($model, 'price_child_free')->label('ВОЗРАСТ РЕБЕНКА ОТ')->textInput() ?>
                             </div>
                             <div class="col-md-12">
                                 <h4>Информация о местонахождении</h4>

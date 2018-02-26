@@ -109,4 +109,12 @@ class Tours extends ActiveRecord
             return false;
         }
     }
+
+    public static function findTours($params){
+        $result = self::find()
+            ->where($params)
+            ->all();
+
+        return $result;
+    }
 }
