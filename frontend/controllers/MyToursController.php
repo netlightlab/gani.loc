@@ -54,8 +54,7 @@ class MyToursController extends Controller
      *
      * @return mixed
      */
-    public function actionAdd()
-    {
+    public function actionAdd() {
         $model = new Tours();
         $image1 = UploadedFile::getInstance($model, 'back_image');
         $image2 = UploadedFile::getInstance($model, 'mini_image');
@@ -78,4 +77,25 @@ class MyToursController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionEdit($id) {
+        $model = new Tours();
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->editTour($id)){
+                $this->refresh();
+                Yii::$app->session->setFlash("success", "Тур успешно изменен");
+            }else{
+                Yii::$app->session->setFlash("error", "Ошибка");
+            };
+        };
+
+        return $this->render('edit', [
+            'model' => Tours::findOne($id),
+        ]);
+    }
+
+    public function statusTour($id) {
+        return Tours::find()->where(['id' => $id])->orderBy('status')->one();
+    }
+
 }

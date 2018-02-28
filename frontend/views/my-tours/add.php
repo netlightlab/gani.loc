@@ -19,13 +19,13 @@ $countries = new Countries();
 $this->title = 'Создание тура';
 ?>
 
-<section class="section-header" style="background: url('../common/img/header/parallax-partner-cabinet.jpg')">
+<section class="section-header" style="background: url('../common/img/header/parallax-addtour.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ПРИВЕТСТВУЕМ!</h2>
-                    <p>Личный кабинет тур компаний <?= $UsersInfo['name_company'] ?></p>
+                    <h2>Воплощение идеи</h2>
+                    <p>Здесь вы можете разместить ваш тур/развлечение</p>
                 </div>
             </div>
         </div>

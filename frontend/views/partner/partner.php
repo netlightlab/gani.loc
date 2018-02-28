@@ -86,7 +86,7 @@ $this->title = 'Личный кабинет';
                             </div>
                             <?php foreach ($tours as $tour):?>
                                 <div id="tour" class="col-md-4 col-sm-6 my-3">
-                                    <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
+                                    <a href="/my-tours/edit?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
                                         <div class="boxTour-hit">
                                             <div class="tour-img">
                                                 <?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?>

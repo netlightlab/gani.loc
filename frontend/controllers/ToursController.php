@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 
 use backend\models\Pages;
+use yii\data\Sort;
 use yii\web\Controller;
 use Yii;
 use frontend\models\Tours;
@@ -17,10 +18,9 @@ use frontend\models\Tours;
 class ToursController extends Controller
 {
     public function actionIndex(){
-        return $this->render('index',
-            [
-                'tours' => Tours::find()->where(['status' => 1])->all(),
-            ]);
+        return $this->render('index', [
+            'tours' => Tours::find()->where(['status' => 1])->all(),
+        ]);
     }
 
     public function actionView($id){
@@ -30,8 +30,28 @@ class ToursController extends Controller
     }
 
     public function actionSearch(){
-        return $this->render('search', [
-            'tours' => Tours::findTours(Yii::$app->request->get()),
+
+        $sort = new Sort([
+            'attributes' => [
+                'price' => [
+                    'asc' => ['price' => SORT_ASC],
+                    'desc' => ['price' => SORT_DESC],
+                    'label' => 'Name',
+                ],
+            ],
         ]);
+
+        $getParams = Yii::$app->request->get();
+
+        unset($getParams['sort']);
+
+        return $this->render('search', [
+            'sort' => $sort,
+            'tours' => Tours::findTours($getParams, $sort->orders),
+        ]);
+
+//        return $this->render('search', [
+//            'tours' => Tours::findTours(Yii::$app->request->get()),
+//        ]);
     }
 }

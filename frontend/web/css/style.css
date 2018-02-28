@@ -303,7 +303,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
     box-shadow: 0px 0px 10px #fac727, 0px 0px 1px #2e2e2e;
 }
 
-#tour a .boxTour-hit h5 {
+#tour .boxTour-hit h5 {
     margin: 0;
     padding: 15px 5px;
     font-weight: bold;
@@ -1180,7 +1180,7 @@ header.sticky #top_line {
 a.btn_map {
     display: block;
     width: 100%;
-    background: #ff6060;
+    background: #4e9ad6;
     text-align: center;
     padding: 10px 0;
     border-radius: 3px;
@@ -1254,17 +1254,17 @@ a.btn_map:hover {
 .alltours_box {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
     background: #fff;
-}
-
-.alltours_box .col-md-2,
-.alltours_box .col-sm-2 {
-    border-left: 1px solid rgba(0, 0, 0, .1);
+    display: block;
+    margin-bottom: 25px;
 }
 
 .alltours_box hr { margin: 5px 0; }
 
 .alltours_description {
-    margin: 10px 0;
+    padding: 10px 0;
+    display: block;
+    height:100%;
+    border-right: 1px solid rgba(0, 0, 0, .1);
 }
 
 .alltours_description a {
@@ -1276,6 +1276,7 @@ a.btn_map:hover {
     font-size: 18px;
     color: #2e2e2e;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .alltours_img-list {
@@ -1299,16 +1300,14 @@ a.btn_map:hover {
 }
 
 .alltours_img-list a img {
-    width: 100%;
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-    -webkit-transition: all 0.7s ease;
+    width: auto;
+    height:200px;
     transition: all 0.7s ease;
 }
 
 .alltours_img-list a:hover img {
-    -webkit-transform: scale(1);
-    transform: scale(1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .alltours_price-list {
@@ -1318,6 +1317,7 @@ a.btn_map:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: -15px;
 }
 
 .alltours_price-list small {
@@ -1351,7 +1351,7 @@ a.btn_map:hover {
     background: #fff;
     width: 100%;
     box-shadow: 0 1px 3px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 3px;
 }
 
@@ -1412,4 +1412,14 @@ a.btn_map:hover {
     padding: 15px 0 0 0;
     font-size:13px;
     font-weight: 500;
+}
+
+#sort {
+    background: #eee;
+    padding: 10px;
+    margin-bottom: 15px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px;
 }

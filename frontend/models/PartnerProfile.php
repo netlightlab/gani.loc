@@ -40,6 +40,8 @@ class PartnerProfile extends Model
     public $email;
     public $confemail;
 
+    private $oldPass;
+
     function __construct()
     {
         parent::__construct();
@@ -66,6 +68,7 @@ class PartnerProfile extends Model
                 $this->user_photo = $arr['user_photo'];
                 $this->mailindex = $arr['mailindex'];
                 $this->email = $arr['email'];
+                $this->oldPass = $arr['password_hash'];
             }
         }
     }
@@ -139,7 +142,11 @@ class PartnerProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->user_photo = $this->uploadFile();
                 $user->auth_key = Yii::$app->security->generateRandomString();
-                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                if ($this->password) {
+                    $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                } else {
+                    $user->password_hash = $this->oldPass;
+                }
                 $user->email = $this->email;
                 $user->save(false);
             } else {
@@ -165,7 +172,6 @@ class PartnerProfile extends Model
                 $user->auth_key = Yii::$app->security->generateRandomString();
                 $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
                 $user->email = $this->email;
-                $user->save(false);
                 $user->save(false);
             }
 

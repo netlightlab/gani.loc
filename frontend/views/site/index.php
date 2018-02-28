@@ -78,7 +78,7 @@ use yii\helpers\Html;
         <div class="row">
             <?php foreach ($model as $tour):?>
                 <div id="tour" class="col-md-4 col-sm-6 my-3">
-                    <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
+                    <a href="/tours/view?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
                         <div class="boxTour-hit">
                             <div class="hit-sale"><b>Хит</b><br>Продаж</div>
                             <div class="tour-img">

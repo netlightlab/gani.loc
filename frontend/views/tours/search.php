@@ -11,7 +11,6 @@ use yii\helpers\Html;
 
 $this->title = 'Поиск';
 
-
 ?>
 
 <section class="section-header" style="background: url('../common/img/header/parallax-alltours.jpg')">
@@ -38,82 +37,82 @@ $this->title = 'Поиск';
         </div>
     </div>
 </section>
+
 <section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
     <div id="map"></div>
 </section>
-<section style="background: #fbfbfb;">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>FILTER</h1>
-                        <div class="hidden_map">
-                            <a class="btn_map collapsed" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">ПОКАЗАТЬ НА КАРТЕ</a>
+
+    <section style="background: #fbfbfb;">
+        <div class="container py-5">
+            <div class="row">
+                <aside class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="hidden_map">
+                                <a class="btn_map collapsed" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">ПОКАЗАТЬ НА КАРТЕ</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 py-3">
-<!--                        <select id="getToursCountries">-->
-<!--                            <option selected>Выберите страну</option>-->
-<!--                            <option value="1">Казахстан</option>-->
-<!--                            <option value="2">Россия</option>-->
-<!--                        </select>-->
-<!--                        <select id="getToursCategory">-->
-<!--                            <option selected>Выберите категорию</option>-->
-<!--                            <option value="1">Алматы</option>-->
-<!--                            <option value="2">Москва</option>-->
-<!--                        </select>-->
-                        <div id="filter">
-                            <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Поиск по фильтру</a>
-                            <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
-                                <div class="filter-block">
-                                    <h6>Выберите страну</h6>
+                        <div class="col-md-12 py-3">
+                            <div id="filter">
+                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Поиск по фильтру</a>
+                                <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
+                                    <div class="filter-block">
+                                        <h6>Выберите страну</h6>
                                         <select id="getToursCountries">
                                             <option value="1">Казахстан</option>
                                             <option value="2">Россия</option>
                                         </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>SORT</h1>
-                    </div>
-                    <?php foreach($tours as $tour) : ?>
-                        <div class="col-md-12 pb-4">
-                            <div class="row alltours_box">
-                                <div class="col-md-4 col-sm-4 m-0 p-0">
-                                    <div class="alltours_img-list">
-                                        <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?></a>
-                                        <span>Category</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="alltours_description">
-                                        <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><h3><?= $tour->name ?></h3></a>
-                                        <hr>
-                                        <span><?= $tour->mini_description ?></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-2 py-2">
-                                    <div class="alltours_price-list">
-                                        <small>от <?= $tour->price ?> ₸</small>
-                                        <a class="alltours_btn-info" href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">подробнее</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <? endforeach; ?>
+                    </div>
+                </aside>
+                <div class="col-md-9">
+                    <div id="sort">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="sort-block">
+                                    <?php echo $sort->link('price'); ?>
+                                    <select name="sort_price" id="sort_price">
+                                        <option value selected>По цене</option>
+                                        <option value="price_asc">Самые дешевые</option>
+                                        <option value="price_desc">Самые дорогие</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="places">
+                        <?php foreach($tours as $tour) : ?>
+                            <div class="alltours_box">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <div class="alltours_img-list">
+                                            <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?></a>
+                                            <span>Category</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="alltours_description">
+                                            <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><h3><?= $tour->name ?></h3></a>
+                                            <span><?= $tour->mini_description ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                        <div class="alltours_price-list">
+                                            <small>от <?= $tour->price ?> ₸</small>
+                                            <a class="alltours_btn-info" href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <? endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 <?php
 
 $js = <<<JS

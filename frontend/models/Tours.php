@@ -10,6 +10,7 @@ namespace frontend\models;
 
 use yii\db\ActiveRecord;
 use Yii;
+use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -42,7 +43,6 @@ class Tours extends ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
-
 
     /**
      * @inheritdoc
@@ -97,7 +97,6 @@ class Tours extends ActiveRecord
     public function getUploadFileName($file) {
         $model = new Tours();
         $image = UploadedFile::getInstance($model, $file);
-
         if ($image->name) {
             if ($model->load($_POST)) {
                 $model->$file = $image;
@@ -110,11 +109,57 @@ class Tours extends ActiveRecord
         }
     }
 
-    public static function findTours($params){
+    public static function findTours($params, $sort){
         $result = self::find()
             ->where($params)
+            ->orderBy($sort)
             ->all();
 
         return $result;
+    }
+
+    public function editTour($id) {
+        if ($this->validate()) {
+            $tour = Tours::find()->where(['id' => $id])->one();
+            $tour->name = $this->name;
+            $tour->category_id = $this->category_id;
+            $tour->tour_language = $this->tour_language;
+            $tour->mini_description = $this->mini_description;
+            $tour->description = $this->description;
+            $tour->conditions = $this->conditions;
+            $tour->return_cond = $this->return_cond;
+            $tour->back_image = $this->uploadFile($id, 'back_image');
+            $tour->mini_image = $this->uploadFile( $id,'mini_image');
+            $tour->gallery = $this->uploadFile( $id,'gallery');
+            $tour->price = $this->price;
+            $tour->price_child = $this->price_child;
+            $tour->official_name = $this->official_name;
+            $tour->country_id = $this->country_id;
+            $tour->city_id = $this->city_id;
+            $tour->dot_place = $this->dot_place;
+            $tour->dot_place_addr = $this->dot_place_addr;
+            $tour->w_included = $this->w_included;
+            $tour->place_id = $this->place_id;
+            $tour->save();
+        }
+        return true;
+    }
+
+    public function uploadFile($id, $params) {
+        $model = new Tours();
+        $image = UploadedFile::getInstance($model, $params);
+        if ($image->name) {
+            if ($model->load($_POST)) {
+                $model->$params = $image;
+                if ($model->validate()) {
+                    FileHelper::createDirectory('common/tour_img/'.$id.'/');
+                    $dir = Yii::getAlias('common/tour_img/'.$id.'/');
+                    $image->saveAs($dir . $model->$params);
+                    return $image->name;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 }
