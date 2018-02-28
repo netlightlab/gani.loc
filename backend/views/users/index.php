@@ -13,11 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <? print_r($asd) ?>
+    <!--<p>
+        <?/*= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) */?>
+    </p>-->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,7 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'email',
-            'role',
+            [
+                'attribute' => 'role',
+                'format' => 'text',
+                'value' => function($model){
+                    return $model->role == 'partner' ? 'Партнер' : 'Пользователь';
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'format' => 'text',
+                'value' => function($model){
+                    return $model->status == 1 ? 'Активен' : 'Неактивен';
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

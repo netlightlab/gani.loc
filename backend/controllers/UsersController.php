@@ -19,6 +19,8 @@ use yii\filters\AccessControl;
 use backend\models\Users;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
+use frontend\models\Tours;
+use common\models\User;
 
 
 class UsersController extends Controller
@@ -60,14 +62,11 @@ class UsersController extends Controller
     public function actionIndex(){
         $role = new DbManager();
 
-        $ro = $role->getUserIdsByRole('user');
-
         $dataProvider = new ActiveDataProvider([
             'query' => Users::find()->where(['!=', 'role', 'admin']),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'asd' => $ro
         ]);
     }
 
@@ -87,13 +86,22 @@ class UsersController extends Controller
         ]);*/
         $model = $this->findModel($id);
 
+        $tours = $this->getUserTours(Yii::$app->request->get('id'));
+
+        $userRole = User::find()->select('role')->where(['id' => Yii::$app->request->get('id')])->one();
+
+        $userRole->role == 'user' ? $userRole->role = 'user' : $userRole->role = 'partner';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash("success", "Сохранено");
-            return $this->redirect(['index', 'id' => $model->id]);
+            //return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect('index');
         }
 
         return $this->render('update', [
             'model' => $model,
+            'tours' => $tours,
+            'role' => $userRole->role
         ]);
     }
 
@@ -115,6 +123,10 @@ class UsersController extends Controller
         }
 
         throw new NotFoundHttpException('Запрашиваемая страница не существует');
+    }
+
+    public function getUserTours($id) {
+        return Tours::find()->where(['user_id' => $id])->select('id, name, price, mini_image')->all();
     }
 
 }
