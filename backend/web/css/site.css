@@ -122,3 +122,70 @@ a.desc:after {
 .admin-sidebar {
     background: #222;
 }
+
+.profile-info {
+    border: 1px solid #f1f0f0;
+    padding: 10px;
+}
+
+.profile-info table {
+    background: #fdfbfb;
+    border: 1px solid #f3f3f3;
+}
+
+.profile-info table tr:nth-child(odd) {
+    background: #f8f8f8 !important;
+}
+
+.profile-info table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.profile-icon {
+    border: 1px solid #f1f0f0;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.profile-icon img {
+    width: 100%;
+    transition: .3s;
+}
+
+.profile-icon img:hover {
+    transform: scale(1.2);
+}
+
+.profile-more-info {
+    border: 1px solid #f1f0f0;
+    padding: 10px;
+    width: 100%;
+    display: block;
+    min-height: 140px;
+}
+
+.btn-refresh-profile {
+    border: none;
+    font-family: inherit;
+    color: #fff !important;
+    width: 100%;
+    background: #85c99d;
+    cursor: pointer;
+    padding: 12px 20px;
+    outline: none;
+    font-size: 12px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.btn-refresh-profile:hover {
+    background: #2e2e2e;
+}

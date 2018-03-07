@@ -14,8 +14,32 @@ $this->title = $title;
 
 ?>
 
-<section class="section-header" style="background: url('backend/web/uploads/page/2/<?= $background ?>')">
+<?/*= Html::img('/frontend/web/common/pages/1/'.$background) */?>
+<!--<video autoplay loop src="/frontend/web/common/pages/1/<?/*= $background */?>"></video>-->
+<style>
+    .pageBg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .section-header {
+        overflow: hidden;
+    }
+</style>
 
+
+
+<!--background: url('/frontend/web/common/pages/<?/*= $pageId .'/'.$background */?>')-->
+
+<section class="section-header" style="">
+    <? if($fileType == 'image'): ?>
+        <img class="pageBg" src="/frontend/web/common/pages/<?= $pageId.'/'.$background ?>" alt="">
+    <? endif; ?>
+    <? if($fileType == 'video'):  ?>
+        <video class="pageBg" src="/frontend/web/common/pages/<?= $pageId.'/'.$background ?>" autoplay loop alt="">
+        </video>
+    <? endif; ?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">

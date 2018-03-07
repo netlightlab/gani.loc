@@ -23,6 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
+            [
+                'attribute' => 'user_id',
+                'format' => 'text',
+                'value' => function($model){
+                    return $model->getTourUser();
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

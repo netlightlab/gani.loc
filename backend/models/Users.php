@@ -27,26 +27,19 @@ class Users extends ActiveRecord
             ['user_name', 'trim'],
             ['user_name', 'string', 'min' => 2, 'max' => 255],
 
-            ['phone', 'trim'],
+            [['phone', 'adres', 'bdate', 'mailindex', 'country', 'city', 'information', 'name_company', 'email'], 'trim'],
 
-            ['adres', 'trim'],
+            ['email', 'email'],
 
-            ['bdate', 'trim'],
-
-            ['mailindex', 'trim'],
-
-            ['country', 'trim'],
-
-            ['city', 'trim'],
-
-            ['information', 'trim'],
+            ['about_company', 'string', 'max' => 1000],
 
             ['surname', 'trim'],
             ['surname', 'string', 'min' => 2, 'max' => 255],
 
             ['user_photo', 'file', 'extensions' => 'png, jpg'],
 
-            ['email', 'trim'],
+            ['active', 'boolean'],
+            /*[ 'trim'],*/
            /* ['confemail', 'trim'],
             ['confemail', 'compare', 'compareAttribute' => 'email', 'message' => Yii::t('app','Email не совпадает')],
 
@@ -66,6 +59,7 @@ class Users extends ActiveRecord
             'name' => 'Город',
             'country_parent' => 'Страна',
             'role' => 'Роль',
+            'status' => 'Статус'
         ];
     }
 
