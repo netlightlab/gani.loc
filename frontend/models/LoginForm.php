@@ -25,6 +25,7 @@ class LoginForm extends Model
             [['email', 'password'], 'required', 'message' => 'Поле не может быть пустым!'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
+            ['email', 'email'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
             ['password', 'required', 'message' => 'Поле не может быть пустым!']
@@ -55,21 +56,21 @@ class LoginForm extends Model
      */
     public function login()
     {
-        $partner = new SignupCompany();
-        $user = new User();
+        $user = new SignupCompany();
+        $checkUser = $user::findByEmail($this->email);
 
-        $rolePartn = $partner->getUsersRole($this->email);
-        $roleUser = $user->getUserRole($this->email);
-        if ($rolePartn['partner']) {
+        if ($checkUser->active == '1' && $checkUser->role == 'partner') {
             if ($this->validate()) {
-//                echo "<script>alert('LOGIN PARTNER');</script>";
                 return Yii::$app->user->login($this->getPartner(), $this->rememberMe ? 3600 * 24 * 30 : 0);
             }
-        } elseif($roleUser['user']) {
+        } elseif($checkUser->role == "user") {
             if ($this->validate()) {
-//                echo "<script>alert('LOGIN USER');</script>";
                 return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
            }
+        } elseif ($checkUser->active == '0') {
+            Yii::$app->session->setFlash("error", "Ваш аккаунт не активирован!");
+        } else {
+            Yii::$app->session->setFlash("error", "Неверный e-mail или пароль!");
         }
         return false;
     }

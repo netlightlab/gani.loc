@@ -79,6 +79,12 @@ class MyToursController extends Controller
     }
 
     public function actionEdit($id) {
+
+        $checkTour = Tours::find()->where(['id' => $id])->one();
+        if ($checkTour->user_id != Yii::$app->user->id) {
+            return $this->goHome();
+        };
+
         $model = new Tours();
         if ($model->load(Yii::$app->request->post())) {
             if($model->editTour($id)){

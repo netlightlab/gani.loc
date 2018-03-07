@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
+use yii\web\User;
 
 /**
  * Tours model
@@ -128,9 +129,15 @@ class Tours extends ActiveRecord
             $tour->description = $this->description;
             $tour->conditions = $this->conditions;
             $tour->return_cond = $this->return_cond;
-            $tour->back_image = $this->uploadFile($id, 'back_image');
-            $tour->mini_image = $this->uploadFile( $id,'mini_image');
-            $tour->gallery = $this->uploadFile( $id,'gallery');
+            if (!$this->uploadFile($id, 'back_image') == "") {
+                $tour->back_image = $this->uploadFile($id, 'back_image');
+            };
+            if (!$this->uploadFile( $id,'mini_image') == "") {
+                $tour->mini_image = $this->uploadFile( $id,'mini_image');
+            };
+            if (!$this->uploadFile( $id,'gallery') == "") {
+                $tour->gallery = $this->uploadFile( $id,'gallery');
+            };
             $tour->price = $this->price;
             $tour->price_child = $this->price_child;
             $tour->official_name = $this->official_name;

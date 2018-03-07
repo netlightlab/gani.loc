@@ -8,6 +8,8 @@
 
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
+use yii\widgets\ListView;
+use yii\widgets\LinkPager;
 
 $this->title = 'Поиск';
 
@@ -41,6 +43,12 @@ $this->title = 'Поиск';
 <section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
     <div id="map"></div>
 </section>
+<!--<span>--><?// print_r($pages); ?><!--</span>-->
+    <hr>
+    <hr>
+<!--    <span>--><?// print_r($model); ?><!--</span>-->
+    <hr>
+    <hr>
 
     <section style="background: #fbfbfb;">
         <div class="container py-5">
@@ -59,6 +67,7 @@ $this->title = 'Поиск';
                                     <div class="filter-block">
                                         <h6>Выберите страну</h6>
                                         <select id="getToursCountries">
+                                            <option> </option>
                                             <option value="1">Казахстан</option>
                                             <option value="2">Россия</option>
                                         </select>
@@ -73,18 +82,18 @@ $this->title = 'Поиск';
                         <div class="row">
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="sort-block">
-                                    <?php echo $sort->link('price'); ?>
+<!--                                    --><?php //echo $sort->link('price'); ?>
                                     <select name="sort_price" id="sort_price">
                                         <option value selected>По цене</option>
-                                        <option value="price_asc">Самые дешевые</option>
-                                        <option value="price_desc">Самые дорогие</option>
+                                        <option value="price">Самые дешевые</option>
+                                        <option value="-price">Самые дорогие</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id="places">
-                        <?php foreach($tours as $tour) : ?>
+                        <?php foreach($model as $tour) : ?>
                             <div class="alltours_box">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -113,20 +122,33 @@ $this->title = 'Поиск';
             </div>
         </div>
     </section>
+
+    <span><? print_r($pages); ?></span>
+
+<?= LinkPager::widget([
+        'pagination' => $pages,
+]); ?>
 <?php
 
 $js = <<<JS
     var getToursCountries = document.getElementById('getToursCountries');
     var getToursCategory = document.getElementById('getToursCategory');
+    var getSortPrice = document.getElementById('sort_price');
     
+    // var currentURL = window.location.href.toString().split(window.location.host+'/tours/')[1];
+    
+    getSortPrice.addEventListener('change', function(){
+        // window.location.href = currentURL + getSortPrice.options[getSortPrice.selectedIndex].value;
+    });    
     
     getToursCountries.addEventListener('change', function(){
-       window.location.href = "search?country_id=" + getToursCountries.options[getToursCountries.selectedIndex].value; 
+       // window.location.href = currentURL + getToursCountries.options[getToursCountries.selectedIndex].value; 
     });
     
     getToursCategory.addEventListener('change', function(){
-       window.location.href = "category_id=" + getToursCategory.options[getToursCategory.selectedIndex].value; 
+       // window.location.href = currentURL + getToursCategory.options[getToursCategory.selectedIndex].value; 
     });
+
 JS;
 
 $this->registerJs($js);

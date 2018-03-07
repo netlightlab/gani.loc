@@ -31,7 +31,6 @@ $this->title = 'Авторизация';
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
-                <?= Alert::widget() ?>
             </div>
         </div>
     </div>
@@ -46,6 +45,9 @@ $this->title = 'Авторизация';
                     <h3>Заполните данные для входа</h3>
                 </div>
                 <hr>
+            </div>
+            <div class="col-md-12">
+                <?= Alert::widget() ?>
             </div>
         </div>
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>

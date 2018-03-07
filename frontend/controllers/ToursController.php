@@ -14,6 +14,10 @@ use yii\data\Sort;
 use yii\web\Controller;
 use Yii;
 use frontend\models\Tours;
+use frontend\models\Search;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 class ToursController extends Controller
 {
@@ -31,6 +35,11 @@ class ToursController extends Controller
 
     public function actionSearch(){
 
+        $searchModel = new Search();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $getParams = Yii::$app->request->get();
+
+
         $sort = new Sort([
             'attributes' => [
                 'price' => [
@@ -41,9 +50,36 @@ class ToursController extends Controller
             ],
         ]);
 
-        $getParams = Yii::$app->request->get();
+        $tour = Tours::find();
 
-        unset($getParams['sort']);
+        $pages = new Pagination(['totalCount' => $tour->count(), 'pageSize' => 3]);
+        $pages->pageSizeParam = false;
+
+
+        $models = $tour->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('search', [
+            'searchModel' => $searchModel,
+            'pages' => $pages,
+            'model' => $models,
+            'dataProvider' => $dataProvider,
+        ]);
+
+//
+//        $sort = new Sort([
+//            'attributes' => [
+//                'price' => [
+//                    'asc' => ['price' => SORT_ASC],
+//                    'desc' => ['price' => SORT_DESC],
+//                    'label' => 'Name',
+//                ],
+//            ],
+//        ]);
+//
+//        $getParams = Yii::$app->request->get();
+
 
         return $this->render('search', [
             'sort' => $sort,

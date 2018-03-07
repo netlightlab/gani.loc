@@ -41,6 +41,7 @@ $this->title = 'Tours';
 <section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
     <div id="map"></div>
 </section>
+
     <section style="background: #fbfbfb;">
         <div class="container py-5">
             <div class="row">
@@ -58,6 +59,7 @@ $this->title = 'Tours';
                                     <div class="filter-block">
                                         <h6>Выберите страну</h6>
                                         <select id="getToursCountries">
+                                            <option> </option>
                                             <option value="1">Казахстан</option>
                                             <option value="2">Россия</option>
                                         </select>
@@ -117,7 +119,11 @@ $this->title = 'Tours';
 $js = <<<JS
     var getToursCountries = document.getElementById('getToursCountries');
     var getToursCategory = document.getElementById('getToursCategory');
+    var getSortPrice = document.getElementById('sort_price');
     
+    getSortPrice.addEventListener('change', function(){
+        window.location.href = "search?sort=" + getSortPrice.options[getSortPrice.selectedIndex].value; 
+    });    
     
     getToursCountries.addEventListener('change', function(){
        window.location.href = "search?country_id=" + getToursCountries.options[getToursCountries.selectedIndex].value; 
@@ -125,7 +131,8 @@ $js = <<<JS
     
     getToursCategory.addEventListener('change', function(){
        window.location.href = "category_id=" + getToursCategory.options[getToursCategory.selectedIndex].value; 
-    });
+    });    
+    
 JS;
 
 $this->registerJs($js);

@@ -30,7 +30,6 @@ use yii\rbac\DbManager;
  * @property integer $city_phone_2
  * @property integer $city_phone_3
  * @property string $email
- * @property string $id_tour
  * @property string $password_hash
  * @property string $password write-only password
  * @property string $password_reset_token
@@ -39,6 +38,7 @@ use yii\rbac\DbManager;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $role
+ * @property boolean $active
  */
 class SignupCompany extends ActiveRecord implements IdentityInterface
 {
@@ -62,7 +62,8 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
     {
         return [
 
-            ['status', 'default', 'value' => 0],
+            ['status', 'default', 'value' => 10],
+            ['active', 'default', 'value' => 0],
             ['role', 'default', 'value' => 'partner'],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 
