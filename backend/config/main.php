@@ -31,6 +31,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/admin'
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -75,9 +76,6 @@ return [
         'assetManager' => [
             'basePath' => '@webroot/assets',
             'baseUrl' => '@web/assets'
-        ],
-        'request' => [
-            'baseUrl' => '/admin'
         ],
     ],
     'params' => $params,

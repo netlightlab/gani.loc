@@ -38,7 +38,7 @@ class Users extends ActiveRecord
 
             ['user_photo', 'file', 'extensions' => 'png, jpg'],
 
-            ['status', 'boolean'],
+            ['active', 'boolean'],
             /*[ 'trim'],*/
            /* ['confemail', 'trim'],
             ['confemail', 'compare', 'compareAttribute' => 'email', 'message' => Yii::t('app','Email не совпадает')],

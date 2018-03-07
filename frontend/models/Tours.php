@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
+use common\models\User;
 
 /**
  * Tours model
@@ -43,6 +44,7 @@ class Tours extends ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
+    public $tourUser;
 
     /**
      * @inheritdoc
@@ -81,6 +83,20 @@ class Tours extends ActiveRecord
             ['official_name', 'trim'],
 
         ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Тур',
+            'user_id' => 'Владелец'
+        ];
+    }
+
+    public function getTourUser(){
+        $userEmail = User::find()->select('email')->where(['id' => $this->user_id])->one();
+        return $userEmail->email;
     }
 
     public function addTour(){

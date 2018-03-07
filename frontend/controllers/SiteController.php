@@ -21,6 +21,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+    public $bgFileExtension;
     /**
      * @inheritdoc
      */
@@ -228,12 +229,23 @@ class SiteController extends Controller
         $title = $page->title;
         $content = $page->content;
         $background = $page->background;
+        $pageId = $id;
+
+        $backgroundFile = pathinfo($page->background);
+        $bgFExt = $backgroundFile['extension'];
+
+        if($bgFExt == 'jpg' || $bgFExt == 'png' || $bgFExt == 'jpeg')
+            $this->bgFileExtension = 'image';
+        else
+            $this->bgFileExtension = 'video';
 
         return $this->render('page', [
             "title" => $title,
             "content" => $content,
             "background" => $background,
             "data" => $data,
+            "pageId" => $pageId,
+            "fileType" => $this->bgFileExtension
         ]);
     }
 

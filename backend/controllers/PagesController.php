@@ -64,8 +64,11 @@ class PagesController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            FileHelper::createDirectory('uploads/pages/' . $id . '/');
-            $folder = Yii::getAlias('uploads/pages/' . $id);
+            //FileHelper::createDirectory('uploads/pages/' . $id . '/');
+            $url = str_replace('\\', '/', Yii::getAlias('@frontend'));
+            FileHelper::createDirectory($url.'/web/common/pages/' . $id . '/');
+            //$folder = Yii::getAlias('uploads/pages/' . $id);
+            $folder = Yii::getAlias($url.'/web/common/pages/' . $id);
 
             if($file){
                 $model->background = $file;
@@ -75,7 +78,8 @@ class PagesController extends Controller
             $model->save(false);
 
             Yii::$app->session->setFlash("success", "Сохранено");
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
+            //return $this->redirect(['index');
         }
 
         return $this->render('update', [
@@ -95,8 +99,11 @@ class PagesController extends Controller
 
             $model->save(false);
 
-            FileHelper::createDirectory('uploads/pages/' . $model->id . '/');
-            $folder = Yii::getAlias('uploads/pages/' . $model->id);
+            //FileHelper::createDirectory('uploads/pages/' . $model->id . '/');
+            $url = str_replace('\\', '/', Yii::getAlias('@frontend'));
+            FileHelper::createDirectory($url.'/web/common/pages/' . $model->id . '/');
+            //$folder = Yii::getAlias('uploads/pages/' . $model->id);
+            $folder = Yii::getAlias($url.'/web/common/pages/' . $model->id);
 
             if($file){
                 $model->background = $file;

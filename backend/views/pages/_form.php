@@ -19,7 +19,7 @@ use mihaildev\elfinder\ElFinder;
 <?= $form->field($model, 'title')->textInput(['placeholder' => 'Например: О нас'])->label('Название') ?>
 <? if($model->background): ?>
     <!--<img width="200px" src="@web/uploads/pages/2/<?/*= $model->background */?>" alt="">-->
-    <?= Html::img('/backend/web/uploads/pages/'. $model->id .'/'. $model->background, ['width' => 200]) ?>
+    <?= Html::img('/frontend/web/common/pages/'. $model->id .'/'. $model->background, ['width' => 200]) ?>
 <? endif; ?>
 <?= $form->field($model, 'background')->fileInput()->label('Изображение') ?>
 <?= $form->field($model, 'content')->widget(CKEditor::className(),[

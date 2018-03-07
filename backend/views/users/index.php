@@ -31,10 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'status',
+                'attribute' => 'active',
                 'format' => 'text',
                 'value' => function($model){
-                    return $model->status == 1 ? 'Активен' : 'Неактивен';
+                    return $model->active == 1 ? 'Активен' : 'Неактивен';
                 }
             ],
 

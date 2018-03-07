@@ -18,7 +18,7 @@ use common\models\Countries;
 
 ?>
 
-<? print_r($model) ?>
+<? //print_r($model) ?>
 
 <section class="pt-5 pb-5" style="background: #f9f9f9;">
     <div class="container">
@@ -286,7 +286,7 @@ use common\models\Countries;
                                             <h4>Активирован</h4>
                                         </div>
                                         <div class="col-md-12">
-                                            <?= $form->field($model, 'status')->checkbox(['label' => 'Учетная запись активна',]) ?>
+                                            <?= $form->field($model, 'active')->checkbox(['label' => 'Учетная запись активна',]) ?>
                                             <hr style="width: 100%; padding-bottom: 25px;">
 
                                         </div>
