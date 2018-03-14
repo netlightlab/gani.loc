@@ -8,6 +8,9 @@
 
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use frontend\models\Comments;
+use frontend\controllers\ToursController;
 
 $this->title = $tour->name;
 
@@ -44,90 +47,224 @@ $this->title = $tour->name;
     </div>
 </section>
 <div class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
-    <div id="map"></div>
+<!--    <div id="map"></div>-->
 </div>
 <div style="background: #f9f9f9;">
     <div class="container">
         <div class="row py-5">
-            <section id="single_tour_desc" class="col-md-8">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Подробное описание</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <h4><?= $tour->name ?></h4>
-                        <p><?= $tour->description ?></p>
-                        <hr>
-                        <h4>Места посещения:</h4>
-                        <hr>
-                        <h4>Места посещения:</h4>
-                        <hr>
-                        <h4>Доступные языки тура или развлечения:</h4>
-
-                    </div>
-                </div>
+            <main id="single_tour_desc" class="col-md-8">
                 <div class="row">
                     <div class="col-md-12">
-                        <hr>
+                        <ul id="w1" class="nav view_tour-tabs">
+                            <li><a class="tab-link active" href="#info" data-toggle="tab" aria-expanded="true"><span>Информация</span></a></li>
+                            <li><a class="tab-link" href="#reviews" data-toggle="tab" aria-expanded="true"><span>Отзывы ( <?= $reviews_count ?> )</span></a></li>
+                        </ul>
+                        <div class="tab-content view_tour_content">
+                            <div id="info" class="tab-pane active">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Подробное описание</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4><?= $tour->name ?></h4>
+                                            </div>
+                                            <div class="col-md-12 my-3">
+                                                <?= $tour->description ?>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Точка сбора:</h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <p><?= $tour->dot_place ?></p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4>Доступные языки тура или развлечения:</h4>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <p><?= $tour->tour_language ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Цены</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><?= $tour->price ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Условия покупки</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><?= $tour->conditions ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Условия возврата</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><?= $tour->return_cond ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="reviews" class="tab-pane">
+                                <? foreach($comments as $comment) :?>
+                                    <articles class="row comments_tour">
+                                        <div class="col-md-3">
+                                            <p style="font-size: 16px;"><?= $comment->fio ?></p>
+                                            <div class="comment_user_photo"><?= $comment['user_photo'] ? Html::img('@web/common/users/'.$comment['user_id'].'/'.$comment['user_photo']) : Html::img('@web/common/users/no-image.png') ?></div>
+                                            <div class="rating">
+                                                <div class="rating_reviews"></div>
+                                                <div id="ratingBar" style="width: <?= $comment->reviews?>%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span><?= $comment->message ?></span>
+                                            <p><?= $comment->date ?></p>
+                                        </div>
+                                    </articles>
+                                <? endforeach; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Подробное описание</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <table class="table table-bordered table-tour-price">
-                            <thead>
-                            <tr>
-                                <th>Тип билета</th>
-                                <th>Возраст</th>
-                                <th>Цена</th>
-                                <th>Цена со скидкой</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Стандартный</td>
-                                <td>-</td>
-                                <td><?= $tour->price ?><span>₸</span></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
+                <? if($isauthorize): ?>
+                <div class="row mt-5">
                     <div class="col-md-12">
-                        <hr>
+                        <?php $form = ActiveForm::begin(['id' => 'form-review', 'method' => "POST", "action" => ""]); ?>
+                        <h5>Оставить отзыв</h5>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="rating_click">
+                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 1, 'data-value_rating' => "20"]) ?>
+                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 2, 'data-value_rating' => "40"]) ?>
+                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 3, 'data-value_rating' => "60"]) ?>
+                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 4, 'data-value_rating' => "80"]) ?>
+                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 5, 'data-value_rating' => "100"]) ?>
+                                    <div id="ratingBarClick"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <?= $form->field($model, 'message')->textarea(['placeholder' => 'Максимум 1000 символов', 'rows' => '5', 'required' => 'true'])->label('')?>
+                                <div style="display: none;"><?= $form->field($model, 'reviews')->textInput(['id' => 'rev_db', 'value' => '60']) ?></div>
+                            </div>
+                            <div class="col-md-4">
+                                <?= Html::submitButton('Отправить', ['class' => 'btn_map', 'name' => 'submit']) ?>
+                            </div>
+                            <div class="col-md-12 my-4">
+                                <span style="color: red;">Важно!!</span>
+                                <span>Данный отзыв будет рассмотрен модератором, после чего он появиться на сайте!</span>
+                            </div>
+                        </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Расписание</h3>
-                    </div>
-                    <div class="col-md-9">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>Условия покупки</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <?= $tour->return_cond ?>
-                    </div>
-                </div>
-            </section>
+                <? endif; ?>
+            </main>
             <aside class="col-md-4">
-                <div class="hidden_map">
+                <div id="sidebar">
                     <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="true" aria-controls="collapseMap">ПОКАЗАТЬ ТОЧКУ СБОРА</a>
+                    <a style="background: #ec3e3e" class="btn_map" href="#btn_buy">купить</a>
+                    <div class="offer-company_details">
+                        <div class="offer-company_header">
+                            <?= $user['user_photo'] ? Html::img('@web/common/users/'.$user['id'].'/'.$user['user_photo']) : Html::img('@web/common/users/no-image.png') ?>
+                        </div>
+                        <div class="offer-company_content">
+                            <span>Компания:</span>
+                            <h5><?= $user->name_company ?></h5>
+                            <?= Html::a('Другие объявления от компании', ['site/index'], ['class' => 'allTours_author']) ?>
+                        </div>
+                    </div>
                 </div>
             </aside>
         </div>
     </div>
 </div>
+
+<?php
+
+$script = <<<JS
+    $(document).ready(function() {
+       $('#ratingBarClick').css({width: 60+'%'});
+    });
+    $(document).hover(function () {
+        $("#1").hover(function () {
+            $("#ratingBarClick").css({width: $("#1").attr("data-value_rating") + "%"});
+            $("#rev_db").val($(this).attr("data-value_rating"));
+        });
+        $("#2").hover(function () {
+            $("#ratingBarClick").css({width: $("#2").attr("data-value_rating") + "%"});
+            $("#rev_db").val($(this).attr("data-value_rating"));
+        });
+        $("#3").hover(function () {
+            $("#ratingBarClick").css({width: $("#3").attr("data-value_rating") + "%"});
+            $("#rev_db").val($(this).attr("data-value_rating"));
+        });
+        $("#4").hover(function () {
+            $("#ratingBarClick").css({width: $("#4").attr("data-value_rating") + "%"});
+            $("#rev_db").val($(this).attr("data-value_rating"));
+        });
+        $("#5").hover(function () {
+            $("#ratingBarClick").css({width: $("#5").attr("data-value_rating") + "%"});
+            $("#rev_db").val($(this).attr("data-value_rating"));
+        });
+    });    
+    $("#form-review").submit(function(e) {
+        e.preventDefault();
+        var form = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            data: form,
+            succes: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+              console.log(error)
+            }
+          }).done(function(){
+            $("#form-review").html('<h2 class="reviews_success">Спасибо, Ваш отзыв отправлен на модератору!</h2>');
+          });
+        return false;
+    });
+JS;
+
+$this->registerJs($script);
+
+?>

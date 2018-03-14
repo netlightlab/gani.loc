@@ -7,40 +7,33 @@ $this->title = 'Туры и экскурсии по Казахстану по л
 use yii\helpers\Html;
 
 ?>
-<section class="section-header-main" style="background: url('common/img/header/header_fon.jpg')">
-<div class="container">
-    <!--<div class="row">-->
-        <div class="row header-description-block"> <!-- HEADER DESCRIPTION -->
+<section class="section-header-main">
+    <video class="pageBg" src="/frontend/web/common/pages/1/kolsay.webm" autoplay="" loop="" alt=""></video>
+    <div class="container">
+        <div class="row header-description-block">
             <div class="col-md-12 col-xs-12 text-center">
                 <span class="header-description">ТУРЫ ПО КАЗАХСТАНУ</span>
             </div>
-        </div> <!-- HEADER DESCRIPTION -->
-        <div class="row tour-block-white pb-2"> <!-- BLOCK TOUR -->
+        </div>
+        <div class="row tour-block-white pb-2">
             <div class="col-md-12 tour-block-search">
                 <span>Поиск тура</span>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 pb-3">
-                <select class="form-control" width="100%">
+            <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
+                <select class="form-control">
                     <option disabled selected value>Выберите страну:</option>
                     <option>Казахстан</option>
                     <option>Россия</option>
                 </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 pb-3">
-                <select class="form-control" width="100%">
+            <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
+                <select class="form-control">
                     <option disabled selected value>Выберите город:</option>
                     <option>Алмата</option>
                     <option>Москва</option>
                 </select>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-6 bg-white pb-3 date">
-                <input type="text" name="date-start" class="form-control date" required placeholder="с dd.mm по mm.dd">
-                <img src="common/img/header/calendar.png">
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6 bg-white pb-3">
-                <input type="text" name="date-start" class="form-control days" required placeholder="на xx - xx ночей">
-            </div>
-            <div class="col-lg-2 col-md-12 col-sm-12 bg-white pb-3 position-relative">
+            <div class="col-lg-4 col-md-12 col-sm-12 bg-white pb-3 position-relative">
                 <input type="submit" name="submit" class="search-tour-btn" value="Поиск тура">
                 <img src="common/img/header/search.png" class="search-tour-img">
             </div>
@@ -66,7 +59,7 @@ use yii\helpers\Html;
 </div>
 </section>
 
-<section>
+<section style="background:#fbfbfb;">
     <div class="container">
         <!-- POPULAR TOUR -->
         <div class="row">
@@ -77,7 +70,7 @@ use yii\helpers\Html;
         </div>
         <div class="row">
             <?php foreach ($model as $tour):?>
-                <div id="tour" class="col-md-4 col-sm-6 my-3">
+                <articles class="col-md-4 col-sm-6 my-3">
                     <a href="/tours/view?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
                         <div class="boxTour-hit">
                             <div class="hit-sale"><b>Хит</b><br>Продаж</div>
@@ -92,22 +85,22 @@ use yii\helpers\Html;
                             <h5><?= $tour->name ?></h5>
                         </div>
                     </a>
-                </div>
+                </articles>
             <?php endforeach; ?>
             <div class="col-md-12 d-flex justify-content-center align-items-center">
                 <?= Html::a('Все туры', ['tours/index'], ['class' => 'btn-all']) ?>
             </div>
         </div>
         <!-- POPULAR TOUR END -->
-        <!-- CATEGORY TOUR -->
-            <div class="col-md-12 col-xs-12 category">
-                <span class="category-description">КАТЕГОРИЯ</span>
-                <span>тура</span>
-            </div>
-        <!-- CATEGORY TOUR END -->
     </div>
 </section>
 <section class="bg-category-tour">
+    <!-- CATEGORY TOUR -->
+    <div class="col-md-12 col-xs-12 category">
+        <span class="category-description">КАТЕГОРИЯ</span>
+        <span>тура</span>
+    </div>
+    <!-- CATEGORY TOUR END -->
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center pt-3 pb-3 position-relative">

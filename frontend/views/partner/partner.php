@@ -163,7 +163,7 @@ $this->title = 'Личный кабинет';
                                         </tr>
                                         <tr>
                                             <td><strong>Контактное лицо</strong></td>
-                                            <td><span><?= $UsersInfo['fio'] ? $UsersInfo['fio'] : "Не заполнено" ?></span></td>
+                                            <td><span><?= $UsersInfo['user_name'] ? $UsersInfo['user_name'].' '.$UsersInfo['surname'] : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Должность</strong></td>
@@ -259,7 +259,10 @@ $this->title = 'Личный кабинет';
                                             <h4>Изменить контактную информацию</h4>
                                         </div>
                                         <div class="col-md-4 col-xs-4">
-                                            <?= $form->field($model, 'fio')->textInput(['placeholder' => 'Например: Иван Иванович Иванов'])->label('КОНТАКТНОЕ ЛИЦО') ?>
+                                            <?= $form->field($model, 'user_name')->textInput(['placeholder' => 'Например: Иван Иванович'])->label('КОНТАКТНОЕ ЛИЦО: ИМЯ/ОТЧЕСТВО') ?>
+                                        </div>
+                                        <div class="col-md-4 col-xs-4">
+                                            <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иванов'])->label('ФАМИЛИЕ') ?>
                                         </div>
                                         <div class="col-md-4 col-xs-4">
                                             <?= $form->field($model, 'position_company')->textInput(['placeholder' => 'Например: Директор'])->label('ДОЛЖНОСТЬ') ?>
@@ -289,11 +292,6 @@ $this->title = 'Личный кабинет';
                                         </div>
                                         <div class="col-md-4 col-xs-4">
                                             <?= $form->field($model, 'city_phone_2')->label('телефон (городской)')->widget(\yii\widgets\MaskedInput::className(), [
-                                                'mask' => '999 (999) 99-99',
-                                            ])->textInput(['placeholder' => 'Например: 727 (232) 77-77']) ?>
-                                        </div>
-                                        <div class="col-md-4 col-xs-4">
-                                            <?= $form->field($model, 'city_phone_3')->label('телефон (городской)')->widget(\yii\widgets\MaskedInput::className(), [
                                                 'mask' => '999 (999) 99-99',
                                             ])->textInput(['placeholder' => 'Например: 727 (232) 77-77']) ?>
                                         </div>

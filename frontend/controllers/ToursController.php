@@ -10,7 +10,10 @@ namespace frontend\controllers;
 
 
 use backend\models\Pages;
+use frontend\models\Comments;
 use yii\data\Sort;
+use yii\filters\AjaxFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
 use frontend\models\Tours;
@@ -18,6 +21,7 @@ use frontend\models\Search;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
+use common\models\User;
 
 class ToursController extends Controller
 {
@@ -28,9 +32,40 @@ class ToursController extends Controller
     }
 
     public function actionView($id){
+        $getId = Tours::find()->where(['id' => $id])->select(['user_id'])->one();
+        $user = User::find()->where(['id' => $getId->user_id])->select(['id', 'user_photo', 'name_company'])->one();
+
+        $model = new Comments();
+        $getUser = User::find()->where(['id' => Yii::$app->user->id])->select(['user_photo', 'user_name', 'surname'])->asArray()->one();
+        $fio = $getUser['user_name'].' '.$getUser['surname'];
+        $photo = $getUser['user_photo'];
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->message;
+            $model->tour_id = $id;
+            $model->user_id = Yii::$app->user->id;
+            $model->user_photo = $photo;
+            $model->fio = $fio;
+            $model->active = 1;
+            $model->reviews;
+            $model->recommendation = 1;
+            $model->save(true);
+        };
+
+        $comment = Comments::find()->where(['tour_id' => $id])->all();
+        $reviews_count = Comments::find()->where(['tour_id' => $id])->count();
+
+        Yii::$app->user->isGuest ? $sign = 0 : $sign = 1;
+
         return $this->render('view', [
             'tour' => Tours::findOne($id),
+            'user' => $user,
+            'model' => $model,
+            'comments' => $comment,
+            'isauthorize' => $sign,
+            'reviews_count' => $reviews_count,
         ]);
+
     }
 
     public function actionSearch(){

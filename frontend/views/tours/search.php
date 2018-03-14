@@ -43,12 +43,6 @@ $this->title = 'Поиск';
 <section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
     <div id="map"></div>
 </section>
-<!--<span>--><?// print_r($pages); ?><!--</span>-->
-    <hr>
-    <hr>
-<!--    <span>--><?// print_r($model); ?><!--</span>-->
-    <hr>
-    <hr>
 
     <section style="background: #fbfbfb;">
         <div class="container py-5">
@@ -123,11 +117,11 @@ $this->title = 'Поиск';
         </div>
     </section>
 
-    <span><? print_r($pages); ?></span>
+<!--     <span><? print_r($pages); ?></span>
 
 <?= LinkPager::widget([
         'pagination' => $pages,
-]); ?>
+]); ?> -->
 <?php
 
 $js = <<<JS

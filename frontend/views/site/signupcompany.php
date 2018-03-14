@@ -42,7 +42,7 @@ $this->title = 'Регистрация';
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-left pt-3">
-                        <h3>Основная информация</h3><span style="color: red;">данный раздел на стадий разработки</span>
+                        <h3>Основная информация</h3>
                     </div>
                     <hr>
                 </div>
@@ -70,15 +70,6 @@ $this->title = 'Регистрация';
             <div class="row">
                 <div class="col-md-12">
                     <?= $form->field($model, 'about_company')->textarea(['placeholder' => 'Краткое описание компании. Максимум 1000 символов', 'rows' => '8'])->label('ОПИСАНИЕ КОМПАНИИ') ?>
-<!--                    --><?//= $form->field($model, 'name_company')->textInput(['autofocus' => true, 'placeholder' => 'Например: Иван'])->label('Отображаемое имя') ?>
-<!---->
-<!--                    --><?//= $form->field($model, 'email')->textInput(['placeholder' => 'Например: info@KazTravel.kz'])->label('E-mail') ?>
-<!---->
-<!--                    --><?//= $form->field($model, 'password')->passwordInput()->label('Придумайте пароль') ?>
-<!---->
-<!--                    <div class="form-group">-->
-<!--                        --><?//= Html::submitButton('Зарегистрироваться', ['class' => 'authorization-btn', 'name' => 'signup-button']) ?>
-<!--                    </div>-->
                 </div>
             </div>
             <div class="row">

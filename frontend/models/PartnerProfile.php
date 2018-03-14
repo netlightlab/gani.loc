@@ -24,15 +24,15 @@ class PartnerProfile extends Model
     public $city;
     public $street;
     public $additional_street;
-    public $fio;
     public $position_company;
+    public $user_name;
+    public $surname;
     public $website;
     public $mobile_phone_1;
     public $mobile_phone_3;
     public $mobile_phone_2;
     public $city_phone_1;
     public $city_phone_2;
-    public $city_phone_3;
     public $mailindex;
     public $user_photo;
     public $password;
@@ -56,7 +56,8 @@ class PartnerProfile extends Model
                 $this->city = $arr['city'];
                 $this->street = $arr['street'];
                 $this->additional_street = $arr['additional_street'];
-                $this->fio = $arr['fio'];
+                $this->user_name = $arr['user_name'];
+                $this->surname = $arr['user_name'];
                 $this->position_company = $arr['position_company'];
                 $this->website = $arr['website'];
                 $this->mobile_phone_1 = $arr['mobile_phone_1'];
@@ -64,7 +65,6 @@ class PartnerProfile extends Model
                 $this->mobile_phone_3 = $arr['mobile_phone_3'];
                 $this->city_phone_1 = $arr['city_phone_1'];
                 $this->city_phone_2 = $arr['city_phone_2'];
-                $this->city_phone_3 = $arr['city_phone_3'];
                 $this->user_photo = $arr['user_photo'];
                 $this->mailindex = $arr['mailindex'];
                 $this->email = $arr['email'];
@@ -85,7 +85,12 @@ class PartnerProfile extends Model
             ['about_company', 'trim'],
             ['street', 'trim'],
             ['additional_street', 'trim'],
-            ['fio', 'trim'],
+            ['user_name', 'trim'],
+            ['user_name', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['user_name', 'string', 'min' => 3, 'max' => 255],
+            ['surname', 'trim'],
+            ['surname', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['surname', 'string', 'min' => 3, 'max' => 255],
             ['position_company', 'trim'],
             ['website', 'trim'],
             ['mobile_phone_1', 'trim'],
@@ -93,7 +98,6 @@ class PartnerProfile extends Model
             ['mobile_phone_3', 'trim'],
             ['city_phone_1', 'trim'],
             ['city_phone_2', 'trim'],
-            ['city_phone_3', 'trim'],
 
             ['mailindex', 'trim'],
 
@@ -130,7 +134,8 @@ class PartnerProfile extends Model
                 $user->city = $this->city;
                 $user->street = $this->street;
                 $user->additional_street = $this->additional_street;
-                $user->fio = $this->fio;
+                $user->user_name = $this->user_name;
+                $user->surname = $this->surname;
                 $user->position_company = $this->position_company;
                 $user->website = $this->website;
                 $user->mobile_phone_1 = $this->mobile_phone_1;
@@ -138,7 +143,6 @@ class PartnerProfile extends Model
                 $user->mobile_phone_3 = $this->mobile_phone_3;
                 $user->city_phone_1 = $this->city_phone_1;
                 $user->city_phone_2 = $this->city_phone_2;
-                $user->city_phone_3 = $this->city_phone_3;
                 $user->mailindex = $this->mailindex;
                 $user->user_photo = $this->uploadFile();
                 $user->auth_key = Yii::$app->security->generateRandomString();
@@ -158,7 +162,8 @@ class PartnerProfile extends Model
                 $user->city = $this->city;
                 $user->street = $this->street;
                 $user->additional_street = $this->additional_street;
-                $user->fio = $this->fio;
+                $user->user_name = $this->user_name;
+                $user->surname = $this->surname;
                 $user->position_company = $this->position_company;
                 $user->website = $this->website;
                 $user->mobile_phone_1 = $this->mobile_phone_1;
@@ -166,7 +171,6 @@ class PartnerProfile extends Model
                 $user->mobile_phone_3 = $this->mobile_phone_3;
                 $user->city_phone_1 = $this->city_phone_1;
                 $user->city_phone_2 = $this->city_phone_2;
-                $user->city_phone_3 = $this->city_phone_3;
                 $user->mailindex = $this->mailindex;
                 $user->user_photo = $this->uploadFile();
                 $user->auth_key = Yii::$app->security->generateRandomString();

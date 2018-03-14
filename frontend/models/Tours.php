@@ -12,12 +12,7 @@ use yii\db\ActiveRecord;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
-<<<<<<< HEAD
-use yii\web\User;
-=======
 use common\models\User;
->>>>>>> c6b83bfb725b98e3434dae25c2a90f8859dc117c
-
 /**
  * Tours model
  * @property integer $id

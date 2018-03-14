@@ -20,7 +20,8 @@ use yii\rbac\DbManager;
  * @property string $street
  * @property string $additional_street
  * @property integer $mailindex
- * @property string $fio
+ * @property string $user_name
+ * @property string $surname
  * @property string $position_company
  * @property string $website
  * @property integer $mobile_phone_1
@@ -28,7 +29,6 @@ use yii\rbac\DbManager;
  * @property integer $mobile_phone_3
  * @property integer $city_phone_1
  * @property integer $city_phone_2
- * @property integer $city_phone_3
  * @property string $email
  * @property string $password_hash
  * @property string $password write-only password
@@ -89,9 +89,12 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
             ['additional_street', 'trim'],
             ['mailindex', 'trim'],
 
-            ['fio', 'trim'],
-            ['fio', 'required', 'message' => 'Поле не может быть пустым!'],
-            ['fio', 'string', 'min' => 3, 'max' => 255],
+            ['user_name', 'trim'],
+            ['user_name', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['user_name', 'string', 'min' => 3, 'max' => 255],
+            ['surname', 'trim'],
+            ['surname', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['surname', 'string', 'min' => 3, 'max' => 255],
 
             ['position_company', 'trim'],
             ['website', 'trim'],
@@ -110,9 +113,6 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
                 return $value;
             }],
             ['city_phone_2', 'filter', 'filter' => function($value) {
-                return $value;
-            }],
-            ['city_phone_3', 'filter', 'filter' => function($value) {
                 return $value;
             }],
 

@@ -47,7 +47,7 @@ $this->title = 'Личный кабинет';
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/locked.png"><span>Настройки</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/user.png"><span>Профиль</span></a></li>
                 </ul>
-                <div class="tab-content">
+                <div id="cabinet-tab" class="tab-content">
                     <div id="orders" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">

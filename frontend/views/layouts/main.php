@@ -25,36 +25,6 @@ $context = $this->context;
     <?php $this->head() ?>
 </head>
 <body>
-<!---->
-<?php //
-//if ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=1') {
-//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
-//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
-//                <source src="/common/kolsay.webm">
-//              </video>';
-//    } elseif ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=2') {
-//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
-//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
-//                <source src="/common/kolsay.webm">
-//              </video>';
-//    } elseif ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=3') {
-//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
-//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
-//                <source src="/common/kolsay.webm">
-//              </video>';
-//    } elseif ('http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] == 'http://'.$_SERVER["SERVER_NAME"].'/page?id=4') {
-//        echo "<div style='position: absolute;overflow: hidden;height: 450px;width: 100%;''> ";
-//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
-//                <source src="/common/kolsay.webm">
-//              </video>';
-//    } else {
-//        echo "<div style='position: absolute;overflow: hidden;height: 588px;width: 100%;''> ";
-//        echo '<video id="video" width="100%" height="auto" autoplay="autoplay" loop="loop" muted="">
-//                <source src="/common/main.webm">
-//              </video>';
-//    }
-//?>
-
 
 <header class="">
     <div id="top_line">
@@ -70,7 +40,7 @@ $context = $this->context;
                         <li class="profile-button">
                             <?php
                             if (Yii::$app->user->isGuest) {
-                                echo Html::a("Войти", ["site/login"], ["class" => "nav-link"]).Html::img('common/img/header/enter_profile.png');
+                                echo Html::a(Html::img('common/img/header/enter_profile.png')."Войти", ["site/login"], ["class" => "nav-link"]);
                             } else {
                                 echo Menu::showCab();
                             }
@@ -79,7 +49,7 @@ $context = $this->context;
                         <li class="profile-button">
                             <?php
                             if (Yii::$app->user->isGuest) {
-                                echo Html::a("Регистрация", ["site/signup"], ["class" => "nav-link"]).Html::img('common/img/header/register_profile.png');
+                                echo Html::a(Html::img('common/img/header/register_profile.png')."Регистрация", ["site/signup"], ["class" => "nav-link"]);
                             } else {
                                 echo
                                     Html::beginForm(['/site/logout'], 'post')
@@ -91,14 +61,6 @@ $context = $this->context;
                             }
                             ?>
                         </li>
-                       <!-- <li class="profile-button">
-                            <select class="top_line-currency">
-                                <option selected>₸ KZT</option>
-                                <option>ք RUB</option>
-                                <option>€ EUR</option>
-                                <option>$ USD</option>
-                            </select>
-                        </li>-->
                         <li class="profile-button">
                             <select class="top_line-currency">
                                 <option selected>АЛМАТЫ</option>
@@ -139,8 +101,8 @@ $context = $this->context;
             </div>
             <div class="col-md-2 col-xs-2 text-right d-flex justify-content-end align-items-center d-none">
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
-                    <li class="profile-button pl-0 pr-4" style="border-right: none;">
-                        <?= Html::a('Поиск', ['site/index']) ?>
+                    <li class="profile-button pl-0 pr-4" style="border: none;">
+                        <?= Html::a('ПОИСК', ['site/index']) ?>
                     </li>
                 </ul>
             </div>
@@ -156,17 +118,6 @@ $context = $this->context;
 
 <footer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 foot-navigation">
-                <ul class="pt-3 pb-3">
-                    <li><a class="pt-2 pb-2" href="#">Главная</a></li>
-                    <li><a class="pt-2 pb-2" href="#">О компании</a></li>
-                    <li><a class="pt-2 pb-2" href="#">Туры</a></li>
-                    <li><a class="pt-2 pb-2" href="#">Новости</a></li>
-                    <li><a class="pt-2 pb-2" href="#">Как купить</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="row pt-3 pb-3">
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <p class="copyright">© Eltourism.kz 2016 - 2017</p>
