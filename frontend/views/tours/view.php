@@ -11,6 +11,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\models\Comments;
 use frontend\controllers\ToursController;
+use yii\widgets\Pjax;
 
 $this->title = $tour->name;
 
@@ -201,7 +202,33 @@ $this->title = $tour->name;
             <aside class="col-md-4">
                 <div id="sidebar">
                     <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="true" aria-controls="collapseMap">ПОКАЗАТЬ ТОЧКУ СБОРА</a>
-                    <a style="background: #ec3e3e" class="btn_map" href="#btn_buy">купить</a>
+
+
+
+                    <? $form = ActiveForm::begin(['method' => "POST", "action" => "/orders/index"]); ?>
+                    <?= Html::submitButton('купить', ['class' => 'btn_map', 'style' => 'background: #ec3e3e', 'name' => 'tour_id', 'value' => $_GET['id'], 'type' => 'submit']) ?>
+                    <?php ActiveForm::end(); ?>
+
+
+
+                    <? $form = ActiveForm::begin([
+                            'method' => "POST",
+                            'id' => 'addToCart',
+                            'enableAjaxValidation' => true,
+                            'action' => '',
+                            'options' => [
+                                    'data-pjax' => true,
+                                    'enctype' => 'multipart/form-data'
+                            ]
+                    ]); ?>
+                    <?= Html::input('hidden', 'tour_id', $_GET['id']) ?>
+                    <?= Html::submitButton('добавить в корзину',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
+                    <?php ActiveForm::end(); ?>
+
+
+
+
+
                     <div class="offer-company_details">
                         <div class="offer-company_header">
                             <?= $user['user_photo'] ? Html::img('@web/common/users/'.$user['id'].'/'.$user['user_photo']) : Html::img('@web/common/users/no-image.png') ?>
@@ -223,6 +250,10 @@ $this->title = $tour->name;
 $script = <<<JS
     $(document).ready(function() {
        $('#ratingBarClick').css({width: 60+'%'});
+        var myAction = function(response){
+           console.log(response);
+       };
+      
     });
     $(document).hover(function () {
         $("#1").hover(function () {
@@ -246,7 +277,7 @@ $script = <<<JS
             $("#rev_db").val($(this).attr("data-value_rating"));
         });
     });    
-    $("#form-review").submit(function(e) {
+    $("#form-review").on('beforeSubmit', function(e) {
         e.preventDefault();
         var form = $(this).serialize();
         $.ajax({
@@ -263,6 +294,21 @@ $script = <<<JS
           });
         return false;
     });
+    $('#addToCart').on('beforeSubmit', function(){
+        var form = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/cart/add',
+            data: form,
+            success: function(response){
+                console.log(response);
+                $('#addToCart button').text('Добавлено');
+            }
+        });
+        return false;
+    });
+    
+       
 JS;
 
 $this->registerJs($script);

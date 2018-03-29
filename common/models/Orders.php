@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: user
+ * Date: 19.03.2018
+ * Time: 12:00
+ */
+
+namespace common\models;
+
+
+use yii\base\Model;
+use yii\db\ActiveRecord;
+
+/**
+ * This is the model class for table "orders".
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property boolean $paid
+ * @property int $sum
+ * @property int $qty
+ * @property integer $time
+ */
+
+class Orders extends ActiveRecord
+{
+    public static function tableName()
+    {
+        return 'orders';
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'user_id' => 'ID пользователя',
+            'paid' => 'Оплачен',
+            'sum' => 'Внесенная сумма',
+            'time' => 'Дата оплаты',
+        ];
+    }
+}

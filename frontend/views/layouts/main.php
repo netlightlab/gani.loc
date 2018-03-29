@@ -62,6 +62,9 @@ $context = $this->context;
                             ?>
                         </li>
                         <li class="profile-button">
+                            <?= Html::a('Корзина', ['/cart/index'], ["class" => "nav-link"]) ?>
+                        </li>
+                        <li class="profile-button">
                             <select class="top_line-currency">
                                 <option selected>АЛМАТЫ</option>
                                 <option>ШЫМКЕНТ</option>

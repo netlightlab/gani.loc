@@ -126,7 +126,7 @@ label {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.profile-button:first-child a{
+.profile-button:first-child a, .profile-button a{
 	color: #fff;
 	font-weight: 600;
 	text-decoration: none;
