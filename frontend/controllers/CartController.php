@@ -97,14 +97,11 @@ class CartController extends Controller
                 $model->user_id = $userId;
                 $model->sum = $data['Orders']['total'];
                 if($model->save(false)){
-                    /*if($this->saveOrderItems($model->id, $data['Orders'])){
+                    if($this->saveOrderItems($model->id, $data['Orders']) && $this->payOrder($model->id, $data)){
                         unset($_SESSION['tour_id']);
-                        $this->redirect(['/cart/index']);
-                        Yii::$app->session->setFlash('success', 'Готово');
-                    }*/
-                    $this->saveOrderItems($model->id, $data['Orders']);
-                    $this->payOrder($model->id, $data);
-
+                        //$this->redirect(['/cart/index']);
+                        //Yii::$app->session->setFlash('success', 'Готово');
+                    }
                 }
             }
         }
