@@ -29,6 +29,15 @@ class CartController extends Controller
     public $orders = array();
     protected $tours = array();
 
+    public function beforeAction($action)
+    {
+        if($action->id == 'pay-result'){
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex(){
 
         $orders = Yii::$app->session->get('tour_id');
@@ -208,13 +217,15 @@ class CartController extends Controller
             throw new BadRequestHttpException();
         }
     }
+    public function actionGetTest(){
+        return $this->redirect(['cart/index']);
+    }
     public function actionPayResult()
     {
         \Yii::$app->response->format = Response::FORMAT_XML;
-        $arrParams = $_GET;
+        $arrParams = $_POST;
         $order_id = $arrParams['pg_order_id'];
-        if (PG_Signature::check($arrParams['pg_sig'], 'pay-ok', $arrParams, $this->merchant_secret_key)) {
-            //print_r(1);
+        if (PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key))      {
             if ($arrParams['pg_result'] == 1) {
                 Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
                 $result = [
@@ -233,8 +244,7 @@ class CartController extends Controller
             $result['pg_sig'] = PG_Signature::make($this->action->id, $result, $this->merchant_secret_key);
             return $result;
         } else {
-            throw new BadRequestHttpException();
-
+             new BadRequestHttpException();
         }
     }
 
