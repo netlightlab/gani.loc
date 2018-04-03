@@ -62,9 +62,6 @@ $context = $this->context;
                             ?>
                         </li>
                         <li class="profile-button">
-                            <?= Html::a('Корзина', ['/cart/index'], ["class" => "nav-link"]) ?>
-                        </li>
-                        <li class="profile-button">
                             <select class="top_line-currency">
                                 <option selected>АЛМАТЫ</option>
                                 <option>ШЫМКЕНТ</option>
@@ -104,6 +101,9 @@ $context = $this->context;
             </div>
             <div class="col-md-2 col-xs-2 text-right d-flex justify-content-end align-items-center d-none">
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
+                    <li class="profile-button pl-0 pr-4" style="border: none;">
+                        <?= Html::a('КОРЗИНА', ['/cart/index'], ["class" => "nav-link"]) ?>
+                    </li>
                     <li class="profile-button pl-0 pr-4" style="border: none;">
                         <?= Html::a('ПОИСК', ['site/index']) ?>
                     </li>
