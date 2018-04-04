@@ -9,76 +9,110 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\widgets\Alert;
+use yii\widgets\Breadcrumbs;
+
+$this->title = 'Корзина';
 
 ?>
 
-<div style="height:200px"></div>
-
-<div class="container">
-    <div class="row">
-        <h1>Корзина</h1>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-            <div class="col-12">
-                <?= Alert::widget() ?>
+    <section class="section-header" style="background: url('../common/img/header/ms.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="parallax-header-text">
+                        <h2>КОРЗИНА</h2>
+                        <p>Здесь вы можете оформить тур.</p>
+                    </div>
+                </div>
             </div>
-            <?/* print_r($model) */?>
-            <?/* print_r($_SESSION) */?>
-            <? if(is_array($orders)): ?>
-                <div class="col-12">
-                    <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
-                        <div class="row">
-                            <div class="col-8">
-                                <? foreach($orders as $order): ?>
-                                    <div class="col-md-12 order-row" data-row="<?= $order->id ?>">
+        </div>
+    </section>
+
+    <section style="background: #2e2e2e;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <?php $this->params['breadcrumbs'][] = $this->title; ?>
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                    <?= Alert::widget() ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-5 pb-5" style="background: #f9f9f9;">
+        <? if(is_array($orders)): ?>
+            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
+            <div class="container">
+                <div class="row">
+                    <main class="col-md-9">
+                        <? foreach($orders as $order): ?>
+                            <article data-row="<?= $order->id ?>" class="basket_box ">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="basket_image">
+                                            <?= Html::img(['/common/tour_img/'.$order->id.'/'.$order->mini_image], ['style' => 'max-width: 100%']) ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <?= Html::img(['/common/tour_img/'.$order->id.'/'.$order->mini_image], ['style' => 'max-width: 100%']) ?>
+                                            <div class="col-md-12">
+                                                <p class="basket_description"><?= $order->name ?></p>
                                             </div>
-                                            <div class="col-md-3">
-                                                <?= $order->name ?>
+                                        </div>
+                                        <div class="row" id="basket-price_info">
+                                            <div class="col-md-4">
+                                                <span>Количество:</span>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-4">
+                                                <span>Сумма:</span>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="basket-price_inputs">
+                                            <div class="col-md-4 d-flex justify-content-center align-items-center">
                                                 <div class="counter">
-                                                    <?= $form->field($model, $order->id.'[qty]')->textInput(['type' => 'number', 'value' => 1, 'min' => 1, 'data-price' => $order->price, 'data-id' => $order->id])->label('') ?>
+                                                    <?= $form->field($model, $order->id.'[qty]')->textInput(['type' => 'number', 'value' => 1, 'min' => 1, 'data-price' => $order->price, 'data-id' => $order->id, 'class' => 'basket-nubmer_tours'])->label('') ?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <div class="price">
-                                                    <span class="price_<?= $order->id ?>"><?= $order->price ?></span>
-                                                </div>
+                                            <div class="col-md-4 d-flex align-items-center price">
+                                                <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem" class="price_<?= $order->id ?>"><?= $order->price ?> тг.</p>
                                                 <?= $form->field($model, $order->id.'[sum]')->hiddenInput(['value' => $order->price, 'class' => 'hiddenPrice_'.$order->id])->label('') ?>
                                             </div>
-                                            <div class="col-md-1">
-                                                <?= Html::a('Удалить', '#', ['class' => 'remove-from-cart', 'data-remove' => $order->id]) ?>
+                                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                                <?= Html::a('Удалить &times;', '#', ['class' => 'remove-from-cart', 'data-remove' => $order->id]) ?>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--hidden fields-->
-                                    <?= $form->field($model, $order->id.'[tour_id]')->hiddenInput(['value' => $order->id])->label('') ?>
-                                    <!--#hidden fields-->
-                                <? endforeach;?>
+                                </div>
+                            </article>
+                        <? endforeach;?>
+                    </main>
+                    <aside class="col-md-3" id="fixed-basket">
+                        <div class="row fixed-basket">
+                            <div class="col-md-12">
+                                <span>Общая сумма</span>
+                                <?= $form->field($model, 'total')->textInput(['value' => '', 'id' => 'total-price', 'readonly' => 'readonly'])->label(''); ?>
                             </div>
-                            <?= $form->field($model, 'total')->textInput(['value' => '', 'id' => 'total-price']) ?>
-                            <div class="col-3">
-                                <?= Html::submitButton('Оформить заказ', ['class' => 'btn btn-primary']) ?>
+                            <div class="col-md-12">
+                                <?= Html::submitButton('Оформить заказ', ['class' => 'alltours_btn-info', 'style' => 'cursor: pointer; border: none;']) ?>
                             </div>
                         </div>
-                    <?php ActiveForm::end(); ?>
+                    </aside>
                 </div>
-            <? else: ?>
-                <p>Корзина пуста</p>
-            <? endif; ?>
-        </div>
-        <!--<div class="col-3 offset-1">
-            <?/*= Html::a('Оформить заказ', ['/orders/index'], ['class' => 'btn btn-primary']) */?>
-        </div>-->
-    </div>
-</div>
-
+            </div>
+            <?php ActiveForm::end(); ?>
+        <? else: ?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2><strong>УПС</strong> Корзина пуста</h2>
+                    </div>
+                </div>
+            </div>
+        <? endif; ?>
+    </section>
 <?php
 
 
@@ -128,7 +162,7 @@ $script = <<<JS
                 itemsPriceX = 0,
                 hiddenPriceInput = $('.hiddenPrice_'+$(this).data('id'));
             
-                priceSpan.html(oneTotalPrice);
+                priceSpan.html(oneTotalPrice+' тг.');
                 hiddenPriceInput.val(oneTotalPrice);
                 
                 
@@ -146,11 +180,17 @@ $script = <<<JS
         });
         
         /*формируем значение для поля total price*/
-        var prices = $('.price span'),
+        var prices = $('.price p'),
             totalPrice = 0;
-        for (var i = 0; i < prices.length; i++){
+			
+        console.log(prices.length);
+        for (var i = 0; i < prices.length; i++){            
             totalPrice += parseInt(prices[i].innerText);
+			console.log(i + ': ' + prices[i].innerText);
+			console.log('ojbect_' + i + ': ' + prices[i]);
+			console.log('total: ' + totalPrice);
         }
+        console.log(totalPrice);
         $('#total-price').val(totalPrice);
         /*#формируем значение для поля total price*/
 
