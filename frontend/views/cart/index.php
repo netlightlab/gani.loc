@@ -21,7 +21,7 @@ $this->title = 'Корзина';
                 <div class="col-md-12">
                     <div class="parallax-header-text">
                         <h2>КОРЗИНА</h2>
-                        <p>Здесь вы можете оформить заказ туров.</p>
+                        <p>Здесь вы можете оформить тур.</p>
                     </div>
                 </div>
             </div>
@@ -44,12 +44,12 @@ $this->title = 'Корзина';
 
     <section class="pt-5 pb-5" style="background: #f9f9f9;">
         <? if(is_array($orders)): ?>
-        <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
+            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
             <div class="container">
                 <div class="row">
                     <main class="col-md-9">
                         <? foreach($orders as $order): ?>
-                            <article class="basket_box ">
+                            <article data-row="<?= $order->id ?>" class="basket_box ">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="basket_image">
@@ -77,7 +77,7 @@ $this->title = 'Корзина';
                                                 </div>
                                             </div>
                                             <div class="col-md-4 d-flex align-items-center price">
-                                                <p style="font-size: 1.2rem; font-weight: bold;" class="price_<?= $order->id ?>"><?= $order->price ?> тг.</p>
+                                                <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem" class="price_<?= $order->id ?>"><?= $order->price ?> тг.</p>
                                                 <?= $form->field($model, $order->id.'[sum]')->hiddenInput(['value' => $order->price, 'class' => 'hiddenPrice_'.$order->id])->label('') ?>
                                             </div>
                                             <div class="col-md-4 d-flex justify-content-center align-items-center">
@@ -102,7 +102,7 @@ $this->title = 'Корзина';
                     </aside>
                 </div>
             </div>
-        <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
         <? else: ?>
             <div class="container">
                 <div class="row">
@@ -180,10 +180,15 @@ $script = <<<JS
         });
         
         /*формируем значение для поля total price*/
-        var prices = $('article .price p'),
+        var prices = $('.price p'),
             totalPrice = 0;
-        for (var i = 0; i < prices.length; i++){
+			
+        console.log(prices.length);
+        for (var i = 0; i < prices.length; i++){            
             totalPrice += parseInt(prices[i].innerText);
+			console.log(i + ': ' + prices[i].innerText);
+			console.log('ojbect_' + i + ': ' + prices[i]);
+			console.log('total: ' + totalPrice);
         }
         console.log(totalPrice);
         $('#total-price').val(totalPrice);
