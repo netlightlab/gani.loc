@@ -40,7 +40,7 @@ $context = $this->context;
                         <li class="profile-button">
                             <?php
                             if (Yii::$app->user->isGuest) {
-                                echo Html::a(Html::img('common/img/header/enter_profile.png')."Войти", ["site/login"], ["class" => "nav-link"]);
+                                echo Html::a(Html::img('@web/common/img/header/enter_profile.png')."Войти", ["site/login"], ["class" => "nav-link"]);
                             } else {
                                 echo Menu::showCab();
                             }
@@ -49,12 +49,12 @@ $context = $this->context;
                         <li class="profile-button">
                             <?php
                             if (Yii::$app->user->isGuest) {
-                                echo Html::a(Html::img('common/img/header/register_profile.png')."Регистрация", ["site/signup"], ["class" => "nav-link"]);
+                                echo Html::a(Html::img('@web/common/img/header/register_profile.png')."Регистрация", ["site/signup"], ["class" => "nav-link"]);
                             } else {
                                 echo
                                     Html::beginForm(['/site/logout'], 'post')
                                     . Html::submitButton(
-                                        'ВЫЙТИ',
+                                        Html::img('@web/common/img/header/logout.png')."ВЫЙТИ",
                                         ['class' => 'nav-link exit-account']
                                     )
                                     . Html::endForm();
@@ -87,7 +87,7 @@ $context = $this->context;
             <div class="col-md-2 col-xs-2 text-left d-flex justify-content-center align-items-center d-none">
                 <?= Html::a(Html::img('@web/common/img/header/logo.png' ), ['site/index']) ?>
             </div>
-            <div class="col-md-8 col-xs-8 text-center">
+            <div class="col-md-7 col-xs-7 text-center">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-menu-mobile">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -99,10 +99,10 @@ $context = $this->context;
                     </div>
                 </nav>
             </div>
-            <div class="col-md-2 col-xs-2 text-right d-flex justify-content-end align-items-center d-none">
+            <div class="col-md-3 col-xs-3 text-right d-flex justify-content-end align-items-center d-none">
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
                     <li class="profile-button pl-0 pr-4" style="border: none;">
-                        <?= Html::a('КОРЗИНА', ['/cart/index'], ["class" => "nav-link"]) ?>
+                        <?= Html::a('КОРЗИНА ('.count(Yii::$app->session->get("tour_id")).')', ['/cart/index'], ["class" => "nav-link"]) ?>
                     </li>
                     <li class="profile-button pl-0 pr-4" style="border: none;">
                         <?= Html::a('ПОИСК', ['site/index']) ?>

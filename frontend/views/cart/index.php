@@ -77,10 +77,13 @@ $this->title = 'Корзина';
                                                 </div>
                                             </div>
                                             <div class="col-md-4 d-flex align-items-center price">
-                                                <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem" class="price_<?= $order->id ?>"><?= $order->price ?> тг.</p>
+                                                <span style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem" class="price_<?= $order->id ?>"><?= $order->price ?> тг.</span>
                                                 <?= $form->field($model, $order->id.'[sum]')->hiddenInput(['value' => $order->price, 'class' => 'hiddenPrice_'.$order->id])->label('') ?>
                                             </div>
                                             <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                                <!--hidden fields-->
+                                                <?= $form->field($model, $order->id.'[tour_id]')->hiddenInput(['value' => $order->id])->label('') ?>
+                                                <!--#hidden fields-->
                                                 <?= Html::a('Удалить &times;', '#', ['class' => 'remove-from-cart', 'data-remove' => $order->id]) ?>
                                             </div>
                                         </div>
@@ -180,7 +183,7 @@ $script = <<<JS
         });
         
         /*формируем значение для поля total price*/
-        var prices = $('.price p'),
+        var prices = $('.price span'),
             totalPrice = 0;
 			
         console.log(prices.length);

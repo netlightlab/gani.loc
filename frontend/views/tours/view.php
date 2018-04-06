@@ -54,7 +54,7 @@ $this->title = $tour->name;
     <div class="container">
         <div class="row py-5">
             <main id="single_tour_desc" class="col-md-8">
-                <div class="row">
+                <div id="single-fix" class="row">
                     <div class="col-md-12">
                         <ul id="w1" class="nav view_tour-tabs">
                             <li><a class="tab-link active" href="#info" data-toggle="tab" aria-expanded="true"><span>Информация</span></a></li>
@@ -290,7 +290,7 @@ $script = <<<JS
               console.log(error)
             }
           }).done(function(){
-            $("#form-review").html('<h2 class="reviews_success">Спасибо, Ваш отзыв отправлен на модератору!</h2>');
+            $("#form-review").html('<h2 class="reviews_success">Спасибо, Ваш отзыв отправлен на проверку модератору!</h2>');
           });
         return false;
     });
