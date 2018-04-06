@@ -43,6 +43,7 @@ class Tickets extends ActiveRecord
             'company_name' => 'Название компании',
             'certificate' => 'Номер билета',
             'order_num' => 'Номер заказа',
+            'tour_id' => 'Номер тура',
             'price' => 'Цена',
             'qty' => 'Количество персон'
         ];
@@ -61,6 +62,7 @@ class Tickets extends ActiveRecord
             $model->company_name = $company->name_company;
             $model->certificate = $orderId.$item->tour_id.$this->randd();
             $model->order_num = $orderId;
+            $model->tour_id = $item->tour_id;
             $model->price = $item->sum;
             $model->qty = $item->qty;
             $model->save();

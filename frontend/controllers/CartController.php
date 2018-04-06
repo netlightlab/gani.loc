@@ -223,6 +223,8 @@ class CartController extends Controller
     }
     public function actionPayResult()
     {
+//        $tickets = new Tickets();
+//        $tickets->createTicket(61);
         \Yii::$app->response->format = Response::FORMAT_XML;
         $arrParams = $_POST;
         $order_id = $arrParams['pg_order_id'];

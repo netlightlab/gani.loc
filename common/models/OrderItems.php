@@ -12,6 +12,7 @@ namespace common\models;
 use frontend\models\Tours;
 use yii\base\Model;
 use yii\db\ActiveRecord;
+use common\models\Tickets;
 
 /**
  * This is the model class for table "orders".
@@ -44,5 +45,9 @@ class OrderItems extends ActiveRecord
     public function getTours()
     {
         return $this->hasOne(Tours::className(), ['id' => 'tour_id'])->select(['id','name','mini_image']);
+    }
+    public function getTickets()
+    {
+        return $this->hasOne(Tickets::className(), ['tour_id' => 'tour_id', 'order_num' => 'order_id'])->asArray();
     }
 }

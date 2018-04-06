@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 
 use common\models\Cities;
+use common\models\Tickets;
 use frontend\models\UserProfile;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
@@ -71,15 +72,16 @@ class UserController extends Controller
         foreach($orders as $order){
             $result[$order->id] = array(
                 'order_info' => Orders::find()->where(['id' => $order->id])->asArray()->one(),
+                //'tickets' => Tickets::find()->where(['order_num' => $order->id])->indexBy('tour_id')->asArray()->all(),
                 'tours_info' => Orders::findOne($order->id)
                     ->getItems()
-                    ->select(['id','qty','sum','tour_id'])
+                    ->select(['id','qty','sum','tour_id', 'order_id'])
                     ->indexBy('id')
                     ->asArray()
                     ->all()
             );
         }
-        print_r($result);
+//        print_r($result);
         //print_r($a);
         /*$o = array(
             [order_id] => array(
@@ -124,6 +126,13 @@ class UserController extends Controller
 
         return $this->render('editprofile', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionTicket($id){
+        $model = Tickets::findOne((int)$id);
+        return $this->render('ticket', [
+            'item' => $model
         ]);
     }
 }
