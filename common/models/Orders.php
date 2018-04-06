@@ -44,7 +44,7 @@ class Orders extends ActiveRecord
 
     public function getItems()
     {
-        return $this->hasOne(OrderItems::className(), ['order_id' => 'id'])->with('tours');
+        return $this->hasOne(OrderItems::className(), ['order_id' => 'id'])->with('tours')->with('tickets');
     }
 
 }

@@ -63,12 +63,15 @@ $this->title = 'Личный кабинет';
                                         </div>
                                         <div class="col-12">
                                             <?php foreach($order['tours_info'] as $item): ?>
-                                                <div class="row">
+                                                <div class="row py-2">
                                                     <div class="col-md-2">
                                                         <?= Html::img('/common/tour_img/'.$item['tours']['id'].'/'.$item['tours']['mini_image']) ?>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <p><?= $item['tours']['name'] ?></p>
+                                                        <? if(!empty($item['tickets'])): ?>
+                                                            <p><?= Html::a('Билет', ['/user/ticket', 'id' => $item['tickets']['id']]) ?></p>
+                                                        <? endif; ?>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <p>Билетов:<br /> <?= $item['qty'] ?></p>
