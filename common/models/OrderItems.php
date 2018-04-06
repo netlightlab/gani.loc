@@ -9,6 +9,7 @@
 namespace common\models;
 
 
+use frontend\models\Tours;
 use yii\base\Model;
 use yii\db\ActiveRecord;
 
@@ -38,5 +39,10 @@ class OrderItems extends ActiveRecord
             'sum' => 'Сумма',
             'qty' => 'Количество билетов',
         ];
+    }
+
+    public function getTours()
+    {
+        return $this->hasOne(Tours::className(), ['id' => 'tour_id'])->select(['id','name','mini_image']);
     }
 }

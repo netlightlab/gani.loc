@@ -10,6 +10,8 @@ namespace frontend\controllers;
 
 use common\models\Cities;
 use frontend\models\UserProfile;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -17,6 +19,8 @@ use Yii;
 use yii\web\UploadedFile;
 use common\models\User;
 use yii\validators\CompareValidator;
+use common\models\Orders;
+use common\models\OrderItems;
 
 
 class UserController extends Controller
@@ -60,6 +64,33 @@ class UserController extends Controller
     {
         $usersInfo = User::findOne(['id' => Yii::$app->user->id]);
         $model = new UserProfile();
+
+        $orders = Orders::find()->where(['user_id' => Yii::$app->user->id])->all();
+        //print_r($orders);
+        $result = array();
+        foreach($orders as $order){
+            $result[$order->id] = array(
+                'order_info' => Orders::find()->where(['id' => $order->id])->asArray()->one(),
+                'tours_info' => Orders::findOne($order->id)
+                    ->getItems()
+                    ->select(['id','qty','sum','tour_id'])
+                    ->indexBy('id')
+                    ->asArray()
+                    ->all()
+            );
+        }
+        print_r($result);
+        //print_r($a);
+        /*$o = array(
+            [order_id] => array(
+                [tour_id] => [
+                    [id] => id,
+                    [qty] => qty
+                ]
+            )
+        );*/
+        //$orderItems = OrderItems::find()->where(['user_id' => Yii::$app->user->id])->all();
+
         if ($model->load(Yii::$app->request->post())) {
             if($model->edit()){
                 $this->refresh();
@@ -71,6 +102,8 @@ class UserController extends Controller
         return $this->render('user', [
             'UsersInfo' => $usersInfo,
             'model' => $model,
+            'orders' => $result,
+            //'orderItems' => $orderItems
         ]);
     }
 
