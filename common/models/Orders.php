@@ -9,6 +9,7 @@
 namespace common\models;
 
 
+use frontend\models\Tours;
 use yii\base\Model;
 use yii\db\ActiveRecord;
 
@@ -40,4 +41,10 @@ class Orders extends ActiveRecord
             'time' => 'Дата оплаты',
         ];
     }
+
+    public function getItems()
+    {
+        return $this->hasOne(OrderItems::className(), ['order_id' => 'id'])->with('tours');
+    }
+
 }

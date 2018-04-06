@@ -1712,3 +1712,7 @@ a.btn_map:hover {
     outline-offset: 0;
     background: transparent;
 }
+
+.user-order-list img {
+    max-width: 100%;
+}

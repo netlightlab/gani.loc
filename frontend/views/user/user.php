@@ -52,6 +52,39 @@ $this->title = 'Личный кабинет';
                         <div class="row">
                             <div class="col-md-12">
 <!--                                <span style="color: red;">на стадий разработки</span>-->
+                                <?php if (is_array($orders) && !empty($orders)): ?>
+                                <?php foreach($orders as $id => $order): ?>
+                                    <div class="row user-order-list">
+                                        <div class="col-12">
+                                            <h3>Заказ № <?= $id ?></h3>
+                                            <p>Сумма заказа: <?= $order['order_info']['sum'] ?></p>
+                                            <p>Дата заказа: <?= $order['order_info']['time'] ?></p>
+                                            <p>Оплачен: <?= $order['order_info']['paid'] == 0 ? 'Не оплачен' : 'Оплачен'?></p>
+                                        </div>
+                                        <div class="col-12">
+                                            <?php foreach($order['tours_info'] as $item): ?>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <?= Html::img('/common/tour_img/'.$item['tours']['id'].'/'.$item['tours']['mini_image']) ?>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <p><?= $item['tours']['name'] ?></p>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <p>Билетов:<br /> <?= $item['qty'] ?></p>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <p>Сумма:<br /> <?= $item['sum'] ?></p>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                        <hr>
+                                <?php endforeach; ?>
+                                <?php else: ?>
+                                    <h2>У вас пока нет заказов</h2>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

@@ -23,6 +23,7 @@ use frontend\models\LoginForm;
 use common\models\PG_Signature;
 use common\models\User;
 use yii\web\Response;
+use common\models\Tickets;
 
 class CartController extends Controller
 {
@@ -228,6 +229,8 @@ class CartController extends Controller
         if (PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key))      {
             if ($arrParams['pg_result'] == 1) {
                 Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
+                $tickets = new Tickets();
+                $tickets->createTicket($order_id);
                 $result = [
                     'pg_salt'=>$arrParams['pg_salt'],
                     'pg_status'=>'ok',
