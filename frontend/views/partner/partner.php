@@ -61,7 +61,7 @@ $this->title = 'Личный кабинет';
                     <div id="statistics" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                                                                <span style="color: red;">на стадий разработки</span>
+                                <?= Html::a('покупки', ['/partner/pays']) ?>
                             </div>
                         </div>
                     </div>

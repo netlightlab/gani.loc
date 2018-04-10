@@ -8,7 +8,10 @@
 
 namespace frontend\controllers;
 
+use common\models\OrderItems;
+use common\models\Orders;
 use frontend\models\PartnerProfile;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -76,5 +79,34 @@ class PartnerController extends Controller
 
     public function getUserTours($id) {
         return Tours::find()->where(['user_id' => $id])->select('id, name, price, mini_image')->all();
+    }
+
+    public function actionPays(){
+        $orders = Orders::find()->where(['user_id' => Yii::$app->user->id])->all();
+        //print_r($orders);
+
+        $thisUserTours = Tours::find()->select('id')->where(['user_id' => Yii::$app->user->id])->asArray()->all();
+
+        /**
+         * id туров которые принадлежат данному партнеру
+         */
+        $thisUserToursId = ArrayHelper::map($thisUserTours,'id', 'id');
+
+
+        $orderItems = OrderItems::find()->with('tickets')->with('tours')->with('orderInfo')->asArray()->all();
+        $result = array();
+        foreach($orderItems as $orderItem){
+            foreach($thisUserToursId as $id){
+                if($orderItem['tour_id'] == $id){
+                    $result[] = $orderItem;
+                }
+            }
+        }
+//        print_r($result);
+
+
+        return $this->render('pays', [
+            'pays' => $result
+        ]);
     }
 }

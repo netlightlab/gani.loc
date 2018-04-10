@@ -89,6 +89,14 @@ use common\models\Countries;
                                 --><?php /*ActiveForm::end(); */?>
                             </div>
                             <div class="col-md-6">
+                                <h4 class="pb-3">Изменить пароль</h4>
+                                <?php $form = ActiveForm::begin(['id' => 'change-password', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+                                <?= $form->field($model, 'password')->label('НОВЫЙ ПАРОЛЬ')->textInput(['required' => 'required', 'type' => 'password']) ?>
+                                <?/*= $form->field($model, 'repassword')->label('ПОДТВЕРДИТЕ НОВЫЙ ПАРОЛЬ')->textInput(['required' => 'required', 'type' => 'password']) */?>
+                                <?= Html::submitButton('Обновить пароль', ['class' => 'btn-refresh-profile', 'name' => 'signup-edit']) ?>
+                                <?php ActiveForm::end(); ?>
+                            </div>
+                            <div class="col-md-6">
                                 <h4 class="pb-3">Изменить email адрес</h4>
                                 <?php $form = ActiveForm::begin(['id' => 'change-email', 'options' => ['enctype' => 'multipart/form-data']]); ?>
                                 <?= $form->field($model, 'email')->label('НОВЫЙ EMAIL')->textInput(['value' => '', 'required' => 'required', 'type' => 'email']) ?>
@@ -138,7 +146,7 @@ use common\models\Countries;
                                         </tr>
                                         <tr>
                                             <td><strong>Контактное лицо</strong></td>
-                                            <td><span><?= $model->fio ? $model->fio : "Не заполнено" ?></span></td>
+                                            <!--<td><span><?/*= $model->fio ? $model->fio : "Не заполнено" */?></span></td>-->
                                         </tr>
                                         <tr>
                                             <td><strong>Должность</strong></td>
@@ -234,7 +242,10 @@ use common\models\Countries;
                                             <h4>Изменить контактную информацию</h4>
                                         </div>
                                         <div class="col-md-4 col-xs-4">
-                                            <?= $form->field($model, 'fio')->textInput(['placeholder' => 'Например: Иван Иванович Иванов'])->label('КОНТАКТНОЕ ЛИЦО') ?>
+                                            <?= $form->field($model, 'user_name')->textInput(['placeholder' => 'Например: Иван Иванович Иванов'])->label('КОНТАКТНОЕ ЛИЦО') ?>
+                                        </div>
+                                        <div class="col-md-4 col-xs-4">
+                                            <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иван Иванович Иванов'])->label('КОНТАКТНОЕ ЛИЦО') ?>
                                         </div>
                                         <div class="col-md-4 col-xs-4">
                                             <?= $form->field($model, 'position_company')->textInput(['placeholder' => 'Например: Директор'])->label('ДОЛЖНОСТЬ') ?>
@@ -264,11 +275,6 @@ use common\models\Countries;
                                         </div>
                                         <div class="col-md-4 col-xs-4">
                                             <?= $form->field($model, 'city_phone_2')->label('телефон (городской)')->widget(\yii\widgets\MaskedInput::className(), [
-                                                'mask' => '999 (999) 99-99',
-                                            ])->textInput(['placeholder' => 'Например: 727 (232) 77-77']) ?>
-                                        </div>
-                                        <div class="col-md-4 col-xs-4">
-                                            <?= $form->field($model, 'city_phone_3')->label('телефон (городской)')->widget(\yii\widgets\MaskedInput::className(), [
                                                 'mask' => '999 (999) 99-99',
                                             ])->textInput(['placeholder' => 'Например: 727 (232) 77-77']) ?>
                                         </div>
