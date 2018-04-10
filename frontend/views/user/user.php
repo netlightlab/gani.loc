@@ -51,6 +51,32 @@ $this->title = 'Личный кабинет';
                     <div id="orders" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
+                                <?php if (is_array($orders) && !empty($orders)): ?>
+                                    <?php foreach ($orders as $id => $order): ?>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Заказ № <?= $id ?></h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p>Сумма заказа: <?= $order['order_info']['sum'] ?></p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Дата заказа: <?= $order['order_info']['time'] ?></p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Оплачен: <?= $order['order_info']['paid'] == 0 ? 'Не оплачен' : 'Оплачен' ?></p>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <h3>У вас нет заказов</h3>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
 <!--                                <span style="color: red;">на стадий разработки</span>-->
                                 <?php if (is_array($orders) && !empty($orders)): ?>
                                 <?php foreach($orders as $id => $order): ?>
