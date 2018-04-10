@@ -100,17 +100,20 @@ $this->title = 'Регистрация';
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <?= $form->field($model, 'fio')->textInput(['placeholder' => 'Например: Иван Иванов Иванович'])->label('КОНТАКТНОЕ ЛИЦО') ?>
+                <div class="col-md-4 col-xs-4">
+                    <?= $form->field($model, 'user_name')->textInput(['placeholder' => 'Например: Иван Иванович'])->label('КОНТАКТНОЕ ЛИЦО: ИМЯ/ОТЧЕСТВО') ?>
                 </div>
-                <div class="col-md-4">
-                    <?= $form->field($model, 'position_company')->textInput(['placeholder' => 'Например: Директор'])->label('Должность') ?>
+                <div class="col-md-4 col-xs-4">
+                    <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иванов'])->label('ФАМИЛИЯ') ?>
                 </div>
-                <div class="col-md-4">
-                    <?= $form->field($model, 'website')->textInput(['placeholder' => 'Например: http://kaztravel.kz'])->label('веб-сайт') ?>
+                <div class="col-md-4 col-xs-4">
+                    <?= $form->field($model, 'position_company')->textInput(['placeholder' => 'Например: Директор'])->label('ДОЛЖНОСТЬ') ?>
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <?= $form->field($model, 'website')->textInput(['placeholder' => 'Например: el-tour.kz'])->label('ВЕБ-САЙТ') ?>
+                </div>
                 <div class="col-md-4">
                     <?= $form->field($model, 'mobile_phone_1')->label('телефон (сотовый)')->widget(\yii\widgets\MaskedInput::className(), [
                             'mask' => '9 (999) 999-9999',
@@ -121,13 +124,13 @@ $this->title = 'Регистрация';
                         'mask' => '9 (999) 999-9999',
                     ])->label('телефон (сотовый)')->textInput(['placeholder' => 'Например: 8 (777) 777-7777']) ?>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <?= $form->field($model, 'mobile_phone_3')->widget(\yii\widgets\MaskedInput::className(), [
                         'mask' => '9 (999) 999-9999',
                     ])->label('телефон (сотовый)')->textInput(['placeholder' => 'Например: 8 (777) 777-7777']) ?>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-4">
                     <?= $form->field($model, 'city_phone_1')->label('телефон (городской)')->widget(\yii\widgets\MaskedInput::className(), [
                         'mask' => '999 (999) 99-99',
@@ -135,11 +138,6 @@ $this->title = 'Регистрация';
                 </div>
                 <div class="col-md-4">
                     <?= $form->field($model, 'city_phone_2')->widget(\yii\widgets\MaskedInput::className(), [
-                        'mask' => '999 (999) 99-99',
-                    ])->label('телефон (городской)')->textInput(['placeholder' => 'Например: 727 (232) 77-77']) ?>
-                </div>
-                <div class="col-md-4">
-                    <?= $form->field($model, 'city_phone_3')->widget(\yii\widgets\MaskedInput::className(), [
                         'mask' => '999 (999) 99-99',
                     ])->label('телефон (городской)')->textInput(['placeholder' => 'Например: 727 (232) 77-77']) ?>
                 </div>

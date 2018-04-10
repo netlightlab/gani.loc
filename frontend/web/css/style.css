@@ -296,11 +296,15 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
 }
 
 .boxTour-hit h5 {
-    margin: 0;
     padding: 15px 5px;
     font-weight: bold;
     text-transform: uppercase;
     color: #2e2e2e;
+    width: 95%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: auto;
 }
 
 a {
@@ -311,6 +315,7 @@ a {
     width: 100%;
     overflow: hidden;
     position: relative;
+    max-height: 250px;
 }
 
 .tour-img img {
@@ -1715,4 +1720,11 @@ a.btn_map:hover {
 
 .user-order-list img {
     max-width: 100%;
+}
+
+#form-review {
+    background: #fff;
+    padding: 25px;
+    box-shadow: 0 1px 1px grey;
+    border: 1px solid #ddd;
 }
