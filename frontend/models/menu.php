@@ -27,16 +27,14 @@ class Menu extends Page
         }
     }
 
-    protected function getElements(){
-
-
-
-        return $data;
-    }
+//    protected function getElements(){
+//        return $data;
+//    }
 
     public static function showCab(){
         $user = new DbManager();
         $usersRole = key($user->getAssignments(Yii::$app->user->id));
-        return Html::a("Кабинет", ["{$usersRole}/index"], ["class" => "nav-link"]);
+        return Html::a(Html::img('@web/common/img/header/account.png')."Кабинет", ["{$usersRole}/index"], ["class" => "nav-link"]);
+//        return Html::a("Кабинет", ["{$usersRole}/index"], ["class" => "nav-link"]);
     }
 }

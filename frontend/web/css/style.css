@@ -126,7 +126,7 @@ label {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.profile-button:first-child a, .profile-button a{
+.profile-button:first-child a, .profile-button a, .profile-button button{
 	color: #fff;
 	font-weight: 600;
 	text-decoration: none;
@@ -140,6 +140,8 @@ label {
     top: 50%;
     margin-top: -8.5px;
 }
+
+.profile-button:nth-of-type(2) button,
 .profile-button:nth-of-type(2) a{
     color: #fac727;
     font-weight: 600;
