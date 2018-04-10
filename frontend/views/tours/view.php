@@ -17,8 +17,7 @@ $this->title = $tour->name;
 
 ?>
 
-<!--<section class="section-header" style="background: url('../common/img/header/parallax-partner-cabinet.jpg')">-->
-<section class="section-header" style="background: url('../common/tour_img/<?= $tour->id ?>/<?= $tour->back_image?>')">
+<?= $tour->back_image ? "<section class='section-header' style='background: url(../common/tour_img/".$tour->id. "/" . $tour->back_image ."')>" : "<section class='section-header' style='background: url(../common/users/no-image.png) no-repeat center; background-size: contain !important'".">" ?>
     <div class="parallax-tour">
         <div class="container">
             <div class="row">

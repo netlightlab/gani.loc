@@ -66,13 +66,13 @@ $this->title = 'Создание тура';
                                 <hr style="10px 0">
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($model, 'name')->label('НАЗВАНИЕ*')->textInput(['required' => 'required']) ?>
+                                <?= $form->field($model, 'name')->label('НАЗВАНИЕ*')->textInput() ?>
                             </div>
                             <div class="col-md-4">
                                 <?= $form->field($model, 'category_id')->dropDownList($cities->getCountriesList())->label('УКАЖИТЕ КАТЕГОРИЮ*') ?>
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($model, 'tour_language')->label('ДОСТУПНЫЕ ЯЗЫКИ ТУРА ИЛИ РАЗВЛЕЧЕНИЯ*')->textInput(['required' => 'required']) ?>
+                                <?= $form->field($model, 'tour_language')->label('ДОСТУПНЫЕ ЯЗЫКИ ТУРА ИЛИ РАЗВЛЕЧЕНИЯ*')->textInput() ?>
                             </div>
                             <div class="col-md-12">
                                 <?= $form->field($model, 'mini_description')->textarea(['rows' => '5', 'placeholder' => 'Вы можете ввести только: 200 символов'])->label('КРАТКОЕ ОПИСАНИЕ*') ?>

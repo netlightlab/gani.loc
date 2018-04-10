@@ -75,7 +75,7 @@ use yii\helpers\Html;
                         <div class="boxTour-hit">
                             <div class="hit-sale"><b>Хит</b><br>Продаж</div>
                             <div class="tour-img">
-                                <?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?>
+                                <?= $tour->mini_image ? Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) : Html::img('@web/common/users/no-image.png') ?>
                                 <div class="tour-info">
                                     <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
                                     <p>подробнее</p>

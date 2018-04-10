@@ -64,11 +64,22 @@ class Tours extends ActiveRecord
             ['place_id', 'trim'],
             ['category_id', 'trim'],
             ['city_id', 'trim'],
+
             ['name', 'trim'],
+            ['name', 'required', 'message' => 'Необходимо указать название компании!'],
+
             ['description', 'trim'],
+            ['description', 'required', 'message' => 'Необходимо заполнить описание компании!'],
+
             ['mini_description', 'trim'],
+            ['mini_description', 'required', 'message' => 'Необходимо заполнить краткое описание компании!'],
+
             ['dot_place', 'trim'],
+            ['dot_place', 'required', 'message' => 'Необходимо указать адрес точки сбора!'],
+
             ['tour_language', 'trim'],
+            ['tour_language', 'required', 'message' => 'Необходимо указать языки туров!'],
+
             ['conditions', 'trim'],
             ['return_cond', 'trim'],
             ['back_image', 'trim'],
@@ -78,8 +89,12 @@ class Tours extends ActiveRecord
             ['price_child_free', 'trim'],
             ['dot_place_addr', 'trim'],
             ['w_included', 'trim'],
+
             ['price', 'trim'],
+            ['price', 'required', 'message' => 'Необходимо указать цену!'],
+
             ['official_name', 'trim'],
+            ['official_name', 'required', 'message' => 'Укажите официальное название компании!'],
 
         ];
     }

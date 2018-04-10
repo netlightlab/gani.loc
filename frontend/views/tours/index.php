@@ -89,7 +89,7 @@ $this->title = 'Tours';
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                         <div class="alltours_img-list">
-                                            <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?></a>
+                                            <?= $tour->mini_image ? Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) : Html::img('@web/common/users/no-image.png') ?>
                                             <span>Category</span>
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@ $this->title = 'Tours';
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="alltours_price-list">
                                             <small>от <?= $tour->price ?> ₸</small>
-                                            <a class="alltours_btn-info" href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">подробнее</a>
+                                            <?= Html::a('Подробнее', ['tours/view','id' => $tour->id], ['title' => $tour->name, 'class' => 'alltours_btn-info'])?>
                                         </div>
                                     </div>
                                 </div>

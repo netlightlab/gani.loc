@@ -1287,6 +1287,16 @@ a.btn_map:hover {
     border-right: 1px solid rgba(0, 0, 0, .1);
 }
 
+.alltours_description span {
+    width: 100%;
+    height: 145px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 .alltours_description a {
     text-decoration: none !important;
 }
@@ -1306,6 +1316,7 @@ a.btn_map:hover {
     position: relative;
 }
 
+
 .alltours_img-list span {
     position: absolute;
     color: #fff;
@@ -1319,13 +1330,13 @@ a.btn_map:hover {
     padding-bottom: 5px;
 }
 
-.alltours_img-list a img {
+.alltours_img-list  img {
     width: auto;
     height:200px;
     transition: all 0.7s ease;
 }
 
-.alltours_img-list a:hover img {
+.alltours_img-list:hover img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }

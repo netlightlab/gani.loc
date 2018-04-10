@@ -104,11 +104,7 @@ $this->title = 'Регистрация';
                     <?= $form->field($model, 'user_name')->textInput(['placeholder' => 'Например: Иван Иванович'])->label('КОНТАКТНОЕ ЛИЦО: ИМЯ/ОТЧЕСТВО') ?>
                 </div>
                 <div class="col-md-4 col-xs-4">
-<<<<<<< HEAD
-                    <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иванов'])->label('ФАМИЛИЕ') ?>
-=======
                     <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иванов'])->label('ФАМИЛИЯ') ?>
->>>>>>> 29889b95262512765c33566799d99b0bf42f85e5
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <?= $form->field($model, 'position_company')->textInput(['placeholder' => 'Например: Директор'])->label('ДОЛЖНОСТЬ') ?>

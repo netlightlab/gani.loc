@@ -89,7 +89,7 @@ $this->title = 'Личный кабинет';
                                     <a href="/my-tours/edit?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
                                         <div class="boxTour-hit">
                                             <div class="tour-img">
-                                                <?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?>
+                                                <?= $tour->mini_image ? Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) : Html::img('@web/common/users/no-image.png') ?>
                                                 <div class="tour-info">
                                                     <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
                                                     <p>подробнее</p>
@@ -262,7 +262,7 @@ $this->title = 'Личный кабинет';
                                             <?= $form->field($model, 'user_name')->textInput(['placeholder' => 'Например: Иван Иванович'])->label('КОНТАКТНОЕ ЛИЦО: ИМЯ/ОТЧЕСТВО') ?>
                                         </div>
                                         <div class="col-md-4 col-xs-4">
-                                            <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иванов'])->label('ФАМИЛИЕ') ?>
+                                            <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Например: Иванов'])->label('ФАМИЛИЯ') ?>
                                         </div>
                                         <div class="col-md-4 col-xs-4">
                                             <?= $form->field($model, 'position_company')->textInput(['placeholder' => 'Например: Директор'])->label('ДОЛЖНОСТЬ') ?>

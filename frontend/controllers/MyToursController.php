@@ -59,16 +59,20 @@ class MyToursController extends Controller
         $image1 = UploadedFile::getInstance($model, 'back_image');
         $image2 = UploadedFile::getInstance($model, 'mini_image');
         $image3 = UploadedFile::getInstance($model, 'gallery');
+
         if ($model->load(Yii::$app->request->post())) {
-            if($model->addTour()){
-                $this->refresh();
-                FileHelper::createDirectory('common/tour_img/' .$model->id. '/');
-                $dir = Yii::getAlias('common/tour_img/' .$model->id. '/');
+            if ($model->addTour()) {
+                if($image1->name && $image2->name && $image3->name) {
+                    $this->refresh();
+                    FileHelper::createDirectory('common/tour_img/' . $model->id . '/');
+                    $dir = Yii::getAlias('common/tour_img/' . $model->id . '/');
+                    $image1->saveAs($dir . $image1->name);
+                    $image2->saveAs($dir . $image2->name);
+                    $image3->saveAs($dir . $image3->name);
+                }
+                $this->redirect(['partner/index#my_tours']);
                 Yii::$app->session->setFlash("success", "Тур успешно добавлен");
-                $image1->saveAs($dir . $image1->name);
-                $image2->saveAs($dir . $image2->name);
-                $image3->saveAs($dir . $image3->name);
-            }else{
+            } else {
                 Yii::$app->session->setFlash("error", "Ошибка");
             };
         };
