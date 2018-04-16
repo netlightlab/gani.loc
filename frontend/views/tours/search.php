@@ -10,6 +10,11 @@ use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\LinkPager;
+use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
+
 
 $this->title = 'Поиск';
 
@@ -40,9 +45,10 @@ $this->title = 'Поиск';
     </div>
 </section>
 
-<section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
-    <div id="map"></div>
-</section>
+
+    <section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
+        <div id="map"></div>
+    </section>
 
     <section style="background: #fbfbfb;">
         <div class="container py-5">
@@ -58,14 +64,18 @@ $this->title = 'Поиск';
                             <div id="filter">
                                 <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Поиск по фильтру</a>
                                 <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
-                                    <div class="filter-block">
+                                    <!--<div class="filter-block">
                                         <h6>Выберите страну</h6>
                                         <select id="getToursCountries">
                                             <option> </option>
                                             <option value="1">Казахстан</option>
                                             <option value="2">Россия</option>
                                         </select>
-                                    </div>
+                                    </div>-->
+                                    <?= $this->render('_filter', [
+                                        'search_form' => $search_form,
+                                        'tours' => $tours
+                                    ]) ?>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +86,7 @@ $this->title = 'Поиск';
                         <div class="row">
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="sort-block">
-<!--                                    --><?php //echo $sort->link('price'); ?>
+                                    <!--                                    --><?php //echo $sort->link('price'); ?>
                                     <select name="sort_price" id="sort_price">
                                         <option value selected>По цене</option>
                                         <option value="price">Самые дешевые</option>
@@ -86,8 +96,19 @@ $this->title = 'Поиск';
                             </div>
                         </div>
                     </div>
+                    <?php
+                    /*Pjax::widget([
+                        'id' => 'searchContainer',  // response goes in this element
+                        'enablePushState' => true,
+                        'enableReplaceState' => false,
+                        'formSelector' => '#ts_form',// this form is submitted on change
+                        'submitEvent' => 'change',
+                    ]);*/
+                    ?>
                     <div id="places">
-                        <?php foreach($model as $tour) : ?>
+                        <?php Pjax::begin(['id' => 'searchContainer']) ?>
+                        <? print_r(count($tours)) ?>
+                        <?php foreach($tours as $tour) : ?>
                             <div class="alltours_box">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -111,38 +132,38 @@ $this->title = 'Поиск';
                                 </div>
                             </div>
                         <? endforeach; ?>
+                        <?php Pjax::end() ?>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-<!--     <span><? print_r($pages); ?></span>
 
-<?= LinkPager::widget([
-        'pagination' => $pages,
-]); ?> -->
+
+
+<?//= GridView::widget([
+//    'dataProvider' => $tours,
+//    'columns' => [
+//
+//        'id',
+//        'name',
+//        'user_id',
+//
+//        ['class' => 'yii\grid\ActionColumn'],
+//    ],
+//]) ?>
+
+<?// print_r($tours) ?>
+
+
+
+
+
 <?php
 
 $js = <<<JS
-    var getToursCountries = document.getElementById('getToursCountries');
-    var getToursCategory = document.getElementById('getToursCategory');
-    var getSortPrice = document.getElementById('sort_price');
     
-    // var currentURL = window.location.href.toString().split(window.location.host+'/tours/')[1];
-    
-    getSortPrice.addEventListener('change', function(){
-        // window.location.href = currentURL + getSortPrice.options[getSortPrice.selectedIndex].value;
-    });    
-    
-    getToursCountries.addEventListener('change', function(){
-       // window.location.href = currentURL + getToursCountries.options[getToursCountries.selectedIndex].value; 
-    });
-    
-    getToursCategory.addEventListener('change', function(){
-       // window.location.href = currentURL + getToursCategory.options[getToursCategory.selectedIndex].value; 
-    });
-
 JS;
 
 $this->registerJs($js);

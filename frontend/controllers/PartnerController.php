@@ -30,7 +30,7 @@ class PartnerController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['partner'],
                     ],
                 ],
             ],

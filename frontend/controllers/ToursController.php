@@ -11,6 +11,7 @@ namespace frontend\controllers;
 
 use backend\models\Pages;
 use frontend\models\Comments;
+use yii\data\ActiveDataProvider;
 use yii\data\Sort;
 use yii\filters\AjaxFilter;
 use yii\helpers\ArrayHelper;
@@ -20,11 +21,49 @@ use frontend\models\Tours;
 use frontend\models\Search;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\Pagination;
 use common\models\User;
+use yii\filters\AccessControl;
 
 class ToursController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+
     public function actionIndex(){
         return $this->render('index', [
             'tours' => Tours::find()->where(['status' => 1])->all(),
@@ -70,59 +109,38 @@ class ToursController extends Controller
 
     public function actionSearch(){
 
-        $searchModel = new Search();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $getParams = Yii::$app->request->get();
+        $search = new Search();
 
+        $m = new Tours;
 
-        $sort = new Sort([
-            'attributes' => [
-                'price' => [
-                    'asc' => ['price' => SORT_ASC],
-                    'desc' => ['price' => SORT_DESC],
-                    'label' => 'Name',
-                ],
-            ],
-        ]);
+//        $model = Tours::find()->all();
 
-        $tour = Tours::find();
+//        $b = $search->search(Yii::$app->request->get());
 
-        $pages = new Pagination(['totalCount' => $tour->count(), 'pageSize' => 3]);
-        $pages->pageSizeParam = false;
+//        $a = $b;
 
-
-        $models = $tour->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-
-        return $this->render('search', [
-            'searchModel' => $searchModel,
-            'pages' => $pages,
-            'model' => $models,
-            'dataProvider' => $dataProvider,
-        ]);
-
-//
-//        $sort = new Sort([
-//            'attributes' => [
-//                'price' => [
-//                    'asc' => ['price' => SORT_ASC],
-//                    'desc' => ['price' => SORT_DESC],
-//                    'label' => 'Name',
-//                ],
-//            ],
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => Tours::find()->where(Yii::$app->request->get()),
 //        ]);
-//
-//        $getParams = Yii::$app->request->get();
 
+//        print_r(Yii::$app->request->get());
 
-        return $this->render('search', [
-            'sort' => $sort,
-            'tours' => Tours::findTours($getParams, $sort->orders),
-        ]);
+//        $activeDataProvider = $search->search(Yii::$app->request->queryParams);
 
-//        return $this->render('search', [
-//            'tours' => Tours::findTours(Yii::$app->request->get()),
-//        ]);
+//        $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->queryParams]);
+        if(Yii::$app->request->isPjax){
+            //print_r(2323);
+            $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->post()['Tours']]);
+            return $this->render('search', [
+                'tours' => $activeDataProvider->getModels(),
+                'search_form' => $m,
+            ]);
+        } else {
+            $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->post()['Tours']]);
+            return $this->render('search', [
+                'tours' => $activeDataProvider->getModels(),
+                'search_form' => $m,
+            ]);
+        }
     }
 }

@@ -12,6 +12,7 @@ use frontend\models\Tours;
  */
 class Search extends Tours
 {
+
     /**
      * @inheritdoc
      */
@@ -41,6 +42,7 @@ class Search extends Tours
      */
     public function search($params)
     {
+
         $query = Tours::find();
 
         // add conditions that should always apply here
@@ -51,9 +53,18 @@ class Search extends Tours
 
         $this->load($params);
 
+//        $params['Search']['price_from'] ? $this->price_from = $params['Search']['price_from'] : NULL;
+//        $params['Search']['price_to'] ? $this->price_to = $params['Search']['price_to'] : NULL;
+        $a = explode(',', $params['Search']['price_from']);
+
+        $this->price_from = $a[0];
+        $this->price_to = $a[1];
+
+//        print_r($this->id);
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+//             $query->where('0=1');
             return $dataProvider;
         }
 
@@ -72,6 +83,8 @@ class Search extends Tours
             'city_id' => $this->city_id,
         ]);
 
+
+
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'official_name', $this->official_name])
             ->andFilterWhere(['like', 'description', $this->description])
@@ -84,7 +97,9 @@ class Search extends Tours
             ->andFilterWhere(['like', 'mini_image', $this->mini_image])
             ->andFilterWhere(['like', 'gallery', $this->gallery])
             ->andFilterWhere(['like', 'dot_place_addr', $this->dot_place_addr])
-            ->andFilterWhere(['like', 'w_included', $this->w_included]);
+            ->andFilterWhere(['like', 'w_included', $this->w_included])
+            ->andFilterWhere(['>=', 'price', $this->price_from])
+            ->andFilterWhere(['<=', 'price', $this->price_to]);
 
         return $dataProvider;
     }
