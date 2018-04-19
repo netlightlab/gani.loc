@@ -19,7 +19,7 @@ class Search extends Tours
     public function rules()
     {
         return [
-            [['id', 'user_id', 'country_id', 'place_id', 'category_id', 'price_child', 'price_child_free', 'status', 'rating', 'price', 'city_id'], 'integer'],
+            [['id', 'user_id', 'country_id', 'place_id', 'price_child', 'category_id', 'price_child_free', 'status', 'rating', 'price', 'city_id'], 'integer'],
             [['name', 'official_name', 'description', 'mini_description', 'dot_place', 'tour_language', 'conditions', 'return_cond', 'back_image', 'mini_image', 'gallery', 'dot_place_addr', 'w_included'], 'safe'],
         ];
     }
@@ -55,10 +55,17 @@ class Search extends Tours
 
 //        $params['Search']['price_from'] ? $this->price_from = $params['Search']['price_from'] : NULL;
 //        $params['Search']['price_to'] ? $this->price_to = $params['Search']['price_to'] : NULL;
-        $a = explode(',', $params['Search']['price_from']);
+//        $a = explode(',', $params['Search']['price_from']);
 
-        $this->price_from = $a[0];
-        $this->price_to = $a[1];
+//        $this->price_from = $a[0];
+//        $this->price_to = $a[1];
+
+//        print_r($params);
+
+        $this->price_from = $params['Search']['price_from'] ? (int)$params['Search']['price_from'] : NULL ;
+        $this->price_to = $params['Search']['price_to'] ? (int)$params['Search']['price_to'] : NULL;
+//        $this->filter_categories = $params['Search']['filter_categories'] ? explode(',', $params['Search']['filter_categories']) : NULL;
+        $this->filter_categories = $params['Search']['filter_categories'];
 
 //        print_r($this->id);
 
@@ -83,7 +90,7 @@ class Search extends Tours
             'city_id' => $this->city_id,
         ]);
 
-
+//        print_r($this->filter_categories);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'official_name', $this->official_name])
@@ -98,6 +105,7 @@ class Search extends Tours
             ->andFilterWhere(['like', 'gallery', $this->gallery])
             ->andFilterWhere(['like', 'dot_place_addr', $this->dot_place_addr])
             ->andFilterWhere(['like', 'w_included', $this->w_included])
+            ->andFilterWhere(['in', 'category_id', $this->filter_categories])
             ->andFilterWhere(['>=', 'price', $this->price_from])
             ->andFilterWhere(['<=', 'price', $this->price_to]);
 

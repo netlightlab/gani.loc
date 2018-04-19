@@ -62,7 +62,7 @@ $this->title = 'Поиск';
                         </div>
                         <div class="col-md-12 py-3">
                             <div id="filter">
-                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Поиск по фильтру</a>
+                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Фильтр</a>
                                 <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
                                     <!--<div class="filter-block">
                                         <h6>Выберите страну</h6>
@@ -74,7 +74,9 @@ $this->title = 'Поиск';
                                     </div>-->
                                     <?= $this->render('_filter', [
                                         'search_form' => $search_form,
-                                        'tours' => $tours
+                                        'tours' => $tours,
+                                        'formParams' => $formParams,
+                                        'categories' => $categories
                                     ]) ?>
                                 </div>
                             </div>
@@ -82,20 +84,7 @@ $this->title = 'Поиск';
                     </div>
                 </aside>
                 <div class="col-md-9">
-                    <div id="sort">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-xs-6">
-                                <div class="sort-block">
-                                    <!--                                    --><?php //echo $sort->link('price'); ?>
-                                    <select name="sort_price" id="sort_price">
-                                        <option value selected>По цене</option>
-                                        <option value="price">Самые дешевые</option>
-                                        <option value="-price">Самые дорогие</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <?php
                     /*Pjax::widget([
                         'id' => 'searchContainer',  // response goes in this element
@@ -106,8 +95,16 @@ $this->title = 'Поиск';
                     ]);*/
                     ?>
                     <div id="places">
-                        <?php Pjax::begin(['id' => 'searchContainer']) ?>
-                        <? print_r(count($tours)) ?>
+                        <?php Pjax::begin([
+                            'id' => 'searchContainer',
+                            'formSelector' => '#filterForm',
+                            'linkSelector' => '#lll',
+                            'enablePushState' => true,
+                            'options' => [
+                                    'data-pjax-timeout' => 10000
+                            ]
+                        ]) ?>
+                        <p>Найдено туров: <?= count($tours) ?></p>
                         <?php foreach($tours as $tour) : ?>
                             <div class="alltours_box">
                                 <div class="row">
@@ -140,32 +137,3 @@ $this->title = 'Поиск';
     </section>
 
 
-
-
-<?//= GridView::widget([
-//    'dataProvider' => $tours,
-//    'columns' => [
-//
-//        'id',
-//        'name',
-//        'user_id',
-//
-//        ['class' => 'yii\grid\ActionColumn'],
-//    ],
-//]) ?>
-
-<?// print_r($tours) ?>
-
-
-
-
-
-<?php
-
-$js = <<<JS
-    
-JS;
-
-$this->registerJs($js);
-
-?>

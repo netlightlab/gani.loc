@@ -53,6 +53,10 @@ class Tours extends ActiveRecord
      * @var string
      */
     public $price_to;
+    /**
+     * @var array
+     */
+    public $filter_categories;
 
     /**
      * @inheritdoc

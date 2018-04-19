@@ -19,50 +19,98 @@ use yii\widgets\Pjax;
 
 
 
-<p>От <span id="price-from-value"></span></p>
-<p>До <span id="price-to-value"></span></p>
 
-<?php Pjax::begin(['id' => 'search-form', 'enablePushState' => false]) ?>
-    <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]); ?>
-    <?//= $form->field($search_form, 'price_from')->input('range', ['min' => 10000, 'max' => 100000]) ?>
-    <?//= $form->field($search_form, 'price_to')->textInput() ?>
-    <?//= $form->field($search_form, 'user_id')->textInput() ?>
-    <?//= $form->field($search_form,'price')->widget(Slider::className(), ['class' => 'range']) ?>
+
+<?// print_r($formParams) ?>
+<?// Pjax::begin(['options' => ['enablePushState' => true]]) ?>
+<?php $form = ActiveForm::begin([
+    'action' => ['/tours/search'],
+    'id' => 'filterForm',
+    'method' => 'GET',
+    'options' => [
+            'data-pjax' => true
+        ]
+    ]); ?>
+    <p>Сортировать</p>
+    <?= Html::dropDownList('sort', $formParams['sort'],[
+            'sort' => '',
+            'price' => 'Цена возрастание',
+            '-price' => 'Цена убывание',
+            'name' => 'Название А-Я',
+            '-name' => 'Название Я-А',
+    ], [
+            'id' => 'sorter'
+    ]) ?>
+    <hr />
+    <p>Категории</p>
+    <?= Html::checkboxList('filter_categories', $formParams['filter_categories'], $categories) ?>
+    <hr />
+    <p>Ценовой диапазон</p>
+    <div style="display: flex; justify-content: space-between;">
+        <p>От <span id="price-from-value"></span></p>
+        <p>До <span id="price-to-value"></span></p>
+    </div>
     <?= SliderInput::widget([
-            'model' => $search_form,
-            'attribute' => 'price_from',
+//            'model' => $search_form,
+//            'attribute' => 'price_from',
             'clientOptions' => [
                 'range' => true,
                 'step' => 500,
-                'min' => 0,
-                'max' => 40000,
+                'min' => 500,
+                'max' => $formParams['max_price'],
                 'animate' => true,
+                'values' => [$formParams['price_from'], $formParams['price_to']]
             ],
             'clientEvents' => [
+                'create' => 'function(event, ui){
+                    if(ui.values === undefined){
+                        ui.values = {
+                            0: '. $formParams['price_from'] .',
+                            1: '. $formParams['price_to'] .'
+                        };
+                    }
+                    var value_from = ui.values[0] ? ui.values[0] = '. $formParams['price_from'] .' : '. $formParams['price_from'] .',
+                        value_to   = ui.values[1] ? ui.values[1] = '. $formParams['price_to'] .' : '. $formParams['price_to']  .';
+                    $("#price_from").val(value_from);
+                    $("#price_to").val(value_to);
+                    $("#price-from-value").text(value_from);
+                    $("#price-to-value").text(value_to);
+                }',
                 'slide' => 'function(event, ui){
-                    $("#tours-price_from").val(ui.values.join(","));
-                    $("#price-from-value").text(ui.values[0]);
-                    $("#price-to-value").text(ui.values[1]);
+                console.log(event.target);
+                    var value_from = ui.values[0] ? ui.values[0] : '. $formParams['price_from'] .',
+                        value_to   = ui.values[1] ? ui.values[1] : '. $formParams['price_to']  .';
+                    $("#price_from").val(value_from);
+                    $("#price_to").val(value_to);
+                    $("#price-from-value").text(value_from);
+                    $("#price-to-value").text(value_to);
                 }'
             ]
-    ]) ?>
-    <?= Html::submitButton('Отправить') ?>
-    <?php ActiveForm::end(); ?>
-<?php Pjax::end() ?>
-
-<?php Pjax::begin(['id' => 'cont']) ?>
-<? print_r(count($tours)) ?>
-<? print_r(1) ?>
-<?php Pjax::end() ?>
+]) ?>
+    <?= Html::input('hidden', 'price_from', '', ['id' => 'price_from']) ?>
+    <?= Html::input('hidden', 'price_to', '', ['id' => 'price_to']) ?>
+    <?= Html::submitButton('Применить', ['style' => 'margin-top: 20px;']) ?>
+    <?= Html::a('Сбросить', ['tours/search'], ['data-pjax' => 1, 'id' => 'lll']) ?>
+<?php ActiveForm::end(); ?>
+<?// Pjax::end() ?>
 
 <?php
 
-$this->registerJs(
-    '$("document").ready(function(){ 
-		$("#search-form").on("pjax:end", function(response) {
-			$.pjax.reload({container:"#searchContainer"});
-//            $("#searchContainer").html(21312);
-		});
-    });'
-);
+$js = <<<JS
+    var searchContainer = $("#searchContainer");
+    searchContainer.on("pjax:start", function(){
+        console.log('loading');
+    });
+    searchContainer.on("pjax:end", function(){
+        console.log('ready');
+        // $.pjax.reload({container: searchContainer});
+    });
+    $('#lll').on('click', function(){
+        $('#filterForm').trigger('reset');  
+    })
+JS;
+
+
+$this->registerJs($js);
+
 ?>

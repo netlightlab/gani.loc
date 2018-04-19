@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 
 use backend\models\Pages;
+use common\models\Categories;
 use frontend\models\Comments;
 use yii\data\ActiveDataProvider;
 use yii\data\Sort;
@@ -113,34 +114,37 @@ class ToursController extends Controller
 
         $m = new Tours;
 
-//        $model = Tours::find()->all();
+        $toursMaxPrice = ArrayHelper::getValue($m::find()->select(['MAX(price)'])->asArray()->one(),  'MAX(price)');
 
-//        $b = $search->search(Yii::$app->request->get());
+//        if(Yii::$app->request->isPjax){
+//            print_r($_GET);
+//        }
+        $catModel = Categories::find()->asArray()->all();
+        $categories = ArrayHelper::map($catModel, 'id', 'name');
 
-//        $a = $b;
 
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => Tours::find()->where(Yii::$app->request->get()),
-//        ]);
-
-//        print_r(Yii::$app->request->get());
-
-//        $activeDataProvider = $search->search(Yii::$app->request->queryParams);
-
-//        $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->queryParams]);
-        if(Yii::$app->request->isPjax){
-            //print_r(2323);
-            $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->post()['Tours']]);
-            return $this->render('search', [
-                'tours' => $activeDataProvider->getModels(),
-                'search_form' => $m,
-            ]);
-        } else {
-            $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->post()['Tours']]);
-            return $this->render('search', [
-                'tours' => $activeDataProvider->getModels(),
-                'search_form' => $m,
-            ]);
+        if(Yii::$app->request->get('filter_categories')){
+            $filterIdFromGet = ArrayHelper::index(Yii::$app->request->get('filter_categories'), function($value){
+                return $value;
+            });
         }
+
+        $formParams = array(
+            'category_id' => Yii::$app->request->get('category_id') ? (int)Yii::$app->request->get('category_id') : 0,
+            'price_from' => Yii::$app->request->get('price_from') ? (int)Yii::$app->request->get('price_from') : 500,
+            'price_to' => Yii::$app->request->get('price_to') ? (int)Yii::$app->request->get('price_to') : $toursMaxPrice,
+            'filter_categories' => Yii::$app->request->get('filter_categories') ? $filterIdFromGet : NULL,
+            'sort' => Yii::$app->request->get('sort') ? Yii::$app->request->get('sort') : NULL,
+            'max_price' => $toursMaxPrice,
+        );
+
+        $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->get()]);
+        return $this->render('search', [
+                'tours' => $activeDataProvider->getModels(),
+                'search_form' => $m,
+                'formParams' => $formParams,
+                'categories' => $categories
+        ]);
+
     }
 }
