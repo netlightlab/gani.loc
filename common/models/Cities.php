@@ -55,9 +55,23 @@ class Cities extends \yii\db\ActiveRecord
         }
         return $result;
     }
+
+    public function getCitiesList($country_id){
+        $cities = Cities::find()->where(['country_parent' => $country_id])->asArray()->all();
+        $result = [];
+        foreach($cities as $country){
+            $result[$country['id']] = $country['name'];
+        }
+        return $result;
+    }
 	
 	public function getCountriesName($id){
 		$country = Countries::find()->where(['id' => $id])->one();
 		return $country->name;
 	}
+
+    public function getCitiesName($id){
+        $cities = Cities::find()->where(['id' => $id])->one();
+        return $cities->name;
+    }
 }

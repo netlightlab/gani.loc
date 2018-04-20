@@ -41,11 +41,7 @@ class Comments extends ActiveRecord
             ['load_photo', 'trim'],
             ['reviews', 'trim'],
             ['recommendation', 'trim'],
-            ['message', 'trim'],
-            ['message', 'required'],
-
-//            ['message', 'match', 'pattern'=>'/^[\w\s,]+$/',
-//                'message'=>'В тегах можно использовать только буквы.'],
+//            ['message', 'required'],
             ['message', 'match', 'pattern'=>'/^[\w\s\,\.\A-Za-zА-Яа-яs]+$/',
                 'message' => 'Сообщение содержит недопустимые символы!'],
             ['message', 'string', 'length' => [0, 1000]],

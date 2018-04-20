@@ -51,7 +51,7 @@ header {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.3);
 	z-index: -1;
 }
 
@@ -101,7 +101,6 @@ label {
     transition: 350ms;
 }
 
-.active { background: #20679f; }
 .navbar-dark .navbar-nav .nav-link:focus { color: #fff; }
 .navbar-dark .navbar-nav .nav-link:hover {
 	color: #fac727;
@@ -287,6 +286,7 @@ select.form-control:not([size]):not([multiple]) { height: 45px !important; }
   left: 265px;
 }
 
+div.boxAds-hit,
 .boxTour-hit {
     padding: 1px;
     position: relative;
@@ -362,11 +362,18 @@ a {
     bottom: 5px;
 }
 
-a:hover .tour-img .tour-info h4 {
+div.boxTour-hit .tour_link {
+    width: 100%;
+    height:100%;
+    position: absolute;
+    z-index:9;
+}
+
+div.boxTour-hit:hover .tour-img .tour-info h4 {
     left:15px;
 }
 
-a:hover .tour-info {
+div.boxTour-hit:hover .tour-info {
     padding-bottom: 35px;
 }
 
@@ -661,19 +668,22 @@ a:hover .tour-info {
     right: 100px;
 }
 
-.item { background: #fff; }
-
-.icon-face {
-    height: 160px;
-    width: 50% !important;
-    margin: auto;
-    border-radius: 50%;
-    border: 1px solid gray;
-    z-index: 999;
-    position: relative;
+.review__box {
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 1px 3px lightgrey;
 }
 
-.FIO {
+.review__box h5 {
+    text-align: center;
+    font-size:14px;
+}
+
+.review__box #ratingBar {
+    background: #f6a71c;
+}
+
+.review__box .review__name {
     width: 85%;
     text-align: center;
     background: #e8e8e8;
@@ -682,42 +692,26 @@ a:hover .tour-info {
     font-weight: bold;
 }
 
-.date-otziv {
+.review__box .review__date {
     text-align: center;
     color: #a5a5a5;
 }
 
-.otziv-client-box h4 {
-    color: #135b94;
-    font-weight: bold;
-    width: 80%;
-    margin: auto;
-    font-size: 18px;
+.review__box .review__images {
+    overflow: hidden;
+    width: 125px;
+    height: 125px;
+    border-radius: 999px;
+    margin: 20px auto;
 }
 
-.otziv-client-box { 
-	position: relative;
-	padding-bottom: 25px;
-	height: 100%; 
+.review__box .review__images img {
+    height:100%;
 }
 
-.otziv-client-box h5 {
-    padding: 0;
-    font-size: 16px;
-    width: 85%;
+.review__box .rating {
     margin: auto;
-    text-align: center;
-    color: #717171;
-}
-
-.border-dashed-otziv {
-    position: absolute;
-    width: 90%;
-    height: 82%;
-    border: 2px dashed gray;
-    top: 80px;
-    margin: auto;
-    left: 15px;
+    margin-bottom: 20px;
 }
 
 footer { background: #2e2e2e; }
@@ -853,14 +847,17 @@ footer { background: #2e2e2e; }
     position: relative;
 }
 
+.breadcrumb li {
+    background: transparent !important;
+}
+
 .breadcrumb li a {
     color: #fff;
     padding: 5px;
     text-decoration: none;
 }
 
-.breadcrumb li.active {
-    background: transparent !important;
+.breadcrumb li:last-child {
     color: #00f3ff !important;
 }
 
@@ -960,6 +957,7 @@ footer { background: #2e2e2e; }
 }
 
 .btn-refresh-profile {
+    display: block;
     border: none;
     font-family: inherit;
     color: #fff !important;
@@ -1235,14 +1233,14 @@ a.btn_map:hover {
 
 .btn-all::after {
     content: '';
-    background-image: url('/common/img/tour-hit/eye.png');
+    /*background-image: url(/common/img/tour-hit/eye.png);*/
     width: 32px;
-    height:32px;
-    position: absolute;
+    height: 32px;
+    position: relative;
     top: 50%;
-    margin-top: -16px;
-    left: 50%;
-    margin-left: -70px;
+    margin-top: -42px;
+    left: 5px;
+    margin-left: 0;
 }
 
 .basket_box,
@@ -1640,6 +1638,45 @@ a.btn_map:hover {
     height:100%;
 }
 
+.tour_gallery,
+.comments_gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+hr.tourLine,
+hr.commentsLine {
+    padding: 0;
+    border-top: 1px dashed lightgray;
+    margin: 1rem 0;
+}
+
+.tour_gallery > .tour_gallery-thumb,
+.comments_gallery > .comments_gallery-thumb  {
+    width: 62px;
+    height: 62px;
+    padding: 2px;
+    margin: 2px;
+    border: 1px solid white;
+    box-shadow: 0 1px 3px #0f0f0f;
+}
+
+.tour_gallery > .tour_gallery-thumb {
+    width: 100px;
+    height: 100px;
+}
+
+.tour_gallery .tour_gallery-thumb a:hover,
+.comments_gallery .comments_gallery-thumb a:hover {
+    opacity: .5;
+}
+
+.tour_gallery .tour_gallery-thumb a img,
+.comments_gallery .comments_gallery-thumb a img {
+    width: 100%;
+    height: 100%;
+}
+
 .reviews_success {
     font-size: 1.5rem;
     color: #fff;
@@ -1739,3 +1776,472 @@ a.btn_map:hover {
     box-shadow: 0 1px 1px grey;
     border: 1px solid #ddd;
 }
+
+h3.order_number {
+    padding: 5px;
+    margin: 0;
+    box-shadow: 0 1px 3px #2e2e2e;
+    background: #fff;
+    padding-left: 25px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    position: relative;
+}
+
+h3.order_number > span {
+    color: #fac727;
+    text-shadow: 0 1px 2px #000, 1px 0 2px #000, 0 -1px 2px #000, -1px 0 2px #000;
+    font-size: 28px;
+    font-weight: bolder;
+}
+
+div.order_info {
+    box-shadow: 0 1px 3px #000;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+div.order_info div.order_info-header {
+    background: #0072ff;
+    padding: 5px;
+}
+
+div.order_info div.order_info-header span {
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+div.order_info div.order_info-body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    background: rgba(0, 114, 255, .5);
+}
+
+div.order_info div.order_info-body span {
+    font-size: 22px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 1px 1px #000, 0 -1px 1px #000, 1px 0 1px #000, -1px 0 1px #000;
+}
+
+div.order_info div.order_info-body span img {
+    width:35px;
+    margin-right:15px;
+}
+
+div.order_info div.order_info-footer {
+    background: #0072ff;
+}
+
+div.order_info div.order_info-footer span {
+    padding: 3px;
+}
+
+div.order_tour {
+    background: #fff;
+    box-shadow: 0 1px 3px #9a9a9a;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    height: auto;
+    min-height: 135px;
+}
+
+div.order_tour-img {
+    overflow: hidden;
+    height:100%;
+    position: relative;
+    width:100%;
+}
+
+div.order_tour-img img {
+    width:100%;
+    height:100%;
+    transition: 500ms;
+}
+
+div.order_tour:hover div.order_tour-img img {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+div.order_tour div.order_tour-money,
+div.order_tour div.order_tour-tickets,
+div.order_tour div.order_tour-description {
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid lightgray;
+    padding-bottom:1rem;
+}
+
+div.order_tour div.order_tour-money,
+div.order_tour div.order_tour-tickets,
+div.order_tour div.order_tour-description > p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bolder;
+    padding-top: 1rem;
+}
+
+div.order_tour div.order_tour-money small,
+div.order_tour div.order_tour-tickets small {
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+.order_list-tour {
+    text-align: right;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #fac727;
+    text-shadow: 0px 1px 2px #000, 1px 0px 2px #000, -1px 0px #000, 0px -1px #000, 1px -1px #000;
+    letter-spacing: 4px;
+}
+
+hr.order_space {
+    padding: 0;
+    margin: 3rem 0;
+    border-top: 2px solid #a7a7a7;
+}
+
+div.boxAds-hit {
+    overflow: hidden;
+    position: relative;
+    transition: 500ms;
+    min-height:150px;
+}
+
+div.boxAds-hit:hover {
+    transform: scale(1.4);
+    z-index:2;
+}
+
+div.boxAds-hit > a {
+    width:100%;
+    height:100%;
+    position: absolute;
+    z-index:1;
+}
+
+div.boxAds-hit .boxAds-img {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    position: relative;
+    width:100%;
+    height:100%;
+}
+
+div.boxAds-hit .boxAds-img img {
+    width:100%;
+    height: auto;
+    max-height: 170px;
+}
+
+div.boxAds-hit .boxAds-info {
+    position: absolute;
+    bottom: -100px;
+    background: #000;
+    width: 100%;
+    display: block;
+    transition: 250ms;
+    left: 0;
+    padding: 3px;
+}
+
+div.boxAds-hit:hover .boxAds-info {
+    bottom: 0;
+}
+
+div.boxAds-hit .boxAds-info span,
+div.boxAds-hit .boxAds-info span p {
+    display: block;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    margin: 0;
+}
+
+div.boxAds-hit p.tel {
+    position: absolute;
+    top: -100px;
+    background: #000;
+    width: 100%;
+    display: block;
+    transition: 250ms;
+    left: 0;
+    padding: 3px;
+    margin: 0;
+    color: #fff;
+    text-align: right;
+}
+
+div.boxAds-hit:hover p.tel {
+    top: 0;
+}
+
+div.my-ads-box {
+    width:100%;
+    box-shadow: 0 1px 3px #9a9a9a;
+    border-radius: 5px;
+    padding: 1px;
+}
+
+div.my-ads-box div.ads-image {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 160px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    border-right:2px solid #f9f9f9;
+}
+
+div.my-ads-box div.ads-image img {
+    max-width:100%;
+}
+
+div.my-ads-box div.ads-info {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+}
+
+div.my-ads-box div.ads-info p > span {
+    font-weight:bold;
+    font-size:16px;
+    padding-left:15px;
+}
+
+div.my-ads-box div.ads-group a:nth-of-type(1),
+div.my-ads-box div.ads-group a:nth-of-type(2),
+div.my-ads-box div.ads-group a:nth-of-type(3) {
+    height: auto;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 10px 0;
+    display: block;
+}
+
+div.my-ads-box div.ads-group a:nth-of-type(1) { color: red; }
+div.my-ads-box div.ads-group a:nth-of-type(2) { color: #00adff; }
+div.my-ads-box div.ads-group a:nth-of-type(3) { color: #20b354; }
+
+div.my-ads-box div.ads-group a:hover:nth-of-type(1),
+div.my-ads-box div.ads-group a:hover:nth-of-type(2),
+div.my-ads-box div.ads-group a:hover:nth-of-type(3) {
+    color: #000;
+}
+
+#edit-tour-rus img {
+    max-width:200px!important;
+}
+
+div.dropzone {
+    border: 1px dashed #4e9ad6 !important;
+}
+
+article .pays-info {
+    opacity: 0;
+    width: 100%;
+    height: 0;
+    transition: 500ms;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -225px;
+    z-index: 10;
+    margin-left: -200px;
+    padding: 0;
+    border: 2px solid lightgray;
+    box-shadow: 0 1px 4px lightgrey;
+    border-radius: 10px;
+    max-height: 450px;
+    overflow: hidden;
+    background: white;
+    max-width: 400px;
+}
+
+article .showBox {
+    background: rgba(0, 0, 0, .5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: 500ms;
+}
+
+article .showBox.hidden {
+    opacity: 1;
+    z-index:9;
+}
+
+article .active {
+    opacity: 1;
+    padding:20px;
+    height:100%;
+}
+
+article .pays-order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #8791ff, rgba(4, 0, 247, .85), #020061);
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px lightgrey;
+    border: 1px solid rgba(0,0,0, .5);
+    position: relative;
+    overflow: hidden;
+}
+
+article .pays-order span {
+    font-size:4rem;
+    color:#fff;
+    font-weight:bolder;
+    font-family:cursive;
+    text-shadow: 0 1px 1px #000, 0 -1px 1px #000, 1px 0 1px #000, -1px 0 1px #000, 1px 1px 1px #000, -1px 1px 1px #000, 1px -1px 1px #000;
+}
+
+article .pays-order div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(40px);
+    background: #fff;
+    z-index: 1;
+    opacity: 0;
+    transition: 450ms;
+}
+
+article .pays-order:hover div {
+    opacity: 1;
+}
+
+article .pays-order:hover p {
+    left:0;
+}
+
+article .pays-order a {
+    position: absolute;
+    width: 100%;
+    z-index:3;
+    height: 100%;
+}
+
+article .pays-order p {
+    transition: 450ms;
+    left: -400px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    font-size: 1.5rem;
+    color: #ffcc2c;
+    font-weight: bold;
+    text-shadow: 0 1px 1px #000, 0 -1px 1px #000, 1px 0 1px #000, -1px 0 1px #000, 1px 1px 1px #000, -1px 1px 1px #000, 1px -1px 1px #000;
+    text-decoration: none !important;
+}
+
+article .pays-box .pays-header {
+    position: relative;
+}
+
+article .pays-box .pays-header h5 {
+    margin: 0;
+    padding: 0;
+    color: red;
+    width: 100%;
+}
+
+article .pays-box .pays-header .dataLinkClose {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: -20px;
+    font-size: 36px;
+    color: red;
+    font-weight: bolder;
+    outline: none !important;
+    cursor: pointer;
+}
+
+article .pays-box .pays-body h3 {
+    position: relative;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+article .pays-box .pays-body p {
+    margin-bottom:.5rem;
+}
+
+@-webkit-keyframes flick {
+    10% { transform: scale(1, 1) rotate(80deg); }
+    20% { transform: scale(0, 0) rotate(160deg); }
+    100% { transform: scale(0, 0) rotate(0deg); }
+}
+@keyframes flick {
+    10% { transform: scale(1, 1) rotate(80deg); }
+    20% { transform: scale(0, 0) rotate(160deg); }
+    100% { transform: scale(0, 0) rotate(0deg); }
+}
+#flick {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    text-shadow: 0 1px 1px #000,
+    0 -1px 1px #000, 1px 0 1px #000,
+    -1px 0 1px #000, 1px 1px 1px #000,
+    -1px 1px 1px #000, 1px -1px 1px #000,
+    -1px -1px 1px #000;
+}
+#flick:after,
+#flick:before {
+    content: "";
+    position: absolute; top: 0; left: 0;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-image:
+            radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0) 30%),
+            linear-gradient(45deg, rgba(0,0,0,0) 49%, rgba(255,255,255,.4) 50%, rgba(0,0,0,0) 51%),
+            linear-gradient(135deg, rgba(0,0,0,0) 49%, rgba(255,255,255,.4) 50%, rgba(0,0,0,0) 51%);
+    -webkit-animation: blink6 10s linear infinite;
+    animation: flick 10s linear infinite;
+    transform: scale(0, 0) rotate(0deg);
+}
+#flick:before {
+    top: -30%;
+    right: 0; left: auto;
+    -webkit-animation-delay: 3s;
+    animation-delay: 3s;
+}
+
+.fancyImage { max-width: 100%; }

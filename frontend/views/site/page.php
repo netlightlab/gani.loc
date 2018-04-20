@@ -28,9 +28,8 @@ $this->title = $title;
     }
 </style>
 
-
-
 <!--background: url('/frontend/web/common/pages/<?/*= $pageId .'/'.$background */?>')-->
+
 
 <section class="section-header" style="">
     <? if($fileType == 'image'): ?>

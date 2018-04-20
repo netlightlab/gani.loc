@@ -60,10 +60,22 @@ class CartController extends Controller
     public function actionAdd(){
         $this->orders = Yii::$app->session->get('tour_id');
 
-        ArrayHelper::setValue($this->orders, Yii::$app->request->post('tour_id'),(int)              Yii::$app->request->post('tour_id'));
+        ArrayHelper::setValue($this->orders, Yii::$app->request->post('tour_id'),(int)Yii::$app->request->post('tour_id'));
 
 
         Yii::$app->session['tour_id'] = $this->orders;
+
+        return true;
+    }
+
+    public function actionAddPost(){
+        $this->orders = Yii::$app->session->get('tour_id');
+
+        ArrayHelper::setValue($this->orders, Yii::$app->request->post('tour_id'),(int)Yii::$app->request->post('tour_id'));
+
+        Yii::$app->session['tour_id'] = $this->orders;
+
+        $this->redirect('/cart/index');
 
         return true;
     }

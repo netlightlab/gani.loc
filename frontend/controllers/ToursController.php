@@ -8,23 +8,24 @@
 
 namespace frontend\controllers;
 
-
-use backend\models\Pages;
 use frontend\models\Comments;
-use yii\data\Sort;
-use yii\filters\AjaxFilter;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
 use frontend\models\Tours;
-use frontend\models\Search;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\data\Pagination;
+use yii\web\UploadedFile;
 use common\models\User;
 
 class ToursController extends Controller
 {
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+
     public function actionIndex(){
         return $this->render('index', [
             'tours' => Tours::find()->where(['status' => 1])->all(),
@@ -40,6 +41,22 @@ class ToursController extends Controller
         $fio = $getUser['user_name'].' '.$getUser['surname'];
         $photo = $getUser['user_photo'];
 
+        $comment = Comments::find()->where(['tour_id' => $id, 'active' => 1])->all();
+        $reviews_count = Comments::find()->where(['tour_id' => $id])->count();
+
+        Yii::$app->user->isGuest ? $sign = 0 : $sign = 1;
+
+        $fileName = 'file';
+        $uploadPath = 'common/users/'.Yii::$app->user->id;
+
+        if (isset($_FILES[$fileName])) {
+            $file = UploadedFile::getInstancesByName($fileName);
+
+            foreach ($file as $item) {
+                $item->saveAs($uploadPath . '/' . $item->name);
+            }
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             $model->message;
             $model->tour_id = $id;
@@ -48,14 +65,11 @@ class ToursController extends Controller
             $model->fio = $fio;
             $model->active = 1;
             $model->reviews;
+            $model->load_photo;
             $model->recommendation = 1;
             $model->save(true);
         };
 
-        $comment = Comments::find()->where(['tour_id' => $id])->all();
-        $reviews_count = Comments::find()->where(['tour_id' => $id])->count();
-
-        Yii::$app->user->isGuest ? $sign = 0 : $sign = 1;
 
         return $this->render('view', [
             'tour' => Tours::findOne($id),
@@ -69,60 +83,37 @@ class ToursController extends Controller
     }
 
     public function actionSearch(){
+        $url = '';
 
-        $searchModel = new Search();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $getParams = Yii::$app->request->get();
+        if (Yii::$app->request->get('category_id')) {
+            $url .= '&category_id=' . Yii::$app->request->get('category_id');
+        }
 
+        if (Yii::$app->request->get('city_id')) {
+            $url .= '&city_id=' . Yii::$app->request->get('city_id');
+        }
 
-        $sort = new Sort([
-            'attributes' => [
-                'price' => [
-                    'asc' => ['price' => SORT_ASC],
-                    'desc' => ['price' => SORT_DESC],
-                    'label' => 'Name',
-                ],
-            ],
-        ]);
+        if (Yii::$app->request->get('country_id')) {
+            $url .= '&country_id=' . Yii::$app->request->get('country_id');
+        }
 
-        $tour = Tours::find();
+        $asd = Tours::find()->where(['price' => 40000])->all();
 
-        $pages = new Pagination(['totalCount' => $tour->count(), 'pageSize' => 3]);
-        $pages->pageSizeParam = false;
-
-
-        $models = $tour->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $time = date('H:i:s');
 
         return $this->render('search', [
-            'searchModel' => $searchModel,
-            'pages' => $pages,
-            'model' => $models,
-            'dataProvider' => $dataProvider,
+            'url' => $url,
+//            'model' => Tours::findTours(Yii::$app->request->get()),
+            'model' => $asd,
+            'time' => $time,
         ]);
+    }
 
-//
-//        $sort = new Sort([
-//            'attributes' => [
-//                'price' => [
-//                    'asc' => ['price' => SORT_ASC],
-//                    'desc' => ['price' => SORT_DESC],
-//                    'label' => 'Name',
-//                ],
-//            ],
-//        ]);
-//
-//        $getParams = Yii::$app->request->get();
+    public function actionUploadCommentsPhoto($id){
+        /* DROPZONEJS */
 
 
-        return $this->render('search', [
-            'sort' => $sort,
-            'tours' => Tours::findTours($getParams, $sort->orders),
-        ]);
 
-//        return $this->render('search', [
-//            'tours' => Tours::findTours(Yii::$app->request->get()),
-//        ]);
+        /* ENDZONENJS */
     }
 }

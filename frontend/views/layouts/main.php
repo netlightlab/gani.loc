@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use frontend\models\Menu;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 $context = $this->context;

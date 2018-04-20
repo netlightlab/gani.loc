@@ -6,10 +6,10 @@
  * Time: 17:10
  */
 
-use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
-use yii\widgets\ListView;
-use yii\widgets\LinkPager;
+use yii\widgets\Breadcrumbs;
+use yii\bootstrap\ActiveForm;
+use yii\widgets\Pjax;
 
 $this->title = 'Поиск';
 
@@ -26,6 +26,14 @@ $this->title = 'Поиск';
         </div>
     </div>
 </section>
+
+<?php Pjax::begin(['id' => 'test']); ?>
+
+<h1><?= $time ?></h1>
+
+<?= Html::a("Обновить", ['tours/search'], ['class' => 'btn btn-lg btn-primary']);?>
+
+<?php Pjax::end(); ?>
 
 <section style="background: #2e2e2e;">
     <div class="container">
@@ -76,7 +84,6 @@ $this->title = 'Поиск';
                         <div class="row">
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="sort-block">
-<!--                                    --><?php //echo $sort->link('price'); ?>
                                     <select name="sort_price" id="sort_price">
                                         <option value selected>По цене</option>
                                         <option value="price">Самые дешевые</option>
@@ -116,12 +123,6 @@ $this->title = 'Поиск';
             </div>
         </div>
     </section>
-
-<!--     <span><? print_r($pages); ?></span>
-
-<?= LinkPager::widget([
-        'pagination' => $pages,
-]); ?> -->
 <?php
 
 $js = <<<JS
@@ -129,18 +130,18 @@ $js = <<<JS
     var getToursCategory = document.getElementById('getToursCategory');
     var getSortPrice = document.getElementById('sort_price');
     
-    // var currentURL = window.location.href.toString().split(window.location.host+'/tours/')[1];
+    var currentURL = window.location.href.toString().split(window.location.host+'/tours/')[1];
     
     getSortPrice.addEventListener('change', function(){
-        // window.location.href = currentURL + getSortPrice.options[getSortPrice.selectedIndex].value;
+        window.location.href = currentURL + getSortPrice.options[getSortPrice.selectedIndex].value;
     });    
     
     getToursCountries.addEventListener('change', function(){
-       // window.location.href = currentURL + getToursCountries.options[getToursCountries.selectedIndex].value; 
+        window.location.href = currentURL + 'category_id=' + getToursCountries.options[getToursCountries.selectedIndex].value; 
     });
     
     getToursCategory.addEventListener('change', function(){
-       // window.location.href = currentURL + getToursCategory.options[getToursCategory.selectedIndex].value; 
+        window.location.href = currentURL + getToursCategory.options[getToursCategory.selectedIndex].value; 
     });
 
 JS;

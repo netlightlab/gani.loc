@@ -75,7 +75,7 @@ class Tours extends ActiveRecord
             ['mini_description', 'required', 'message' => 'Необходимо заполнить краткое описание компании!'],
 
             ['dot_place', 'trim'],
-            ['dot_place', 'required', 'message' => 'Необходимо указать адрес точки сбора!'],
+            ['dot_place_addr', 'required', 'message' => 'Необходимо указать адрес точки сбора!'],
 
             ['tour_language', 'trim'],
             ['tour_language', 'required', 'message' => 'Необходимо указать языки туров!'],
@@ -118,7 +118,7 @@ class Tours extends ActiveRecord
             $this->user_id = Yii::$app->user->id;
             $this->back_image = $this->getUploadFileName('back_image');
             $this->mini_image = $this->getUploadFileName('mini_image');
-            $this->gallery = $this->getUploadFileName('gallery');
+            $this->gallery;
             $this->save();
             return true;
         };
@@ -139,14 +139,14 @@ class Tours extends ActiveRecord
         }
     }
 
-    public static function findTours($params, $sort){
+    public static function findTours($params){
         $result = self::find()
             ->where($params)
-            ->orderBy($sort)
             ->all();
 
         return $result;
     }
+
 
     public function editTour($id) {
         if ($this->validate()) {
@@ -164,11 +164,16 @@ class Tours extends ActiveRecord
             if (!$this->uploadFile( $id,'mini_image') == "") {
                 $tour->mini_image = $this->uploadFile( $id,'mini_image');
             };
-            if (!$this->uploadFile( $id,'gallery') == "") {
-                $tour->gallery = $this->uploadFile( $id,'gallery');
-            };
+
+            if ($tour->gallery == '') {
+                $tour->gallery .= $this->gallery;
+            } else {
+                $tour->gallery .= ','.$this->gallery;
+            }
+
             $tour->price = $this->price;
             $tour->price_child = $this->price_child;
+            $tour->price_child_free = $this->price_child_free;
             $tour->official_name = $this->official_name;
             $tour->country_id = $this->country_id;
             $tour->city_id = $this->city_id;

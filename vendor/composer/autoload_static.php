@@ -34,10 +34,18 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'n' => 
+        array (
+            'newerton\\fancybox\\' => 18,
+        ),
         'm' => 
         array (
             'mihaildev\\elfinder\\' => 19,
             'mihaildev\\ckeditor\\' => 19,
+        ),
+        'k' => 
+        array (
+            'kato\\' => 5,
         ),
         'd' => 
         array (
@@ -130,6 +138,10 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+        'newerton\\fancybox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/newerton/yii2-fancybox',
+        ),
         'mihaildev\\elfinder\\' => 
         array (
             0 => __DIR__ . '/..' . '/mihaildev/yii2-elfinder',
@@ -137,6 +149,10 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
         'mihaildev\\ckeditor\\' => 
         array (
             0 => __DIR__ . '/..' . '/mihaildev/yii2-ckeditor',
+        ),
+        'kato\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/perminder-klair/yii2-dropzone',
         ),
         'dmstr\\' => 
         array (
@@ -427,7 +443,7 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
         'PHPUnit_Util_TestDox_ResultPrinter_Text' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/TestDox/ResultPrinter/Text.php',
         'PHPUnit_Util_TestSuiteIterator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/TestSuiteIterator.php',
         'PHPUnit_Util_Type' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Type.php',
-        'PHPUnit_Util_XML' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml.php',
+        'PHPUnit_Util_XML' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/XML.php',
         'PHP_CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'PHP_CodeCoverage_Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver.php',
         'PHP_CodeCoverage_Driver_HHVM' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver/HHVM.php',

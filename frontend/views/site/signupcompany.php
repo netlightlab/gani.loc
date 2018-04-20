@@ -9,6 +9,10 @@ use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\MaskedInput;
+use mihaildev\ckeditor\CKEditor;
+use common\models\Cities;
+
+$cities = new Cities();
 
 $this->title = 'Регистрация';
 ?>
@@ -55,21 +59,20 @@ $this->title = 'Регистрация';
                     <?= $form->field($model, 'name_brand')->textInput(['placeholder' => 'Например: KazTravel'])->label('НАЗВАНИЕ БРЕНДА*') ?>
                 </div>
                 <div class="col-md-3">
-                    <?= $form->field($model, 'country')->dropDownList([
-                        'КАЗАХСТАН',
-                        'РОССИЯ',
-                    ])->label('СТРАНА*') ?>
+                    <?= $form->field($model, 'country')->dropDownList($cities->getCountriesList(), ['id' => 'CountryId'])->label('СТРАНА*') ?>
                 </div>
                 <div class="col-md-3">
-                    <?= $form->field($model, 'city')->dropDownList([
-                        'АЛМАТЫ',
-                        'АСТАНА',
-                    ])->label('ГОРОД*') ?>
+                    <?= $form->field($model, 'city')->dropDownList($cities->getCitiesList(1), ['id' => 'CitiesList'])->label('ГОРОД*') ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <?= $form->field($model, 'about_company')->textarea(['placeholder' => 'Краткое описание компании. Максимум 1000 символов', 'rows' => '8'])->label('ОПИСАНИЕ КОМПАНИИ') ?>
+                    <?= $form->field($model, 'about_company')->widget(CKEditor::className(), [
+                        'editorOptions' => [
+                            'inline' => false,
+                            'preset' => 'standart',
+                        ],
+                    ])->label('ОПИСАНИЕ КОМПАНИИ');?>
                 </div>
             </div>
             <div class="row">
@@ -171,3 +174,28 @@ $this->title = 'Регистрация';
         <?php ActiveForm::end(); ?>
     </div>
 </section>
+
+<?php
+$script = <<<JS
+    $('#CountryId').change(function() {        
+        $.ajax({
+            'url'       : 'site/signup_company',
+            'method'    : 'post',
+            'data'      : {'country_id': this.value},
+            'dataType'  : 'json',
+            'success'   : function(data) {
+                var options = [];
+                for (var value in data) {
+                    if (data.hasOwnProperty(value)) {
+                        options.push('value="' + value + '">' + data[value]);
+                    }
+                }
+                document.getElementById('CitiesList').innerHTML = '<option ' + options.join('</option><option ') + '</option>';
+            },
+        });
+    });
+JS;
+
+$this->registerJs($script);
+
+?>

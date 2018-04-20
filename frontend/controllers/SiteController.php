@@ -1,6 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Cities;
+use frontend\models\Ads;
+use frontend\models\Comments;
 use frontend\models\Page;
 use frontend\models\SignupCompany;
 use frontend\models\Tours;
@@ -15,6 +18,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -76,13 +80,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+        $ads = Ads::find()->where(['active' => 1])->limit(4)->all();
+
+        $comments = Comments::find()->where(['active' => 1])->all();
+
         return $this->render('index', [
-            'model' => $this->getMainTours(),
+            'model'     => $this->getMainTours(),
+            'ads'       => $ads,
+            'comments'  => $comments,
         ]);
     }
 
     public function getMainTours() {
-        return Tours::find()->select('id, mini_image, price, name')->limit(9)->all();
+        return Tours::find()->select('id, mini_image, price, name, category_id')->limit(9)->all();
     }
 
     /**
@@ -251,11 +262,17 @@ class SiteController extends Controller
 
     public function actionSignup_company(){
         $model = new SignupCompany();
+
+        if (Yii::$app->request->isAjax) {
+            $cities = new Cities();
+            $arr = $cities->getCitiesList((int)Yii::$app->request->post('country_id'));
+            echo json_encode($arr);
+            return false;
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-//                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-//                }
+                return $this->goHome();
             }
         }
 

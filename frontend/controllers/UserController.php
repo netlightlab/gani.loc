@@ -8,21 +8,19 @@
 
 namespace frontend\controllers;
 
-use common\models\Cities;
 use common\models\Tickets;
+use frontend\models\Ads;
 use frontend\models\UserProfile;
-use yii\db\Query;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
-use yii\web\UploadedFile;
 use common\models\User;
-use yii\validators\CompareValidator;
 use common\models\Orders;
-use common\models\OrderItems;
-
+use yii\web\NotFoundHttpException;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
+use common\models\Cities;
 
 class UserController extends Controller
 {
@@ -34,7 +32,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['user'],
                     ],
                 ],
             ],
@@ -101,11 +99,28 @@ class UserController extends Controller
                 Yii::$app->session->setFlash("error", "Ошибка");
             }
         }
+
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->edit()){
+                $this->refresh();
+                Yii::$app->session->setFlash("success", "Сохранено");
+            }else{
+                Yii::$app->session->setFlash("error", "Ошибка");
+            }
+        }
+
+        if (Yii::$app->request->isAjax) {
+            $cities = new Cities();
+            $arr = $cities->getCitiesList((int)Yii::$app->request->post('country_id'));
+            echo json_encode($arr);
+            return false;
+        }
+
         return $this->render('user', [
             'UsersInfo' => $usersInfo,
             'model' => $model,
             'orders' => $result,
-            //'orderItems' => $orderItems
+            'ads' => Ads::find()->where(['user_id' => Yii::$app->user->id])->all(),
         ]);
     }
 
@@ -120,10 +135,6 @@ class UserController extends Controller
             }
         }
 
-        /*if($model->getUserInfo()){
-            $model = $model->getUserInfo();
-        }*/
-
         return $this->render('editprofile', [
             'model' => $model,
         ]);
@@ -135,4 +146,113 @@ class UserController extends Controller
             'item' => $model
         ]);
     }
+
+    /**
+     * Creates a new Ads model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionAdsCreate()
+    {
+        $model = new Ads();
+
+        $model->user_id = Yii::$app->user->id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->mini_image = $this->getUploadFileName(Yii::$app->user->id, 'mini_image');
+            $model->gallery = $this->getUploadFileName(Yii::$app->user->id, 'gallery');
+            if ($model->save()) {
+                return $this->redirect(['user/index']);
+            }
+        }
+
+        return $this->render('my-ads/create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Ads model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionAdsUpdate($id)
+    {
+        $model = $this->findModel($id);
+        $mini_image = $model->mini_image;
+        $gallery = $model->gallery;
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if ($this->getUploadFileName(Yii::$app->user->id, 'mini_image')) {
+                $model->mini_image = $this->getUploadFileName(Yii::$app->user->id, 'mini_image');
+            } else {
+                $model->mini_image = $mini_image;
+            }
+
+            if ($this->getUploadFileName(Yii::$app->user->id, 'gallery')) {
+                $model->gallery = $this->getUploadFileName(Yii::$app->user->id, 'gallery');
+            } else {
+                $model->gallery = $mini_image;
+            }
+
+            if ($model->save()) {
+                return $this->redirect(['user/index']);
+            }
+        }
+
+        return $this->render('my-ads/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Ads model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete($id) {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+
+    /**
+     * Finds the Ads model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Ads the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id) {
+        if (($model = Ads::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function getUploadFileName($id, $params) {
+        $model = new Ads();
+        $image = UploadedFile::getInstance($model, $params);
+        if ($image->name) {
+            if ($model->load($_POST)) {
+                $model->$params = $image;
+                if ($model->validate()) {
+                    FileHelper::createDirectory('common/users/'.$id.'/ads/');
+                    $dir = Yii::getAlias('common/users/'.$id.'/ads/');
+                    $image->saveAs($dir . $model->$params);
+                    return $image->name;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
 }

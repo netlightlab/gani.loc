@@ -6,22 +6,54 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 $this->title = $name;
 ?>
-<div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+<section class="section-header" style="background: url('../common/img/header/parallax-addtour.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="parallax-header-text">
+                    <h2><?= Html::encode($this->title) ?></h2>
+                    <p><?= nl2br(Html::encode($message)) ?></p>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+<section style="background: #2e2e2e;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php $this->params['breadcrumbs'][] = $this->title; ?>
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+            </div>
+        </div>
+    </div>
+</section>
 
-</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 my-5">
+                <h1><?= Html::encode($this->title) ?></h1>
+
+                <div class="alert alert-danger">
+                    <?= nl2br(Html::encode($message)) ?>
+                </div>
+                <p>
+                    Вышеупомянутая ошибка возникла, когда веб-сервер обрабатывал ваш запрос.
+                </p>
+                <p>
+                    Если вы считаете, что это ошибка сервера, свяжитесь с нами. Спасибо.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

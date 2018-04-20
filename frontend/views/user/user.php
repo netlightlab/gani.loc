@@ -4,6 +4,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\ActiveForm;
 use common\models\Cities;
+use mihaildev\ckeditor\CKEditor;
 
 $cities = new Cities();
 
@@ -43,85 +44,122 @@ $this->title = 'Личный кабинет';
                 <?= Alert::widget() ?>
                 <ul id="w1" class="cabinet-nav nav nav-tabs">
                     <li class="nav-item"><a class="nav-link" href="#orders" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/list.png"><span>Заказы</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#wishlist" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/like.png"><span>Список желаний</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ads" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/like.png"><span>Мои объявления</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/locked.png"><span>Настройки</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/user.png"><span>Профиль</span></a></li>
                 </ul>
                 <div id="cabinet-tab" class="tab-content">
                     <div id="orders" class="tab-pane set-tab-content">
                         <div class="row">
-                            <div class="col-md-12">
-                                <?php if (is_array($orders) && !empty($orders)): ?>
-                                    <?php foreach ($orders as $id => $order): ?>
+                            <?php if (is_array($orders) && !empty($orders)): ?>
+                                <?php foreach ($orders as $id => $order): ?>
+                                    <div id="order_[<?= $id ?>]" class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h3>Заказ № <?= $id ?></h3>
+                                                <h3 class="order_number">Заказ № <span><?= $id ?></span></h3>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <p>Сумма заказа: <?= $order['order_info']['sum'] ?></p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <p>Дата заказа: <?= $order['order_info']['time'] ?></p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <p>Оплачен: <?= $order['order_info']['paid'] == 0 ? 'Не оплачен' : 'Оплачен' ?></p>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <h3>У вас нет заказов</h3>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-<!--                                <span style="color: red;">на стадий разработки</span>-->
-                                <?php if (is_array($orders) && !empty($orders)): ?>
-                                <?php foreach($orders as $id => $order): ?>
-                                    <div class="row user-order-list">
-                                        <div class="col-12">
-                                            <h3>Заказ № <?= $id ?></h3>
-                                            <p>Сумма заказа: <?= $order['order_info']['sum'] ?></p>
-                                            <p>Дата заказа: <?= $order['order_info']['time'] ?></p>
-                                            <p>Оплачен: <?= $order['order_info']['paid'] == 0 ? 'Не оплачен' : 'Оплачен'?></p>
-                                        </div>
-                                        <div class="col-12">
-                                            <?php foreach($order['tours_info'] as $item): ?>
-                                                <div class="row py-2">
-                                                    <div class="col-md-2">
-                                                        <?= Html::img('/common/tour_img/'.$item['tours']['id'].'/'.$item['tours']['mini_image']) ?>
+                                                <div class="order_info">
+                                                    <div class="order_info-header">
+                                                        <span>Сумма заказа:</span>
                                                     </div>
-                                                    <div class="col-md-5">
-                                                        <p><?= $item['tours']['name'] ?></p>
-                                                        <? if(!empty($item['tickets'])): ?>
-                                                            <p><?= Html::a('Билет', ['/user/ticket', 'id' => $item['tickets']['id']]) ?></p>
-                                                        <? endif; ?>
+                                                    <div class="order_info-body">
+                                                        <span><?= Html::img('@web/common/img/order/money.png') ?> <?= $order['order_info']['sum'] ?> тг.</span>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <p>Билетов:<br /> <?= $item['qty'] ?></p>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <p>Сумма:<br /> <?= $item['sum'] ?></p>
+                                                    <div class="order_info-footer">
+                                                        <span></span>
                                                     </div>
                                                 </div>
-                                            <?php endforeach; ?>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="order_info">
+                                                    <div class="order_info-header">
+                                                        <span>Дата заказа:</span>
+                                                    </div>
+                                                    <div class="order_info-body">
+                                                        <span><?= Html::img('@web/common/img/order/calendar.png') ?> <?= $order['order_info']['time'] ?></span>
+                                                    </div>
+                                                    <div class="order_info-footer">
+                                                        <span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="order_info">
+                                                    <div class="order_info-header">
+                                                        <span>Статус оплаты:</span>
+                                                    </div>
+                                                    <div class="order_info-body">
+                                                        <span><?= $order['order_info']['paid'] == 0 ? Html::img('@web/common/img/order/fail.png').'Не оплачен' : Html::img('@web/common/img/order/ok.png').'Оплачен' ?></span>
+                                                    </div>
+                                                    <div class="order_info-footer">
+                                                        <span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4 class="order_list-tour">Список туров:</h4>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <?php foreach($order['tours_info'] as $item): ?>
+                                            <div class="order_tour">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="order_tour-img">
+                                                            <?= Html::img('/common/tour_img/'.$item['tours']['id'].'/'.$item['tours']['mini_image']) ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="order_tour-description">
+                                                            <p><?= $item['tours']['name'] ?></p>
+                                                            <? if(!empty($item['tickets'])): ?>
+                                                                <p><?= Html::a('Билет', ['/user/ticket', 'id' => $item['tickets']['id']]) ?></p>
+                                                            <? endif; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="order_tour-tickets">
+                                                            <p>Кол-во билетов:</p>
+                                                            <small><?= $item['qty'] ?> шт.</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="order_tour-money">
+                                                            <p>Сумма:</p>
+                                                            <small><?= $item['sum'] ?> тг.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                        <hr class="order_space">
                                     </div>
-                                        <hr>
                                 <?php endforeach; ?>
-                                <?php else: ?>
-                                    <h2>У вас пока нет заказов</h2>
-                                <?php endif; ?>
-                            </div>
+                            <?php else: ?>
+                                <div class="col-md-12">
+                                    <h3>У вас нет заказов</h3>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <div id="wishlist" class="tab-pane set-tab-content">
+                    <div id="ads" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-<!--                                <span style="color: red;">на стадий разработки</span>-->
+                                <?= Html::a('Разместить объявление', ['user/ads-create'], ['class' => 'btn-refresh-profile']) ?>
+                                <hr>
                             </div>
+                            <div class="col-md-12">
+                                <h3>Мои объявления</h3>
+                                <hr>
+                            </div>
+                            <?= $this->render('_ads', [
+                                'ads' => $ads,
+                            ]) ?>
                         </div>
                     </div>
                     <div id="settings" class="tab-pane set-tab-content">
@@ -180,7 +218,7 @@ $this->title = 'Личный кабинет';
                                         </tr>
                                         <tr>
                                             <td><strong>Город</strong></td>
-                                            <td><span><?= $UsersInfo['city'] ? $UsersInfo['city'] : "Не заполнено" ?></span></td>
+                                            <td><span><?= $UsersInfo['city'] ? $cities->getCitiesName($UsersInfo['city']) : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Адрес</strong></td>
@@ -238,10 +276,12 @@ $this->title = 'Личный кабинет';
                                             <?= $form->field($model, 'surname')->label('Фамилия')->textInput(['placeholder' => 'Например: Петров']) ?>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
-                                            <?= $form->field($model, 'phone')->label('Номер телефона')->textInput(['placeholder' => 'Например: 8 (707) 693-42-31']) ?>
+                                            <?= $form->field($model, 'phone')->label('Номер телефона')->widget(\yii\widgets\MaskedInput::className(), [
+                                                'mask' => '9 (999) 999-9999',
+                                            ])->textInput(['placeholder' => 'Например: 8 (777) 777-7777']) ?>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
-                                            <?= $form->field($model, 'bdate')->label('Дата рождения')->textInput(['placeholder' => 'Например: 17.02.1940']) ?>
+                                            <?= $form->field($model, 'bdate')->label('Дата рождения')->textInput(['type' => 'date', 'placeholder' => 'Например: 17.02.1940']) ?>
                                         </div>
                                         <div class="col-md-12">
                                             <hr style="margin: 0 !important; width: 100%;">
@@ -253,13 +293,13 @@ $this->title = 'Личный кабинет';
                                             <?= $form->field($model, 'adres')->label('Улица')->textInput(['placeholder' => 'Например: Фурманова 35']) ?>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
-                                            <?= $form->field($model, 'city')->label('Город')->textInput(['placeholder' => 'Например: Алматы']) ?>
+                                            <?= $form->field($model, 'country')->dropDownList($cities->getCountriesList(), ['id' => 'CountryId'])->label('СТРАНА*') ?>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
                                             <?= $form->field($model, 'mailindex')->textInput(['placeholder' => 'Например: 99999'])->label('Почтовый индекс') ?>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
-                                            <?= $form->field($model, 'country')->dropDownList($cities->getCountriesList())->label('Страна') ?>
+                                            <?= $form->field($model, 'city')->dropDownList($cities->getCitiesList($UsersInfo['country']), ['id' => 'CitiesList'])->label('ГОРОД*') ?>
                                         </div>
                                         <div class="col-md-12">
                                             <hr style="margin: 0 !important; width: 100%;">
@@ -268,7 +308,12 @@ $this->title = 'Личный кабинет';
                                             <h4>Редактировать информацию</h4>
                                         </div>
                                         <div class="col-md-12">
-                                            <?= $form->field($model, 'information')->textarea(['placeholder' => 'Например: Ищу супервыгодные туры', 'rows' => '5'])->label('О себе') ?>
+                                            <?= $form->field($model, 'information')->widget(CKEditor::className(), [
+                                                'editorOptions' => [
+                                                    'inline' => false,
+                                                    'preset' => 'standart',
+                                                ],
+                                            ])->label('О себе');?>
                                             <hr style="margin: 0 !important; width: 100%;">
                                         </div>
                                         <div class="col-md-12 py-3">
@@ -295,3 +340,27 @@ $this->title = 'Личный кабинет';
     </div>
 </section>
 
+<?php
+$script = <<<JS
+    $('#CountryId').change(function() {        
+        $.ajax({
+            'url'       : '/user/index',
+            'method'    : 'post',
+            'data'      : {'country_id': this.value},
+            'dataType'  : 'json',
+            'success'   : function(data) {
+                var options = [];
+                for (var value in data) {
+                    if (data.hasOwnProperty(value)) {
+                        options.push('value="' + value + '">' + data[value]);
+                    }
+                }
+                document.getElementById('CitiesList').innerHTML = '<option ' + options.join('</option><option ') + '</option>';
+            },
+        });
+    });
+JS;
+
+$this->registerJs($script);
+
+?>

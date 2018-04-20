@@ -5,6 +5,9 @@
 $this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
 
 use yii\helpers\Html;
+use common\models\Categories;
+
+$category = new Categories();
 
 ?>
 <section class="section-header-main">
@@ -12,7 +15,7 @@ use yii\helpers\Html;
     <div class="container">
         <div class="row header-description-block">
             <div class="col-md-12 col-xs-12 text-center">
-                <span class="header-description">ТУРЫ ПО КАЗАХСТАНУ</span>
+                <span id="flick" class="header-description">ТУРЫ ПО КАЗАХСТАНУ</span>
             </div>
         </div>
         <div class="row tour-block-white pb-2">
@@ -71,20 +74,19 @@ use yii\helpers\Html;
         <div class="row">
             <?php foreach ($model as $tour):?>
                 <articles class="col-md-4 col-sm-6 my-3">
-                    <a href="/tours/view?id=<?= $tour->id ?>" title="<?= $tour->name ?>">
-                        <div class="boxTour-hit">
-                            <div class="hit-sale"><b>Хит</b><br>Продаж</div>
-                            <div class="tour-img">
-                                <?= $tour->mini_image ? Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) : Html::img('@web/common/users/no-image.png') ?>
-                                <div class="tour-info">
-                                    <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
-                                    <p>подробнее</p>
-                                    <h4>Category</h4>
-                                </div>
+                    <div class="boxTour-hit">
+                        <?= Html::a('', ['/tours/view', 'id' => $tour->id], ['title' => $tour->name, 'class' => 'tour_link']) ?>
+                        <div class="hit-sale"><b>Хит</b><br>Продаж</div>
+                        <div class="tour-img">
+                            <?= $tour->mini_image ? Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) : Html::img('@web/common/users/no-image.png') ?>
+                            <div class="tour-info">
+                                <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
+                                <p>подробнее</p>
+                                <h4><?= $category->getCategoryName($tour->category_id) ?></h4>
                             </div>
-                            <h5><?= $tour->name ?></h5>
                         </div>
-                    </a>
+                        <h5><?= $tour->name ?></h5>
+                    </div>
                 </articles>
             <?php endforeach; ?>
             <div class="col-md-12 d-flex justify-content-center align-items-center">
@@ -92,6 +94,31 @@ use yii\helpers\Html;
             </div>
         </div>
         <!-- POPULAR TOUR END -->
+        <!-- ADS -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12 popular">
+                <span class="popular-description">Объявления</span>
+                <span>пользователей</span>
+            </div>
+            <?php foreach ($ads as $item): ?>
+                <div class="col-md-3 col-sm-4 my-3">
+                    <div class="boxAds-hit">
+                        <?= Html::a('', ['ads/view', 'id' => $item->id], ['class' => 'tour_link']) ?>
+                        <div class="boxAds-img">
+                            <?= $item->mini_image ? Html::img('@web/common/users/'.$item->user_id.'/ads/'.$item->mini_image) : Html::img('@web/common/users/no-image.png') ?>
+                        </div>
+                        <div class="boxAds-info">
+                            <span><?= $item->description ?></span>
+                        </div>
+                        <p class="tel"><?= $item->phone ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <?= Html::a('Все объявления', ['ads/index'], ['class' => 'btn-all']) ?>
+            </div>
+        </div>
+        <!-- ADS END -->
     </div>
 </section>
 <section class="bg-category-tour">
@@ -232,97 +259,20 @@ use yii\helpers\Html;
             </div>
             <div class="col-md-12">
                 <div class="owl-carousel">
-                    <div class="item">
-                        <div class="FIO">Титова Тамара Васильевна</div>
-                        <div class="date-otziv">02.11.11</div>
-                        <div class="otziv-client-box">
-                            <div class="border-dashed-otziv"></div>
-                            <img class="icon-face mt-3 mb-3" src="common/img/otziv/otziv-1.png">
-                            <h4 class="pt-3 pb-3">Геолог Казахстана пансионат</h4>
-                            <div id="reviewStars-input">
-                                <input id="star-4" type="radio" name="reviewStars" checked/>
-                                <label title="gorgeous" for="star-4"></label>
-                                <input id="star-3" type="radio" name="reviewStars" />
-                                <label title="good" for="star-3"></label>
-                                <input id="star-2" type="radio" name="reviewStars" />
-                                <label title="regular" for="star-2"></label>
-                                <input id="star-1" type="radio" name="reviewStars" />
-                                <label title="poor" for="star-1"></label>
-                                <input id="star-0" type="radio" name="reviewStars" />
-                                <label title="bad" for="star-0"></label>
+                    <?php foreach ($comments as $item): ?>
+                        <div class="item review__box my-3">
+                            <div class="review__name"><?= $item->fio ?></div>
+                            <div class="review__date"><?= substr($item->date, 0, 10) ?></div>
+                            <div class="review__images">
+                                <?= $item->user_photo ? Html::img('@web/common/users/'.$item->user_id.'/'.$item->user_photo) : Html::img('@web/common/users/no-image.png') ?>
                             </div>
-                            <h5>Не первый год я отдыхаю в Геологе Казахстана, который находиться в п.Иноземцево.И в следующем году также собираюсь провести часть своего отпуска там. Персонал пансионата делает все возможное и не возможное чтобы у отдыхающих остались только положительные впечатления.</h5>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="FIO">Титова Тамара Васильевна</div>
-                        <div class="date-otziv">02.11.11</div>
-                        <div class="otziv-client-box">
-                            <div class="border-dashed-otziv"></div>
-                            <img class="icon-face mt-3 mb-3" src="common/img/otziv/otziv-1.png">
-                            <h4 class="pt-3 pb-3">Геолог Казахстана пансионат</h4>
-                            <div id="reviewStars-input">
-                                <input id="star-4" type="radio" name="reviewStars" checked/>
-                                <label title="gorgeous" for="star-4"></label>
-                                <input id="star-3" type="radio" name="reviewStars" />
-                                <label title="good" for="star-3"></label>
-                                <input id="star-2" type="radio" name="reviewStars" />
-                                <label title="regular" for="star-2"></label>
-                                <input id="star-1" type="radio" name="reviewStars" />
-                                <label title="poor" for="star-1"></label>
-                                <input id="star-0" type="radio" name="reviewStars" />
-                                <label title="bad" for="star-0"></label>
+                            <div class="rating">
+                                <div class="rating_reviews"></div>
+                                <div id="ratingBar" style="width: <?= $item->reviews?>%"></div>
                             </div>
-                            <h5>Не первый год я отдыхаю в Геологе Казахстана, который находиться в п.Иноземцево.И в следующем году также собираюсь провести часть своего отпуска там. Персонал пансионата делает все возможное и не возможное чтобы у отдыхающих остались только положительные впечатления.</h5>
+                            <h5><?= $item->message ?></h5>
                         </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="FIO">Титова Тамара Васильевна</div>
-                        <div class="date-otziv">02.11.11</div>
-                        <div class="otziv-client-box">
-                            <div class="border-dashed-otziv"></div>
-                            <img class="icon-face mt-3 mb-3" src="common/img/otziv/otziv-1.png">
-                            <h4 class="pt-3 pb-3">Геолог Казахстана пансионат</h4>
-                            <div id="reviewStars-input">
-                                <input id="star-4" type="radio" name="reviewStars" checked/>
-                                <label title="gorgeous" for="star-4"></label>
-                                <input id="star-3" type="radio" name="reviewStars" />
-                                <label title="good" for="star-3"></label>
-                                <input id="star-2" type="radio" name="reviewStars" />
-                                <label title="regular" for="star-2"></label>
-                                <input id="star-1" type="radio" name="reviewStars" />
-                                <label title="poor" for="star-1"></label>
-                                <input id="star-0" type="radio" name="reviewStars" />
-                                <label title="bad" for="star-0"></label>
-                            </div>
-                            <h5>Не первый год я отдыхаю в Геологе Казахстана, который находиться в п.Иноземцево.И в следующем году также собираюсь провести часть своего отпуска там. Персонал пансионата делает все возможное и не возможное чтобы у отдыхающих остались только положительные впечатления.</h5>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="FIO">Титова Тамара Васильевна</div>
-                        <div class="date-otziv">02.11.11</div>
-                        <div class="otziv-client-box">
-                            <div class="border-dashed-otziv"></div>
-                            <img class="icon-face mt-3 mb-3" src="common/img/otziv/otziv-1.png">
-                            <h4 class="pt-3 pb-3">Геолог Казахстана пансионат</h4>
-                            <div id="reviewStars-input">
-                                <input id="star-4" type="radio" name="reviewStars" checked/>
-                                <label title="gorgeous" for="star-4"></label>
-                                <input id="star-3" type="radio" name="reviewStars" />
-                                <label title="good" for="star-3"></label>
-                                <input id="star-2" type="radio" name="reviewStars" />
-                                <label title="regular" for="star-2"></label>
-                                <input id="star-1" type="radio" name="reviewStars" />
-                                <label title="poor" for="star-1"></label>
-                                <input id="star-0" type="radio" name="reviewStars" />
-                                <label title="bad" for="star-0"></label>
-                            </div>
-                            <h5>Не первый год я отдыхаю в Геологе Казахстана, который находиться в п.Иноземцево.И в следующем году также собираюсь провести часть своего отпуска там. Персонал пансионата делает все возможное и не возможное чтобы у отдыхающих остались только положительные впечатления.</h5>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

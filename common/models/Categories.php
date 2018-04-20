@@ -50,4 +50,9 @@ class Categories extends \yii\db\ActiveRecord
         }
         return $result;
     }
+
+    public function getCategoryName($id) {
+        $category = Categories::find()->where(['id' => $id])->one();
+        return $category->name;
+    }
 }

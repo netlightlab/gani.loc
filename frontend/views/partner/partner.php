@@ -12,9 +12,11 @@ use common\widgets\Alert;
 use yii\widgets\ActiveForm;
 use common\models\Cities;
 use common\models\Countries;
+use mihaildev\ckeditor\CKEditor;
+use common\models\Categories;
 
 $cities = new Cities();
-$countries = new Countries();
+$category = new Categories();
 
 $this->title = 'Личный кабинет';
 ?>
@@ -61,7 +63,7 @@ $this->title = 'Личный кабинет';
                     <div id="statistics" class="tab-pane set-tab-content">
                         <div class="row">
                             <div class="col-md-12">
-                                <?= Html::a('покупки', ['/partner/pays']) ?>
+                                <?= Html::a('покупки', ['/partner/pays'], ['class' => 'btn-refresh-profile']) ?>
                             </div>
                         </div>
                     </div>
@@ -93,7 +95,7 @@ $this->title = 'Личный кабинет';
                                                 <div class="tour-info">
                                                     <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
                                                     <p>подробнее</p>
-                                                    <h4>Category</h4>
+                                                    <h4><?= $category->getCategoryName($tour->category_id) ?></h4>
                                                 </div>
                                             </div>
                                             <h5><?= $tour->name ?></h5>
@@ -143,11 +145,11 @@ $this->title = 'Личный кабинет';
                                         </tr>
                                         <tr>
                                             <td><strong>Страна</strong></td>
-                                            <td><?= $UsersInfo['country'] ? $cities->getCountriesName($UsersInfo['country']) : "Не заполнено" ?></td>
+                                            <td><span><?= $UsersInfo['country'] ? $cities->getCountriesName($UsersInfo['country']) : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Город</strong></td>
-                                            <td><span><?= $UsersInfo['city'] ? $UsersInfo['city'] : "Не заполнено" ?></span></td>
+                                            <td><span><?= $UsersInfo['city'] ? $cities->getCitiesName($UsersInfo['city']) : "Не заполнено" ?></span></td>
                                         </tr>
                                         <tr>
                                             <td><strong>Адрес компании</strong></td>
@@ -229,13 +231,18 @@ $this->title = 'Личный кабинет';
                                             <?= $form->field($model, 'name_brand')->label('НАЗВАНИЕ БРЕНДА*')->textInput(['placeholder' => 'Например: el-tour']) ?>
                                         </div>
                                         <div class="col-md-3 col-xs-6">
-                                            <?= $form->field($model, 'country')->dropDownList($cities->getCountriesList())->label('СТРАНА*') ?>
+                                            <?= $form->field($model, 'country')->dropDownList($cities->getCountriesList(), ['id' => 'CountryId'])->label('СТРАНА*') ?>
                                         </div>
                                         <div class="col-md-3 col-xs-6">
-                                            <?= $form->field($model, 'city')->dropDownList($cities->getCountriesList())->label('ГОРОД*') ?>
+                                            <?= $form->field($model, 'city')->dropDownList($cities->getCitiesList($UsersInfo['country']), ['id' => 'CitiesList'])->label('ГОРОД*') ?>
                                         </div>
                                         <div class="col-md-12">
-                                            <?= $form->field($model, 'about_company')->textarea(['placeholder' => 'Например: TOO Kolsaylakes', 'rows' => '10'])->label('ОПИСАНИЕ КОМПАНИИ') ?>
+                                            <?= $form->field($model, 'about_company')->widget(CKEditor::className(), [
+                                                'editorOptions' => [
+                                                    'inline' => false,
+                                                    'preset' => 'standart',
+                                                ],
+                                            ])->label('ОПИСАНИЕ КОМПАНИИ');?>
                                         </div>
                                         <div class="col-md-12">
                                             <hr style="width: 100%;">
@@ -322,3 +329,27 @@ $this->title = 'Личный кабинет';
     </div>
 </section>
 
+<?php
+$script = <<<JS
+    $('#CountryId').change(function() {        
+        $.ajax({
+            'url'       : '/partner/index',
+            'method'    : 'post',
+            'data'      : {'country_id': this.value},
+            'dataType'  : 'json',
+            'success'   : function(data) {
+                var options = [];
+                for (var value in data) {
+                    if (data.hasOwnProperty(value)) {
+                        options.push('value="' + value + '">' + data[value]);
+                    }
+                }
+                document.getElementById('CitiesList').innerHTML = '<option ' + options.join('</option><option ') + '</option>';
+            },
+        });
+    });
+JS;
+
+$this->registerJs($script);
+
+?>

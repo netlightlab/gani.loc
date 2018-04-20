@@ -11,10 +11,11 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\ActiveForm;
 use common\models\Cities;
-use common\models\Countries;
+use common\models\Categories;
+use mihaildev\ckeditor\CKEditor;
 
 $cities = new Cities();
-$countries = new Countries();
+$category = new Categories;
 
 $this->title = 'Создание тура';
 ?>
@@ -57,7 +58,7 @@ $this->title = 'Создание тура';
                 </ul>
                 <div class="tab-content">
                     <div id="rus" class="tab-pane set-tab-content active">
-                        <?php $form = ActiveForm::begin(['id' => 'add-tour-rus', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+                        <?php $form = ActiveForm::begin(['id' => 'tours_add', 'options' => ['enctype' => 'multipart/form-data']]); ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <h4>Основная информация</h4>
@@ -69,22 +70,42 @@ $this->title = 'Создание тура';
                                 <?= $form->field($model, 'name')->label('НАЗВАНИЕ*')->textInput() ?>
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($model, 'category_id')->dropDownList($cities->getCountriesList())->label('УКАЖИТЕ КАТЕГОРИЮ*') ?>
+                                <?= $form->field($model, 'category_id')->dropDownList($category->getCategoriesList())->label('УКАЖИТЕ КАТЕГОРИЮ*') ?>
                             </div>
                             <div class="col-md-4">
                                 <?= $form->field($model, 'tour_language')->label('ДОСТУПНЫЕ ЯЗЫКИ ТУРА ИЛИ РАЗВЛЕЧЕНИЯ*')->textInput() ?>
                             </div>
                             <div class="col-md-12">
-                                <?= $form->field($model, 'mini_description')->textarea(['rows' => '5', 'placeholder' => 'Вы можете ввести только: 200 символов'])->label('КРАТКОЕ ОПИСАНИЕ*') ?>
+                                <?= $form->field($model, 'mini_description')->widget(CKEditor::className(), [
+                                    'editorOptions' => [
+                                        'inline' => false,
+                                        'preset' => 'standart',
+                                    ],
+                                ])->label('КРАТКОЕ ОПИСАНИЕ*');?>
                             </div>
                             <div class="col-md-12">
-                                <?= $form->field($model, 'description')->textarea(['rows' => '5'])->label('ПОДРОБНОЕ ОПИСАНИЕ') ?>
+                                <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                                    'editorOptions' => [
+                                        'inline' => false,
+                                        'preset' => 'standart',
+                                    ],
+                                ])->label('ПОДРОБНОЕ ОПИСАНИЕ*');?>
                             </div>
                             <div class="col-md-12">
-                                <?= $form->field($model, 'conditions')->textarea(['rows' => '5'])->label('УСЛОВИЯ ПРЕДСТАВЛЕНИЯ') ?>
+                                <?= $form->field($model, 'conditions')->widget(CKEditor::className(), [
+                                    'editorOptions' => [
+                                        'inline' => false,
+                                        'preset' => 'standart',
+                                    ],
+                                ])->label('УСЛОВИЯ ПРЕДСТАВЛЕНИЯ');?>
                             </div>
                             <div class="col-md-12">
-                                <?= $form->field($model, 'return_cond')->textarea(['rows' => '5'])->label('УСЛОВИЯ ВОЗВРАТА') ?>
+                                <?= $form->field($model, 'return_cond')->widget(CKEditor::className(), [
+                                    'editorOptions' => [
+                                        'inline' => false,
+                                        'preset' => 'standart',
+                                    ],
+                                ])->label('УСЛОВИЯ ВОЗВРАТА');?>
                             </div>
                             <div class="col-md-12">
                                 <h4>Настройка изображения</h4>
@@ -116,7 +137,22 @@ $this->title = 'Создание тура';
                                 <p style="margin-bottom:1rem;"><strong>Для более корректного отображения Ваших изображений рекомендуется их подготовить.</strong></p>
                             </div>
                             <div class="col-md-12  py-4">
-                                <?= $form->field($model, 'gallery')->fileInput()->label('') ?>
+                                <p>Загрузите галерею фотографии:</p>
+                                <?php
+                                echo \kato\DropZone::widget([
+                                    'options' => [
+                                        'maxFilesize' => 10,
+                                        'maxFiles' => 10,
+                                        'url' => '/my-tours/add',
+                                        'uploadMultiple' => true,
+                                        'parallelUploads' => 10,
+                                        'autoProcessQueue' => false,
+                                    ],
+                                    'clientEvents' => [
+                                        'removedfile' => "function(file){alert(file.name + ' is removed')}"
+                                    ],
+                                ]);
+                                ?>
                             </div>
                             <div class="col-md-12">
                                 <h4>Настройка цен</h4>
@@ -155,10 +191,10 @@ $this->title = 'Создание тура';
                                 <?= $form->field($model, 'official_name')->label('ОФИЦИАЛЬНОЕ НАЗВАНИЕ ОБЪЕКТА* ')->textInput() ?>
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($model, 'country_id')->dropDownList($cities->getCountriesList())->label('СТРАНА*') ?>
+                                <?= $form->field($model, 'country_id')->dropDownList($cities->getCountriesList(), ['id' => 'CountryId'])->label('СТРАНА*') ?>
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($model, 'city_id')->dropDownList($cities->getCountriesList())->label('ГОРОД*') ?>
+                                <?= $form->field($model, 'city_id')->dropDownList($cities->getCitiesList(1), ['id' => 'CitiesList'])->label('ГОРОД*') ?>
                             </div>
                             <div class="col-md-12">
                                 <h4>Информация о точке сбора</h4>
@@ -167,10 +203,10 @@ $this->title = 'Создание тура';
                                 <hr style="10px 0">
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($model, 'dot_place')->label('АДРЕС ТОЧКИ СБОРА*')->textInput() ?>
+                                <?= $form->field($model, 'dot_place_addr')->label('АДРЕС ТОЧКИ СБОРА*')->textInput(['placeholder' => 'укажите на карте', 'id' => 'dot_placeAddr', 'readonly' => true]) ?>
                             </div>
-                            <div class="col-md-6">
-                                <?= $form->field($model, 'dot_place_addr')->label('ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ ПО АДРЕСУ ТОЧКИ СБОРА')->textInput() ?>
+                            <div class="col-md-6" style="display: none;">
+                                <?= $form->field($model, 'dot_place')->label('ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ ПО АДРЕСУ ТОЧКИ СБОРА')->textInput(['type' => 'text', 'id' => 'hidden_placeId']) ?>
                             </div>
                             <div class="col-md-12">
                                 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
@@ -186,15 +222,15 @@ $this->title = 'Создание тура';
                             <div class="col-md-12">
                                 <?= $form->field($model, 'w_included')->label('Что входит в тур*')->textInput() ?>
                             </div>
-                            <div class="col-md-12">
-                                <h4>Места посещения</h4>
-                            </div>
-                            <div class="col-md-12">
-                                <hr style="10px 0">
-                            </div>
-                            <div class="col-md-12">
-                                <?= $form->field($model, 'place_id')->dropDownList($cities->getCountriesList())->label('ГОРОД*') ?>
-                            </div>
+<!--                            <div class="col-md-12">-->
+<!--                                <h4>Места посещения</h4>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-12">-->
+<!--                                <hr style="10px 0">-->
+<!--                            </div>-->
+<!--                            <div class="col-md-12">-->
+<!--                                --><?//= $form->field($model, 'place_id')->dropDownList($cities->getCountriesList())->label('ГОРОД*') ?>
+<!--                            </div>-->
                             <div class="col-md-12">
                                 <hr style="10px 0">
                             </div>
@@ -224,25 +260,73 @@ $this->title = 'Создание тура';
     </div>
 </section>
 
+
 <?php
 
 $js = <<< JS
+
+    $(document).ready(function(){
+        alert(1);
+    })
+
+    $("#tours_add").on('beforeSubmit', function(e) {
+        e.preventDefault();
+        var form = $(this).serialize();
+        var photos = [];
+        $.each(myDropzone.files, function(index, value) {
+          photos.push(value.name);
+        }) ;
+        form += "&Tours%5Bgallery%5D="+photos;
+        $.ajax({
+            type: 'POST',
+            data: form,
+            succes: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error)
+            }
+          }).done(function(){
+                myDropzone.processQueue();
+                alert('asd');
+                window.location.href = '/partner/index';
+          });
+        // return false;
+    });
+    
+    $('#CountryId').change(function() {        
+        $.ajax({
+            'url'       : '/my-tours/add',
+            'method'    : 'post',
+            'data'      : {'country_id': this.value},
+            'dataType'  : 'json',
+            'success'   : function(data) {
+                var options = [];
+                for (var value in data) {
+                    if (data.hasOwnProperty(value)) {
+                        options.push('value="' + value + '">' + data[value]);
+                    }
+                }
+                document.getElementById('CitiesList').innerHTML = '<option ' + options.join('</option><option ') + '</option>';
+            }
+        });
+    });
 
 ymaps.ready(init);
 
 function init() {
     var myPlacemark,
         myMap = new ymaps.Map('map', {
-            center: [55.753994, 37.622093],
+            center: [56,36],
             zoom: 9
         }, {
             searchControlProvider: 'yandex#search'
         });
-
+        
     // Слушаем клик на карте.
     myMap.events.add('click', function (e) {
         var coords = e.get('coords');
-
+        
         // Если метка уже создана – просто передвигаем ее.
         if (myPlacemark) {
             myPlacemark.geometry.setCoordinates(coords);
@@ -285,8 +369,11 @@ function init() {
                         firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
                     ].filter(Boolean).join(', '),
                     // В качестве контента балуна задаем строку с адресом объекта.
-                    balloonContent: firstGeoObject.getAddressLine()
+                    balloonContent: firstGeoObject.getAddressLine()                    
                 });
+            // console.log('dots: ' + coords + ' name: '+firstGeoObject.getAddressLine());
+            $('#dot_placeAddr').val(firstGeoObject.getAddressLine());
+            $('#hidden_placeId').val(coords);            
         });
     }
 }
@@ -294,4 +381,5 @@ function init() {
 
 JS;
 $this->registerJs($js);
+
 ?>

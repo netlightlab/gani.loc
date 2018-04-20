@@ -18,6 +18,7 @@ use yii\filters\AccessControl;
 use Yii;
 use common\models\User;
 use frontend\models\Tours;
+use common\models\Cities;
 
 
 class PartnerController extends Controller
@@ -30,7 +31,7 @@ class PartnerController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['partner'],
                     ],
                 ],
             ],
@@ -70,6 +71,14 @@ class PartnerController extends Controller
                 Yii::$app->session->setFlash("error", "Ошибка");
             }
         }
+
+        if (Yii::$app->request->isAjax) {
+            $cities = new Cities();
+            $arr = $cities->getCitiesList((int)Yii::$app->request->post('country_id'));
+            echo json_encode($arr);
+            return false;
+        }
+
         return $this->render('partner', [
             'UsersInfo' => $usersInfo,
             'model' => $model,
@@ -78,7 +87,7 @@ class PartnerController extends Controller
     }
 
     public function getUserTours($id) {
-        return Tours::find()->where(['user_id' => $id])->select('id, name, price, mini_image')->all();
+        return Tours::find()->where(['user_id' => $id])->select('id, name, price, mini_image, category_id')->all();
     }
 
     public function actionPays(){

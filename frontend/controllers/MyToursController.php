@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
+use common\models\Cities;
 
 
 class MyToursController extends Controller
@@ -58,24 +59,43 @@ class MyToursController extends Controller
         $model = new Tours();
         $image1 = UploadedFile::getInstance($model, 'back_image');
         $image2 = UploadedFile::getInstance($model, 'mini_image');
-        $image3 = UploadedFile::getInstance($model, 'gallery');
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->addTour()) {
-                if($image1->name && $image2->name && $image3->name) {
-                    $this->refresh();
+                if($image1->name && $image2->name) {
+//                    $this->refresh();
                     FileHelper::createDirectory('common/tour_img/' . $model->id . '/');
                     $dir = Yii::getAlias('common/tour_img/' . $model->id . '/');
                     $image1->saveAs($dir . $image1->name);
                     $image2->saveAs($dir . $image2->name);
-                    $image3->saveAs($dir . $image3->name);
                 }
-                $this->redirect(['partner/index#my_tours']);
+
                 Yii::$app->session->setFlash("success", "Тур успешно добавлен");
             } else {
                 Yii::$app->session->setFlash("error", "Ошибка");
             };
         };
+
+        $fileName = 'file';
+        $uploadPath = 'common/tour_img/'.$model->id;
+
+        if (isset($_FILES[$fileName])) {
+            $file = UploadedFile::getInstancesByName($fileName);
+
+            print_r($file);
+            print_r($_FILES);
+
+            foreach ($file as $item) {
+                $item->saveAs($uploadPath . '/' . $item->name);
+            }
+        }
+
+        if (Yii::$app->request->isAjax) {
+            $cities = new Cities();
+            $arr = $cities->getCitiesList((int)Yii::$app->request->post('country_id'));
+            echo json_encode($arr);
+            return false;
+        }
 
         return $this->render('add', [
             'model' => $model,
@@ -98,6 +118,24 @@ class MyToursController extends Controller
                 Yii::$app->session->setFlash("error", "Ошибка");
             };
         };
+
+        $fileName = 'file';
+        $uploadPath = 'common/tour_img/'.$id;
+
+        if (isset($_FILES[$fileName])) {
+            $file = UploadedFile::getInstancesByName($fileName);
+
+            foreach ($file as $item) {
+                $item->saveAs($uploadPath . '/' . $item->name);
+            }
+        }
+
+        if (Yii::$app->request->isAjax) {
+            $cities = new Cities();
+            $arr = $cities->getCitiesList((int)Yii::$app->request->post('country_id'));
+            echo json_encode($arr);
+            return false;
+        }
 
         return $this->render('edit', [
             'model' => Tours::findOne($id),
