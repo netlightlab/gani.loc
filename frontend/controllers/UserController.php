@@ -157,6 +157,11 @@ class UserController extends Controller
         $model = new Ads();
         $model->user_id = Yii::$app->user->id;
 
+//        if($model->load(Yii::$app->request->post()) && $model->validate()){
+//            $model->mini_image = $_FILES['file']['name'];
+//            $model->save();
+//        }
+
         $fileName = 'file';
         $uploadPath = 'common/users/'.Yii::$app->user->id;
 
@@ -171,14 +176,15 @@ class UserController extends Controller
 
         }
 
-        $image = UploadedFile::getInstance($model, 'mini_image');
-                if ($model->validate()) {
+
+        $a = Yii::$app->request->post();
+                if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                    $image = UploadedFile::getInstance($model,'mini_image');
                     FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
                     $dir = Yii::getAlias('common/users/'.Yii::$app->user->id.'/ads/');
-                    $image->saveAs($dir . $model->mini_image);
+                    $image->saveAs($dir . $image->name);
                     $model->mini_image = $image->name;
                     $model->save();
-                    print_r($model);
                 }
 
         return $this->render('my-ads/create', [

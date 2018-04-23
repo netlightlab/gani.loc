@@ -21,8 +21,8 @@ use yii\base\Model;
  * @property integer $user_id
  * @property integer $phone
  * @property string $description
- * @property resource $mini_image
- * @property resource $gallery
+ * @property string $mini_image
+ * @property string $gallery
  *
  */
 class Ads extends ActiveRecord

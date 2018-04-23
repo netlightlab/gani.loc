@@ -14,6 +14,8 @@ use mihaildev\ckeditor\CKEditor;
 
 <?php $form = ActiveForm::begin([
         'id'                     => 'ads-add',
+//        'enableAjaxValidation' => true,
+        'enableClientValidation' => false,
         'options' => [
                 'enctype'   => 'multipart/form-data',
                 'class'     => 'ads-form'
@@ -33,7 +35,7 @@ use mihaildev\ckeditor\CKEditor;
     </div>
     <div class="col-md-4">
         <span class="mb-3 d-flex">Основное изображение</span>
-        <?= $form->field($model, 'mini_image')->fileInput()->label('') ?>
+        <?= $form->field($model, 'mini_image')->fileInput(['autoComplete' => 'off'])->label('') ?>
     </div>
     <div class="col-md-12">
         <span class="mb-3 d-flex">Галерея фотографии</span>
@@ -62,7 +64,7 @@ use mihaildev\ckeditor\CKEditor;
         ])->label('ОПИСАНИЕ*');?>
     </div>
     <div class="col-md-12">
-        <?= Html::submitButton('Разместить объявление', ['class' => 'btn-refresh-profile', 'name' => 'signup-button']) ?>
+        <?= Html::submitButton('Разместить объявление', ['class' => 'btn-refresh-profile']) ?>
     </div>
 </div>
 <?php ActiveForm::end(); ?>
@@ -71,7 +73,7 @@ use mihaildev\ckeditor\CKEditor;
 <?php
 $script = <<<JS
 
-    $("#ads-add").on('beforeSubmit', function(e) {
+    /*$("#ads-add").on('beforeSubmit', function(e) {
         e.preventDefault();
         var form = $(this).serialize();
         var photos = [];
@@ -79,6 +81,7 @@ $script = <<<JS
           photos.push(value.name);
         }) ;
         form += "&Ads%5Bgallery%5D="+photos;
+        console.log(form);
         $.ajax({
             type: 'POST',            
             data: form,
@@ -93,7 +96,7 @@ $script = <<<JS
             // window.location.href = '/user/index';
           });
         return false;
-    });
+    });*/
 JS;
 
 $this->registerJs($script);
