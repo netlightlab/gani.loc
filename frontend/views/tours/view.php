@@ -225,7 +225,7 @@ $category = new Categories();
                             <div id="reviews" class="tab-pane">
                                 <?php
                                 echo newerton\fancybox\FancyBox::widget([
-                                    'target' => 'a[rel=fancybox]',
+                                    'target' => 'a[rel=commentBox]',
                                     'helpers' => true,
                                     'mouse' => true,
                                     'config' => [
@@ -276,7 +276,7 @@ $category = new Categories();
                                                 <div class="comments_gallery">
                                                 <?php foreach (explode(',', $comment['load_photo']) as $item): ?>
                                                     <div class="comments_gallery-thumb">
-                                                        <?= Html::a(Html::img('@web/common/users/'.$comment['user_id'].'/'.$item), '@web/common/users/'.$comment['user_id'].'/'.$item, ['rel' => 'fancybox']); ?>
+                                                        <?= Html::a(Html::img('@web/common/users/'.$comment['user_id'].'/'.$item), '@web/common/users/'.$comment['user_id'].'/'.$item, ['rel' => 'commentBox']); ?>
                                                     </div>
                                                 <?php endforeach; ?>
                                                 </div>

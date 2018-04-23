@@ -27,14 +27,6 @@ $this->title = 'Поиск';
     </div>
 </section>
 
-<?php Pjax::begin(['id' => 'test']); ?>
-
-<h1><?= $time ?></h1>
-
-<?= Html::a("Обновить", ['tours/search'], ['class' => 'btn btn-lg btn-primary']);?>
-
-<?php Pjax::end(); ?>
-
 <section style="background: #2e2e2e;">
     <div class="container">
         <div class="row">

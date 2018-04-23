@@ -7,6 +7,7 @@
  */
 
 use yii\widgets\Breadcrumbs;
+use yii\helpers\Html;
 
 $this->title = 'Объявление пользователя';
 
@@ -40,12 +41,66 @@ $this->title = 'Объявление пользователя';
 
 <section class="pt-5 pb-5" style="background: #f9f9f9;">
     <div class="container">
-        <div class="row">
+        <div id="ads-view" class="row">
+            <div class="col-md-4">
+                <div class="ads-view_image">
+                    <?= $ads->mini_image ? Html::img('@web/common/users/'.$ads->user_id.'/ads/'.$ads->mini_image) : Html::img('@web/common/users/no-image.png') ?>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h4>Номер телефона:</h4>
+                <p><b><?= $ads->phone ?></b></p>
+                <h4>Описание:</h4>
+                <p><?= $ads->description ?></p>
+            </div>
             <div class="col-md-12">
-                .
+                <h4>Галерея фотографии:</h4>
+                <?php
+                echo newerton\fancybox\FancyBox::widget([
+                    'target' => 'a[rel=fancybox]',
+                    'helpers' => true,
+                    'mouse' => true,
+                    'config' => [
+                        'maxWidth' => '90%',
+                        'maxHeight' => '90%',
+                        'playSpeed' => 7000,
+                        'padding' => 0,
+                        'fitToView' => false,
+                        'width' => '70%',
+                        'height' => '70%',
+                        'autoSize' => false,
+                        'closeClick' => false,
+                        'openEffect' => 'elastic',
+                        'closeEffect' => 'elastic',
+                        'prevEffect' => 'elastic',
+                        'nextEffect' => 'elastic',
+                        'closeBtn' => false,
+                        'openOpacity' => true,
+                        'helpers' => [
+                            'title' => ['type' => 'float'],
+                            'buttons' => [],
+                            'thumbs' => ['width' => 68, 'height' => 50],
+                            'overlay' => [
+                                'css' => [
+                                    'background' => 'rgba(0, 0, 0, 0.8)'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]);
+                ?>
+                <?php if ($ads['gallery']):?>
+                    <hr class="tourLine">
+                    <div class="tour_gallery">
+                        <?php foreach (explode(',', $ads['gallery']) as $item): ?>
+                            <div class="tour_gallery-thumb">
+                                <?= Html::a(Html::img('@web/common/users/'.$ads->user_id.'/ads/'.$item), '@web/common/users/'.$ads->user_id.'/ads/'.$item, ['class' => 'fancybox', 'rel' => 'fancybox']); ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
-
-<?php print_r($ads) ?>

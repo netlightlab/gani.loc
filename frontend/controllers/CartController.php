@@ -161,7 +161,7 @@ class CartController extends Controller
 
     private $merchant_id = '10751';
     private $merchant_secret_key = 'pexabiqoqepujiqy';
-    private $test_pay = true;
+    private $test_pay = false;
     public function payOrder($orderId,$orderData){
         $arrReq = array();
         //print_r($orderData);
@@ -171,7 +171,8 @@ class CartController extends Controller
         $arrReq['pg_amount'] = intval($orderData['Orders']['total']);        // Сумма заказа
         $arrReq['pg_lifetime'] = 3600 * 24;    // Время жизни счёта (в секундах)
         $arrReq['pg_description'] = 'Заказ №' . $orderId; // Описание заказа (показывается в Платёжной системе)
-        $arrReq['pg_user_phone'] = $userPhone->phone ? $userPhone->phone : '';
+//        $arrReq['pg_user_phone'] = $userPhone->phone ? $userPhone->phone : '';
+        $arrReq['pg_user_phone'] = $userPhone->phone ? (int)(str_replace(array('(',')','-','_',' '), '', '9 (999) 999-9999')) : '';
         $arrReq['pg_currency'] = 'KZT';
         if ($this->test_pay) {
 //                $arrReq['pg_payment_system'] = 'TEST';

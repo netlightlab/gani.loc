@@ -155,16 +155,31 @@ class UserController extends Controller
     public function actionAdsCreate()
     {
         $model = new Ads();
-
         $model->user_id = Yii::$app->user->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->mini_image = $this->getUploadFileName(Yii::$app->user->id, 'mini_image');
-            $model->gallery = $this->getUploadFileName(Yii::$app->user->id, 'gallery');
-            if ($model->save()) {
-                return $this->redirect(['user/index']);
+        $fileName = 'file';
+        $uploadPath = 'common/users/'.Yii::$app->user->id;
+
+        FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
+
+        if (isset($_FILES[$fileName])) {
+            $file = UploadedFile::getInstancesByName($fileName);
+
+            foreach ($file as $item) {
+                $item->saveAs($uploadPath . '/ads/' . $item->name);
             }
+
         }
+
+        $image = UploadedFile::getInstance($model, 'mini_image');
+                if ($model->validate()) {
+                    FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
+                    $dir = Yii::getAlias('common/users/'.Yii::$app->user->id.'/ads/');
+                    $image->saveAs($dir . $model->mini_image);
+                    $model->mini_image = $image->name;
+                    $model->save();
+                    print_r($model);
+                }
 
         return $this->render('my-ads/create', [
             'model' => $model,
@@ -183,6 +198,17 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $mini_image = $model->mini_image;
         $gallery = $model->gallery;
+        $fileName = 'file';
+        $uploadPath = 'common/users/'.Yii::$app->user->id;
+
+        if (isset($_FILES[$fileName])) {
+            $file = UploadedFile::getInstancesByName($fileName);
+
+            foreach ($file as $item) {
+                $item->saveAs($uploadPath . '/ads/' . $item->name);
+            }
+
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
@@ -192,11 +218,7 @@ class UserController extends Controller
                 $model->mini_image = $mini_image;
             }
 
-            if ($this->getUploadFileName(Yii::$app->user->id, 'gallery')) {
-                $model->gallery = $this->getUploadFileName(Yii::$app->user->id, 'gallery');
-            } else {
-                $model->gallery = $mini_image;
-            }
+            $model->gallery = $this->is_in_str($gallery, $model->gallery);
 
             if ($model->save()) {
                 return $this->redirect(['user/index']);
@@ -206,6 +228,19 @@ class UserController extends Controller
         return $this->render('my-ads/update', [
             'model' => $model,
         ]);
+    }
+
+    public function is_in_str($str, $substr) {
+        if ($str == '') {
+            $string = $substr;
+        } else if ($substr == ''){
+            $string = $str .= $substr;
+        } else {
+            $string = $str .= ',' . $substr;
+        }
+        $array = explode(',', $string);
+
+        return implode(',',array_unique($array));
     }
 
     /**
