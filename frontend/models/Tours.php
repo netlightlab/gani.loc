@@ -46,6 +46,19 @@ class Tours extends ActiveRecord
     public $tourUser;
 
     /**
+     * @var string
+     */
+    public $price_from;
+    /**
+     * @var string
+     */
+    public $price_to;
+    /**
+     * @var array
+     */
+    public $filter_categories;
+
+    /**
      * @inheritdoc
      */
     public static function tableName()

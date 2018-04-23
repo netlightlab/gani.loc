@@ -13,10 +13,48 @@ use yii\web\Controller;
 use Yii;
 use frontend\models\Tours;
 use yii\web\UploadedFile;
+use backend\models\Pages;
+use common\models\Categories;
+use yii\data\ActiveDataProvider;
+use yii\data\Sort;
+use yii\filters\AjaxFilter;
+use yii\helpers\ArrayHelper;
+use frontend\models\Search;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use common\models\User;
+use yii\filters\AccessControl;
 
 class ToursController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actions()
     {
         return [
@@ -96,6 +134,17 @@ class ToursController extends Controller
         if (Yii::$app->request->get('country_id')) {
             $url .= '&country_id=' . Yii::$app->request->get('country_id');
         }
+        $search = new Search();
+
+        $m = new Tours;
+
+        $toursMaxPrice = ArrayHelper::getValue($m::find()->select(['MAX(price)'])->asArray()->one(),  'MAX(price)');
+
+//        if(Yii::$app->request->isPjax){
+//            print_r($_GET);
+//        }
+        $catModel = Categories::find()->asArray()->all();
+        $categories = ArrayHelper::map($catModel, 'id', 'name');
 
         $asd = Tours::find()->where(['price' => 40000])->all();
 
@@ -111,9 +160,26 @@ class ToursController extends Controller
 
     public function actionUploadCommentsPhoto($id){
         /* DROPZONEJS */
+        if(Yii::$app->request->get('filter_categories')){
+            $filterIdFromGet = ArrayHelper::index(Yii::$app->request->get('filter_categories'), function($value){
+                return $value;
+            });
+        }
 
+        $formParams = array(
+            'category_id' => Yii::$app->request->get('category_id') ? (int)Yii::$app->request->get('category_id') : 0,
+            'price_from' => Yii::$app->request->get('price_from') ? (int)Yii::$app->request->get('price_from') : 500,
+            'price_to' => Yii::$app->request->get('price_to') ? (int)Yii::$app->request->get('price_to') : $toursMaxPrice,
+            'filter_categories' => Yii::$app->request->get('filter_categories') ? $filterIdFromGet : NULL,
+            'sort' => Yii::$app->request->get('sort') ? Yii::$app->request->get('sort') : NULL,
+            'max_price' => $toursMaxPrice,
+        );
 
 
         /* ENDZONENJS */
+        return $this->render('search', [
+                'formParams' => $formParams,
+        ]);
+
     }
 }

@@ -10,6 +10,10 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
+use yii\widgets\ListView;
+use yii\widgets\LinkPager;
+use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 $this->title = 'Поиск';
 
@@ -40,9 +44,10 @@ $this->title = 'Поиск';
     </div>
 </section>
 
-<section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
-    <div id="map"></div>
-</section>
+
+    <section class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
+        <div id="map"></div>
+    </section>
 
     <section style="background: #fbfbfb;">
         <div class="container py-5">
@@ -56,16 +61,22 @@ $this->title = 'Поиск';
                         </div>
                         <div class="col-md-12 py-3">
                             <div id="filter">
-                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Поиск по фильтру</a>
+                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Фильтр</a>
                                 <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
-                                    <div class="filter-block">
+                                    <!--<div class="filter-block">
                                         <h6>Выберите страну</h6>
                                         <select id="getToursCountries">
                                             <option> </option>
                                             <option value="1">Казахстан</option>
                                             <option value="2">Россия</option>
                                         </select>
-                                    </div>
+                                    </div>-->
+                                    <?= $this->render('_filter', [
+                                        'search_form' => $search_form,
+                                        'tours' => $tours,
+                                        'formParams' => $formParams,
+                                        'categories' => $categories
+                                    ]) ?>
                                 </div>
                             </div>
                         </div>
@@ -85,8 +96,27 @@ $this->title = 'Поиск';
                             </div>
                         </div>
                     </div>
+                    <?php
+                    /*Pjax::widget([
+                        'id' => 'searchContainer',  // response goes in this element
+                        'enablePushState' => true,
+                        'enableReplaceState' => false,
+                        'formSelector' => '#ts_form',// this form is submitted on change
+                        'submitEvent' => 'change',
+                    ]);*/
+                    ?>
                     <div id="places">
-                        <?php foreach($model as $tour) : ?>
+                        <?php Pjax::begin([
+                            'id' => 'searchContainer',
+                            'formSelector' => '#filterForm',
+                            'linkSelector' => '#lll',
+                            'enablePushState' => true,
+                            'options' => [
+                                    'data-pjax-timeout' => 10000
+                            ]
+                        ]) ?>
+                        <p>Найдено туров: <?= count($tours) ?></p>
+                        <?php foreach($tours as $tour) : ?>
                             <div class="alltours_box">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -110,6 +140,7 @@ $this->title = 'Поиск';
                                 </div>
                             </div>
                         <? endforeach; ?>
+                        <?php Pjax::end() ?>
                     </div>
                 </div>
             </div>
@@ -139,5 +170,4 @@ $js = <<<JS
 JS;
 
 $this->registerJs($js);
-
 ?>

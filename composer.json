@@ -21,8 +21,12 @@
         "dmstr/yii2-adminlte-asset": "^2.1",
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
+<<<<<<< HEAD
         "perminder-klair/yii2-dropzone": "dev-master",
         "newerton/yii2-fancybox": "dev-master"
+=======
+        "yiisoft/yii2-jui": "^2.0"
+>>>>>>> 46cc21e59cfb202c4add727115ac15a7881d5473
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
