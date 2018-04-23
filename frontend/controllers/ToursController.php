@@ -158,28 +158,4 @@ class ToursController extends Controller
         ]);
     }
 
-    public function actionUploadCommentsPhoto($id){
-        /* DROPZONEJS */
-        if(Yii::$app->request->get('filter_categories')){
-            $filterIdFromGet = ArrayHelper::index(Yii::$app->request->get('filter_categories'), function($value){
-                return $value;
-            });
-        }
-
-        $formParams = array(
-            'category_id' => Yii::$app->request->get('category_id') ? (int)Yii::$app->request->get('category_id') : 0,
-            'price_from' => Yii::$app->request->get('price_from') ? (int)Yii::$app->request->get('price_from') : 500,
-            'price_to' => Yii::$app->request->get('price_to') ? (int)Yii::$app->request->get('price_to') : $toursMaxPrice,
-            'filter_categories' => Yii::$app->request->get('filter_categories') ? $filterIdFromGet : NULL,
-            'sort' => Yii::$app->request->get('sort') ? Yii::$app->request->get('sort') : NULL,
-            'max_price' => $toursMaxPrice,
-        );
-
-
-        /* ENDZONENJS */
-        return $this->render('search', [
-                'formParams' => $formParams,
-        ]);
-
-    }
 }
