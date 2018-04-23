@@ -2,13 +2,19 @@
 namespace frontend\controllers;
 
 use common\models\Cities;
+<<<<<<< HEAD
 use frontend\models\Ads;
 use frontend\models\Comments;
+=======
+use common\models\Countries;
+>>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
 use frontend\models\Page;
+use frontend\models\Search;
 use frontend\models\SignupCompany;
 use frontend\models\Tours;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -29,6 +35,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+
     public function behaviors()
     {
         return [
@@ -80,6 +87,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+<<<<<<< HEAD
 
         $ads = Ads::find()->where(['active' => 1])->limit(4)->all();
 
@@ -89,6 +97,17 @@ class SiteController extends Controller
             'model'     => $this->getMainTours(),
             'ads'       => $ads,
             'comments'  => $comments,
+=======
+        $searchForm = array(
+            'categories' => (new \common\models\Categories())->getCategoriesList(),
+            'countries' => ArrayHelper::map(Countries::find()->asArray()->all(), 'id', 'name'),
+            'cities' => ArrayHelper::map(Cities::find()->asArray()->all(), 'id', 'name'),
+        );
+
+        return $this->render('index', [
+            'searchForm' => $searchForm,
+            'model' => $this->getMainTours(),
+>>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
         ]);
     }
 

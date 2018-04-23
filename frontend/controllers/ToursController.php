@@ -27,6 +27,12 @@ use yii\filters\AccessControl;
 
 class ToursController extends Controller
 {
+<<<<<<< HEAD
+=======
+
+    public $defaultAction = 'search';
+
+>>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
     public function behaviors()
     {
         return [
@@ -64,11 +70,46 @@ class ToursController extends Controller
         ];
     }
 
-    public function actionIndex(){
-        return $this->render('index', [
-            'tours' => Tours::find()->where(['status' => 1])->all(),
+    /*public function actionIndex(){
+        $search = new Search();
+
+        $m = new Tours;
+
+        $toursMaxPrice = ArrayHelper::getValue($m::find()->select(['MAX(price)'])->asArray()->one(),  'MAX(price)');
+
+        $catModel = Categories::find()->asArray()->all();
+        $categories = ArrayHelper::map($catModel, 'id', 'name');
+
+
+        if(Yii::$app->request->get('filter_categories')){
+            $filterIdFromGet = ArrayHelper::index(Yii::$app->request->get('filter_categories'), function($value){
+                return $value;
+            });
+        }
+
+        $formParams = array(
+            'category_id' => Yii::$app->request->get('category_id') ? (int)Yii::$app->request->get('category_id') : 0,
+            'price_from' => Yii::$app->request->get('price_from') ? (int)Yii::$app->request->get('price_from') : 500,
+            'price_to' => Yii::$app->request->get('price_to') ? (int)Yii::$app->request->get('price_to') : $toursMaxPrice,
+            'filter_categories' => Yii::$app->request->get('filter_categories') ? $filterIdFromGet : NULL,
+            'sort' => Yii::$app->request->get('sort') ? Yii::$app->request->get('sort') : NULL,
+            'max_price' => $toursMaxPrice,
+        );
+
+
+
+
+//        return $this->render('index', [
+//            'tours' => Tours::find()->where(['status' => 1])->all(),
+//        ]);
+        $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->get()]);
+        return $this->render('search', [
+            'tours' => $activeDataProvider->getModels(),
+            'search_form' => $m,
+            'formParams' => $formParams,
+            'categories' => $categories
         ]);
-    }
+    }*/
 
     public function actionView($id){
         $getId = Tours::find()->where(['id' => $id])->select(['user_id'])->one();
@@ -109,6 +150,8 @@ class ToursController extends Controller
         };
 
 
+        $a = 1;
+
         return $this->render('view', [
             'tour' => Tours::findOne($id),
             'user' => $user,
@@ -140,13 +183,15 @@ class ToursController extends Controller
 
         $toursMaxPrice = ArrayHelper::getValue($m::find()->select(['MAX(price)'])->asArray()->one(),  'MAX(price)');
 
-//        if(Yii::$app->request->isPjax){
-//            print_r($_GET);
-//        }
         $catModel = Categories::find()->asArray()->all();
         $categories = ArrayHelper::map($catModel, 'id', 'name');
 
+<<<<<<< HEAD
         $asd = Tours::find()->where(['price' => 40000])->all();
+=======
+        $a = 1;
+
+>>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
 
         $time = date('H:i:s');
 

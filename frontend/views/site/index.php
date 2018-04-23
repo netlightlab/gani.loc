@@ -18,46 +18,37 @@ $category = new Categories();
                 <span id="flick" class="header-description">ТУРЫ ПО КАЗАХСТАНУ</span>
             </div>
         </div>
-        <div class="row tour-block-white pb-2">
-            <div class="col-md-12 tour-block-search">
-                <span>Поиск тура</span>
+        <?php $form = \yii\widgets\ActiveForm::begin([
+                'action' => '/tours/search',
+                'method' => 'GET',
+        ]) ?>
+            <div class="row tour-block-white pb-2">
+                <div class="col-md-12 tour-block-search">
+                    <span>Поиск тура</span>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
+                    <?= Html::dropDownList('country_id', '', $searchForm['countries'], ['class' => 'form-control']) ?>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
+                    <?= Html::dropDownList('city_id', '', $searchForm['cities'], ['class' => 'form-control']) ?>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 bg-white pb-3 position-relative">
+                    <?= Html::submitButton('Поиск тура', ['class' => 'search-tour-btn']) ?>
+                    <img src="common/img/header/search.png" class="search-tour-img">
+                </div>
+            </div> <!-- BLOCK TOUR -->
+            <div class="row bgGray pt-3 pb-3">
+                <div class="col-md-12">
+                    <?= Html::checkboxList('filter_categories', '', $searchForm['categories'], [
+                        'class' => 'row',
+                        'item' => function($index, $label, $name, $checked, $value){
+                            $options = array_merge(['label' => $label, 'value' => $value], []);
+                            return "<div class='col-md-4 col-xs-4'><label> <input hidden='true' type='checkbox' value='{$value}' name='{$name}'><span></span> {$label}</label></div>";
+                        }
+                    ]) ?>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
-                <select class="form-control">
-                    <option disabled selected value>Выберите страну:</option>
-                    <option>Казахстан</option>
-                    <option>Россия</option>
-                </select>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
-                <select class="form-control">
-                    <option disabled selected value>Выберите город:</option>
-                    <option>Алмата</option>
-                    <option>Москва</option>
-                </select>
-            </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 bg-white pb-3 position-relative">
-                <input type="submit" name="submit" class="search-tour-btn" value="Поиск тура">
-                <img src="common/img/header/search.png" class="search-tour-img">
-            </div>
-        </div> <!-- BLOCK TOUR -->
-        <div class="row bgGray pt-3 pb-3">
-            <div class="col-md-4 col-xs-4">
-                <label for="c1"><input type="checkbox" hidden id="c1"><span></span>Однодневные Новогодние туры</label><br>
-                <label for="c2"><input type="checkbox" hidden id="c2"><span></span>Автобусные туры на юг</label><br>
-                <label for="c3"><input type="checkbox" hidden id="c3"><span></span>Автобусные туры на юг</label><br>
-            </div>
-            <div class="col-md-4 col-xs-4">
-                <label for="c4"><input type="checkbox" hidden id="c4"><span></span>Развлекательные мероприятия</label><br>
-                <label for="c5"><input type="checkbox" hidden id="c5"><span></span>Однодневные туры</label><br>
-                <label for="c6"><input type="checkbox" hidden id="c6"><span></span>Однодневные туры</label><br>
-            </div>
-            <div class="col-md-4 col-xs-4">
-                <label for="c7"><input type="checkbox" hidden id="c7"><span></span>Туры в Великий Устюг</label><br>
-                <label for="c8"><input type="checkbox" hidden id="c8"><span></span>Развлекательные мероприятия</label><br>
-                <label for="c9"><input type="checkbox" hidden id="c9"><span></span>Развлекательные мероприятия</label><br>
-            </div>
-        </div>
+        <?php \yii\widgets\ActiveForm::end(); ?>
     <!--</div>-->
 </div>
 </section>
@@ -90,7 +81,7 @@ $category = new Categories();
                 </articles>
             <?php endforeach; ?>
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-                <?= Html::a('Все туры', ['tours/index'], ['class' => 'btn-all']) ?>
+                <?= Html::a('Все туры', ['tours/search'], ['class' => 'btn-all']) ?>
             </div>
         </div>
         <!-- POPULAR TOUR END -->
