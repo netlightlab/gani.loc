@@ -1,11 +1,15 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Cities;
+use common\models\Countries;
 use frontend\models\Page;
+use frontend\models\Search;
 use frontend\models\SignupCompany;
 use frontend\models\Tours;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -25,6 +29,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+
     public function behaviors()
     {
         return [
@@ -76,7 +81,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $searchForm = array(
+            'categories' => (new \common\models\Categories())->getCategoriesList(),
+            'countries' => ArrayHelper::map(Countries::find()->asArray()->all(), 'id', 'name'),
+            'cities' => ArrayHelper::map(Cities::find()->asArray()->all(), 'id', 'name'),
+        );
+
         return $this->render('index', [
+            'searchForm' => $searchForm,
             'model' => $this->getMainTours(),
         ]);
     }

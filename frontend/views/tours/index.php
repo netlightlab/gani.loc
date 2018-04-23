@@ -54,7 +54,7 @@ $this->title = 'Tours';
                         </div>
                         <div class="col-md-12 py-3">
                             <div id="filter">
-                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Поиск по фильтру</a>
+                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Фильтр</a>
                                 <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
                                     <div class="filter-block">
                                         <h6>Выберите страну</h6>
@@ -64,6 +64,12 @@ $this->title = 'Tours';
                                             <option value="2">Россия</option>
                                         </select>
                                     </div>
+                                    <?= $this->render('_filter', [
+                                        'search_form' => $search_form,
+                                        'tours' => $tours,
+                                        'formParams' => $formParams,
+                                        'categories' => $categories
+                                    ]) ?>
                                 </div>
                             </div>
                         </div>
