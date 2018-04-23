@@ -27,12 +27,9 @@ use yii\filters\AccessControl;
 
 class ToursController extends Controller
 {
-<<<<<<< HEAD
-=======
 
     public $defaultAction = 'search';
 
->>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
     public function behaviors()
     {
         return [
@@ -164,19 +161,6 @@ class ToursController extends Controller
     }
 
     public function actionSearch(){
-        $url = '';
-
-        if (Yii::$app->request->get('category_id')) {
-            $url .= '&category_id=' . Yii::$app->request->get('category_id');
-        }
-
-        if (Yii::$app->request->get('city_id')) {
-            $url .= '&city_id=' . Yii::$app->request->get('city_id');
-        }
-
-        if (Yii::$app->request->get('country_id')) {
-            $url .= '&country_id=' . Yii::$app->request->get('country_id');
-        }
         $search = new Search();
 
         $m = new Tours;
@@ -186,20 +170,34 @@ class ToursController extends Controller
         $catModel = Categories::find()->asArray()->all();
         $categories = ArrayHelper::map($catModel, 'id', 'name');
 
-<<<<<<< HEAD
-        $asd = Tours::find()->where(['price' => 40000])->all();
-=======
-        $a = 1;
 
->>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
+        if(Yii::$app->request->get('filter_categories')){
+            $filterIdFromGet = ArrayHelper::index(Yii::$app->request->get('filter_categories'), function($value){
+                return $value;
+            });
+        }
 
-        $time = date('H:i:s');
+        $formParams = array(
+            'category_id' => Yii::$app->request->get('category_id') ? (int)Yii::$app->request->get('category_id') : 0,
+            'price_from' => Yii::$app->request->get('price_from') ? (int)Yii::$app->request->get('price_from') : 500,
+            'price_to' => Yii::$app->request->get('price_to') ? (int)Yii::$app->request->get('price_to') : $toursMaxPrice,
+            'filter_categories' => Yii::$app->request->get('filter_categories') ? $filterIdFromGet : NULL,
+            'sort' => Yii::$app->request->get('sort') ? Yii::$app->request->get('sort') : NULL,
+            'max_price' => $toursMaxPrice,
+        );
 
+
+
+
+//        return $this->render('index', [
+//            'tours' => Tours::find()->where(['status' => 1])->all(),
+//        ]);
+        $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->get()]);
         return $this->render('search', [
-            'url' => $url,
-//            'model' => Tours::findTours(Yii::$app->request->get()),
-            'model' => $asd,
-            'time' => $time,
+            'tours' => $activeDataProvider->getModels(),
+            'search_form' => $m,
+            'formParams' => $formParams,
+            'categories' => $categories
         ]);
     }
 

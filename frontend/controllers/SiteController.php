@@ -2,12 +2,9 @@
 namespace frontend\controllers;
 
 use common\models\Cities;
-<<<<<<< HEAD
 use frontend\models\Ads;
 use frontend\models\Comments;
-=======
 use common\models\Countries;
->>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
 use frontend\models\Page;
 use frontend\models\Search;
 use frontend\models\SignupCompany;
@@ -87,17 +84,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-<<<<<<< HEAD
+
 
         $ads = Ads::find()->where(['active' => 1])->limit(4)->all();
 
         $comments = Comments::find()->where(['active' => 1])->all();
 
-        return $this->render('index', [
-            'model'     => $this->getMainTours(),
-            'ads'       => $ads,
-            'comments'  => $comments,
-=======
+//        return $this->render('index', [
+//            'model'     => $this->getMainTours(),
+//            'ads'       => $ads,
+//            'comments'  => $comments,]);
+
         $searchForm = array(
             'categories' => (new \common\models\Categories())->getCategoriesList(),
             'countries' => ArrayHelper::map(Countries::find()->asArray()->all(), 'id', 'name'),
@@ -107,7 +104,8 @@ class SiteController extends Controller
         return $this->render('index', [
             'searchForm' => $searchForm,
             'model' => $this->getMainTours(),
->>>>>>> 4d4603e4c461f9b266c6d5ac6c855dbc69a4cbc6
+            'ads'       => $ads,
+            'comments'  => $comments,
         ]);
     }
 
