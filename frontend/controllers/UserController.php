@@ -157,35 +157,43 @@ class UserController extends Controller
         $model = new Ads();
         $model->user_id = Yii::$app->user->id;
 
+        FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
+
 //        if($model->load(Yii::$app->request->post()) && $model->validate()){
 //            $model->mini_image = $_FILES['file']['name'];
 //            $model->save();
 //        }
 
-        $fileName = 'file';
-        $uploadPath = 'common/users/'.Yii::$app->user->id;
-
-        FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
-
-        if (isset($_FILES[$fileName])) {
-            $file = UploadedFile::getInstancesByName($fileName);
-
-            foreach ($file as $item) {
-                $item->saveAs($uploadPath . '/ads/' . $item->name);
-            }
-
+        if (Yii::$app->requset->isPost && $model->validate()) {
+            $model->mini_image;
+        } else {
+            return $model->errors;
         }
 
-
-        $a = Yii::$app->request->post();
-                if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                    $image = UploadedFile::getInstance($model,'mini_image');
-                    FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
-                    $dir = Yii::getAlias('common/users/'.Yii::$app->user->id.'/ads/');
-                    $image->saveAs($dir . $image->name);
-                    $model->mini_image = $image->name;
-                    $model->save();
-                }
+//        $fileName = 'file';
+//        $uploadPath = 'common/users/'.Yii::$app->user->id;
+//
+//
+//
+//        if (isset($_FILES[$fileName])) {
+//            $file = UploadedFile::getInstancesByName($fileName);
+//
+//            foreach ($file as $item) {
+//                $item->saveAs($uploadPath . '/ads/' . $item->name);
+//            }
+//
+//        }
+//
+//
+//        $a = Yii::$app->request->post();
+//                if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//                    $image = UploadedFile::getInstance($model,'mini_image');
+//                    FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
+//                    $dir = Yii::getAlias('common/users/'.Yii::$app->user->id.'/ads/');
+//                    $image->saveAs($dir . $image->name);
+//                    $model->mini_image = $image->name;
+//                    $model->save();
+//                }
 
         return $this->render('my-ads/create', [
             'model' => $model,

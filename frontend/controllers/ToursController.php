@@ -35,7 +35,7 @@ class ToursController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'sb nignup'],
                 'rules' => [
                     [
                         'actions' => ['signup'],

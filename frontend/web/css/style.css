@@ -956,6 +956,7 @@ footer { background: #2e2e2e; }
     min-height: 140px;
 }
 
+.my-btn,
 .btn-refresh-profile {
     display: block;
     border: none;
@@ -979,6 +980,7 @@ footer { background: #2e2e2e; }
     margin-bottom: 10px;
 }
 
+.my-btn:hover,
 .btn-refresh-profile:hover {
     background: #2e2e2e;
 }
