@@ -19,6 +19,7 @@ use common\models\User;
 use common\models\Orders;
 use yii\web\NotFoundHttpException;
 use yii\helpers\FileHelper;
+use yii\web\Response;
 use yii\web\UploadedFile;
 use common\models\Cities;
 
@@ -157,35 +158,26 @@ class UserController extends Controller
         $model = new Ads();
         $model->user_id = Yii::$app->user->id;
 
-//        if($model->load(Yii::$app->request->post()) && $model->validate()){
-//            $model->mini_image = $_FILES['file']['name'];
-//            $model->save();
-//        }
-
         $fileName = 'file';
         $uploadPath = 'common/users/'.Yii::$app->user->id;
 
         FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
 
-        if (isset($_FILES[$fileName])) {
-            $file = UploadedFile::getInstancesByName($fileName);
-
-            foreach ($file as $item) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $image = UploadedFile::getInstance($model,'mini_image');
+            $gallery = UploadedFile::getInstances($model,'gallery');
+            if($image->saveAs($uploadPath . '/ads/' . $image->name)){
+                $model->mini_image = $image->name;
+            }
+            $galleryArray = array();
+            foreach($gallery as $item){
+                $galleryArray[] .= $item->name;
                 $item->saveAs($uploadPath . '/ads/' . $item->name);
             }
+            $model->gallery = serialize($galleryArray);
 
+            $model->save();
         }
-
-
-        $a = Yii::$app->request->post();
-                if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                    $image = UploadedFile::getInstance($model,'mini_image');
-                    FileHelper::createDirectory('common/users/'.Yii::$app->user->id.'/ads/');
-                    $dir = Yii::getAlias('common/users/'.Yii::$app->user->id.'/ads/');
-                    $image->saveAs($dir . $image->name);
-                    $model->mini_image = $image->name;
-                    $model->save();
-                }
 
         return $this->render('my-ads/create', [
             'model' => $model,
@@ -203,18 +195,9 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
         $mini_image = $model->mini_image;
-        $gallery = $model->gallery;
-        $fileName = 'file';
+        $gallery = unserialize($model->gallery);
+        print_r($gallery);
         $uploadPath = 'common/users/'.Yii::$app->user->id;
-
-        if (isset($_FILES[$fileName])) {
-            $file = UploadedFile::getInstancesByName($fileName);
-
-            foreach ($file as $item) {
-                $item->saveAs($uploadPath . '/ads/' . $item->name);
-            }
-
-        }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
@@ -224,7 +207,12 @@ class UserController extends Controller
                 $model->mini_image = $mini_image;
             }
 
-            $model->gallery = $this->is_in_str($gallery, $model->gallery);
+            $galleryModel = UploadedFile::getInstances($model,'gallery');
+            foreach($galleryModel as $item){
+                $gallery[] .= $item->name;
+                $item->saveAs($uploadPath . '/ads/' . $item->name);
+            }
+            $model->gallery = serialize($gallery);
 
             if ($model->save()) {
                 return $this->redirect(['user/index']);
@@ -233,21 +221,11 @@ class UserController extends Controller
 
         return $this->render('my-ads/update', [
             'model' => $model,
+            'gallery' => 123
         ]);
     }
 
-    public function is_in_str($str, $substr) {
-        if ($str == '') {
-            $string = $substr;
-        } else if ($substr == ''){
-            $string = $str .= $substr;
-        } else {
-            $string = $str .= ',' . $substr;
-        }
-        $array = explode(',', $string);
 
-        return implode(',',array_unique($array));
-    }
 
     /**
      * Deletes an existing Ads model.

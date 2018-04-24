@@ -89,10 +89,10 @@ $this->title = 'Объявление пользователя';
                     ]
                 ]);
                 ?>
-                <?php if ($ads['gallery']):?>
+                <?php if ($gallery):?>
                     <hr class="tourLine">
                     <div class="tour_gallery">
-                        <?php foreach (explode(',', $ads['gallery']) as $item): ?>
+                        <?php foreach ($gallery as $item): ?>
                             <div class="tour_gallery-thumb">
                                 <?= Html::a(Html::img('@web/common/users/'.$ads->user_id.'/ads/'.$item), '@web/common/users/'.$ads->user_id.'/ads/'.$item, ['class' => 'fancybox', 'rel' => 'fancybox']); ?>
                             </div>

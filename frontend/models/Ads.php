@@ -47,9 +47,9 @@ class Ads extends ActiveRecord
             ['description', 'trim'],
             ['description', 'required', 'message' => 'Необходимо указать описание'],
 
-            ['mini_image', 'trim'],
+            ['mini_image', 'file'],
 //            [['mini_image'], 'file', 'extensions' => 'png, jpg, jpeg, gif'],
-            [['gallery'], 'file', 'extensions' => 'gif, jpg, jpeg, png'],
+            [['gallery'], 'file', 'extensions' => 'gif, jpg, jpeg, png', 'maxFiles' => 10],
         ];
     }
 
