@@ -34,9 +34,12 @@ class AdsController extends Controller
         $ads = Ads::findOne($id);
         $user = User::find()->where(['id' => $ads->user_id])->one();
 
+        $adsGallery = unserialize($ads['gallery']);
+
         return $this->render('view', [
             'ads' => $ads,
             'user' => $user,
+            'gallery' => $adsGallery
         ]);
     }
 }

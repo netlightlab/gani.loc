@@ -15,7 +15,7 @@ use mihaildev\ckeditor\CKEditor;
 <?php $form = ActiveForm::begin([
         'id'                     => 'ads-add',
 //        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
+//        'enableClientValidation' => false,
         'options' => [
                 'enctype'   => 'multipart/form-data',
                 'class'     => 'ads-form'
@@ -35,25 +35,12 @@ use mihaildev\ckeditor\CKEditor;
     </div>
     <div class="col-md-4">
         <span class="mb-3 d-flex">Основное изображение</span>
-        <?= $form->field($model, 'mini_image')->fileInput(['autoComplete' => 'off'])->label('') ?>
+        <?= $form->field($model, 'mini_image')->fileInput(['autoComplete' => 'off', 'id' => 'mini_image'])->label('') ?>
     </div>
     <div class="col-md-12">
+        <? print_r($gallery) ?>
         <span class="mb-3 d-flex">Галерея фотографии</span>
-        <?php
-        echo \kato\DropZone::widget([
-            'options' => [
-                'maxFilesize' => 10,
-                'maxFiles' => 100,
-                'url' => $_SERVER['REQUEST_URI'].'/',
-                'uploadMultiple' => true,
-                'parallelUploads' => 10,
-                'autoProcessQueue' => false,
-            ],
-            'clientEvents' => [
-                'removedfile' => "function(file){alert(file.name + ' is removed')}"
-            ],
-        ]);
-        ?>
+        <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
     </div>
     <div class="col-md-12 my-3">
         <?= $form->field($model, 'description')->widget(CKEditor::className(), [
@@ -72,31 +59,7 @@ use mihaildev\ckeditor\CKEditor;
 
 <?php
 $script = <<<JS
-
-    /*$("#ads-add").on('beforeSubmit', function(e) {
-        e.preventDefault();
-        var form = $(this).serialize();
-        var photos = [];
-        $.each(myDropzone.files, function(index, value) {
-          photos.push(value.name);
-        }) ;
-        form += "&Ads%5Bgallery%5D="+photos;
-        console.log(form);
-        $.ajax({
-            type: 'POST',            
-            data: form,
-            succes: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-              console.log(error)
-            }
-          }).done(function(){
-            myDropzone.processQueue();
-            // window.location.href = '/user/index';
-          });
-        return false;
-    });*/
+    
 JS;
 
 $this->registerJs($script);
