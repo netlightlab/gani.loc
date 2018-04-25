@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use Yii;
 use yii\helpers\FileHelper;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use common\models\Cities;
 
@@ -57,10 +58,50 @@ class MyToursController extends Controller
      */
     public function actionAdd() {
         $model = new Tours();
-        $image1 = UploadedFile::getInstance($model, 'back_image');
-        $image2 = UploadedFile::getInstance($model, 'mini_image');
 
-        if ($model->load(Yii::$app->request->post())) {
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $model->user_id = Yii::$app->user->id;
+
+            $backgroundImage = UploadedFile::getInstance($model, 'back_image');
+            $minimalImage = UploadedFile::getInstance($model, 'mini_image');
+            $gallery = UploadedFile::getInstances($model, 'gallery');
+
+            if($backgroundImage){
+                $model->back_image = $backgroundImage->name;
+            }
+            if($minimalImage){
+                $model->mini_image = $minimalImage->name;
+            }
+            if($gallery){
+                $galleryArray = array();
+                foreach($gallery as $item){
+                    $galleryArray[] .= $item->name;
+                }
+                $model->gallery = serialize($galleryArray);
+            }
+
+
+            $model->save();
+
+            FileHelper::createDirectory('common/tour_img/' . $model->id . '/');
+            $dir = Yii::getAlias('common/tour_img/' . $model->id . '/');
+
+            if($backgroundImage){
+                $backgroundImage->saveAs($dir.'/'.$backgroundImage->name);
+            }
+            if($minimalImage){
+                $minimalImage->saveAs($dir.'/'.$minimalImage->name);
+            }
+            if($gallery){
+                foreach($gallery as $item){
+                    $item->saveAs($dir.'/'.$item->name);
+                }
+            }
+
+            Yii::$app->session->setFlash('success', 'Тур успешно добавлен');
+        }
+
+        /*if ($model->load(Yii::$app->request->post())) {
             if ($model->addTour()) {
                 if($image1->name && $image2->name) {
 //                    $this->refresh();
@@ -74,9 +115,9 @@ class MyToursController extends Controller
             } else {
                 Yii::$app->session->setFlash("error", "Ошибка");
             };
-        };
+        };*/
 
-        $fileName = 'file';
+        /*$fileName = 'file';
         $uploadPath = 'common/tour_img/'.$model->id;
 
         if (isset($_FILES[$fileName])) {
@@ -88,7 +129,7 @@ class MyToursController extends Controller
             foreach ($file as $item) {
                 $item->saveAs($uploadPath . '/' . $item->name);
             }
-        }
+        }*/
 
         if (Yii::$app->request->isAjax) {
             $cities = new Cities();
@@ -103,32 +144,51 @@ class MyToursController extends Controller
     }
 
     public function actionEdit($id) {
+        $model = $this->findModel($id);
+        $galleryImages = unserialize($model->gallery);
+        $backgroundImage = $model->back_image;
+        $minimalImage = $model->mini_image;
 
         $checkTour = Tours::find()->where(['id' => $id])->one();
         if ($checkTour->user_id != Yii::$app->user->id) {
             return $this->goHome();
         };
 
-        $model = new Tours();
-        if ($model->load(Yii::$app->request->post())) {
-            if($model->editTour($id)){
-                $this->refresh();
-                Yii::$app->session->setFlash("success", "Тур успешно изменен");
-            }else{
-                Yii::$app->session->setFlash("error", "Ошибка");
-            };
-        };
-
-        $fileName = 'file';
         $uploadPath = 'common/tour_img/'.$id;
 
-        if (isset($_FILES[$fileName])) {
-            $file = UploadedFile::getInstancesByName($fileName);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            foreach ($file as $item) {
-                $item->saveAs($uploadPath . '/' . $item->name);
+            $backImage = UploadedFile::getInstance($model, 'back_image');
+            $miniImage = UploadedFile::getInstance($model, 'mini_image');
+            $gallery = UploadedFile::getInstances($model, 'gallery');
+
+            if ($gallery) {
+                foreach ($gallery as $item) {
+                    $galleryImages[] .= $item->name;
+                    $item->saveAs($uploadPath . '/' . $item->name);
+                }
             }
-        }
+            if ($backImage){
+                $model->back_image = $backImage->name;
+                $backImage->saveAs($uploadPath . '/' . $backImage->name);
+            }else{
+                $model->back_image = $backgroundImage;
+            }
+
+            if($miniImage){
+                $model->mini_image = $miniImage->name;
+                $miniImage -> saveAs($uploadPath . '/' . $miniImage->name);
+            }else{
+                $model->mini_image = $minimalImage;
+            }
+
+
+            $model->gallery = serialize($galleryImages);
+
+            $model -> save();
+            Yii::$app->session->setFlash("success", "Тур успешно изменен");
+        };
+
 
         if (Yii::$app->request->isAjax) {
             $cities = new Cities();
@@ -139,7 +199,16 @@ class MyToursController extends Controller
 
         return $this->render('edit', [
             'model' => Tours::findOne($id),
+            'gallery' => $galleryImages
         ]);
+    }
+
+    protected function findModel($id) {
+        if (($model = Tours::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     public function statusTour($id) {

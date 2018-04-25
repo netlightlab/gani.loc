@@ -57,6 +57,7 @@ $this->params['breadcrumbs'][] = 'Мои объявления'
                         <div id="rus" class="tab-pane set-tab-content active">
                             <?= $this->render('_form', [
                                 'model' => $model,
+                                'gallery' => $gallery
                             ]) ?>
                         </div>
                         <div id="kaz" class="tab-pane set-tab-content">

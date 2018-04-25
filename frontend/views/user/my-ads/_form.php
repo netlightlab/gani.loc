@@ -38,9 +38,18 @@ use mihaildev\ckeditor\CKEditor;
         <?= $form->field($model, 'mini_image')->fileInput(['autoComplete' => 'off', 'id' => 'mini_image'])->label('') ?>
     </div>
     <div class="col-md-12">
-        <? print_r($gallery) ?>
         <span class="mb-3 d-flex">Галерея фотографии</span>
         <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+        <? if($gallery): ?>
+            <div class="gallery-container d-flex">
+                <? foreach($gallery as $key => $item): ?>
+                    <div class="gallery-image">
+                        <?= Html::img('/common/users/' . Yii::$app->user->id . '/ads/' . $item, ['style' => 'width:150px;']) ?>
+                        <?= Html::a('x', '#', ['class' => 'delete_image_link', 'data-delete' => $key]) ?>
+                    </div>
+                <? endforeach; ?>
+            </div>
+        <? endif; ?>
     </div>
     <div class="col-md-12 my-3">
         <?= $form->field($model, 'description')->widget(CKEditor::className(), [
@@ -59,7 +68,21 @@ use mihaildev\ckeditor\CKEditor;
 
 <?php
 $script = <<<JS
-    
+    $('.delete_image_link').on('click', function(event){
+        event.preventDefault();
+        var id = $(this).data('delete'),
+            container = $(this).parent();
+        console.log(id);
+        $.ajax({
+            method: 'POST',
+            data: {
+                deleteImage: 1,
+                imageId : id
+            }
+        }).done(function(response){
+            container.remove();
+        })
+    })
 JS;
 
 $this->registerJs($script);

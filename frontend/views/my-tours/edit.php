@@ -143,45 +143,10 @@ $this->title = 'Редактирование тура ';
                                 </div>
                                 <div class="col-md-12  py-4">
                                     <p>Загруженные изображения:</p>
-                                    <?php
-                                    echo newerton\fancybox\FancyBox::widget([
-                                        'target' => 'a[rel=fancybox]',
-                                        'helpers' => true,
-                                        'mouse' => true,
-                                        'config' => [
-                                            'maxWidth' => '90%',
-                                            'maxHeight' => '90%',
-                                            'playSpeed' => 7000,
-                                            'padding' => 0,
-                                            'fitToView' => false,
-                                            'width' => '70%',
-                                            'height' => '70%',
-                                            'autoSize' => false,
-                                            'closeClick' => false,
-                                            'openEffect' => 'elastic',
-                                            'closeEffect' => 'elastic',
-                                            'prevEffect' => 'elastic',
-                                            'nextEffect' => 'elastic',
-                                            'closeBtn' => false,
-                                            'openOpacity' => true,
-                                            'helpers' => [
-                                                'title' => ['type' => 'float'],
-                                                'buttons' => [],
-                                                'thumbs' => ['width' => 68, 'height' => 50],
-                                                'overlay' => [
-                                                    'css' => [
-                                                        'background' => 'rgba(0, 0, 0, 0.8)'
-                                                    ]
-                                                ]
-                                            ],
-                                        ]
-                                    ]);
-
-                                    ?>
-                                    <?php if ($model['gallery']):?>
+                                    <?php if ($gallery):?>
                                         <hr class="tourLine">
                                         <div class="tour_gallery">
-                                            <?php foreach (explode(',', $model['gallery']) as $item): ?>
+                                            <?php foreach ($gallery as $item): ?>
                                                 <div class="tour_gallery-thumb">
                                                     <?= Html::a(Html::img('@web/common/tour_img/'.$model->id.'/'.$item), '@web/common/tour_img/'.$model->id.'/'.$item, ['rel' => 'fancybox']); ?>
                                                 </div>
@@ -190,21 +155,7 @@ $this->title = 'Редактирование тура ';
 
                                     <?php endif; ?>
                                     <hr>
-                                    <?php
-                                    echo \kato\DropZone::widget([
-                                        'options' => [
-                                            'maxFilesize' => 10,
-                                            'maxFiles' => 20,
-                                            'url' => '/my-tours/edit?id='.Yii::$app->request->get('id'),
-                                            'uploadMultiple' => true,
-                                            'parallelUploads' => 10,
-                                            'autoProcessQueue' => false,
-                                        ],
-                                        'clientEvents' => [
-                                            'removedfile' => "function(file){alert(file.name + ' is removed')}"
-                                        ],
-                                    ]);
-                                    ?>
+                                    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                                 </div>
                                 <div class="col-md-12">
                                     <h4>Настройка цен</h4>
@@ -316,30 +267,6 @@ $this->title = 'Редактирование тура ';
 <?php
 
 $js = <<< JS
-
-    $("#edit-tour-rus").on('beforeSubmit', function(e) {
-        e.preventDefault();
-        var form = $(this).serialize();
-        var photos = [];
-        $.each(myDropzone.files, function(index, value) {
-          photos.push(value.name);
-        }) ;
-        form += "&Tours%5Bgallery%5D="+photos;
-        $.ajax({
-            type: 'POST',            
-            data: form,
-            succes: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-              console.log(error)
-            }
-          }).done(function(){
-                myDropzone.processQueue();
-                window.location.href = '/partner/index';
-          });
-        return false;
-    });
     
     $('#CountryId').change(function() {        
         $.ajax({

@@ -161,7 +161,7 @@ class Tours extends ActiveRecord
     }
 
 
-    public function editTour($id) {
+    /*public function editTour($id) {
         if ($this->validate()) {
             $tour = Tours::find()->where(['id' => $id])->one();
             $tour->name = $this->name;
@@ -197,7 +197,7 @@ class Tours extends ActiveRecord
             $tour->save();
         }
         return true;
-    }
+    }*/
 
     public function uploadFile($id, $params) {
         $model = new Tours();

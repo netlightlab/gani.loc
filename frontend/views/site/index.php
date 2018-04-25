@@ -230,12 +230,17 @@ $category = new Categories();
             <div class="offset-md-2 col-md-8 pt-5 pb-5 d-flex justify-content-center align-items-center flex-column bg-vopros">
                 <h5 align="center">У вас остались вопросы?</h5>
                 <h2 align="center"><strong>Мы ответим на них!</strong></h2>
-                <div class="input-vopros">
-                    <input class="mt-2 mb-2" type="text" name="name" required placeholder="Представтесь">
-                    <input class="mt-2 mb-2" type="email" name="name" required placeholder="E-mail">
-                </div>
-                <textarea class="mt-2 mb-2" type="text" rows="5" placeholder="Введите интересующий вас вопрос" required></textarea>
-                <button type="submit" class="vopros-btn pl-3 pr-3">Задать вопрос</button>
+                <? $form = \yii\widgets\ActiveForm::begin() ?>
+                    <div class="input-vopros">
+                        <input class="mt-2 mb-2" type="text" name="name" required placeholder="Представтесь">
+
+                        <input class="mt-2 mb-2" type="email" name="name" required placeholder="E-mail">
+                    </div>
+                    <textarea class="mt-2 mb-2" type="text" rows="5" placeholder="Введите интересующий вас вопрос" required></textarea>
+
+<!--                    <button type="submit" class="vopros-btn pl-3 pr-3">Задать вопрос</button>-->
+                    <?= Html::submitButton('Задать вопрос', ['class' => 'vopros-btn pl-3 pr-3']) ?>
+                <? \yii\widgets\ActiveForm::end() ?>
             </div>
         </div>
     </div>

@@ -196,8 +196,18 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $mini_image = $model->mini_image;
         $gallery = unserialize($model->gallery);
-        print_r($gallery);
         $uploadPath = 'common/users/'.Yii::$app->user->id;
+
+        /**
+         * Delete image from gallery
+         */
+        if(Yii::$app->request->isAjax && (Yii::$app->request->post('deleteImage') == 1)){
+            $imageId = (int)Yii::$app->request->post('imageId');
+            unset($gallery[$imageId]);
+            $model->gallery = serialize($gallery);
+            $model->save();
+            return false;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
@@ -221,11 +231,9 @@ class UserController extends Controller
 
         return $this->render('my-ads/update', [
             'model' => $model,
-            'gallery' => 123
+            'gallery' => $gallery
         ]);
     }
-
-
 
     /**
      * Deletes an existing Ads model.

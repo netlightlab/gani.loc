@@ -21,7 +21,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use yii\web\Response;
+use common\models\Mailer;
 
 /**
  * Site controller
@@ -106,6 +106,7 @@ class SiteController extends Controller
             'model' => $this->getMainTours(),
             'ads'       => $ads,
             'comments'  => $comments,
+//            'mailForm' => (new Mailer())
         ]);
     }
 
@@ -298,5 +299,8 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionMailer(){
+
+    }
 
 }

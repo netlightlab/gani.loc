@@ -138,10 +138,10 @@ $category = new Categories();
                                                     ]
                                                 ]);
                                                 ?>
-                                                <?php if ($tour['gallery']):?>
+                                                <?php if ($gallery):?>
                                                     <hr class="tourLine">
                                                     <div class="tour_gallery">
-                                                        <?php foreach (explode(',', $tour['gallery']) as $item): ?>
+                                                        <?php foreach ($gallery as $item): ?>
                                                             <div class="tour_gallery-thumb">
                                                                 <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$item), '@web/common/tour_img/'.$tour->id.'/'.$item, ['rel' => 'fancybox']); ?>
                                                             </div>
@@ -379,7 +379,7 @@ $category = new Categories();
                         <div class="offer-company_content">
                             <span>Компания:</span>
                             <h5><?= $user->name_company ?></h5>
-                            <?= Html::a('Другие объявления от компании', ['site/index'], ['class' => 'allTours_author']) ?>
+                            <?= Html::a('Другие объявления от компании', ['/tours/search/', 'user_id' => $user->id], ['class' => 'allTours_author']) ?>
                         </div>
                     </div>
                 </div>

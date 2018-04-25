@@ -147,17 +147,26 @@ class ToursController extends Controller
         };
 
 
-        $a = 1;
+        $gallery = unserialize($this->findModel($id)->gallery);
 
         return $this->render('view', [
             'tour' => Tours::findOne($id),
             'user' => $user,
             'model' => $model,
             'comments' => $comment,
+            'gallery' => $gallery,
             'isauthorize' => $sign,
             'reviews_count' => $reviews_count,
         ]);
 
+    }
+
+    protected function findModel($id) {
+        if (($model = Tours::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     public function actionSearch(){

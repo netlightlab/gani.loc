@@ -138,21 +138,7 @@ $this->title = 'Создание тура';
                             </div>
                             <div class="col-md-12  py-4">
                                 <p>Загрузите галерею фотографии:</p>
-                                <?php
-                                echo \kato\DropZone::widget([
-                                    'options' => [
-                                        'maxFilesize' => 10,
-                                        'maxFiles' => 10,
-                                        'url' => '/my-tours/add',
-                                        'uploadMultiple' => true,
-                                        'parallelUploads' => 10,
-                                        'autoProcessQueue' => false,
-                                    ],
-                                    'clientEvents' => [
-                                        'removedfile' => "function(file){alert(file.name + ' is removed')}"
-                                    ],
-                                ]);
-                                ?>
+                                <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                             </div>
                             <div class="col-md-12">
                                 <h4>Настройка цен</h4>
@@ -265,34 +251,7 @@ $this->title = 'Создание тура';
 
 $js = <<< JS
 
-    $(document).ready(function(){
-        alert(1);
-    })
-
-    $("#tours_add").on('beforeSubmit', function(e) {
-        e.preventDefault();
-        var form = $(this).serialize();
-        var photos = [];
-        $.each(myDropzone.files, function(index, value) {
-          photos.push(value.name);
-        }) ;
-        form += "&Tours%5Bgallery%5D="+photos;
-        $.ajax({
-            type: 'POST',
-            data: form,
-            succes: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error)
-            }
-          }).done(function(){
-                myDropzone.processQueue();
-                alert('asd');
-                window.location.href = '/partner/index';
-          });
-        // return false;
-    });
+    
     
     $('#CountryId').change(function() {        
         $.ajax({

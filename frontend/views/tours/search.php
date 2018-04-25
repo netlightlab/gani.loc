@@ -14,8 +14,10 @@ use yii\widgets\ListView;
 use yii\widgets\LinkPager;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use common\models\Categories;
 
 $this->title = 'Поиск';
+$category = new Categories();
 
 ?>
 
@@ -121,20 +123,20 @@ $this->title = 'Поиск';
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                         <div class="alltours_img-list">
-                                            <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><?= Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) ?></a>
-                                            <span>Category</span>
+                                            <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image), ['/tours/view', 'id' => $tour->id]) ?>
+                                            <span><?= $category->getCategoryName($tour->category_id) ?></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="alltours_description">
-                                            <a href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>"><h3><?= $tour->name ?></h3></a>
+                                            <?= Html::a('<h3>'.$tour->name.'</h3>', ['/tours/view/', 'id' => $tour->id]) ?>
                                             <span><?= $tour->mini_description ?></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="alltours_price-list">
                                             <small>от <?= $tour->price ?> ₸</small>
-                                            <a class="alltours_btn-info" href="/tours/view/?id=<?= $tour->id ?>" title="<?= $tour->name ?>">подробнее</a>
+                                            <?= Html::a('подробнее', ['/tours/view/', 'id' => $tour->id], ['class' => 'alltours_btn-info']) ?>
                                         </div>
                                     </div>
                                 </div>
