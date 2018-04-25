@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use Yii;
 use common\models\User;
 use yii\rbac\DbManager;
+use common\models\Menu as MenuItems;
 
 class Menu extends Page
 {
@@ -30,6 +31,16 @@ class Menu extends Page
 //    protected function getElements(){
 //        return $data;
 //    }
+
+    public static function newMenu(){
+        $items = MenuItems::find()->orderBy('sort')->all();
+//        print_r($items);
+        foreach($items as $item){
+            echo Html::tag('li',
+                Html::a($item->name, $item->link ? '/site/page?id=' . $item->link : $item->slink, ['class' => 'nav-link']),
+                ["class" => "nav-item"]);
+        }
+    }
 
     public static function showCab(){
         $user = new DbManager();
