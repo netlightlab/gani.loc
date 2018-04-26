@@ -325,6 +325,17 @@ a {
     min-height:250px;
 }
 
+.catalog-img {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    max-height: 200px;
+}
+
+.catalog-img img {
+    max-height: 200px;
+}
+
 .tour-info {
     bottom: 0;
     position: absolute;

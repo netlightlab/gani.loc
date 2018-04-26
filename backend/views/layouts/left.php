@@ -37,6 +37,7 @@
                     ['label' => 'Города', 'icon' => 'map','url' => ['/cities/index']],
                     ['label' => 'Категории', 'icon' => 'map','url' => ['/categories/index']],
                     ['label' => 'Меню', 'icon' => 'map','url' => ['/menu/index']],
+                    ['label' => 'Каталог туров', 'icon' => 'map','url' => ['/catalog/index']],
                     ['label' => 'Туры', 'icon' => 'map','url' => ['/tours/index']],
                     ['label' => 'Заказы', 'icon' => 'map','url' => ['/orders/index']],
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],

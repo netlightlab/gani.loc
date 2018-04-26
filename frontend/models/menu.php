@@ -34,7 +34,6 @@ class Menu extends Page
 
     public static function newMenu(){
         $items = MenuItems::find()->orderBy('sort')->all();
-//        print_r($items);
         foreach($items as $item){
             echo Html::tag('li',
                 Html::a($item->name, $item->link ? '/site/page?id=' . $item->link : $item->slink, ['class' => 'nav-link']),
