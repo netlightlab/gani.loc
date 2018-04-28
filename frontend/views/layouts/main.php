@@ -128,7 +128,12 @@ $context = $this->context;
                 <a href="#">Договор публичной оферты</a>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
-                <input class="search-input-footer" type="text" name="search" required placeholder="Поиск">
+                <? $form = \yii\widgets\ActiveForm::begin([
+                    'action' => '/global-search/global-search',
+                    'method' => 'GET'
+                ]) ?>
+                <?= Html::input('text', 'param', '', ['class' => 'search-input-footer', 'placeholder' => 'Поиск']) ?>
+                <? \yii\widgets\ActiveForm::end() ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">
                 <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;+7 (___) - ___ - __ - __</p>

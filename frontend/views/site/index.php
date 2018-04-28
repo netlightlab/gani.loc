@@ -11,7 +11,7 @@ $category = new Categories();
 
 ?>
 <section class="section-header-main">
-    <video class="pageBg" src="/frontend/web/common/pages/1/kolsay.webm" autoplay="" loop="" alt=""></video>
+    <video class="pageBg" src="/frontend/web/common/pages/1/uplmain.mp4" autoplay="" loop="" muted="" alt=""></video>
     <div class="container">
         <div class="row header-description-block">
             <div class="col-md-12 col-xs-12 text-center">
@@ -230,13 +230,16 @@ $category = new Categories();
             <div class="offset-md-2 col-md-8 pt-5 pb-5 d-flex justify-content-center align-items-center flex-column bg-vopros">
                 <h5 align="center">У вас остались вопросы?</h5>
                 <h2 align="center"><strong>Мы ответим на них!</strong></h2>
-                <? $form = \yii\widgets\ActiveForm::begin() ?>
+                <? $form = \yii\widgets\ActiveForm::begin([
+                        'id' => 'main_form',
+                        'action' => '/site/send-main-form'
+                ]) ?>
                     <div class="input-vopros">
-                        <input class="mt-2 mb-2" type="text" name="name" required placeholder="Представтесь">
+                        <?= $form->field($mailForm, 'name')->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'Представьтесь'])->label(false) ?>
 
-                        <input class="mt-2 mb-2" type="email" name="name" required placeholder="E-mail">
+                        <?= $form->field($mailForm, 'mail')->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'E-mail'])->label(false) ?>
                     </div>
-                    <textarea class="mt-2 mb-2" type="text" rows="5" placeholder="Введите интересующий вас вопрос" required></textarea>
+                <?= $form->field($mailForm, 'message')->textarea(['class' => 'mt-2 mb-2', 'rows' => '5', 'placeholder' => 'Введите интересующий вас вопрос', 'required' => ''])->label(false) ?>
 
 <!--                    <button type="submit" class="vopros-btn pl-3 pr-3">Задать вопрос</button>-->
                     <?= Html::submitButton('Задать вопрос', ['class' => 'vopros-btn pl-3 pr-3']) ?>
@@ -293,6 +296,19 @@ $script = <<<JS
                 items: 3
             }
         }
+    });
+    
+    $('#main_form').on('submit', function(event){
+        event.preventDefault();
+        var data = $(this).serialize();
+        $.ajax({
+            url: '/site/send-main-form',
+            type: 'POST',
+            data: data,
+            success: function(response){
+                console.log(response);
+            }
+        });
     })
 JS;
 

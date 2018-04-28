@@ -177,6 +177,8 @@ class UserController extends Controller
             $model->gallery = serialize($galleryArray);
 
             $model->save();
+            Yii::$app->session->setFlash('success', 'Объявление создано');
+            return $this->redirect(['user/index']);
         }
 
         return $this->render('my-ads/create', [
@@ -225,6 +227,7 @@ class UserController extends Controller
             $model->gallery = serialize($gallery);
 
             if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Объявление сохранено');
                 return $this->redirect(['user/index']);
             }
         }

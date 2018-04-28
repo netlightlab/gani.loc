@@ -12,32 +12,33 @@ use Yii;
 use yii\base\Model;
 
 
-class Mailer extends Model
+class Mainform extends Model
 {
     public $toEmail = 'igor@netlight.kz';
     public $subject = 'Вопрос с сайта eltourism';
-    public $body;
+    public $name;
+    public $mail;
+    public $message;
 
     public function rules()
     {
         return [
-            [['', 'body'], 'required'],
-            ['fromEmail', 'email'],
-            ['toEmail', 'email']
+            [['name','mail','message'], 'required'],
+            [['name','mail','message'], 'trim'],
+            [['mail', 'toEmail'], 'email'],
         ];
     }
 
     public function sendEmail()
     {
         if ($this->validate()) {
-            Yii::$app->mailer->compose()
+            $body = $this->name . $this->mail . $this->message;
+            return Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['supportEmail'])
                 ->setTo($this->toEmail)
-                ->setFrom([$this->fromEmail => $this->fromName])
                 ->setSubject($this->subject)
-                ->setTextBody($this->body)
+                ->setTextBody($body)
                 ->send();
-
-            return true;
         }
         return false;
     }

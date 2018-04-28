@@ -72,7 +72,6 @@ $script = <<<JS
         event.preventDefault();
         var id = $(this).data('delete'),
             container = $(this).parent();
-        console.log(id);
         $.ajax({
             method: 'POST',
             data: {

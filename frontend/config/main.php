@@ -19,6 +19,14 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            /*'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'mail.eltourism.kz',
+                'username' => 'noreply@eltourism.kz',
+                'password' => 'Jm2w~7t8',
+                'port' => '25',
+            ]*/
         ],
         'request' => [
             'csrfParam' => '_csrf-frontend',

@@ -1,5 +1,5 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'noreply@eltourism.kz',
+    'adminEmail' => 'igor@netlight.kz', // email администратора
+    'supportEmail' => 'noreply@eltourism.kz', //email для поля from
 ];

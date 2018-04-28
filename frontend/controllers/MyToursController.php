@@ -99,6 +99,7 @@ class MyToursController extends Controller
             }
 
             Yii::$app->session->setFlash('success', 'Тур успешно добавлен');
+            return $this->redirect(['/partner/index']);
         }
 
         /*if ($model->load(Yii::$app->request->post())) {
@@ -154,6 +155,18 @@ class MyToursController extends Controller
             return $this->goHome();
         };
 
+
+        /**
+         * Delete image from gallery
+         */
+        if(Yii::$app->request->isAjax && (Yii::$app->request->post('deleteImage') == 1)){
+            $imageId = (int)Yii::$app->request->post('imageId');
+            unset($galleryImages[$imageId]);
+            $model->gallery = serialize($galleryImages);
+            $model->save();
+            return false;
+        }
+
         $uploadPath = 'common/tour_img/'.$id;
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -187,6 +200,7 @@ class MyToursController extends Controller
 
             $model -> save();
             Yii::$app->session->setFlash("success", "Тур успешно изменен");
+            return $this->redirect(['/partner/index']);
         };
 
 
@@ -209,6 +223,20 @@ class MyToursController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Deletes an existing Ads model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete($id) {
+        $this->findModel($id)->delete();
+
+        Yii::$app->session->setFlash('success', 'Тур успешно удален');
+        return $this->redirect(['/partner/index']);
     }
 
     public function statusTour($id) {

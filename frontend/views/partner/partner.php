@@ -101,6 +101,7 @@ $this->title = 'Личный кабинет';
                                             <h5><?= $tour->name ?></h5>
                                         </div>
                                     </a>
+                                    <?= Html::a('Удалить тур', ['/my-tours/delete', 'id' => $tour->id]) ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>

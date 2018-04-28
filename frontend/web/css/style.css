@@ -762,6 +762,7 @@ footer { background: #2e2e2e; }
     border-radius: 8px;
     height: 45px;	
     padding-left: 15px;
+    color: #fff;
 }
 
 .footPhone {
@@ -1670,6 +1671,7 @@ hr.commentsLine {
     margin: 2px;
     border: 1px solid white;
     box-shadow: 0 1px 3px #0f0f0f;
+    position: relative;
 }
 
 .tour_gallery > .tour_gallery-thumb {

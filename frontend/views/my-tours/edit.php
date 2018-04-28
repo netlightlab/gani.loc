@@ -146,9 +146,10 @@ $this->title = 'Редактирование тура ';
                                     <?php if ($gallery):?>
                                         <hr class="tourLine">
                                         <div class="tour_gallery">
-                                            <?php foreach ($gallery as $item): ?>
+                                            <?php foreach ($gallery as $key => $item): ?>
                                                 <div class="tour_gallery-thumb">
                                                     <?= Html::a(Html::img('@web/common/tour_img/'.$model->id.'/'.$item), '@web/common/tour_img/'.$model->id.'/'.$item, ['rel' => 'fancybox']); ?>
+                                                    <?= Html::a('x', '#', ['class' => 'delete_image_link', 'data-delete' => $key]) ?>
                                                 </div>
                                             <?php endforeach; ?>
                                         </div>
@@ -361,6 +362,23 @@ function init() {
             $('#hidden_placeId').val(coords);            
         });
     }
+    
+    //удаляем картинку галереи
+    $('.delete_image_link').on('click', function(event){
+        event.preventDefault();
+        var id = $(this).data('delete'),
+            container = $(this).parent();
+        console.log(id);
+        $.ajax({
+            method: 'POST',
+            data: {
+                deleteImage: 1,
+                imageId : id
+            }
+        }).done(function(response){
+            container.remove();
+        })
+    })
 }
 
 
