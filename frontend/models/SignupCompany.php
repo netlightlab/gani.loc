@@ -118,6 +118,7 @@ class SignupCompany extends ActiveRecord implements IdentityInterface
 
             ['email', 'trim'],
             ['email', 'required', 'message' => 'Поле не может быть пустым!'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Данный email уже используется.'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
 

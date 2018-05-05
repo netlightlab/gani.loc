@@ -151,6 +151,7 @@ $this->title = 'Личный кабинет';
                         <div class="row">
                             <div class="col-md-12">
                                 <?= Html::a('Разместить объявление', ['user/ads-create'], ['class' => 'btn-refresh-profile']) ?>
+                                <?= Html::a('Информация о платеже', ['./site/page', 'id' => 6], ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none; width: 240px;']) ?>
                                 <hr>
                             </div>
                             <div class="col-md-12">
