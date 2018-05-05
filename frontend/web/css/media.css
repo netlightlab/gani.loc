@@ -43,7 +43,7 @@
 	.input-vopros input + input { margin-left: 0px;}
 	.input-vopros { flex-direction: column; }
 	.foot-navigation ul {
-		flex-direction: column
+		flex-direction: column;
 	}
 
 	.registr-description { margin-top: 60px; }

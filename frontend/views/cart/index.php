@@ -100,6 +100,7 @@ $this->title = 'Корзина';
                             </div>
                             <div class="col-md-12">
                                 <?= Html::submitButton('Оформить заказ', ['class' => 'alltours_btn-info', 'style' => 'cursor: pointer; border: none;']) ?>
+								<?= Html::a('Информация о платеже', ['./site/page', 'id' => 5], ['class' => 'alltours_btn-info mt-3', 'style' => 'cursor: pointer; border: none;']) ?>
                             </div>
                         </div>
                     </aside>

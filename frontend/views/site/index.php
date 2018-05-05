@@ -235,11 +235,11 @@ $category = new Categories();
                         'action' => '/site/send-main-form'
                 ]) ?>
                     <div class="input-vopros">
-                        <?= $form->field($mailForm, 'name')->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'Представьтесь'])->label(false) ?>
+                        <?= $form->field($mailForm, 'name', ['options' => ['class' => 'mz-div']])->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'Представьтесь'])->label(false) ?>
 
-                        <?= $form->field($mailForm, 'mail')->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'E-mail'])->label(false) ?>
+                        <?= $form->field($mailForm, 'mail', ['options' => ['class' => 'mz-div']])->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'E-mail'])->label(false) ?>
                     </div>
-                <?= $form->field($mailForm, 'message')->textarea(['class' => 'mt-2 mb-2', 'rows' => '5', 'placeholder' => 'Введите интересующий вас вопрос', 'required' => ''])->label(false) ?>
+                <?= $form->field($mailForm, 'message', ['options' => ['class' => 'mz-div-a']])->textarea(['class' => 'mt-2 mb-2', 'rows' => '5', 'placeholder' => 'Введите интересующий вас вопрос', 'required' => ''])->label(false) ?>
 
 <!--                    <button type="submit" class="vopros-btn pl-3 pr-3">Задать вопрос</button>-->
                     <?= Html::submitButton('Задать вопрос', ['class' => 'vopros-btn pl-3 pr-3']) ?>
