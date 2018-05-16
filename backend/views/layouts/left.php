@@ -40,6 +40,7 @@
                     ['label' => 'Каталог туров', 'icon' => 'map','url' => ['/catalog/index']],
                     ['label' => 'Туры', 'icon' => 'map','url' => ['/tours/index']],
                     ['label' => 'Заказы', 'icon' => 'map','url' => ['/orders/index']],
+                    ['label' => 'Новости', 'icon' => 'map','url' => ['/news/index']],
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [

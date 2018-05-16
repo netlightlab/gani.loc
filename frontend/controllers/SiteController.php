@@ -291,7 +291,8 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                return $this->goHome();
+                $this->redirect(['/site/login']);
+                Yii::$app->session->setFlash('success', 'Регистрация прошла успешно. Вы сможете войти в аккаунт, после активации аккаунта администратором.');
             }
         }
 

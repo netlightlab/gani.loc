@@ -276,8 +276,9 @@ ymaps.ready(init);
 function init() {
     var myPlacemark,
         myMap = new ymaps.Map('map', {
-            center: [56,36],
-            zoom: 9
+            // center: [56,36],
+            center: [43.19635166998611,76.97155513789725],
+            zoom: 10
         }, {
             searchControlProvider: 'yandex#search'
         });

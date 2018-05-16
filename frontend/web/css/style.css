@@ -2303,3 +2303,15 @@ article .pays-box .pays-body p {
     margin: 0 20px;
     width: 90%;
 }
+
+.news-date span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 170px;
+    font-size: 14px;
+    color: #2e2e2e;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    border-bottom: 2px solid #fac727;
+}
