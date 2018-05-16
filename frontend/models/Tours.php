@@ -160,45 +160,6 @@ class Tours extends ActiveRecord
         return $result;
     }
 
-
-    /*public function editTour($id) {
-        if ($this->validate()) {
-            $tour = Tours::find()->where(['id' => $id])->one();
-            $tour->name = $this->name;
-            $tour->category_id = $this->category_id;
-            $tour->tour_language = $this->tour_language;
-            $tour->mini_description = $this->mini_description;
-            $tour->description = $this->description;
-            $tour->conditions = $this->conditions;
-            $tour->return_cond = $this->return_cond;
-            if (!$this->uploadFile($id, 'back_image') == "") {
-                $tour->back_image = $this->uploadFile($id, 'back_image');
-            };
-            if (!$this->uploadFile( $id,'mini_image') == "") {
-                $tour->mini_image = $this->uploadFile( $id,'mini_image');
-            };
-
-            if ($tour->gallery == '') {
-                $tour->gallery .= $this->gallery;
-            } else {
-                $tour->gallery .= ','.$this->gallery;
-            }
-
-            $tour->price = $this->price;
-            $tour->price_child = $this->price_child;
-            $tour->price_child_free = $this->price_child_free;
-            $tour->official_name = $this->official_name;
-            $tour->country_id = $this->country_id;
-            $tour->city_id = $this->city_id;
-            $tour->dot_place = $this->dot_place;
-            $tour->dot_place_addr = $this->dot_place_addr;
-            $tour->w_included = $this->w_included;
-            $tour->place_id = $this->place_id;
-            $tour->save();
-        }
-        return true;
-    }*/
-
     public function uploadFile($id, $params) {
         $model = new Tours();
         $image = UploadedFile::getInstance($model, $params);

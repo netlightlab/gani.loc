@@ -67,47 +67,6 @@ class ToursController extends Controller
         ];
     }
 
-    /*public function actionIndex(){
-        $search = new Search();
-
-        $m = new Tours;
-
-        $toursMaxPrice = ArrayHelper::getValue($m::find()->select(['MAX(price)'])->asArray()->one(),  'MAX(price)');
-
-        $catModel = Categories::find()->asArray()->all();
-        $categories = ArrayHelper::map($catModel, 'id', 'name');
-
-
-        if(Yii::$app->request->get('filter_categories')){
-            $filterIdFromGet = ArrayHelper::index(Yii::$app->request->get('filter_categories'), function($value){
-                return $value;
-            });
-        }
-
-        $formParams = array(
-            'category_id' => Yii::$app->request->get('category_id') ? (int)Yii::$app->request->get('category_id') : 0,
-            'price_from' => Yii::$app->request->get('price_from') ? (int)Yii::$app->request->get('price_from') : 500,
-            'price_to' => Yii::$app->request->get('price_to') ? (int)Yii::$app->request->get('price_to') : $toursMaxPrice,
-            'filter_categories' => Yii::$app->request->get('filter_categories') ? $filterIdFromGet : NULL,
-            'sort' => Yii::$app->request->get('sort') ? Yii::$app->request->get('sort') : NULL,
-            'max_price' => $toursMaxPrice,
-        );
-
-
-
-
-//        return $this->render('index', [
-//            'tours' => Tours::find()->where(['status' => 1])->all(),
-//        ]);
-        $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->get()]);
-        return $this->render('search', [
-            'tours' => $activeDataProvider->getModels(),
-            'search_form' => $m,
-            'formParams' => $formParams,
-            'categories' => $categories
-        ]);
-    }*/
-
     public function actionView($id){
         $getId = Tours::find()->where(['id' => $id])->select(['user_id'])->one();
         $user = User::find()->where(['id' => $getId->user_id])->select(['id', 'user_photo', 'name_company'])->one();
@@ -145,7 +104,6 @@ class ToursController extends Controller
             $model->recommendation = 1;
             $model->save(true);
         };
-
 
         $gallery = unserialize($this->findModel($id)->gallery);
 
@@ -195,12 +153,6 @@ class ToursController extends Controller
             'max_price' => $toursMaxPrice,
         );
 
-
-
-
-//        return $this->render('index', [
-//            'tours' => Tours::find()->where(['status' => 1])->all(),
-//        ]);
         $activeDataProvider = $search->search([$search->formName() => Yii::$app->request->get()]);
         return $this->render('search', [
             'tours' => $activeDataProvider->getModels(),

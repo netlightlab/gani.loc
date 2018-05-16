@@ -368,7 +368,7 @@ a {
     font-weight: normal;
     font-size: 18px;
     position: absolute;
-    left: -100px;
+    left: -999px;
     transition: 200ms;
     bottom: 5px;
 }
@@ -448,6 +448,7 @@ div.boxTour-hit:hover .tour-info {
 .fish-icon a,
 .sport-icon a,
 .photo-icon a,
+.jeep-icon a,
 .shrine-icon a,
 .sanatoriy-icon a{
 	color: #fff;
@@ -465,6 +466,7 @@ div.boxTour-hit:hover .tour-info {
 .shrine-icon { position: absolute; bottom: 18.555%; right: 40.331%; }
 .sanatoriy-icon { position: absolute; right: 20.222%; bottom: 28.311%; }
 .photo-icon { position: absolute; top: 40.311%; left: 26.333%; }
+.jeep-icon { position: absolute; top: 51.311%; left: 39.333%; }
 
 .about-preim-description {
     background: #20679f !important;
@@ -556,12 +558,12 @@ div.boxTour-hit:hover .tour-info {
     height: 40px;
     cursor: pointer;
     border-radius: 8px;
+    outline: none !important;
     transition: 1s;
 }
 
 .about-preim-btn:hover{
 	border: 2px solid red;
-    color: #002bff;
 }
 
 .vopros-description {
@@ -594,10 +596,10 @@ div.boxTour-hit:hover .tour-info {
 }
 
 .bg-vopros {
-	background: linear-gradient(to top, #dacec2 10%, #fff 45%);
+	background: linear-gradient(to top, #dacec2, #fff 65%);
 	position: relative;
 	border-radius: 15px;
-	padding: 60px;
+	padding: 40px;
 	z-index: 9999;
 }
 
@@ -624,6 +626,9 @@ div.boxTour-hit:hover .tour-info {
     border: 1px solid #bcbcbc;
     background: #fff;
     border-radius: 8px;
+    color: #442519;
+    font-weight: bold;
+    outline: none !important;
 }
 
 .input-vopros input { height: 40px; }
@@ -648,9 +653,14 @@ div.boxTour-hit:hover .tour-info {
     color: #fff;
     cursor: pointer;
     font-weight: bold;
-    position: absolute;
-    bottom: -15px;
-}	
+    outline: none !important;
+    width:100%;
+    transition: 250ms;
+}
+
+.vopros-btn:hover {
+    background: linear-gradient(to top, #1e7bca, #1d4162);
+}
 
 .bg-vopros h5 {
     color: #1d1c1c;
@@ -1643,11 +1653,9 @@ a.btn_map:hover {
     border-radius: 100%;
     width: 125px;
     height: 125px;
-}
-
-.comment_user_photo img {
-    width:100%;
-    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tour_gallery,
@@ -2294,14 +2302,10 @@ article .pays-box .pays-body p {
     font-weight: bold;
 }
 
-.mz-div {
-    margin: 0 20px;
-    width: 50%;
-}
-
-.mz-div-a {
-    margin: 0 20px;
-    width: 90%;
+.mz-div > .help-block {
+    position: absolute;
+    bottom: -10px;
+    white-space: nowrap;
 }
 
 .news-date span {

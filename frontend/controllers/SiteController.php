@@ -84,16 +84,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-
         $ads = Ads::find()->where(['active' => 1])->limit(4)->all();
-
         $comments = Comments::find()->where(['active' => 1])->all();
-
-//        return $this->render('index', [
-//            'model'     => $this->getMainTours(),
-//            'ads'       => $ads,
-//            'comments'  => $comments,]);
         $mailForm = new Mainform();
 
         $searchForm = array(
@@ -103,16 +95,16 @@ class SiteController extends Controller
         );
 
         return $this->render('index', [
-            'searchForm' => $searchForm,
-            'model' => $this->getMainTours(),
-            'ads'       => $ads,
-            'comments'  => $comments,
-            'mailForm' => $mailForm
+            'searchForm'    => $searchForm,
+            'model'         => $this->getMainTours(),
+            'ads'           => $ads,
+            'comments'      => $comments,
+            'mailForm'      => $mailForm
         ]);
     }
 
     public function getMainTours() {
-        return Tours::find()->select('id, mini_image, price, name, category_id')->limit(9)->all();
+        return Tours::find()->select('id, mini_image, price, name, category_id')->orderBy(['id' => SORT_DESC])->limit(9)->all();
     }
 
     /**

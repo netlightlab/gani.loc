@@ -96,12 +96,15 @@ $category = new Categories();
                                                     <input type="text" id="hidden_placeId" value="<?= $tour->dot_place ?>">
                                                 </div>
                                             </div>
+                                            <?php if ($tour->w_included): ?>
                                             <div class="col-md-12">
                                                 <h4>Что входит в тур:</h4>
                                             </div>
                                             <div class="col-md-12">
                                                 <p><?= $tour->w_included ?></p>
                                             </div>
+                                            <?php endif; ?>
+                                            <?php if ($gallery):?>
                                             <div class="col-md-12">
                                                 <h4>Галерея фотографии:</h4>
                                                 <?php
@@ -138,7 +141,6 @@ $category = new Categories();
                                                     ]
                                                 ]);
                                                 ?>
-                                                <?php if ($gallery):?>
                                                     <hr class="tourLine">
                                                     <div class="tour_gallery">
                                                         <?php foreach ($gallery as $item): ?>
@@ -147,9 +149,8 @@ $category = new Categories();
                                                             </div>
                                                         <?php endforeach; ?>
                                                     </div>
-
-                                                <?php endif; ?>
                                             </div>
+                                        <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -171,6 +172,7 @@ $category = new Categories();
                                     </div>
                                 </div>
                                 <hr>
+                                <?php if ($tour->conditions): ?>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="row">
@@ -188,6 +190,8 @@ $category = new Categories();
                                     </div>
                                 </div>
                                 <hr>
+                                <?php endif; ?>
+                                <?php if ($tour->return_cond): ?>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="row">
@@ -205,6 +209,7 @@ $category = new Categories();
                                     </div>
                                 </div>
                                 <hr>
+                                <?php endif; ?>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="row">
@@ -223,6 +228,7 @@ $category = new Categories();
                                 </div>
                             </div>
                             <div id="reviews" class="tab-pane">
+                                <?php if ($comments): ?>
                                 <?php
                                 echo newerton\fancybox\FancyBox::widget([
                                     'target' => 'a[rel=commentBox]',
@@ -285,6 +291,9 @@ $category = new Categories();
                                     </article>
                                 <? endforeach; ?>
                             </div>
+                        <?php else: ?>
+                            <h4 align="center">В данном туре отзывы отсутствуют, <span><b>будьте первыми!</b></span></h4>
+                        <?php endif; ?>
                         </div>
                     </div>
                 </div>

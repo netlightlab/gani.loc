@@ -102,6 +102,9 @@ class UserProfile extends Model
     {
         if ($this->validate()) {
             if ($this->getUserInfo()) {
+
+                Comments::updateAll(['fio' => $this->user_name. ' ' .$this->surname, 'user_photo' => $this->uploadFile()],['user_id' => Yii::$app->user->id]);
+
                 $user = User::findOne(['id' => $this->getId()]);
                 $user->user_name = $this->user_name;
                 $user->phone = $this->phone;

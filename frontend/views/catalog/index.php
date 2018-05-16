@@ -58,7 +58,7 @@ use yii\helpers\Html;
                 <div class="row">
                     <?php if($items): ?>
                         <?php foreach($items as $item): ?>
-                            <div class="col-md-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="boxTour-hit">
                                     <?= Html::a('', ['/catalog/view', 'id' => $item->id], ['class' => 'tour_link']) ?>
                                     <div class="catalog-img">

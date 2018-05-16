@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 use common\models\Tickets;
 use frontend\models\Ads;
+use frontend\models\Comments;
 use frontend\models\UserProfile;
 use yii\web\Controller;
 use yii\filters\VerbFilter;

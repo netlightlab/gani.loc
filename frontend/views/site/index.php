@@ -125,47 +125,52 @@ $category = new Categories();
                 <img src="common/img/tour-category/map.png" width="100%" height="auto">
                 <div class="jungle-icon">
                     <img src="common/img/tour-category/jungle.png"><br>
-                    <a href="#">ПРИРОДА</a>
+                    <?= Html::a('ПРИРОДА', ['/tours/search', 'filter_categories[]' => 1], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="kupatsya-icon">
                     <img src="common/img/tour-category/kupatsya.png"><br>
-                    <a href="#">КУПАТЬСЯ</a>
+                    <?= Html::a('ПЛЯЖНЫЙ ОТДЫХ', ['/tours/search', 'filter_categories[]' => 6], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="smile-icon">
                     <img src="common/img/tour-category/smile.png"><br>
-                    <a href="#">РАЗВЛЕЧЕНИЯ</a>
+                    <?= Html::a('РАЗВЛЕЧЕНИЯ', ['/tours/search', 'filter_categories[]' => 2], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="babies-icon">
                     <img src="common/img/tour-category/babies.png"><br>
-                    <a href="#">ДЛЯ ДЕТЕЙ</a>
+                    <?= Html::a('ИСТОРИЧЕСКИЕ ТУРЫ', ['/tours/search', 'filter_categories[]' => 8], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="fish-icon">
                     <img src="common/img/tour-category/fish.png"><br>
-                    <a href="#">РЫБАЛКА</a>
+                    <?= Html::a('АКТИВНЫЙ ОТДЫХ', ['/tours/search', 'filter_categories[]' => 4], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="sport-icon">
                     <img src="common/img/tour-category/sport.png"><br>
-                    <a href="#">ЭКСТРИМ</a>
+                    <?= Html::a('МНОГОДНЕВНЫЕ ТУРЫ', ['/tours/search', 'filter_categories[]' => 3], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="shrine-icon">
                     <img src="common/img/tour-category/shrine.png"><br>
-                    <a href="#">СВЯТЫЕ МЕСТА</a>
+                    <?= Html::a('САКРАЛЬНЫЙ ТУРИЗМ', ['/tours/search', 'filter_categories[]' => 9], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="sanatoriy-icon">
                     <img src="common/img/tour-category/sanatoriy.png"><br>
-                    <a href="#">САНАТОРИЙ</a>
+                    <?= Html::a('БАЗЫ ОТДЫХА, САНАТОРИИ', ['/tours/search', 'filter_categories[]' => 10], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="photo-icon">
                     <img src="common/img/tour-category/photo.png"><br>
-                    <a href="#">ЭКСКУРСИИ</a>
+                    <?= Html::a('ТРАНСПОРТ', ['/tours/search', 'filter_categories[]' => 7], ['class' => 'tour_link']) ?>
+                </div>
+
+                <div class="jeep-icon">
+                    <img src="common/img/tour-category/babies.png"><br>
+                    <?= Html::a('ДЖИП-ТУРЫ', ['/tours/search', 'filter_categories[]' => 5], ['class' => 'tour_link']) ?>
                 </div>
             </div>
         </div>
@@ -227,7 +232,7 @@ $category = new Categories();
 <section class="bg-zayavka">
     <div class="container pt-5 pb-5">
         <div class="row beforeAndAfter">
-            <div class="offset-md-2 col-md-8 pt-5 pb-5 d-flex justify-content-center align-items-center flex-column bg-vopros">
+            <div class="offset-md-2 col-md-8 d-flex justify-content-center align-items-center flex-column bg-vopros">
                 <h5 align="center">У вас остались вопросы?</h5>
                 <h2 align="center"><strong>Мы ответим на них!</strong></h2>
                 <? $form = \yii\widgets\ActiveForm::begin([
@@ -235,14 +240,21 @@ $category = new Categories();
                         'action' => '/site/send-main-form'
                 ]) ?>
                     <div class="input-vopros">
-                        <?= $form->field($mailForm, 'name', ['options' => ['class' => 'mz-div']])->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'Представьтесь'])->label(false) ?>
-
-                        <?= $form->field($mailForm, 'mail', ['options' => ['class' => 'mz-div']])->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'E-mail'])->label(false) ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field($mailForm, 'name', ['options' => ['class' => 'mz-div my-2']])->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'Представьтесь'])->label(false) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($mailForm, 'mail', ['options' => ['class' => 'mz-div my-2']])->textInput(['class' => 'mt-2 mb-2', 'required' => '', 'placeholder' => 'E-mail'])->label(false) ?>
+                            </div>
+                            <div class="col-md-12">
+                                <?= $form->field($mailForm, 'message', ['options' => ['class' => 'mz-div my-2']])->textarea(['class' => 'mt-2 mb-2', 'rows' => '5', 'placeholder' => 'Введите интересующий вас вопрос', 'required' => ''])->label(false) ?>
+                            </div>
+                            <div class="mt-3 offset-md-3 col-md-6">
+                                <?= Html::submitButton('Задать вопрос', ['class' => 'vopros-btn']) ?>
+                            </div>
+                        </div>
                     </div>
-                <?= $form->field($mailForm, 'message', ['options' => ['class' => 'mz-div-a']])->textarea(['class' => 'mt-2 mb-2', 'rows' => '5', 'placeholder' => 'Введите интересующий вас вопрос', 'required' => ''])->label(false) ?>
-
-<!--                    <button type="submit" class="vopros-btn pl-3 pr-3">Задать вопрос</button>-->
-                    <?= Html::submitButton('Задать вопрос', ['class' => 'vopros-btn pl-3 pr-3']) ?>
                 <? \yii\widgets\ActiveForm::end() ?>
             </div>
         </div>
