@@ -298,8 +298,7 @@ $category = new Categories();
                     </div>
                 </div>
                 <? if($isauthorize): ?>
-                <div class="row mt-5">
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-5">
                         <?php $form = ActiveForm::begin(['id' => 'form-review', "action" => "", "options" => ['ecntype' => 'multipart/form-data']]); ?>
                         <h5>Оставить отзыв</h5>
                         <div class="row">
@@ -346,7 +345,6 @@ $category = new Categories();
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>
-                </div>
                 <? endif; ?>
             </main>
             <aside class="col-md-4">
