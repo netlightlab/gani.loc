@@ -116,8 +116,9 @@ class UserProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
-                $user->auth_key = Yii::$app->security->generateRandomString();
-                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                if ($this->password) {
+                    $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                }
                 $user->email = $this->email;
                 $user->save(false);
             } else {
