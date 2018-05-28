@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Banners;
 use common\models\Cities;
 use common\models\Mainform;
 use frontend\models\Ads;
@@ -88,6 +89,10 @@ class SiteController extends Controller
         $comments = Comments::find()->where(['active' => 1])->all();
         $mailForm = new Mainform();
 
+        $banner_top = Banners::find()->where(['page_id' => 1])->andWhere(['position' => 'home_top'])->one();
+        $banner_mid = Banners::find()->where(['page_id' => 1])->andWhere(['position' => 'home_mid'])->one();
+        $banner_bottom = Banners::find()->where(['page_id' => 1])->andWhere(['position' => 'home_bottom'])->one();
+
         $searchForm = array(
             'categories' => (new \common\models\Categories())->getCategoriesList(),
             'countries' => ArrayHelper::map(Countries::find()->asArray()->all(), 'id', 'name'),
@@ -99,7 +104,10 @@ class SiteController extends Controller
             'model'         => $this->getMainTours(),
             'ads'           => $ads,
             'comments'      => $comments,
-            'mailForm'      => $mailForm
+            'mailForm'      => $mailForm,
+            'banner_top'    => $banner_top,
+            'banner_mid'    => $banner_mid,
+            'banner_bottom'    => $banner_bottom,
         ]);
     }
 

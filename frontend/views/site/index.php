@@ -15,7 +15,7 @@ $category = new Categories();
     <div class="container">
         <div class="row header-description-block">
             <div class="col-md-12 col-xs-12 text-center">
-                <span id="flick" class="header-description">ТУРЫ ПО КАЗАХСТАНУ</span>
+                <h1 id="flick" class="header-description">ТУРЫ ПО КАЗАХСТАНУ</h1>
             </div>
         </div>
         <?php $form = \yii\widgets\ActiveForm::begin([
@@ -53,6 +53,18 @@ $category = new Categories();
 </div>
 </section>
 
+<?php if($banner_top): ?>
+<section style="background:#fbfbfb;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-4">
+                <?= Html::a(Html::img('@web/common/banners/'.$banner_top->id.'/'.$banner_top->banner, ['style' => 'max-width: 100%']),$banner_top->link,['target' => 'blank']) ?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
 <section style="background:#fbfbfb;">
     <div class="container">
         <!-- POPULAR TOUR -->
@@ -73,10 +85,10 @@ $category = new Categories();
                             <div class="tour-info">
                                 <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
                                 <p>подробнее</p>
-                                <h4><?= $category->getCategoryName($tour->category_id) ?></h4>
+                                <span class="h4"><?= $category->getCategoryName($tour->category_id) ?></span>
                             </div>
                         </div>
-                        <h5><?= $tour->name ?></h5>
+                        <span class="h5"><?= $tour->name ?></span>
                     </div>
                 </articles>
             <?php endforeach; ?>
@@ -112,6 +124,19 @@ $category = new Categories();
         <!-- ADS END -->
     </div>
 </section>
+
+<?php if($banner_mid): ?>
+    <section style="background:#fbfbfb;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mb-4">
+                    <?= Html::a(Html::img('@web/common/banners/'.$banner_mid->id.'/'.$banner_mid->banner, ['style' => 'max-width: 100%']),$banner_mid->link,['target' => 'blank']) ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
+
 <section class="bg-category-tour">
     <!-- CATEGORY TOUR -->
     <div class="col-md-12 col-xs-12 category">
@@ -177,6 +202,18 @@ $category = new Categories();
     </div>
 </section>
 
+<?php if($banner_bottom): ?>
+    <section style="background:#fbfbfb;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mt-4">
+                    <?= Html::a(Html::img('@web/common/banners/'.$banner_bottom->id.'/'.$banner_bottom->banner, ['style' => 'max-width: 100%']),$banner_bottom->link,['target' => 'blank']) ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
+
 <section>
     <div class="container">
         <div class="row">
@@ -190,7 +227,7 @@ $category = new Categories();
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/king.png">
                 <div class="about-preim-grayLine"></div>
-                <h4 class="pt-3 pb-2">Лучшие туры</h4>
+                <span class="h4 pt-3 pb-2">Лучшие туры</span>
                 <p>Чем вы хотите заняться на выходных и в отпуске в Казахстане? Все туры Казахстана тут!</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
@@ -198,7 +235,7 @@ $category = new Categories();
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/online.png">
                 <div class="about-preim-grayLine"></div>
-                <h4 class="pt-3 pb-2">Онлайн оплата 24/7</h4>
+                <span class="h4 pt-3 pb-2">Онлайн оплата 24/7</span>
                 <p>Вы легко и быстро можете выбрать, сравнить и купить туры онлайн прямо на нашем сайте, не выходя из дома.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
@@ -206,7 +243,7 @@ $category = new Categories();
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
-                <h4 class="pt-3 pb-2">Лучшие цены</h4>
+                <span class="h4 pt-3 pb-2">Лучшие цены</span>
                 <p>Поиск лучшей цены среди предложений всех компаний. У нас вы найдете различные предложения на любой бюджет.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
@@ -214,7 +251,7 @@ $category = new Categories();
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/rating.png">
                 <div class="about-preim-grayLine"></div>
-                <h4 class="pt-3 pb-2">Отзывы и рейтинги</h4>
+                <span class="h4 pt-3 pb-2">Отзывы и рейтинги</span>
                 <p>Выбирайте ваш отдых по реальным отзывам и рекомендациям опытных туристов и путешественников.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
@@ -233,8 +270,8 @@ $category = new Categories();
     <div class="container pt-5 pb-5">
         <div class="row beforeAndAfter">
             <div class="offset-md-2 col-md-8 d-flex justify-content-center align-items-center flex-column bg-vopros">
-                <h5 align="center">У вас остались вопросы?</h5>
-                <h2 align="center"><strong>Мы ответим на них!</strong></h2>
+                <span class="h5">У вас остались вопросы?</span>
+                <span class="h2"><strong>Мы ответим на них!</strong></span>
                 <? $form = \yii\widgets\ActiveForm::begin([
                         'id' => 'main_form',
                         'action' => '/site/send-main-form'
@@ -281,7 +318,7 @@ $category = new Categories();
                                 <div class="rating_reviews"></div>
                                 <div id="ratingBar" style="width: <?= $item->reviews?>%"></div>
                             </div>
-                            <h5><?= $item->message ?></h5>
+                            <span class="h5"><?= $item->message ?></span>
                         </div>
                     <?php endforeach; ?>
                 </div>

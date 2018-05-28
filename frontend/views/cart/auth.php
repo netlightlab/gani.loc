@@ -20,7 +20,7 @@ use yii\widgets\Breadcrumbs;
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ОПЛАТА</h2>
+                    <h1>ОПЛАТА</h1>
                     <p>Для осуществления покупки, необходимо авторизоваться.</p>
                 </div>
             </div>
@@ -48,7 +48,7 @@ use yii\widgets\Breadcrumbs;
         <div class="row">
             <div class="col-md-12">
                 <div class="text-left pt-3">
-                    <h3>Заполните данные для входа</h3>
+                    <span class="h3">Заполните данные для входа</span>
                 </div>
                 <hr>
             </div>

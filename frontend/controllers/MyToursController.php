@@ -102,36 +102,7 @@ class MyToursController extends Controller
             return $this->redirect(['/partner/index']);
         }
 
-        /*if ($model->load(Yii::$app->request->post())) {
-            if ($model->addTour()) {
-                if($image1->name && $image2->name) {
-//                    $this->refresh();
-                    FileHelper::createDirectory('common/tour_img/' . $model->id . '/');
-                    $dir = Yii::getAlias('common/tour_img/' . $model->id . '/');
-                    $image1->saveAs($dir . $image1->name);
-                    $image2->saveAs($dir . $image2->name);
-                }
-
-                Yii::$app->session->setFlash("success", "Тур успешно добавлен");
-            } else {
-                Yii::$app->session->setFlash("error", "Ошибка");
-            };
-        };*/
-
-        /*$fileName = 'file';
-        $uploadPath = 'common/tour_img/'.$model->id;
-
-        if (isset($_FILES[$fileName])) {
-            $file = UploadedFile::getInstancesByName($fileName);
-
-            print_r($file);
-            print_r($_FILES);
-
-            foreach ($file as $item) {
-                $item->saveAs($uploadPath . '/' . $item->name);
-            }
-        }*/
-
+    
         if (Yii::$app->request->isAjax) {
             $cities = new Cities();
             $arr = $cities->getCitiesList((int)Yii::$app->request->post('country_id'));

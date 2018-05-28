@@ -145,7 +145,6 @@ class PartnerProfile extends Model
                 $user->city_phone_2 = $this->city_phone_2;
                 $user->mailindex = $this->mailindex;
                 $user->user_photo = $this->uploadFile();
-                $user->auth_key = Yii::$app->security->generateRandomString();
                 if ($this->password) {
                     $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
                 } else {
@@ -173,8 +172,11 @@ class PartnerProfile extends Model
                 $user->city_phone_2 = $this->city_phone_2;
                 $user->mailindex = $this->mailindex;
                 $user->user_photo = $this->uploadFile();
-                $user->auth_key = Yii::$app->security->generateRandomString();
-                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                if ($this->password) {
+                    $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                } else {
+                    $user->password_hash = $this->oldPass;
+                }
                 $user->email = $this->email;
                 $user->save(false);
             }

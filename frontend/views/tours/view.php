@@ -32,368 +32,368 @@ $category = new Categories();
             </div>
         </div>
     </div>
-</section>
+    </section>
 
-<section style="background: #2e2e2e;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <?php $this->params['breadcrumbs'][] = $this->title; ?>
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
+    <section style="background: #2e2e2e;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <?php $this->params['breadcrumbs'][] = $this->title; ?>
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                </div>
             </div>
         </div>
+    </section>
+    <div class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <div id="map"></div>
     </div>
-</section>
-<div class="collapse" id="collapseMap" aria-expanded="false" style="height: 0px;">
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <div id="map"></div>
-</div>
 
-<div style="background: #f9f9f9;">
-    <div class="container">
-        <div class="row py-5">
-            <main id="single_tour_desc" class="col-md-8">
-                <div id="single-fix" class="row">
-                    <div class="col-md-12">
-                        <ul id="w1" class="nav view_tour-tabs">
-                            <li><a class="tab-link active" href="#info" data-toggle="tab" aria-expanded="true"><span>Информация</span></a></li>
-                            <li><a class="tab-link" href="#reviews" data-toggle="tab" aria-expanded="true"><span>Отзывы ( <?= $reviews_count ?> )</span></a></li>
-                        </ul>
-                        <div class="tab-content view_tour_content">
-                            <div id="info" class="tab-pane active">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3>Подробное описание</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h4><?= $tour->name ?></h4>
-                                            </div>
-                                            <div class="col-md-12 my-3">
-                                                <?= $tour->description ?>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h4>Точка сбора:</h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <p><?= $tour->dot_place_addr ?></p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h4>Доступные языки тура или развлечения:</h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <p><?= $tour->tour_language ?></p>
-                                            </div>
-                                            <div class="col-md-12" style="display: none;">
-                                                <div style="display: none;">
-                                                    <input type="text" id="hidden_placeId" value="<?= $tour->dot_place ?>">
-                                                </div>
-                                            </div>
-                                            <?php if ($tour->w_included): ?>
-                                            <div class="col-md-12">
-                                                <h4>Что входит в тур:</h4>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <p><?= $tour->w_included ?></p>
-                                            </div>
-                                            <?php endif; ?>
-                                            <?php if ($gallery):?>
-                                            <div class="col-md-12">
-                                                <h4>Галерея фотографии:</h4>
-                                                <?php
-                                                echo newerton\fancybox\FancyBox::widget([
-                                                    'target' => 'a[rel=fancybox]',
-                                                    'helpers' => true,
-                                                    'mouse' => true,
-                                                    'config' => [
-                                                        'maxWidth' => '90%',
-                                                        'maxHeight' => '90%',
-                                                        'playSpeed' => 7000,
-                                                        'padding' => 0,
-                                                        'fitToView' => false,
-                                                        'width' => '70%',
-                                                        'height' => '70%',
-                                                        'autoSize' => false,
-                                                        'closeClick' => false,
-                                                        'openEffect' => 'elastic',
-                                                        'closeEffect' => 'elastic',
-                                                        'prevEffect' => 'elastic',
-                                                        'nextEffect' => 'elastic',
-                                                        'closeBtn' => false,
-                                                        'openOpacity' => true,
-                                                        'helpers' => [
-                                                            'title' => ['type' => 'float'],
-                                                            'buttons' => [],
-                                                            'thumbs' => ['width' => 68, 'height' => 50],
-                                                            'overlay' => [
-                                                                'css' => [
-                                                                    'background' => 'rgba(0, 0, 0, 0.8)'
-                                                                ]
-                                                            ]
-                                                        ],
-                                                    ]
-                                                ]);
-                                                ?>
-                                                    <hr class="tourLine">
-                                                    <div class="tour_gallery">
-                                                        <?php foreach ($gallery as $item): ?>
-                                                            <div class="tour_gallery-thumb">
-                                                                <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$item), '@web/common/tour_img/'.$tour->id.'/'.$item, ['rel' => 'fancybox']); ?>
-                                                            </div>
-                                                        <?php endforeach; ?>
-                                                    </div>
-                                            </div>
-                                        <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3>Цены</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p><?= $tour->price ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <?php if ($tour->conditions): ?>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3>Условия покупки</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p><?= $tour->conditions ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <?php endif; ?>
-                                <?php if ($tour->return_cond): ?>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3>Условия возврата</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p><?= $tour->return_cond ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <?php endif; ?>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3>Категория тура</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p><?= $category->getCategoryName($tour->category_id) ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="reviews" class="tab-pane">
-                                <?php if ($comments): ?>
-                                <?php
-                                echo newerton\fancybox\FancyBox::widget([
-                                    'target' => 'a[rel=commentBox]',
-                                    'helpers' => true,
-                                    'mouse' => true,
-                                    'config' => [
-                                        'maxWidth' => '90%',
-                                        'maxHeight' => '90%',
-                                        'playSpeed' => 7000,
-                                        'padding' => 0,
-                                        'fitToView' => false,
-                                        'width' => '70%',
-                                        'height' => '70%',
-                                        'autoSize' => false,
-                                        'closeClick' => false,
-                                        'openEffect' => 'elastic',
-                                        'closeEffect' => 'elastic',
-                                        'prevEffect' => 'elastic',
-                                        'nextEffect' => 'elastic',
-                                        'closeBtn' => false,
-                                        'openOpacity' => true,
-                                        'helpers' => [
-                                            'title' => ['type' => 'float'],
-                                            'buttons' => [],
-                                            'thumbs' => ['width' => 68, 'height' => 50],
-                                            'overlay' => [
-                                                'css' => [
-                                                    'background' => 'rgba(0, 0, 0, 0.8)'
-                                                ]
-                                            ]
-                                        ],
-                                    ]
-                                ]);
-
-                                ?>
-                                <? foreach($comments as $comment) :?>
-                                    <article class="row comments_tour">
+    <div style="background: #f9f9f9;">
+        <div class="container">
+            <div class="row py-5">
+                <main id="single_tour_desc" class="col-md-8">
+                    <div id="single-fix" class="row">
+                        <div class="col-md-12">
+                            <ul id="w1" class="nav view_tour-tabs">
+                                <li><a class="tab-link active" href="#info" data-toggle="tab" aria-expanded="true"><span>Информация</span></a></li>
+                                <li><a class="tab-link" href="#reviews" data-toggle="tab" aria-expanded="true"><span>Отзывы ( <?= $reviews_count ?> )</span></a></li>
+                            </ul>
+                            <div class="tab-content view_tour_content">
+                                <div id="info" class="tab-pane active">
+                                    <div class="row">
                                         <div class="col-md-3">
-                                            <p style="font-size: 16px;"><?= $comment->fio ?></p>
-                                            <div class="comment_user_photo"><?= $comment['user_photo'] ? Html::img('@web/common/users/'.$comment['user_id'].'/'.$comment['user_photo']) : Html::img('@web/common/users/no-image.png') ?></div>
-                                            <div class="rating">
-                                                <div class="rating_reviews"></div>
-                                                <div id="ratingBar" style="width: <?= $comment->reviews?>%"></div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="h3">Подробное описание</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-9">
-                                            <span><?= $comment->message ?></span>
-                                            <p><?= $comment->date ?></p>
-                                            <?php if ($comment['load_photo']):?>
-                                                <hr class="commentsLine">
-                                                <div class="comments_gallery">
-                                                <?php foreach (explode(',', $comment['load_photo']) as $item): ?>
-                                                    <div class="comments_gallery-thumb">
-                                                        <?= Html::a(Html::img('@web/common/users/'.$comment['user_id'].'/'.$item), '@web/common/users/'.$comment['user_id'].'/'.$item, ['rel' => 'commentBox']); ?>
-                                                    </div>
-                                                <?php endforeach; ?>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="h4"><?= $tour->name ?></span>
                                                 </div>
-                                            <?php endif; ?>
+                                                <div class="col-md-12 my-3">
+                                                    <?= $tour->description ?>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <span class="h4">Точка сбора:</span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <p><?= $tour->dot_place_addr ?></p>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <span class="h4">Доступные языки тура или развлечения:</span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <p><?= $tour->tour_language ?></p>
+                                                </div>
+                                                <div class="col-md-12" style="display: none;">
+                                                    <div style="display: none;">
+                                                        <input type="text" id="hidden_placeId" value="<?= $tour->dot_place ?>">
+                                                    </div>
+                                                </div>
+                                                <?php if ($tour->w_included): ?>
+                                                    <div class="col-md-12">
+                                                        <span class="h4">Что входит в тур:</span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p><?= $tour->w_included ?></p>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($gallery):?>
+                                                    <div class="col-md-12">
+                                                        <span class="h4">Галерея фотографии:</span>
+                                                        <?php
+                                                        echo newerton\fancybox\FancyBox::widget([
+                                                            'target' => 'a[rel=fancybox]',
+                                                            'helpers' => true,
+                                                            'mouse' => true,
+                                                            'config' => [
+                                                                'maxWidth' => '90%',
+                                                                'maxHeight' => '90%',
+                                                                'playSpeed' => 7000,
+                                                                'padding' => 0,
+                                                                'fitToView' => false,
+                                                                'width' => '70%',
+                                                                'height' => '70%',
+                                                                'autoSize' => false,
+                                                                'closeClick' => false,
+                                                                'openEffect' => 'elastic',
+                                                                'closeEffect' => 'elastic',
+                                                                'prevEffect' => 'elastic',
+                                                                'nextEffect' => 'elastic',
+                                                                'closeBtn' => false,
+                                                                'openOpacity' => true,
+                                                                'helpers' => [
+                                                                    'title' => ['type' => 'float'],
+                                                                    'buttons' => [],
+                                                                    'thumbs' => ['width' => 68, 'height' => 50],
+                                                                    'overlay' => [
+                                                                        'css' => [
+                                                                            'background' => 'rgba(0, 0, 0, 0.8)'
+                                                                        ]
+                                                                    ]
+                                                                ],
+                                                            ]
+                                                        ]);
+                                                        ?>
+                                                        <hr class="tourLine">
+                                                        <div class="tour_gallery">
+                                                            <?php foreach ($gallery as $item): ?>
+                                                                <div class="tour_gallery-thumb">
+                                                                    <?= Html::a(Html::img('@web/common/tour_img/'.$tour->id.'/'.$item), '@web/common/tour_img/'.$tour->id.'/'.$item, ['rel' => 'fancybox']); ?>
+                                                                </div>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
-                                    </article>
-                                <? endforeach; ?>
-                            </div>
-                        <?php else: ?>
-                            <h4 align="center">В данном туре отзывы отсутствуют, <span><b>будьте первыми!</b></span></h4>
-                        <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-                <? if($isauthorize): ?>
-                    <div class="col-md-12 mt-5">
-                        <?php $form = ActiveForm::begin(['id' => 'form-review', "action" => "", "options" => ['ecntype' => 'multipart/form-data']]); ?>
-                        <h5>Оставить отзыв</h5>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="rating_click">
-                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 1, 'data-value_rating' => "20"]) ?>
-                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 2, 'data-value_rating' => "40"]) ?>
-                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 3, 'data-value_rating' => "60"]) ?>
-                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 4, 'data-value_rating' => "80"]) ?>
-                                    <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 5, 'data-value_rating' => "100"]) ?>
-                                    <div id="ratingBarClick"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="h3">Цены</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p><?= $tour->price ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <?php if ($tour->conditions): ?>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="h3">Условия покупки</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p><?= $tour->conditions ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    <?php endif; ?>
+                                    <?php if ($tour->return_cond): ?>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="h3">Условия возврата</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p><?= $tour->return_cond ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    <?php endif; ?>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="h3">Категория тура</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p><?= $category->getCategoryName($tour->category_id) ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <?= $form->field($model, 'message')->textarea(['placeholder' => 'Максимум 1000 символов', 'rows' => '5', 'required' => 'true'])->label('')?>
-                                <div style="display: none;"><?= $form->field($model, 'reviews')->textInput(['id' => 'rev_db', 'value' => '60']) ?></div>
-                            </div>
-                            <div class="col-md-12">
-                            </div>
-                            <div class="col-md-12">
-                                <?php
-                                echo \kato\DropZone::widget([
-                                    'options' => [
-                                        'maxFilesize' => 10,
-                                        'maxFiles' => 10,
-                                        'url' => '/tours/view?id='.Yii::$app->request->get('id'),
-                                        'uploadMultiple' => true,
-                                        'parallelUploads' => 10,
-                                        'autoProcessQueue' => false,
-                                    ],
-                                    'clientEvents' => [
-                                        'removedfile' => "function(file){alert(file.name + ' is removed')}"
-                                    ],
-                                ]);
-                                ?>
-                            </div>
-                            <div class="col-md-4 mt-3">
-                                <?= Html::submitButton('Отправить', ['class' => 'btn_map', 'name' => 'submit']) ?>
-                            </div>
-                            <div class="col-md-12 my-4">
-                                <span style="color: red;">Важно!!</span>
-                                <span>Данный отзыв будет рассмотрен модератором, после чего он появиться на сайте!</span>
+                                <div id="reviews" class="tab-pane">
+                                    <?php if ($comments): ?>
+                                    <?php
+                                    echo newerton\fancybox\FancyBox::widget([
+                                        'target' => 'a[rel=commentBox]',
+                                        'helpers' => true,
+                                        'mouse' => true,
+                                        'config' => [
+                                            'maxWidth' => '90%',
+                                            'maxHeight' => '90%',
+                                            'playSpeed' => 7000,
+                                            'padding' => 0,
+                                            'fitToView' => false,
+                                            'width' => '70%',
+                                            'height' => '70%',
+                                            'autoSize' => false,
+                                            'closeClick' => false,
+                                            'openEffect' => 'elastic',
+                                            'closeEffect' => 'elastic',
+                                            'prevEffect' => 'elastic',
+                                            'nextEffect' => 'elastic',
+                                            'closeBtn' => false,
+                                            'openOpacity' => true,
+                                            'helpers' => [
+                                                'title' => ['type' => 'float'],
+                                                'buttons' => [],
+                                                'thumbs' => ['width' => 68, 'height' => 50],
+                                                'overlay' => [
+                                                    'css' => [
+                                                        'background' => 'rgba(0, 0, 0, 0.8)'
+                                                    ]
+                                                ]
+                                            ],
+                                        ]
+                                    ]);
+
+                                    ?>
+                                    <? foreach($comments as $comment) :?>
+                                        <article class="row comments_tour">
+                                            <div class="col-md-3">
+                                                <p style="font-size: 16px;"><?= $comment->fio ?></p>
+                                                <div class="comment_user_photo"><?= $comment['user_photo'] ? Html::img('@web/common/users/'.$comment['user_id'].'/'.$comment['user_photo']) : Html::img('@web/common/users/no-image.png') ?></div>
+                                                <div class="rating">
+                                                    <div class="rating_reviews"></div>
+                                                    <div id="ratingBar" style="width: <?= $comment->reviews?>%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <span><?= $comment->message ?></span>
+                                                <p><?= $comment->date ?></p>
+                                                <?php if($isauthorize): ?>
+                                                    <a id="<?= $comment->id ?>" class="comment_reply">Ответить</a>
+                                                <?php endif; ?>
+                                                <?php if ($comment['load_photo']):?>
+                                                    <hr class="commentsLine">
+                                                    <div class="comments_gallery">
+                                                        <?php foreach (explode(',', $comment['load_photo']) as $item): ?>
+                                                            <div class="comments_gallery-thumb">
+                                                                <?= Html::a(Html::img('@web/common/users/'.$comment['user_id'].'/'.$item), '@web/common/users/'.$comment['user_id'].'/'.$item, ['rel' => 'commentBox']); ?>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </article>
+                                    <? endforeach; ?>
+                                </div>
+                                <?php else: ?>
+                                    <span class="h4" align="center">В данном туре отзывы отсутствуют, <span><b>будьте первыми!</b></span></span>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        <?php ActiveForm::end(); ?>
                     </div>
-                <? endif; ?>
-            </main>
-            <aside class="col-md-4">
-                <div id="sidebar">
-                    <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="true" aria-controls="collapseMap">ПОКАЗАТЬ ТОЧКУ СБОРА</a>
-                    <? $form = ActiveForm::begin([
-                        'method' => "POST",
-                        'id' => 'addPost',
-                        'enableAjaxValidation' => true,
-                        'action' => '',
-                        'options' => [
-                            'data-pjax' => true,
-                            'enctype' => 'multipart/form-data'
-                        ]
-                    ]); ?>
-                    <?= Html::input('hidden', 'tour_id', (int)Yii::$app->request->get('id')) ?>
-                    <?= Html::submitButton('Купить',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
-                    <?php ActiveForm::end(); ?>
-<!--                    --><?// $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/index"]); ?>
-<!--                    --><?//= Html::submitButton('купить', ['class' => 'btn_map', 'style' => 'background: #ec3e3e', 'name' => 'tour_id', 'value' => $_GET['id'], 'type' => 'submit']) ?>
-<!--                    --><?php //ActiveForm::end(); ?>
-                    <? $form = ActiveForm::begin([
+                    <? if($isauthorize): ?>
+                        <div class="row">
+                            <div class="col-md-12 mt-5">
+                                <?php $form = ActiveForm::begin(['id' => 'form-review', "action" => "", "options" => ['ecntype' => 'multipart/form-data']]); ?>
+                                <span class="h5">Оставить отзыв</span>
+                                <div class="col-md-12">
+                                    <div class="rating_click">
+                                        <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 1, 'data-value_rating' => "20"]) ?>
+                                        <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 2, 'data-value_rating' => "40"]) ?>
+                                        <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 3, 'data-value_rating' => "60"]) ?>
+                                        <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 4, 'data-value_rating' => "80"]) ?>
+                                        <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 5, 'data-value_rating' => "100"]) ?>
+                                        <div id="ratingBarClick"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <?= $form->field($model, 'message')->textarea(['placeholder' => 'Максимум 1000 символов', 'rows' => '5', 'required' => 'true', 'onkeypress' => 'textResize(event.keyCode)'])->label('')?>
+                                    <div style="display: none;"><?= $form->field($model, 'reviews')->textInput(['id' => 'rev_db', 'value' => '60']) ?></div>
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+                                <div class="col-md-12">
+                                    <?php
+                                    echo \kato\DropZone::widget([
+                                        'options' => [
+                                            'maxFilesize' => 10,
+                                            'maxFiles' => 10,
+                                            'url' => '/tours/view?id='.Yii::$app->request->get('id'),
+                                            'uploadMultiple' => true,
+                                            'parallelUploads' => 10,
+                                            'autoProcessQueue' => false,
+                                        ],
+                                        'clientEvents' => [
+                                            'removedfile' => "function(file){alert(file.name + ' is removed')}"
+                                        ],
+                                    ]);
+                                    ?>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <?= Html::submitButton('Отправить', ['class' => 'btn_map', 'name' => 'submit']) ?>
+                                </div>
+                                <div class="col-md-12 my-4">
+                                    <span style="color: red;">Важно!!</span>
+                                    <span>Данный отзыв будет рассмотрен модератором, после чего он появиться на сайте!</span>
+                                </div>
+                                <?php ActiveForm::end(); ?>
+                            </div>
+                        </div>
+                    <? endif; ?>
+                </main>
+                <aside class="col-md-4">
+                    <div id="sidebar">
+                        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="true" aria-controls="collapseMap">ПОКАЗАТЬ ТОЧКУ СБОРА</a>
+                        <? $form = ActiveForm::begin([
+                            'method' => "POST",
+                            'id' => 'addPost',
+                            'enableAjaxValidation' => true,
+                            'action' => '',
+                            'options' => [
+                                'data-pjax' => true,
+                                'enctype' => 'multipart/form-data'
+                            ]
+                        ]); ?>
+                        <?= Html::input('hidden', 'tour_id', (int)Yii::$app->request->get('id')) ?>
+                        <?= Html::submitButton('Купить',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
+                        <?php ActiveForm::end(); ?>
+                        <? $form = ActiveForm::begin([
                             'method' => "POST",
                             'id' => 'addToCart',
                             'enableAjaxValidation' => true,
                             'action' => '',
                             'options' => [
-                                    'data-pjax' => true,
-                                    'enctype' => 'multipart/form-data'
+                                'data-pjax' => true,
+                                'enctype' => 'multipart/form-data'
                             ]
-                    ]); ?>
-                    <?= Html::input('hidden', 'tour_id', (int)Yii::$app->request->get('id')) ?>
-                    <?= Html::submitButton('добавить в корзину',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
-                    <?php ActiveForm::end(); ?>
-                    <div class="offer-company_details">
-                        <div class="offer-company_header">
-                            <?= $user['user_photo'] ? Html::img('@web/common/users/'.$user['id'].'/'.$user['user_photo']) : Html::img('@web/common/users/no-image.png') ?>
-                        </div>
-                        <div class="offer-company_content">
-                            <span>Компания:</span>
-                            <h5><?= $user->name_company ?></h5>
-                            <?= Html::a('Другие объявления от компании', ['/tours/search/', 'user_id' => $user->id], ['class' => 'allTours_author']) ?>
+                        ]); ?>
+                        <?= Html::input('hidden', 'tour_id', (int)Yii::$app->request->get('id')) ?>
+                        <?= Html::submitButton('добавить в корзину',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
+                        <?php ActiveForm::end(); ?>
+                        <div class="offer-company_details">
+                            <div class="offer-company_header">
+                                <?= $user['user_photo'] ? Html::img('@web/common/users/'.$user['id'].'/'.$user['user_photo']) : Html::img('@web/common/users/no-image.png') ?>
+                            </div>
+                            <div class="offer-company_content">
+                                <span>Компания:</span>
+                                <span class="h5"><?= $user->name_company ?></span>
+                                <?= Html::a('Другие объявления от компании', ['/tours/search/', 'user_id' => $user->id], ['class' => 'allTours_author']) ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </aside>
+                </aside>
+            </div>
         </div>
     </div>
-</div>
 
 <?php
 
@@ -405,6 +405,7 @@ $script = <<<JS
        };
       
     });
+
     $(document).hover(function () {
         $("#1").hover(function () {
             $("#ratingBarClick").css({width: $("#1").attr("data-value_rating") + "%"});
@@ -515,10 +516,11 @@ $script = <<<JS
             });
         }
     });
-
+     
 ymaps.ready(init);
 
-function init() {
+function init() {    
+    
     var getCoordinat = $('#hidden_placeId').val();
     var myCoords = getCoordinat.split(',');
     
@@ -576,6 +578,46 @@ function init() {
        
 JS;
 
+
+$replyComment = <<<JS
+
+     $('a.comment_reply').on('click', function(){
+         var id = $(this).attr('id');
+         var elem = $(this).parent();
+         
+         elem.parent().parent().find('form').remove();
+         
+         var textResize = function(pressKey) {
+           console.log(pressKey+'asd');
+         };
+
+        if (!$(this).parent().children('form')[0]) {
+            $('<form>', {class: 'CReply',method: 'post', id: id, enctype: 'multipart/form-data', action: '/tours/view?id=' + $tour->id}).appendTo($(this).parent().append()).append(
+            '<textarea id="formCReply" class="form-control cmReply-area" name="CommentsReply[comment]" placeholder="Добавить ответ" required="true" aria-required="true" autofocus autocomplete="off" required maxlength="1000" rows="1">').append(
+                '<div class="CReply-formGroup">' +
+                '<a class="closeCReply">Отменить</a>' +
+                '<input type="text" name="CommentsReply[comment_id]" value="'+id+'">' +
+                '<button type="submit" name="submit">Отправить</button>' +                
+                 '</div></form>'
+            );
+            
+        }
+        
+        elem.find('a.closeCReply').on('click', function(){
+            $(this).parent().parent().find('.cmReply-area').css("width", "0");
+            elem.parent().find('form').remove();
+        });
+
+        setTimeout(function() {
+          elem.parent().find('.cmReply-area').css("width", "100%");
+        }, 100);
+     });
+
+  
+
+JS;
+
+$this->registerJs($replyComment);
 $this->registerJs($script);
 
 ?>

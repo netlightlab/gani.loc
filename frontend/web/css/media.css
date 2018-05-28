@@ -13,6 +13,7 @@
 	.shrine-icon img { width: 25px; height: 25px; }
 	.sanatoriy-icon img { width: 25px; height: 25px; }
 	.photo-icon img { width: 25px; height: 25px; }
+	.jeep-icon img { width: 25px; height: 25px; }
 
 	.jungle-icon a,
 	.kupatsya-icon a,
@@ -22,17 +23,70 @@
 	.sport-icon a,
 	.photo-icon a,
 	.shrine-icon a,
-	.sanatoriy-icon a{
+	.sanatoriy-icon a,
+	.jeep-icon a {
 		color: #fff;
-		font-weight: 600; 
-		text-decoration: none; 
-		border-bottom: 1px solid #fff; 
-		font-size: 10px;
+		font-weight: 600;
+		border-bottom: 1px solid #fff;
+		display: block;
+		width: 50px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.jungle-icon {
+		top: 20.999%;
+		left: 6.333%;
+	}
+
+	.kupatsya-icon {
+		top: 10.333%;
+		left: 36.858%;
 	}
 
 	.parallax-header-description {
 		font-size: 1.2rem;
 		margin-top:0px;
+	}
+
+	.smile-icon {
+		top: 5.333%;
+		right: 27.333%;
+	}
+
+	.babies-icon {
+		top: 18.333%;
+		right: 5.333%;
+	}
+
+	.fish-icon {
+		bottom: 21.222%;
+		left: 10.899%;
+	}
+
+	.shrine-icon {
+		bottom: 0.555%;
+		right: 36.331%;
+	}
+
+	.sanatoriy-icon {
+		right: 12.222%;
+		bottom: 24.311%;
+	}
+
+	.photo-icon {
+		top: 40.311%;
+		left: 26.333%;
+	}
+	.jeep-icon {
+		top: 46.311%;
+		left: 41.333%;
+	}
+
+	.sport-icon {
+		top: 34.331%;
+		left: 55.333%;
 	}
 
 	.section-header, .section-header-main {
@@ -70,6 +124,13 @@
 	}
 
 	.alltours_description { padding: 10px;}
+
+	.bg-vopros::after {
+		width: 50px;
+		height: 50px;
+		-webkit-background-size: cover;
+		background-size: cover;
+	}
 
 }
 

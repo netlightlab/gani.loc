@@ -14,15 +14,6 @@ use yii\jui\SliderInput;
 use yii\widgets\Pjax;
 
 ?>
-
-
-
-
-
-
-
-<?// print_r($formParams) ?>
-<?// Pjax::begin(['options' => ['enablePushState' => true]]) ?>
 <?php $form = ActiveForm::begin([
     'action' => ['/tours/search'],
     'id' => 'filterForm',

@@ -18,7 +18,7 @@ $this->title = 'Объявление пользователя';
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ОБЪЯВЛЕНИЯ!</h2>
+                    <h1>ОБЪЯВЛЕНИЯ!</h1>
                     <p>Объявление пользователей</p>
                 </div>
             </div>

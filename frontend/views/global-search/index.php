@@ -34,7 +34,7 @@ $this->title = 'Поиск'
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2><?= $this->title ?></h2>
+                    <h1><?= $this->title ?></h1>
                 </div>
             </div>
         </div>

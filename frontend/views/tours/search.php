@@ -26,7 +26,7 @@ $category = new Categories();
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ПОИСК</h2>
+                    <h1>ПОИСК</h1>
                 </div>
             </div>
         </div>
@@ -82,6 +82,11 @@ $category = new Categories();
                                 </div>
                             </div>
                         </div>
+                        <?php if($banner): ?>
+                            <div class="col-md-12 text-center">
+                                <?= Html::a(Html::img('@web/common/banners/'.$banner->id.'/'.$banner->banner, ['style' => 'max-width: 100%']),$banner->link,['target' => 'blank']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </aside>
                 <div class="col-md-9">
@@ -129,7 +134,7 @@ $category = new Categories();
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="alltours_description">
-                                            <?= Html::a('<h3>'.$tour->name.'</h3>', ['/tours/view/', 'id' => $tour->id]) ?>
+                                            <?= Html::a('<p class="h3">'.$tour->name.'</p>', ['/tours/view/', 'id' => $tour->id]) ?>
                                             <span><?= $tour->mini_description ?></span>
                                         </div>
                                     </div>

@@ -28,10 +28,6 @@ class Menu extends Page
         }
     }
 
-//    protected function getElements(){
-//        return $data;
-//    }
-
     public static function newMenu(){
         $items = MenuItems::find()->orderBy('sort')->all();
         foreach($items as $item){
@@ -45,6 +41,5 @@ class Menu extends Page
         $user = new DbManager();
         $usersRole = key($user->getAssignments(Yii::$app->user->id));
         return Html::a(Html::img('@web/common/img/header/account.png')."Кабинет", ["{$usersRole}/index"], ["class" => "nav-link"]);
-//        return Html::a("Кабинет", ["{$usersRole}/index"], ["class" => "nav-link"]);
     }
 }

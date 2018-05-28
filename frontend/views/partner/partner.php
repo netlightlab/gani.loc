@@ -26,7 +26,7 @@ $this->title = 'Личный кабинет';
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ПРИВЕТСТВУЕМ!</h2>
+                    <h1>ПРИВЕТСТВУЕМ!</h1>
                     <p>Личный кабинет тур компаний <?= $UsersInfo['name_company'] ?></p>
                 </div>
             </div>

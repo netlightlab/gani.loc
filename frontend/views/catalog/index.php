@@ -30,7 +30,7 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>Каталог туров</h2>
+                    <h1>Каталог туров</h1>
                 </div>
             </div>
         </div>
@@ -64,7 +64,11 @@ use yii\helpers\Html;
                                     <div class="catalog-img">
                                         <?= Html::img('/frontend/web/common/catalog/' . $item->id . '/' . $item->image) ?>
                                     </div>
-                                    <h5 style="text-align: center;"><?= $item->name ?></h5>
+                                    <span class="h5" style="text-align: center;     text-align: center;
+    text-overflow: initial;
+    overflow: unset;
+    white-space: normal;
+    font-size: 18px;"><?= $item->name ?></span>
                                 </div>
                             </div>
                         <?php endforeach; ?>

@@ -22,7 +22,7 @@ $context = $this->context;
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?= Html::csrfMetaTags() ?>
-    <title>Туры и экскурсии по Казахстану по лучшим ценам! | <?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>

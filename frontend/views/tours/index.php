@@ -18,7 +18,7 @@ $this->title = 'Tours';
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ПОИСК</h2>
+                    <h1>ПОИСК</h1>
                 </div>
             </div>
         </div>

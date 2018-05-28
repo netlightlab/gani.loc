@@ -9,7 +9,12 @@
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 
-$this->title = 'Объявление пользователя';
+\Yii::$app->view->registerMetaTag([
+    'name' => 'description',
+    'content' => strip_tags($ads->description),
+]);
+
+$this->title = $ads->title;
 
 ?>
 
@@ -18,7 +23,7 @@ $this->title = 'Объявление пользователя';
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>ПРИВЕТСТВУЮ!</h2>
+                    <h1><?= $ads->title ?></h1>
                     <p>Объявление от полльзователя "<b><?= $user['user_name'] ?></b>"</p>
                 </div>
             </div>
@@ -48,13 +53,13 @@ $this->title = 'Объявление пользователя';
                 </div>
             </div>
             <div class="col-md-8">
-                <h4>Номер телефона:</h4>
+                <span class="h4">Номер телефона:</span>
                 <p><b><?= $ads->phone ?></b></p>
-                <h4>Описание:</h4>
+                <span class="h4">Описание:</span>
                 <p><?= $ads->description ?></p>
             </div>
             <div class="col-md-12">
-                <h4>Галерея фотографии:</h4>
+                <span class="h4">Галерея фотографии:</span>
                 <?php
                 echo newerton\fancybox\FancyBox::widget([
                     'target' => 'a[rel=fancybox]',

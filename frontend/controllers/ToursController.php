@@ -9,15 +9,14 @@
 namespace frontend\controllers;
 
 use frontend\models\Comments;
+use frontend\models\CommentsReply;
 use yii\web\Controller;
 use Yii;
 use frontend\models\Tours;
 use yii\web\UploadedFile;
-use backend\models\Pages;
+use yii\helpers\FileHelper;
+use common\models\Banners;
 use common\models\Categories;
-use yii\data\ActiveDataProvider;
-use yii\data\Sort;
-use yii\filters\AjaxFilter;
 use yii\helpers\ArrayHelper;
 use frontend\models\Search;
 use yii\web\NotFoundHttpException;
@@ -71,12 +70,19 @@ class ToursController extends Controller
         $getId = Tours::find()->where(['id' => $id])->select(['user_id'])->one();
         $user = User::find()->where(['id' => $getId->user_id])->select(['id', 'user_photo', 'name_company'])->one();
 
+        /* comments */
+
         $model = new Comments();
         $getUser = User::find()->where(['id' => Yii::$app->user->id])->select(['user_photo', 'user_name', 'surname'])->asArray()->one();
-        $fio = $getUser['user_name'].' '.$getUser['surname'];
+        if ($getUser['user_name'] && $getUser['surname']) {
+            $fio = $getUser['user_name'] . ' ' . $getUser['surname'];
+        } else {
+            $fio = 'Дорогой гость';
+        }
+
         $photo = $getUser['user_photo'];
 
-        $comment = Comments::find()->where(['tour_id' => $id, 'active' => 1])->all();
+        $comment = Comments::find()->where(['tour_id' => $id, 'active' => 1])->orderBy(['id' => SORT_DESC])->all();
         $reviews_count = Comments::find()->where(['tour_id' => $id])->count();
 
         Yii::$app->user->isGuest ? $sign = 0 : $sign = 1;
@@ -85,6 +91,7 @@ class ToursController extends Controller
         $uploadPath = 'common/users/'.Yii::$app->user->id;
 
         if (isset($_FILES[$fileName])) {
+            FileHelper::createDirectory('common/users/' . Yii::$app->user->id . '/');
             $file = UploadedFile::getInstancesByName($fileName);
 
             foreach ($file as $item) {
@@ -93,7 +100,7 @@ class ToursController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->message;
+            strip_tags($model->message);
             $model->tour_id = $id;
             $model->user_id = Yii::$app->user->id;
             $model->user_photo = $photo;
@@ -104,17 +111,31 @@ class ToursController extends Controller
             $model->recommendation = 1;
             $model->save(true);
         };
+        /* end comments*/
+
+        /* comments_reply */
+
+        $commentReply = new CommentsReply();
+
+        if ($commentReply->load(Yii::$app->request->post())) {
+            $commentReply->user_id = Yii::$app->user->id;
+            $commentReply->tour_id = Yii::$app->request->get('id');
+            $commentReply->save(false);
+        }
+
+        /* end comments_reply */
 
         $gallery = unserialize($this->findModel($id)->gallery);
 
         return $this->render('view', [
-            'tour' => Tours::findOne($id),
-            'user' => $user,
-            'model' => $model,
-            'comments' => $comment,
-            'gallery' => $gallery,
-            'isauthorize' => $sign,
-            'reviews_count' => $reviews_count,
+            'tour'              => Tours::findOne($id),
+            'user'              => $user,
+            'model'             => $model,
+            'commentsReply'     => $commentReply,
+            'comments'          => $comment,
+            'gallery'           => $gallery,
+            'isauthorize'       => $sign,
+            'reviews_count'     => $reviews_count,
         ]);
 
     }
@@ -129,6 +150,8 @@ class ToursController extends Controller
 
     public function actionSearch(){
         $search = new Search();
+
+        $banner = Banners::find()->where(['page_id' => 2])->andWhere(['position' => 'page_left'])->one();
 
         $m = new Tours;
 
@@ -158,7 +181,8 @@ class ToursController extends Controller
             'tours' => $activeDataProvider->getModels(),
             'search_form' => $m,
             'formParams' => $formParams,
-            'categories' => $categories
+            'categories' => $categories,
+            'banner' => $banner,
         ]);
     }
 

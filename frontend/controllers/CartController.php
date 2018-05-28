@@ -161,7 +161,7 @@ class CartController extends Controller
 
     private $merchant_id = '10751';
     private $merchant_secret_key = 'pexabiqoqepujiqy';
-    private $test_pay = false;
+    private $test_pay = true;
     public function payOrder($orderId,$orderData){
         $arrReq = array();
         //print_r($orderData);
@@ -220,20 +220,23 @@ class CartController extends Controller
             throw new BadRequestHttpException();
         }
     }
+
     public function actionPayOk()
     {
         $arrParams = $_GET;
         $order_id = $arrParams['pg_order_id'];
         if (PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key)) {
-//            Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
+            Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
             return $this->redirect(['cart/index']);
         } else {
             throw new BadRequestHttpException();
         }
     }
+
     public function actionGetTest(){
         return $this->redirect(['cart/index']);
     }
+
     public function actionPayResult()
     {
 //        $tickets = new Tickets();

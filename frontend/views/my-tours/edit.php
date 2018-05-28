@@ -26,7 +26,7 @@ $this->title = 'Редактирование тура ';
             <div class="row">
                 <div class="col-md-12">
                     <div class="parallax-header-text">
-                        <h2><?= $model->name ?></h2>
+                        <h1><?= $model->name ?></h1>
                         <p>Здесь вы можете отредактировать свой тур/развлечение</p>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ $this->title = 'Авторизация';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="py-3 registr-description" align="center">Авторизация</h2>
+                <h1 class="py-3 registr-description" align="center">Авторизация</h1>
             </div>
         </div>
     </div>

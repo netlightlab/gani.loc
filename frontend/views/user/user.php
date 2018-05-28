@@ -151,7 +151,7 @@ $this->title = 'Личный кабинет';
                         <div class="row">
                             <div class="col-md-12">
                                 <?= Html::a('Разместить объявление', ['user/ads-create'], ['class' => 'btn-refresh-profile']) ?>
-                                <?= Html::a('Информация о платеже', ['./site/page', 'id' => 6], ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none; width: 240px;']) ?>
+                                <?= Html::a('правила подачи объявления', ['./site/page', 'id' => 6], ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none; width: 240px;']) ?>
                                 <hr>
                             </div>
                             <div class="col-md-12">
@@ -193,10 +193,6 @@ $this->title = 'Личный кабинет';
                             <div class="col-md-8">
                                 <div class="profile-info">
                                     <table width="100%;" cellspacing="5" cellpadding="5">
-                                        <tr>
-                                            <td><strong>Отображаемое имя</strong></td>
-                                            <td><span><?= $UsersInfo['username'] ? $UsersInfo['username'] : "Не заполнено" ?></span></td>
-                                        </tr>
                                         <tr>
                                             <td><strong>Имя</strong></td>
                                             <td><span><?= $UsersInfo['user_name'] ? $UsersInfo['user_name'] : "Не заполнено" ?></span></td>

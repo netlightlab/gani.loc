@@ -11,6 +11,7 @@ namespace frontend\controllers;
 use common\models\Tickets;
 use frontend\models\Ads;
 use frontend\models\Comments;
+use frontend\models\Tours;
 use frontend\models\UserProfile;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -144,8 +145,10 @@ class UserController extends Controller
 
     public function actionTicket($id){
         $model = Tickets::findOne((int)$id);
+        $tour = Tours::findOne((int)$model->tour_id);
         return $this->render('ticket', [
-            'item' => $model
+            'item' => $model,
+            'tour' => $tour,
         ]);
     }
 

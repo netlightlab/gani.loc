@@ -133,8 +133,9 @@ class UserProfile extends Model
                 $user->mailindex = $this->mailindex;
                 $user->surname = $this->surname;
                 $user->user_photo = $this->uploadFile();
-                $user->auth_key = Yii::$app->security->generateRandomString();
-                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                if ($this->password) {
+                    $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+                }
                 $user->email = $this->email;
                 $user->save(false);
             }
@@ -157,12 +158,10 @@ class UserProfile extends Model
         if($user_photo->name != $model->user_photo->name) {
             if ($model->load($_POST)) {
                 $model->user_photo = $user_photo;
-                if ($model->validate()) {
-                    FileHelper::createDirectory('common/users/' . $this->getId() . '/');
-                    $dir = Yii::getAlias('common/users/' . $this->getId() . '/');
-                    $user_photo->saveAs($dir . $model->user_photo->name);
-                    return $user_photo->name;
-                }
+                FileHelper::createDirectory('common/users/' . $this->getId() . '/');
+                $dir = Yii::getAlias('common/users/' . $this->getId() . '/');
+                $user_photo->saveAs($dir . $model->user_photo->name);
+                return $user_photo->name;
             }
         } else {
             return $model->user_photo;

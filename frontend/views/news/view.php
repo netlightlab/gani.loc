@@ -33,7 +33,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $item->description
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2><?= $item->title ?></h2>
+                    <h1><?= $item->title ?></h1>
                 </div>
             </div>
         </div>

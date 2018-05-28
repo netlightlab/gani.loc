@@ -25,7 +25,7 @@ $this->title = 'Создание тура';
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>Воплощение идеи</h2>
+                    <h1>Воплощение идеи</h1>
                     <p>Здесь вы можете разместить ваш тур/развлечение</p>
                 </div>
             </div>

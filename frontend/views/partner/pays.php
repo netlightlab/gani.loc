@@ -23,7 +23,7 @@ $this->title = 'Покупки';
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2>Информация о покупках!</h2>
+                    <h1>Информация о покупках!</h1>
                 </div>
             </div>
         </div>

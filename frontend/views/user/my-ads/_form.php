@@ -28,6 +28,9 @@ use mihaildev\ckeditor\CKEditor;
     <div class="col-md-12">
         <hr style="10px 0">
     </div>
+    <div class="col-md-12">
+        <?= $form->field($model, 'title')->textInput()->label('Название объявления:');?>
+    </div>
     <div class="col-md-4">
         <?= $form->field($model, 'phone')->label('телефон (сотовый)')->widget(\yii\widgets\MaskedInput::className(), [
             'mask' => '9 (999) 999-9999',

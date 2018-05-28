@@ -7,6 +7,7 @@
  */
 
 use yii\widgets\Breadcrumbs;
+use yii\helpers\Html;
 
 $this->title = 'Билеты';
 
@@ -38,23 +39,70 @@ $this->title = 'Билеты';
     </div>
 </section>
 
-<section id="ticket-data">
+<section class="pt-5 pb-5" style="background: #f9f9f9;" id="ticket-data">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 style="text-align: center">Сертификат</h1>
-                <p>Название тура: <?= $item->tour_name ?></p>
-                <p>Компания: <?= $item->company_name ?></p>
-                <p>Номер сертификата: <?= $item->certificate ?></p>
-                <p>Номер заказа: <?= $item->order_num ?></p>
-                <p>Количество билетов: <?= $item->qty ?></p>
-                <p>Сумма: <?= $item->price ?></p>
+        <div class="row py-3" style="background: #fff; border: 1px solid #ddd;">
+            <div class="col-md-12">
+                <h1 align="center"><?= Html::img('@web/common/img/header/logo_ticket.png' ) ?></h1>
+            </div>
+            <div class="col-md-5 my-3">
+                <table width="100%" class="tour_info">
+                    <tbody>
+                    <tr>
+                        <td><p><b>Тур</b>:</p></td>
+                        <td><span><?= $item->tour_name ?></span></td>
+                    </tr>
+                    <tr>
+                        <td><p><b>от</b>:</p></td>
+                        <td><span><?= $item->company_name ?></span></td>
+                    </tr>
+                    <tr>
+                        <td><p><b>Количество билетов</b>:</p></td>
+                        <td><span><?= $item->qty ?></span></td>
+                    </tr>
+                    <tr>
+                        <td><p><b>Сумма</b>:</p></td>
+                        <td><span><?= $item->price ?></span> ₸.</td>
+                    </tr>
+                    <tr>
+                        <td><p><b>Номер вашего сертификата</b>:</p></td>
+                        <td><span><strong><?= $item->certificate ?></strong></span></td>
+                    </tr>
+                    <tr>
+                        <td><p><b>Номер заказа</b>:</p></td>
+                        <td><span><?= $item->order_num ?></span></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-7 my-3">
+                <div class="box">
+                    <input type="text" style="display: none;" id="hidden_placeId" value="<?= $tour->dot_place ?>">
+                    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+                    <div id="map"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table width="100%">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <span style="text-align: left;"><?= $tour->mini_description ?></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 mt-3">
+                <p align="center">© Eltourism.kz 2016 - 2018</p>
+            </div>
+            <div class="col-md-12">
+                <p align="right"><a id="zxc" title="Распечатать проект">Распечатать</a></p>
             </div>
         </div>
     </div>
 </section>
-
-<a id="zxc" title="Распечатать проект">Распечатать</a>
 <?php
 
 $script = <<<JS
@@ -74,6 +122,64 @@ $script = <<<JS
             WinPrint.close(); 
             // prtContent.innerHTML=strOldOne;  
         });
+        
+ymaps.ready(init);
+
+async function init() {
+    var getCoordinat = $('#hidden_placeId').val();
+    var myCoords = getCoordinat.split(',');
+    
+    var myPlacemark,
+        myMap = new ymaps.Map('map', {
+            center: [myCoords[0], myCoords[1]],
+            zoom: 16
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+    
+    myMap.behaviors.disable('scrollZoom'); 
+    
+     myPlacemark = createPlacemark([myCoords[0], myCoords[1]]);
+            myMap.geoObjects.add(myPlacemark);
+            // Слушаем событие окончания перетаскивания на метке.
+            myPlacemark.events.add('dragend', function () {
+                getAddress(myPlacemark.geometry.getCoordinates());
+            });
+            getAddress(getCoordinat);
+
+    // Создание метки.
+    function createPlacemark(coords) {
+        return new ymaps.Placemark(coords, {
+            iconCaption: 'поиск...'
+        }, {
+            preset: 'islands#violetDotIconWithCaption',
+            draggable: true
+        });
+    }
+
+    // Определяем адрес по координатам (обратное геокодирование).
+    function getAddress(coords) {
+        myPlacemark.properties.set('iconCaption', 'поиск...');
+        ymaps.geocode(coords).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+
+            myPlacemark.properties
+                .set({
+                    // Формируем строку с данными об объекте.
+                    iconCaption: [
+                        // Название населенного пункта или вышестоящее административно-территориальное образование.
+                        firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
+                        // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+                        firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                    ].filter(Boolean).join(', '),
+                    // В качестве контента балуна задаем строку с адресом объекта.
+                    balloonContent: firstGeoObject.getAddressLine()                    
+                });
+            $('#dot_placeAddr').val(firstGeoObject.getAddressLine());
+            $('#hidden_placeId').val(coords);            
+        });
+    }
+}
 JS;
 
 $this->registerJs($script);

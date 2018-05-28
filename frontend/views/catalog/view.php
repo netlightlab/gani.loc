@@ -34,7 +34,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2><?= $item->name ?></h2>
+                    <h1><?= $item->name ?></h1>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
                 <div class="row">
                     <?php if($recomendations): ?>
                         <div class="col-md-12 pb-3">
-                            <h4>Рекомендуемые туры:</h4>
+                            <span class="h4">Рекомендуемые туры:</span>
                         </div>
                         <?php foreach($recomendations as $recomendation): ?>
                             <div class="col-md-3">
@@ -76,7 +76,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
                                     <div class="catalog-img">
                                         <?= Html::img('/frontend/web/common/tour_img/' . $recomendation->id . '/' . $recomendation->mini_image) ?>
                                     </div>
-                                    <h5 style="text-align: center;"><?= $recomendation->name ?></h5>
+                                    <span class="h5" style="text-align: center;"><?= $recomendation->name ?></span>
                                 </div>
                             </div>
                         <?php endforeach; ?>

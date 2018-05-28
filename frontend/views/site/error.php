@@ -17,7 +17,7 @@ $this->title = $name;
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h2><?= Html::encode($this->title) ?></h2>
+                    <h1><?= Html::encode($this->title) ?></h1>
                     <p><?= nl2br(Html::encode($message)) ?></p>
                 </div>
             </div>
@@ -42,7 +42,7 @@ $this->title = $name;
     <div class="container">
         <div class="row">
             <div class="col-md-12 my-5">
-                <h1><?= Html::encode($this->title) ?></h1>
+                <h2><?= Html::encode($this->title) ?></h2>
 
                 <div class="alert alert-danger">
                     <?= nl2br(Html::encode($message)) ?>
