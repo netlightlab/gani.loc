@@ -22,6 +22,8 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+
     <?php if($model->image): ?>
         <?= Html::img('/frontend/web/common/catalog/' . $model->id . '/' . $model->image, [
                 'style' => 'width: 150px'

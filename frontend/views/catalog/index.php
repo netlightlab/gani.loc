@@ -9,6 +9,7 @@
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 
@@ -60,7 +61,7 @@ use yii\helpers\Html;
                         <?php foreach($items as $item): ?>
                             <div class="col-md-3 mb-4">
                                 <div class="boxTour-hit">
-                                    <?= Html::a('', ['/catalog/view', 'id' => $item->id], ['class' => 'tour_link']) ?>
+                                    <?= Html::a('', Url::to(['/catalog/view', 'id' => $item->id]), ['class' => 'tour_link']) ?>
                                     <div class="catalog-img">
                                         <?= Html::img('/frontend/web/common/catalog/' . $item->id . '/' . $item->image) ?>
                                     </div>

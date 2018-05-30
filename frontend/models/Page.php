@@ -14,17 +14,17 @@ use Yii;
 
 class Page extends ActiveRecord
 {
-    public $id;
+    /*public $id;
     public $title;
     public $content;
     public $url;
-    public $background;
+    public $background;*/
 
     public static function tableName() {
         return '{{%page}}';
     }
 
-    protected function getFields(){
+    /*protected function getFields(){
         //return self::find()->where(["id" => $this->getId()])->asArray()->all();
         return self::find()->where(["id" => $this->getId()])->asArray()->one();
     }
@@ -42,5 +42,5 @@ class Page extends ActiveRecord
         $this->background = $data['background'];
 
         return true;
-    }
+    }*/
 }

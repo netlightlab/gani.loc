@@ -78,8 +78,13 @@ return [
             'showScriptName' => false,
 //            'suffix' => '.html',
             'rules' => [
-                '' => 'site/index',
-                '<action>'=>'site/<action>',
+                [
+                    'class' => 'common\components\PageUrlRule',
+                ],
+//                '' => 'site/page',
+//                '<action>'=>'site/<action>',
+                '<alias:[\w\-]+>' => 'site/page',
+                'catalog/<alias:[\w\-]+>' => 'catalog/view',
             ],
         ],
         'assetManager' => [

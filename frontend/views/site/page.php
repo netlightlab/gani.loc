@@ -9,7 +9,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\helpers\Html;
 
-$this->title = $title;
+$this->title = $model -> title;
 
 
 ?>
@@ -33,17 +33,17 @@ $this->title = $title;
 
 <section class="section-header" style="">
     <? if($fileType == 'image'): ?>
-        <img class="pageBg" src="/frontend/web/common/pages/<?= $pageId.'/'.$background ?>" alt="">
+        <img class="pageBg" src="/frontend/web/common/pages/<?= $model->id.'/'.$model->background ?>" alt="">
     <? endif; ?>
     <? if($fileType == 'video'):  ?>
-        <video class="pageBg" src="/frontend/web/common/pages/<?= $pageId.'/'.$background ?>" autoplay loop alt="">
+        <video class="pageBg" src="/frontend/web/common/pages/<?= $model->id.'/'.$model->background ?>" autoplay loop alt="">
         </video>
     <? endif; ?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h1><?= $title ?></h1>
+                    <h1><?= $model -> title ?></h1>
                 </div>
             </div>
         </div>
@@ -67,8 +67,9 @@ $this->title = $title;
         <div class="row">
             <div class="col-md-12 pt-5 pb-5">
                 <?= Alert::widget() ?>
-                <?= $content ?>
+                <?= $model->content ?>
             </div>
         </div>
     </div>
 </section>
+

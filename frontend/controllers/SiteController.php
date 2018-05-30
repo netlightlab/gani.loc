@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\components\PageRule;
 use common\models\Banners;
 use common\models\Cities;
 use common\models\Mainform;
@@ -176,10 +177,10 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
+    /*public function actionAbout()
     {
         return $this->render('about');
-    }
+    }*/
 
     /**
      * Signs user up.
@@ -252,22 +253,14 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionPage($id)
+    public function actionPage($alias)
     {
-        $page = new Page();
+        /*$page = new Page();
         $data = $page->data();
         $title = $page->title;
         $content = $page->content;
         $background = $page->background;
-        $pageId = $id;
 
-        $backgroundFile = pathinfo($page->background);
-        $bgFExt = $backgroundFile['extension'];
-
-        if($bgFExt == 'jpg' || $bgFExt == 'png' || $bgFExt == 'jpeg')
-            $this->bgFileExtension = 'image';
-        else
-            $this->bgFileExtension = 'video';
 
         return $this->render('page', [
             "title" => $title,
@@ -276,6 +269,26 @@ class SiteController extends Controller
             "data" => $data,
             "pageId" => $pageId,
             "fileType" => $this->bgFileExtension
+        ]);*/
+        if($alias)
+            $model = Page::findOne(['url' => $alias]);
+
+        if(!$model)
+            throw new BadRequestHttpException();
+
+        $pageId = $model->id;
+
+        $backgroundFile = pathinfo($model->background);
+        $bgFExt = $backgroundFile['extension'];
+
+        if($bgFExt == 'jpg' || $bgFExt == 'png' || $bgFExt == 'jpeg')
+            $this->bgFileExtension = 'image';
+        else
+            $this->bgFileExtension = 'video';
+
+        return $this->render('page', [
+            'model' => $model,
+            'fileType' => $this->bgFileExtension
         ]);
     }
 

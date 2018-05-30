@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property string $url
  * @property string $title
  * @property string $description
  * @property string $keywords
@@ -34,7 +35,7 @@ class Catalog extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
-            [['title', 'description', 'keywords', 'text', 'recommended'], 'trim']
+            [['title', 'description', 'keywords', 'text', 'recommended', 'url'], 'trim']
         ];
     }
 
@@ -45,6 +46,7 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             'name' => 'Название',
+            'url' => 'Алиас',
             'title' => 'Заголовок',
             'text' => 'Текст',
             'image' => 'Изображение',

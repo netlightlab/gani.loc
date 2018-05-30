@@ -47,7 +47,8 @@ class Menu extends ActiveRecord
     }
 
     public function getAllLinks(){
-        $pages = ArrayHelper::map(Page::find()->select('id,title')->indexBy('id')->asArray()->all(), 'id', 'title');
+
+        $pages = ArrayHelper::map(Page::find()->select('url,title')->asArray()->all(), 'url', 'title');
         array_unshift($pages, '');
         return $pages;
     }

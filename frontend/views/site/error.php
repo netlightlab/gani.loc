@@ -42,17 +42,14 @@ $this->title = $name;
     <div class="container">
         <div class="row">
             <div class="col-md-12 my-5">
-                <h2><?= Html::encode($this->title) ?></h2>
-
-                <div class="alert alert-danger">
-                    <?= nl2br(Html::encode($message)) ?>
-                </div>
-                <p>
-                    Вышеупомянутая ошибка возникла, когда веб-сервер обрабатывал ваш запрос.
-                </p>
-                <p>
-                    Если вы считаете, что это ошибка сервера, свяжитесь с нами. Спасибо.
-                </p>
+<!--                <h2>--><?//= Html::encode($this->title) ?><!--</h2>-->
+                <h2>Страница не найдена!</h2>
+                <p></p>
+                <!--<div class="alert alert-danger">
+                    <? //nl2br(Html::encode($message)) ?>
+                    <? //nl2br('Переходите <a href="/">НА ГЛАВНУЮ</a> или воспользуйтесь поиском туров') ?>
+                </div>-->
+                <h5>Переходите <a href="/">НА ГЛАВНУЮ</a> или воспользуйтесь поиском туров.</h5>
             </div>
         </div>
     </div>
