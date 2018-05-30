@@ -76,15 +76,18 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-//            'suffix' => '.html',
+            'suffix' => '/',
             'rules' => [
                 [
                     'class' => 'common\components\PageUrlRule',
                 ],
-//                '' => 'site/page',
+                '/' => 'site/index',
 //                '<action>'=>'site/<action>',
-                '<alias:[\w\-]+>' => 'site/page',
+                'catalog' => 'catalog/index',
+                '<alias:[\w\d\-]+>' => 'site/page',
                 'catalog/<alias:[\w\-]+>' => 'catalog/view',
+                'tours/<id:[\d\-]+>' => 'tours/view',
+//                'cart' => 'cart/index'
             ],
         ],
         'assetManager' => [

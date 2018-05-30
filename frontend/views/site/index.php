@@ -19,7 +19,7 @@ $category = new Categories();
             </div>
         </div>
         <?php $form = \yii\widgets\ActiveForm::begin([
-                'action' => '/tours/search',
+                'action' => '/tours/search/',
                 'method' => 'GET',
         ]) ?>
             <div class="row tour-block-white pb-2">

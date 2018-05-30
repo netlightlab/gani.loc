@@ -270,9 +270,13 @@ class SiteController extends Controller
             "pageId" => $pageId,
             "fileType" => $this->bgFileExtension
         ]);*/
-        if($alias)
+        if($alias && is_numeric($alias)){
+            $model = Page::findOne(['id' => $alias]);
+        }elseif($alias && !is_numeric($alias)){
             $model = Page::findOne(['url' => $alias]);
-
+        }else{
+            throw new BadRequestHttpException();
+        }
         if(!$model)
             throw new BadRequestHttpException();
 

@@ -75,7 +75,7 @@ class CartController extends Controller
 
         Yii::$app->session['tour_id'] = $this->orders;
 
-        $this->redirect('/cart/index');
+        $this->redirect('/cart/index/');
 
         return true;
     }
@@ -183,12 +183,12 @@ class CartController extends Controller
         }
 
         //$arrReq['pg_success_url'] =Url::to(['api/pay-ok'],true);
-        $arrReq['pg_success_url'] =Url::to(['cart/pay-ok'],true);
+        $arrReq['pg_success_url'] =Url::to(['cart/pay-ok/'],true);
         $arrReq['pg_success_url_method'] = 'AUTOPOST';
         //$arrReq['pg_check_url'] = Url::to(['api/pay-check'],true);
-        $arrReq['pg_check_url'] = Url::to(['cart/pay-check'],true);
+        $arrReq['pg_check_url'] = Url::to(['cart/pay-check/'],true);
         //$arrReq['pg_result_url'] = Url::to(['api/pay-result'],true);
-        $arrReq['pg_result_url'] = Url::to(['cart/pay-result'],true);
+        $arrReq['pg_result_url'] = Url::to(['cart/pay-result/'],true);
         $arrReq['pg_request_method'] = 'POST';
         /* Параметры безопасности сообщения. Необходима генерация pg_salt и подписи сообщения. */
         $arrReq['pg_salt'] = rand(21, 43433);
@@ -227,14 +227,14 @@ class CartController extends Controller
         $order_id = $arrParams['pg_order_id'];
         if (PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key)) {
             Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
-            return $this->redirect(['cart/index']);
+            return $this->redirect(['cart/index/']);
         } else {
             throw new BadRequestHttpException();
         }
     }
 
     public function actionGetTest(){
-        return $this->redirect(['cart/index']);
+        return $this->redirect(['cart/index/']);
     }
 
     public function actionPayResult()

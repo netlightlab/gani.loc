@@ -20,14 +20,20 @@ class PageUrlRule implements UrlRuleInterface
     public function createUrl($manager, $route, $params)
     {
         if ($route === 'site/page') {
-            return $params['id'];
+            if(is_numeric($params['id'])){
+                $url = Page::find()->select('url')->where(['id' => $params['id']])->one();
+                if($url -> url)
+                    return $url -> url . '/';
+            }
+
+            return $params['id'] . '/';
         }
         if($route === 'catalog/view'){
             $url = Catalog::find()->select('url')->where(['id' => $params['id']])->one();
             if($url -> url)
-                return 'catalog/' . $url -> url;
+                return 'catalog/' . $url -> url . '/';
 
-            return 'catalog/' . $params['id'];
+            return 'catalog/' . $params['id'] . '/';
         }
         return false;  // данное правило не применимо
     }

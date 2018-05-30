@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use frontend\models\Menu;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 $context = $this->context;
@@ -103,7 +104,7 @@ $context = $this->context;
             <div class="col-md-3 col-xs-3 text-right d-flex justify-content-end align-items-center d-none">
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
                     <li class="profile-button pl-0 pr-4" style="border: none;">
-                        <?= Html::a('КОРЗИНА ('.count(Yii::$app->session->get("tour_id")).')', ['/cart/index'], ["class" => "nav-link"]) ?>
+                        <?= Html::a('КОРЗИНА ('.count(Yii::$app->session->get("tour_id")).')', Url::to(['cart/index']), ["class" => "nav-link"]) ?>
                     </li>
                     <li class="profile-button pl-0 pr-4" style="border: none;">
                         <?= Html::a('ПОИСК', ['site/index']) ?>
@@ -129,7 +130,7 @@ $context = $this->context;
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <? $form = \yii\widgets\ActiveForm::begin([
-                    'action' => '/global-search/global-search',
+                    'action' => '/global-search/global-search/',
                     'method' => 'GET'
                 ]) ?>
                 <?= Html::input('text', 'param', '', ['class' => 'search-input-footer', 'placeholder' => 'Поиск']) ?>

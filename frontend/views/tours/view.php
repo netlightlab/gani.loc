@@ -455,7 +455,7 @@ $script = <<<JS
         var form = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '/cart/add',
+            url: '/cart/add/',
             data: form,
             success: function(response){
                 $('#addToCart button').text('Добавлено');
@@ -468,7 +468,7 @@ $script = <<<JS
         var form = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '/cart/add-post',
+            url: '/cart/add-post/',
             data: form
         });
         return false;

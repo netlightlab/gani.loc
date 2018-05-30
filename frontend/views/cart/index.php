@@ -10,6 +10,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
+use yii\helpers\Url;
 
 $this->title = 'Корзина';
 
@@ -44,7 +45,7 @@ $this->title = 'Корзина';
 
     <section class="pt-5 pb-5" style="background: #f9f9f9;">
         <? if(is_array($orders)): ?>
-            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
+            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout/", 'options' => ['style' => 'width: 100%']]); ?>
             <div class="container">
                 <div class="row">
                     <main class="col-md-9">
@@ -100,7 +101,7 @@ $this->title = 'Корзина';
                             </div>
                             <div class="col-md-12">
                                 <?= Html::submitButton('Оформить заказ', ['class' => 'alltours_btn-info', 'style' => 'cursor: pointer; border: none;']) ?>
-								<?= Html::a('Информация о платеже', ['./site/page', 'id' => 5], ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none;']) ?>
+								<?= Html::a('Информация о платеже', Url::to(['site/page', 'id' => 5]), ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none;']) ?>
                             </div>
                         </div>
                     </aside>
@@ -132,7 +133,7 @@ $script = <<<JS
             var id = $(this).attr('data-remove');
             $.ajax({
                 type: 'POST',
-                url: '/cart/remove-from-cart',
+                url: '/cart/remove-from-cart/',
                 data: { id: id },
                 success: function(response){
                     $('[data-row=' + id + ']').remove();
