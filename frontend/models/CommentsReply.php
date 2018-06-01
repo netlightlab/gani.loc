@@ -30,6 +30,7 @@ class CommentsReply extends ActiveRecord
     {
         return [
             ['comment', 'required'],
+            ['comment_id', 'trim'],
             ['comment', 'trim'],
         ];
     }

@@ -592,7 +592,7 @@ $replyComment = <<<JS
          };
 
         if (!$(this).parent().children('form')[0]) {
-            $('<form>', {class: 'CReply',method: 'post', id: id, enctype: 'multipart/form-data', action: '/tours/view?id=' + $tour->id}).appendTo($(this).parent().append()).append(
+            $('<form>', {class: 'CReply',method: 'post', id: id, enctype: 'multipart/form-data'}).appendTo($(this).parent().append()).append(
             '<textarea id="formCReply" class="form-control cmReply-area" name="CommentsReply[comment]" placeholder="Добавить ответ" required="true" aria-required="true" autofocus autocomplete="off" required maxlength="1000" rows="1">').append(
                 '<div class="CReply-formGroup">' +
                 '<a class="closeCReply">Отменить</a>' +
@@ -600,6 +600,21 @@ $replyComment = <<<JS
                 '<button type="submit" name="submit">Отправить</button>' +                
                  '</div></form>'
             );
+            
+            $('.CReply').submit(function(e){
+                e.preventDefault();
+                var data = $(this).serialize();
+                
+                $.ajax({
+                    url: '/tours/16/',
+                    method: 'POST',
+                    data: data,
+                    success: function(response){
+                        console.log(response);   
+                    }            
+                });
+            });
+            
             
         }
         
@@ -611,7 +626,14 @@ $replyComment = <<<JS
         setTimeout(function() {
           elem.parent().find('.cmReply-area').css("width", "100%");
         }, 100);
+        
+        
+        
+        
+        
      });
+
+    
 
   
 
