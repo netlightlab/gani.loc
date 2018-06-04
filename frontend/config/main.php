@@ -76,7 +76,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'suffix' => '/',
+//            'suffix' => '/',
             'rules' => [
                 [
                     'class' => 'common\components\PageUrlRule',
@@ -84,6 +84,7 @@ return [
                 '/' => 'site/index',
 //                '<action>'=>'site/<action>',
                 'catalog' => 'catalog/index',
+                'news' => 'news/index',
                 '<alias:[\w\d\-]+>' => 'site/page',
                 'catalog/<alias:[\w\-]+>' => 'catalog/view',
                 'tours/<id:[\d\-]+>' => 'tours/view',

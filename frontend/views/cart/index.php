@@ -45,7 +45,7 @@ $this->title = 'Корзина';
 
     <section class="pt-5 pb-5" style="background: #f9f9f9;">
         <? if(is_array($orders)): ?>
-            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout/", 'options' => ['style' => 'width: 100%']]); ?>
+            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
             <div class="container">
                 <div class="row">
                     <main class="col-md-9">
@@ -133,7 +133,7 @@ $script = <<<JS
             var id = $(this).attr('data-remove');
             $.ajax({
                 type: 'POST',
-                url: '/cart/remove-from-cart/',
+                url: '/cart/remove-from-cart',
                 data: { id: id },
                 success: function(response){
                     $('[data-row=' + id + ']').remove();

@@ -293,13 +293,15 @@ $category = new Categories();
                                             </div>
                                         </article>
                                     <? endforeach; ?>
-                                </div>
+                                
                                 <?php else: ?>
                                     <span class="h4" align="center">В данном туре отзывы отсутствуют, <span><b>будьте первыми!</b></span></span>
                                 <?php endif; ?>
+								</div>
                             </div>
                         </div>
                     </div>
+				
                     <? if($isauthorize): ?>
                         <div class="row">
                             <div class="col-md-12 mt-5">
@@ -455,7 +457,7 @@ $script = <<<JS
         var form = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '/cart/add/',
+            url: '/cart/add',
             data: form,
             success: function(response){
                 $('#addToCart button').text('Добавлено');
@@ -468,7 +470,7 @@ $script = <<<JS
         var form = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '/cart/add-post/',
+            url: '/cart/add-post',
             data: form
         });
         return false;

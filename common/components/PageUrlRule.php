@@ -26,15 +26,19 @@ class PageUrlRule implements UrlRuleInterface
                     return $url -> url . '/';
             }
 
-            return $params['id'] . '/';
+            //return $params['id'] . '/';
+            return $params['id'];
         }
         if($route === 'catalog/view'){
             $url = Catalog::find()->select('url')->where(['id' => $params['id']])->one();
             if($url -> url)
-                return 'catalog/' . $url -> url . '/';
+                return 'catalog/' . $url -> url;
+                //return 'catalog/' . $url -> url . '/';
 
-            return 'catalog/' . $params['id'] . '/';
+            return 'catalog/' . $params['id'];
+            //return 'catalog/' . $params['id'] . '/';
         }
+		
         return false;  // данное правило не применимо
     }
     public function parseRequest($manager, $request)

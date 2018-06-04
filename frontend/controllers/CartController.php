@@ -32,10 +32,11 @@ class CartController extends Controller
 
     public function beforeAction($action)
     {
-        if($action->id == 'pay-result'){
+		//print_r($action->id);
+        if($action->id == 'pay-result' || $action->id == 'pay-ok'){
             $this->enableCsrfValidation = false;
         }
-
+		
         return parent::beforeAction($action);
     }
 
@@ -58,24 +59,26 @@ class CartController extends Controller
     }
 
     public function actionAdd(){
-        $this->orders = Yii::$app->session->get('tour_id');
+        //$this->orders = Yii::$app->session->get('tour_id');
+		//$this->orders[] .= Yii::$app->request->post('tour_id');
 
         ArrayHelper::setValue($this->orders, Yii::$app->request->post('tour_id'),(int)Yii::$app->request->post('tour_id'));
 
-
         Yii::$app->session['tour_id'] = $this->orders;
+		
+		//print_r(Yii::$app->request->post('tour_id'));
 
         return true;
     }
 
     public function actionAddPost(){
-        $this->orders = Yii::$app->session->get('tour_id');
+        //$this->orders = Yii::$app->session->get('tour_id');
 
         ArrayHelper::setValue($this->orders, Yii::$app->request->post('tour_id'),(int)Yii::$app->request->post('tour_id'));
 
         Yii::$app->session['tour_id'] = $this->orders;
 
-        $this->redirect('/cart/index/');
+        $this->redirect('/cart/index');
 
         return true;
     }
@@ -150,7 +153,7 @@ class CartController extends Controller
     public function actionAuth(){
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('/cart/index');
+            return $this->redirect('/cart/index/');
         } else {
             return $this->render('auth', [
                 'model' => $model
@@ -183,12 +186,12 @@ class CartController extends Controller
         }
 
         //$arrReq['pg_success_url'] =Url::to(['api/pay-ok'],true);
-        $arrReq['pg_success_url'] =Url::to(['cart/pay-ok/'],true);
+        $arrReq['pg_success_url'] = Url::to(['cart/pay-ok'],true);
         $arrReq['pg_success_url_method'] = 'AUTOPOST';
         //$arrReq['pg_check_url'] = Url::to(['api/pay-check'],true);
-        $arrReq['pg_check_url'] = Url::to(['cart/pay-check/'],true);
+        $arrReq['pg_check_url'] = Url::to(['cart/pay-check'],true);
         //$arrReq['pg_result_url'] = Url::to(['api/pay-result'],true);
-        $arrReq['pg_result_url'] = Url::to(['cart/pay-result/'],true);
+        $arrReq['pg_result_url'] = Url::to(['cart/pay-result'],true);
         $arrReq['pg_request_method'] = 'POST';
         /* Параметры безопасности сообщения. Необходима генерация pg_salt и подписи сообщения. */
         $arrReq['pg_salt'] = rand(21, 43433);
@@ -227,6 +230,7 @@ class CartController extends Controller
         $order_id = $arrParams['pg_order_id'];
         if (PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key)) {
             Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
+			//print_r(PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key));
             return $this->redirect(['cart/index/']);
         } else {
             throw new BadRequestHttpException();
@@ -244,6 +248,7 @@ class CartController extends Controller
         \Yii::$app->response->format = Response::FORMAT_XML;
         $arrParams = $_POST;
         $order_id = $arrParams['pg_order_id'];
+		//print_r('rwar');
         if (PG_Signature::check($arrParams['pg_sig'], $this->action->id, $arrParams, $this->merchant_secret_key))      {
             if ($arrParams['pg_result'] == 1) {
                 Orders::updateAll(['paid' => 1], ['id' => $order_id, 'paid' => 0]);
@@ -265,7 +270,7 @@ class CartController extends Controller
             $result['pg_sig'] = PG_Signature::make($this->action->id, $result, $this->merchant_secret_key);
             return $result;
         } else {
-             new BadRequestHttpException();
+            new BadRequestHttpException();
         }
     }
 
