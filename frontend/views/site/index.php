@@ -10,6 +10,7 @@ use common\models\Categories;
 $category = new Categories();
 
 ?>
+
 <section class="section-header-main">
     <video class="pageBg" src="/frontend/web/common/pages/1/uplmain.mp4" autoplay="" loop="" muted="" alt=""></video>
     <div class="container">
@@ -227,16 +228,16 @@ $category = new Categories();
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/king.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Лучшие туры</span>
-                <p>Чем вы хотите заняться на выходных и в отпуске в Казахстане? Все туры Казахстана тут!</p>
+                <span class="h4 pt-3 pb-2">Интереснейшие турпрограммы</span>
+                <p>Вы сможете выбрать и приобрести туры от ведущих туроператоров Казахстана. Выберите свой досуг!</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/online.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Онлайн оплата 24/7</span>
-                <p>Вы легко и быстро можете выбрать, сравнить и купить туры онлайн прямо на нашем сайте, не выходя из дома.</p>
+                <span class="h4 pt-3 pb-2">Онлайн оплата</span>
+                <p>Вам не нужно ходить по городу чтобы приобрести тур, вы можете приобрести тур не выходя из дома или офиса. Для покупки вам необходима только банковская карта, либо терминал оплаты.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
@@ -244,15 +245,15 @@ $category = new Categories();
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
                 <span class="h4 pt-3 pb-2">Лучшие цены</span>
-                <p>Поиск лучшей цены среди предложений всех компаний. У нас вы найдете различные предложения на любой бюджет.</p>
+                <p>Среди множества предложений, вы сможете выбрать наиболее подходящие вам по ценовой категории.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/rating.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Отзывы и рейтинги</span>
-                <p>Выбирайте ваш отдых по реальным отзывам и рекомендациям опытных туристов и путешественников.</p>
+                <span class="h4 pt-3 pb-2">Отзывы и обмен мнениями</span>
+                <p>Вы сможете ознакомиться с отзывами других пользователей, оставить свой и задать интересующие вас вопросы тем, кто уже воспользовался предложениями туроператоров.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
         </div>
@@ -326,7 +327,6 @@ $category = new Categories();
         </div>
     </div>
 </section>
-
 <?php
 
 $script = <<<JS

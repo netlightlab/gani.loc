@@ -72,12 +72,13 @@ $context = $this->context;
                                 <option>АКТОБЕ</option>
                             </select>
                         </li>
-                        <li class="profile-button">
-                            <select class="top_line-currency lang">
+                        <li class="">
+                            <!--<select class="top_line-currency lang">
                                 <option selected>РУССКИЙ</option>
                                 <option>КАЗАХСКИЙ</option>
                                 <option>ENGLISH</option>
-                            </select>
+                            </select>-->
+                            <?= \frontend\widgets\MultiLang\MultiLang::widget() ?>
                         </li>
                     </ul>
                 </div>
