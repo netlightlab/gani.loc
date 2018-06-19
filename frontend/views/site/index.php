@@ -252,7 +252,7 @@ $category = new Categories();
             <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/rating.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Отзывы и обмен мнениями</span>
+                <span class="h4 pt-3 pb-2">Отзывы и обмен мнениямии</span>
                 <p>Вы сможете ознакомиться с отзывами других пользователей, оставить свой и задать интересующие вас вопросы тем, кто уже воспользовался предложениями туроператоров.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
