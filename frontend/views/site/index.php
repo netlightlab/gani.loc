@@ -224,7 +224,7 @@ $category = new Categories();
             </div>
         </div>
 
-        <div class="row preim-dashed-border">
+       <div class="row preim-dashed-border">
             <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/king.png">
                 <div class="about-preim-grayLine"></div>
