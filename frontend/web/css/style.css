@@ -2482,6 +2482,12 @@ form.CReply {
     color: #0093ff;
     margin-right: 0;
 }
+.col-md-2-5
+{
+
+            width: 25%;
+        flex: 0 0 25%;
+}
 @media screen and (max-width:768px)
 {
     .col-md-2-5
