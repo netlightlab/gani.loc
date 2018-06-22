@@ -54,41 +54,7 @@ $category = new Categories();
     <section style="background: #fbfbfb;">
         <div class="container py-5">
             <div class="row">
-                <aside class="col-md-3">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="hidden_map">
-                                <a class="btn_map collapsed" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">ПОКАЗАТЬ НА КАРТЕ</a>
-                            </div>
-                        </div>
-                        <div class="col-md-12 py-3">
-                            <div id="filter">
-                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/nut-icon.png" >Фильтр</a>
-                                <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
-                                    <!--<div class="filter-block">
-                                        <h6>Выберите страну</h6>
-                                        <select id="getToursCountries">
-                                            <option> </option>
-                                            <option value="1">Казахстан</option>
-                                            <option value="2">Россия</option>
-                                        </select>
-                                    </div>-->
-                                    <?= $this->render('_filter', [
-                                        'search_form' => $search_form,
-                                        'tours' => $tours,
-                                        'formParams' => $formParams,
-                                        'categories' => $categories
-                                    ]) ?>
-                                </div>
-                            </div>
-                        </div>
-                        <?php if($banner): ?>
-                            <div class="col-md-12 text-center">
-                                <?= Html::a(Html::img('@web/common/banners/'.$banner->id.'/'.$banner->banner, ['style' => 'max-width: 100%']),$banner->link,['target' => 'blank']) ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </aside>
+                
                 <div class="col-md-9">
                     <div id="sort">
                         <div class="row">
@@ -150,6 +116,43 @@ $category = new Categories();
                         <?php Pjax::end() ?>
                     </div>
                 </div>
+                <aside class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="hidden_map">
+                                <a class="btn_map collapsed" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">ПОКАЗАТЬ НА КАРТЕ</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 py-3">
+                            <div id="filter">
+                                <a class="filter_show collapsed" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"><img src="/common/filters/loupe.png" >Фильтр</a>
+                                <div class="collapse" id="collapseFilter" aria-expanded="false" style="height: 0px;">
+                                    <!--<div class="filter-block">
+                                        <h6>Выберите страну</h6>
+                                        <select id="getToursCountries">
+                                            <option> </option>
+                                            <option value="1">Казахстан</option>
+                                            <option value="2">Россия</option>
+                                        </select>
+                                    </div>-->
+                                    <?= $this->render('_filter', [
+                                        'search_form' => $search_form,
+                                        'tours' => $tours,
+                                        'formParams' => $formParams,
+                                        'categories' => $categories
+                                    ]) ?>
+                                </div>
+                            </div>
+                           
+  
+                        </div>
+                        <?php if($banner): ?>
+                            <div class="col-md-12 text-center">
+                                <?= Html::a(Html::img('@web/common/banners/'.$banner->id.'/'.$banner->banner, ['style' => 'max-width: 100%']),$banner->link,['target' => 'blank']) ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </aside>
             </div>
         </div>
     </section>
