@@ -21,7 +21,7 @@ return [
                 [
                     'baseUrl'=>'@web',
                     'basePath'=>'@webroot',
-                    'path' => '/upload',
+                    'path' => 'uploads',
                     'name' => 'Global'
                 ],
 

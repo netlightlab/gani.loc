@@ -225,35 +225,42 @@ $category = new Categories();
         </div>
 
         <div class="row preim-dashed-border">
-            <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/king.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Интереснейшие турпрограммы</span>
-                <p>Вы сможете выбрать и приобрести туры от ведущих туроператоров Казахстана. Выберите свой досуг!</p>
+                <span class="h4 pt-3 pb-2">Полезную информацию</span>
+                <p>Новости из мира туризма, а так же многое интересное, советы и рекомендации. Куда поехать и что увидеть</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
-            <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/online.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Онлайн оплата</span>
-                <p>Вам не нужно ходить по городу чтобы приобрести тур, вы можете приобрести тур не выходя из дома или офиса. Для покупки вам необходима только банковская карта, либо терминал оплаты.</p>
+                <span class="h4 pt-3 pb-2">Покупай интересное</span>
+                <p>Самые интересные предложения туров и экскурсий от ведущих компаний по внутреннему и въездному туризму Казахстана, а так же выбери услугу, предоставляемую пользователями на частной основе.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
-            <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Лучшие цены</span>
-                <p>Среди множества предложений, вы сможете выбрать наиболее подходящие вам по ценовой категории.</p>
+                <span class="h4 pt-3 pb-2">Продавай интересное</span>
+                <p>Если вам есть что предложить, размещайте бесплатные объявления. И если они хоть как-то связанны с туризмом Казахстана, мы обязательно опубликуем их.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
-            <div class="col-md-3 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/rating.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Отзывы и обмен мнениямии</span>
-                <p>Вы сможете ознакомиться с отзывами других пользователей, оставить свой и задать интересующие вас вопросы тем, кто уже воспользовался предложениями туроператоров.</p>
+                <span class="h4 pt-3 pb-2">Отзывы</span>
+                <p>Получите информацию от реальных туристов, от тех, кто уже был и видел. Задай им интересующие вопросы.</p>
+                <button class="about-preim-btn" type="submit">Подробнее</button>
+            </div>
+            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+                <img src="common/img/preim/price.png">
+                <div class="about-preim-grayLine"></div>
+                <span class="h4 pt-3 pb-2">Лёгкая покупка</span>
+                <p>Пройди легкую и короткую регистрацию чтобы иметь возможность воспользоваться заинтересовавшим предложением. Нужен минимум. Для регистрации только электронный адрес, а для покупки желание!</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
         </div>
