@@ -25,7 +25,7 @@ $category = new Categories();
         ]) ?>
             <div class="row tour-block-white pb-2">
                 <div class="col-md-12 tour-block-search">
-                    <span>Поиск тура</span>
+                    <span><?= Yii::t('app', 'Поиск тура') ?></span>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
                     <?= Html::dropDownList('country_id', '', $searchForm['countries'], ['class' => 'form-control']) ?>

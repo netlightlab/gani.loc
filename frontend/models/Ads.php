@@ -42,7 +42,7 @@ class Ads extends ActiveRecord
     public function rules()
     {
         return [
-            ['active', 'default', 'value' => 1],
+            ['active', 'default', 'value' => 0],
             ['user_id', 'trim'],
 
             ['phone', 'trim'],

@@ -131,14 +131,14 @@ class BannersController extends Controller
             $dir = Yii::getAlias($url.'/web/common/banners/' . $id);
 
             $image = UploadedFile::getInstance($model, 'banner');
-            if($image !== NULL)
+            if($image->name !== NULL)
             {
                 $model->banner = $image;
                 $model->banner->saveAs($dir . '/' . $model->banner->name);
             }
             else
             {
-                $model->banner = $this ->save_image_update;
+                $model->banner = $this->save_image_update;
             }
 
             $model->save(false);

@@ -78,7 +78,7 @@ return [
             'showScriptName' => false,
 //            'suffix' => '/',
             'class' => 'frontend\widgets\MultiLang\components\UrlManager',
-            'languages' => ['ru', 'en'],
+            'languages' => ['ru', 'en', 'kz'],
             'enableDefaultLanguageUrlCode' => false,
             'rules' => [
                 [

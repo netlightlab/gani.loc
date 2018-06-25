@@ -12,21 +12,27 @@ use Yii;
 ?>
 
 <div class="btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="color: #fff">
         <span class="uppercase"><?= Yii::$app->language; ?></span>
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
         <li class="item-lang">
-            <?= Html::a('Go to English', array_merge(
+            <?= Html::a('English', array_merge(
                 Yii::$app->request->get(),
                 [Yii::$app->controller->route, 'language' => 'en']
             )); ?>
         </li>
         <li class="item-lang">
-            <?= Html::a('Перейти на русский', array_merge(
+            <?= Html::a('Русский', array_merge(
                 Yii::$app->request->get(),
                 [Yii::$app->controller->route, 'language' => 'ru']
+            )); ?>
+        </li>
+        <li class="item-lang">
+            <?= Html::a('Қазақша', array_merge(
+                Yii::$app->request->get(),
+                [Yii::$app->controller->route, 'language' => 'kz']
             )); ?>
         </li>
     </ul>

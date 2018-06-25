@@ -436,16 +436,16 @@ class ClassLoader
                     return false;
                 }
             }
-
-            /**
-             * Scope isolated include.
-             *
-             * Prevents access to $this/self from included files.
-             */
-            function includeFile($file)
-            {
-                include $file;
-            }
         }
     }
+}
+
+/**
+ * Scope isolated include.
+ *
+ * Prevents access to $this/self from included files.
+ */
+function includeFile($file)
+{
+    include $file;
 }
