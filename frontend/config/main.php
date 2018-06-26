@@ -77,7 +77,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
 //            'suffix' => '/',
-            'class' => 'frontend\widgets\MultiLang\components\UrlManager',
+            'class' => 'frontend\widgets\MultiLang\Components\UrlManager',
             'languages' => ['ru', 'en', 'kz'],
             'enableDefaultLanguageUrlCode' => false,
             'rules' => [

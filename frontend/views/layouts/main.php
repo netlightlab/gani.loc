@@ -8,6 +8,7 @@ use frontend\assets\AppAsset;
 use frontend\models\Menu;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
+use frontend\widgets\GSettings\GSettings;
 
 AppAsset::register($this);
 $context = $this->context;
@@ -33,9 +34,10 @@ $context = $this->context;
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-xs-2 pb-2 d-flex align-items-center">
-                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
-                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/face.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
-                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/mail.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
+                    <? //Html::a(Html::img('@web/common/img/footer/vk.png', ['width' => '26px'] ), GSettings::widget(['param' => 'whatsapp']), ['class' => 'ml-1']) ?>
+                    <?= Html::a(Html::img('@web/common/img/footer/face.png', ['width' => '26px'] ), GSettings::widget(['param' => 'facebook']), ['class' => 'ml-1', 'target' => '_blank']) ?>
+                    <?= Html::a(Html::img('@web/common/img/footer/insta.png', ['width' => '26px'] ), GSettings::widget(['param' => 'instagram']), ['class' => 'mr-1 ml-1', 'target' => '_blank']) ?>
+                    <?= Html::a(Html::img('@web/common/img/footer/mail.png', ['width' => '26px'] ), null,['href' => 'mailto:'.GSettings::widget(['param' => 'email', 'class' => 'mr-1 ml-1'])]) ?>
                 </div>
                 <div class="col-md-10 pb-2 top_line-box">
                     <ul class="profile-menu d-flex justify-content-center align-items-center">
@@ -138,13 +140,14 @@ $context = $this->context;
                 <? \yii\widgets\ActiveForm::end() ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">
-                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;+7 (___) - ___ - __ - __</p>
+                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;<?= GSettings::widget(['param' => 'phone']) ?></p>
                 <a href="#">info@eltourism.kz</a>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 d-flex justify-content-center align-items-center">
-                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?></a>
-                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/face.png' ), ['site/index']) ?></a>
-                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/mail.png' ), ['site/index']) ?></a>
+                <? //Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?>
+                <?= Html::a(Html::img('@web/common/img/footer/face.png' ), GSettings::widget(['param' => 'facebook']), ['target' => '_blank']) ?>
+                <?= Html::a(Html::img('@web/common/img/footer/insta.png' ), GSettings::widget(['param' => 'instagram']), ['target' => '_blank']) ?>
+                <?= Html::a(Html::img('@web/common/img/footer/mail.png' ), null,['href' => 'mailto:'.GSettings::widget(['param' => 'email'])]) ?>
             </div>
         </div>
     </div>

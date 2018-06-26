@@ -1,5 +1,5 @@
 <?php
-namespace frontend\widgets\MultiLang\components;
+namespace frontend\widgets\MultiLang\Components;
 defined('YII2_LOCALEURLS_TEST') || define('YII2_LOCALEURLS_TEST', false);
 use Yii;
 use yii\base\InvalidConfigException;
