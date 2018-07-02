@@ -141,7 +141,7 @@ $context = $this->context;
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">
                 <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;<?= GSettings::widget(['param' => 'phone']) ?></p>
-                <a href="#">info@eltourism.kz</a>
+                <?= Html::a(GSettings::widget(['param' => 'email']), null,['href' => 'mailto:'.GSettings::widget(['param' => 'email'])]) ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 d-flex justify-content-center align-items-center">
                 <? //Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?>
