@@ -2481,6 +2481,7 @@ form.CReply {
     color: #0093ff;
     margin-right: 0;
 }
+<<<<<<< HEAD
 
 c-reply .c-reply-thumb {
     display: flex;
@@ -2530,4 +2531,19 @@ c-reply:nth-of-type(1) {
 
 c-reply:last-child {
     border-bottom:none;
+=======
+.col-md-2-5
+{
+
+            width: 20%;
+        flex: 0 0 20%;
+}
+@media screen and (max-width:768px)
+{
+    .col-md-2-5
+    {
+            width: 100%;
+        flex: 0 0 100%;
+    }
+>>>>>>> 977c714397a5462c51b9270d87dad30441c4a36e
 }

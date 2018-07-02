@@ -15,16 +15,16 @@ return [
     'controllerMap' => [
         'elfinder' => [
             'class' => 'mihaildev\elfinder\Controller',
-            'access' => ['admin'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
             'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
             'roots' => [
                 [
-                    'baseUrl'=>'@web',
+                    'baseUrl'=>'/backend/web',
                     'basePath'=>'@webroot',
-                    'path' => '/upload',
-                    'name' => 'Global'
+                    'path' => '/uploads',
+//                    'access' => ['read' => '*', 'write' => '*'],
+                    'name' => 'Global',
                 ],
-
             ],
         ]
     ],
@@ -63,7 +63,17 @@ return [
         ],
 
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
+            'showScriptName' => false,
+            // Disable r= routes
             'enablePrettyUrl' => true,
+            'rules' => array(
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ),
+            /*'enablePrettyUrl' => true,
             'showScriptName' => false,
             //'suffix' => '.html',
             'rules' => [
@@ -71,7 +81,7 @@ return [
 
 
                 '<action>'=>'site/<action>',
-            ],
+            ],*/
         ],
         'assetManager' => [
             'basePath' => '@webroot/assets',

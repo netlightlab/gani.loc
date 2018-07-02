@@ -13,9 +13,13 @@ use yii\web\UrlRuleInterface;
 use yii\base\BaseObject;
 use frontend\models\Page;
 
+
+
 class PageUrlRule implements UrlRuleInterface
 {
+    public $languages;
 
+    /*--------------------------------------------------------------------------------------*/
 
     public function createUrl($manager, $route, $params)
     {

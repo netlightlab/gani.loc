@@ -118,10 +118,12 @@ class BannersController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public $save_image_update;
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+   
+        $this->save_image_update = $model->banner;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $url = str_replace('\\', '/', Yii::getAlias('@frontend'));
@@ -129,9 +131,14 @@ class BannersController extends Controller
             $dir = Yii::getAlias($url.'/web/common/banners/' . $id);
 
             $image = UploadedFile::getInstance($model, 'banner');
-            if($image !== NULL){
+            if($image->name !== NULL)
+            {
                 $model->banner = $image;
                 $model->banner->saveAs($dir . '/' . $model->banner->name);
+            }
+            else
+            {
+                $model->banner = $this->save_image_update;
             }
 
             $model->save(false);

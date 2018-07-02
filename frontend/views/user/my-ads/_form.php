@@ -62,6 +62,14 @@ use mihaildev\ckeditor\CKEditor;
                 ],
         ])->label('ОПИСАНИЕ*');?>
     </div>
+    <div class="col-md-12 my-3">
+        <?= $form->field($model, 'description_en')->widget(CKEditor::className(), [
+            'editorOptions' => [
+                'inline' => false,
+                'preset' => 'standart',
+            ],
+        ])->label('ОПИСАНИЕ*');?>
+    </div>
     <div class="col-md-12">
         <?= Html::submitButton('Разместить объявление', ['class' => 'btn-refresh-profile']) ?>
     </div>

@@ -22,12 +22,15 @@ use yii\base\Model;
  * @property integer $phone
  * @property string $title
  * @property string $description
+ * @property string $description_en
  * @property string $mini_image
  * @property string $gallery
  *
  */
 class Ads extends ActiveRecord
 {
+    public $body;
+
     /**
      * @inheritdoc
      */
@@ -39,7 +42,7 @@ class Ads extends ActiveRecord
     public function rules()
     {
         return [
-            ['active', 'default', 'value' => 1],
+            ['active', 'default', 'value' => 0],
             ['user_id', 'trim'],
 
             ['phone', 'trim'],
@@ -50,6 +53,7 @@ class Ads extends ActiveRecord
             ['title', 'string', 'max' => 80],
 
             ['description', 'trim'],
+            ['description_en', 'trim'],
             ['description', 'required', 'message' => 'Необходимо указать описание'],
 
             ['mini_image', 'file'],

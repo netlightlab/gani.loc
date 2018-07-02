@@ -8,6 +8,7 @@ use frontend\assets\AppAsset;
 use frontend\models\Menu;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
+use frontend\widgets\GSettings\GSettings;
 
 AppAsset::register($this);
 $context = $this->context;
@@ -33,9 +34,10 @@ $context = $this->context;
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-xs-2 pb-2 d-flex align-items-center">
-                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
-                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/face.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
-                    <a href="#"><?= Html::a(Html::img('@web/common/img/footer/mail.png', ['width' => '26px'] ), ['site/index'], ['class' => 'mr-1 ml-1']) ?></a>
+                    <? //Html::a(Html::img('@web/common/img/footer/vk.png', ['width' => '26px'] ), GSettings::widget(['param' => 'whatsapp']), ['class' => 'ml-1']) ?>
+                    <?= Html::a(Html::img('@web/common/img/footer/face.png', ['width' => '26px'] ), GSettings::widget(['param' => 'facebook']), ['class' => 'ml-1', 'target' => '_blank']) ?>
+                    <?= Html::a(Html::img('@web/common/img/footer/insta.png', ['width' => '26px'] ), GSettings::widget(['param' => 'instagram']), ['class' => 'mr-1 ml-1', 'target' => '_blank']) ?>
+                    <?= Html::a(Html::img('@web/common/img/footer/mail.png', ['width' => '26px'] ), null,['href' => 'mailto:'.GSettings::widget(['param' => 'email', 'class' => 'mr-1 ml-1'])]) ?>
                 </div>
                 <div class="col-md-10 pb-2 top_line-box">
                     <ul class="profile-menu d-flex justify-content-center align-items-center">
@@ -72,12 +74,13 @@ $context = $this->context;
                                 <option>АКТОБЕ</option>
                             </select>
                         </li>
-                        <li class="profile-button">
-                            <select class="top_line-currency lang">
+                        <li class="">
+                            <!--<select class="top_line-currency lang">
                                 <option selected>РУССКИЙ</option>
                                 <option>КАЗАХСКИЙ</option>
                                 <option>ENGLISH</option>
-                            </select>
+                            </select>-->
+                            <?= \frontend\widgets\MultiLang\MultiLang::widget() ?>
                         </li>
                     </ul>
                 </div>
@@ -137,17 +140,63 @@ $context = $this->context;
                 <? \yii\widgets\ActiveForm::end() ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">
-                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;+7 (___) - ___ - __ - __</p>
-                <a href="#">info@eltourism.kz</a>
+                <p><?= Html::img('@web/common/img/footer/phone.png') ?>&nbsp;&nbsp;&nbsp;<?= GSettings::widget(['param' => 'phone']) ?></p>
+                <?= Html::a(GSettings::widget(['param' => 'email']), null,['href' => 'mailto:'.GSettings::widget(['param' => 'email'])]) ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 d-flex justify-content-center align-items-center">
-                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?></a>
-                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/face.png' ), ['site/index']) ?></a>
-                <a href="#"><?= Html::a(Html::img('@web/common/img/footer/mail.png' ), ['site/index']) ?></a>
+                <? //Html::a(Html::img('@web/common/img/footer/vk.png' ), ['site/index']) ?>
+                <?= Html::a(Html::img('@web/common/img/footer/face.png' ), GSettings::widget(['param' => 'facebook']), ['target' => '_blank']) ?>
+                <?= Html::a(Html::img('@web/common/img/footer/insta.png' ), GSettings::widget(['param' => 'instagram']), ['target' => '_blank']) ?>
+                <?= Html::a(Html::img('@web/common/img/footer/mail.png' ), null,['href' => 'mailto:'.GSettings::widget(['param' => 'email'])]) ?>
             </div>
         </div>
     </div>
 </footer>
+
+
+<script type="text/javascript">
+    var yaParams = {};
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://ip.up66.ru/', true);
+    xhr.onload = function() {
+
+        yaParams.ip = this.responseText;
+    }
+    xhr.send();
+</script>
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter48947582 = new Ya.Metrika({
+                    id:48947582,
+                    params:window.yaParams,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48947582" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <?php $this->endBody() ?>
 </body>
 </html>

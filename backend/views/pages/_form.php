@@ -10,10 +10,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
+use yii\web\JsExpression;
+use mihaildev\elfinder\InputFile;
 ?>
-
-
-
 
 <?php $form = ActiveForm::begin(['id' => 'form-page-create' , 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')->textInput(['placeholder' => 'Например: О нас'])->label('Название') ?>
@@ -22,11 +21,17 @@ use mihaildev\elfinder\ElFinder;
     <?= Html::img('/frontend/web/common/pages/'. $model->id .'/'. $model->background, ['width' => 200]) ?>
 <? endif; ?>
 <?= $form->field($model, 'background')->fileInput()->label('Изображение') ?>
-<?= $form->field($model, 'content')->widget(CKEditor::className(),[
+<?= $form->field($model, 'content')->widget(CKEditor::class,[
     'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
-        'preset' => 'full'
+        'preset' => 'full',
+//        'path' => 'web/uploads'
+    'language' => 'ru'
     ]),
 ]); ?>
+
+
+
+
 <?= $form->field($model, 'url')->textInput()->label('ЧПУ') ?>
 <?= $form->field($model, 'active')->checkbox() ?>
 <?= $form->field($model, 'show')->checkbox() ?>

@@ -12,9 +12,12 @@ namespace frontend\controllers;
 use yii\web\Controller;
 use frontend\models\Ads;
 use common\models\User;
+use Yii;
 
 class AdsController extends Controller
 {
+    public $body;
+
     public function actions()
     {
         return [
@@ -32,6 +35,14 @@ class AdsController extends Controller
 
     public function actionView($id){
         $ads = Ads::findOne($id);
+        $lang = Yii::$app->language;
+
+        if($lang === 'ru'){
+            $ads->body = $ads->description;
+        }elseif ($lang === 'en'){
+            $ads->body = $ads->description_en;
+        }
+
         $user = User::find()->where(['id' => $ads->user_id])->one();
 
         $adsGallery = unserialize($ads['gallery']);
@@ -41,5 +52,9 @@ class AdsController extends Controller
             'user' => $user,
             'gallery' => $adsGallery
         ]);
+    }
+
+    public function getAdsBody(){
+
     }
 }

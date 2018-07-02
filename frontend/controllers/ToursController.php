@@ -83,7 +83,7 @@ class ToursController extends Controller
         $photo = $getUser['user_photo'];
 
         $comment = Comments::find()->where(['tour_id' => $id, 'active' => 1])->orderBy(['id' => SORT_DESC])->all();
-        $reviews_count = Comments::find()->where(['tour_id' => $id])->count();
+        $reviews_count = Comments::find()->where(['tour_id' => $id, 'active' => 1])->count();
 
         Yii::$app->user->isGuest ? $sign = 0 : $sign = 1;
 
@@ -105,7 +105,7 @@ class ToursController extends Controller
             $model->user_id = Yii::$app->user->id;
             $model->user_photo = $photo;
             $model->fio = $fio;
-            $model->active = 1;
+            $model->active = 0;
             $model->reviews;
             $model->load_photo;
             $model->recommendation = 1;

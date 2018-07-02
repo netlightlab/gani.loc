@@ -53,10 +53,10 @@ $this->title = $ads->title;
                 </div>
             </div>
             <div class="col-md-8">
-                <span class="h4">Номер телефона:</span>
+                <span class="h4"><?= Yii::t('app', 'Номер телефона') ?>:</span>
                 <p><b><?= $ads->phone ?></b></p>
-                <span class="h4">Описание:</span>
-                <p><?= $ads->description ?></p>
+                <span class="h4"><?= Yii::t('app', 'Описание') ?>:</span>
+                <p><?= $ads->body ?></p>
             </div>
             <div class="col-md-12">
                 <span class="h4">Галерея фотографии:</span>

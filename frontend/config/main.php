@@ -9,7 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'language' => 'RU',
+    'language' => 'ru',
     'bootstrap' => ['log'],
     //'homeUrl' => '/',
     'controllerNamespace' => 'frontend\controllers',
@@ -77,6 +77,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
 //            'suffix' => '/',
+            'class' => 'frontend\widgets\MultiLang\Components\UrlManager',
+            'languages' => ['ru', 'en', 'kz'],
+            'enableDefaultLanguageUrlCode' => false,
             'rules' => [
                 [
                     'class' => 'common\components\PageUrlRule',
@@ -94,6 +97,19 @@ return [
         'assetManager' => [
             'basePath' => '@webroot/assets',
             'baseUrl' => '@web/assets'
+        ],
+
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    // каталог, где будут располагаться словари
+                    'basePath' => '@common/messages',
+                    // исходный язык, на котором изначально
+                    // написаны фразы в приложении
+                    'sourceLanguage' => 'ru',
+                ],
+            ],
         ],
     ],
     'params' => $params,
