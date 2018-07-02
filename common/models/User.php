@@ -224,4 +224,16 @@ class User extends ActiveRecord implements IdentityInterface
         $role = $db->getRolesByUser($id);
         return $role;
     }
+
+    public function getUserPhoto($userId) {
+        $user = static::find()->where(['id' => $userId])->select(['user_photo'])->asArray()->one();
+
+        return $user['user_photo'];
+    }
+
+    public function getUserName($userId) {
+        $user = static::find()->where(['id' => $userId])->select(['user_name'])->asArray()->one();
+
+        return $user['user_name'];
+    }
 }

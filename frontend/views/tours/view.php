@@ -12,8 +12,8 @@ use yii\bootstrap\ActiveForm;
 use common\models\Categories;
 
 $this->title = $tour->name;
-
 $category = new Categories();
+$iuser = new \common\models\User();
 
 ?>
 
@@ -276,8 +276,8 @@ $category = new Categories();
                                             </div>
                                             <div class="col-md-9">
                                                 <span><?= $comment->message ?></span>
-                                                <p><?= $comment->date ?></p>
-                                                <?php if($isauthorize): ?>
+                                                    <p><?= $comment->date ?></p>
+                                                <?php if($isauthorize): ?>                                                     
                                                     <a id="<?= $comment->id ?>" class="comment_reply">Ответить</a>
                                                 <?php endif; ?>
                                                 <?php if ($comment['load_photo']):?>
@@ -290,10 +290,29 @@ $category = new Categories();
                                                         <?php endforeach; ?>
                                                     </div>
                                                 <?php endif; ?>
+                                                <?php foreach ($comments_reply as $item): ?>
+                                                    <?php if ($comment->id == $item->comment_id): ?>
+                                                       <c-reply class="row">
+                                                           <div class="col-md-2">
+                                                               <div class="c-reply-thumb"><?= HTML::img('@web/common/users/'.$item->user_id.'/'.$iuser->getUserPhoto($item->user_id))?></div>
+                                                           </div>
+                                                           <div class="col-md-10">
+                                                               <div class="c-reply-header">
+                                                                   <p class="fio"><?= $iuser->getUserName($item->user_id); ?></p>
+                                                                   <p class="date"><?= $item->date ?></p>
+                                                               </div>
+                                                           </div>
+                                                           <div class="offset-md-2 col-md-10">
+                                                               <div class="c-reply-body">
+                                                                   <span class="message"><?= $item->comment ?></span>
+                                                               </div>
+                                                           </div>
+                                                       </c-reply>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
                                             </div>
                                         </article>
                                     <? endforeach; ?>
-                                
                                 <?php else: ?>
                                     <span class="h4" align="center">В данном туре отзывы отсутствуют, <span><b>будьте первыми!</b></span></span>
                                 <?php endif; ?>
@@ -598,7 +617,7 @@ $replyComment = <<<JS
             '<textarea id="formCReply" class="form-control cmReply-area" name="CommentsReply[comment]" placeholder="Добавить ответ" required="true" aria-required="true" autofocus autocomplete="off" required maxlength="1000" rows="1">').append(
                 '<div class="CReply-formGroup">' +
                 '<a class="closeCReply">Отменить</a>' +
-                '<input type="text" name="CommentsReply[comment_id]" value="'+id+'">' +
+                '<input type="text" name="CommentsReply[comment_id]" value="'+id+'" hidden>' +
                 '<button type="submit" name="submit">Отправить</button>' +                
                  '</div></form>'
             );
@@ -608,11 +627,11 @@ $replyComment = <<<JS
                 var data = $(this).serialize();
                 
                 $.ajax({
-                    url: '/tours/16/',
+                    url: '/tours/' + $tour->id,
                     method: 'POST',
                     data: data,
                     success: function(response){
-                        console.log(response);   
+                        elem.parent().find('form').remove();
                     }            
                 });
             });

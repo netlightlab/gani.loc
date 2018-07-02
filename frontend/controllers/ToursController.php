@@ -136,9 +136,16 @@ class ToursController extends Controller
             'gallery'           => $gallery,
             'isauthorize'       => $sign,
             'reviews_count'     => $reviews_count,
+            'comments_reply'    => $this->getCommetsReply(),
         ]);
 
     }
+
+    public function getCommetsReply() {
+        return CommentsReply::find()->where(['tour_id' => Yii::$app->request->get('id')])->all();
+    }
+
+
 
     protected function findModel($id) {
         if (($model = Tours::findOne($id)) !== null) {

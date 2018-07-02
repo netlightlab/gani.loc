@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * @property int $comment_id
  * @property int $tour_id
  * @property string $comment
+ * @property int $date
  */
 class CommentsReply extends ActiveRecord
 {

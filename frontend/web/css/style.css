@@ -2435,7 +2435,6 @@ form#filterForm a#lll:hover {
     color: #696969;
     font-weight: 400;
     cursor: pointer;
-    float: left;
 }
 
 .comments_tour a.comment_reply:hover {
@@ -2481,4 +2480,54 @@ form.CReply {
 .CReply-formGroup button {
     color: #0093ff;
     margin-right: 0;
+}
+
+c-reply .c-reply-thumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    border-radius: 100px;
+    box-shadow: 0 1px 1px #0000006b;
+}
+
+c-reply .c-reply-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+c-reply .c-reply-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+c-reply .c-reply-header p.fio {
+    margin: 0;
+    border-bottom: 1px solid #4e9ad6;
+}
+
+c-reply .c-reply-header p.date {
+    letter-spacing: 2px;
+    white-space: nowrap;
+    margin: 0;
+    width: 95px;
+    overflow: hidden;
+}
+
+c-reply {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+c-reply:nth-of-type(1) {
+    border-top: 1px dotted;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+c-reply:last-child {
+    border-bottom:none;
 }
