@@ -29,7 +29,7 @@ class AdsController extends Controller
 
     public function actionIndex(){
         return $this->render('index', [
-            'ads' => Ads::find()->where(['active' => 1])->all(),
+            'ads' => Ads::find()->where(['active' => 1])->orderBy(['id' => SORT_DESC])->all(),
         ]);
     }
 

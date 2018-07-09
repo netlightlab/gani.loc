@@ -86,7 +86,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $ads = Ads::find()->where(['active' => 1])->limit(4)->all();
+        $ads = Ads::find()->where(['active' => 1])->orderBy(['id' => SORT_DESC])->limit(4)->all();
         $comments = Comments::find()->where(['active' => 1])->all();
         $mailForm = new Mainform();
 
