@@ -225,7 +225,7 @@ $category = new Categories();
         </div>
 
        <div class="row preim-dashed-border">
-            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/king.png">
                 <div class="about-preim-grayLine"></div>
                 <span class="h4 pt-3 pb-2">Полезную информацию</span>
@@ -233,7 +233,7 @@ $category = new Categories();
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
-            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/online.png">
                 <div class="about-preim-grayLine"></div>
                 <span class="h4 pt-3 pb-2">Покупай интересное</span>
@@ -241,7 +241,7 @@ $category = new Categories();
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
-            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
                 <span class="h4 pt-3 pb-2">Продавай интересное</span>
@@ -249,14 +249,14 @@ $category = new Categories();
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
 
-            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/rating.png">
                 <div class="about-preim-grayLine"></div>
                 <span class="h4 pt-3 pb-2">Отзывы</span>
                 <p>Получите информацию от реальных туристов, от тех, кто уже был и видел. Задай им интересующие вопросы.</p>
                 <button class="about-preim-btn" type="submit">Подробнее</button>
             </div>
-            <div class="col-md-2-5 col-sm-6 p-0 m-0 box-top-tour pt-4 pb-4">
+            <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
                 <span class="h4 pt-3 pb-2">Лёгкая покупка</span>

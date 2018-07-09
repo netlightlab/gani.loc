@@ -276,9 +276,21 @@ $iuser = new \common\models\User();
                                             </div>
                                             <div class="col-md-9">
                                                 <span><?= $comment->message ?></span>
-                                                    <p><?= $comment->date ?></p>
-                                                <?php if($isauthorize): ?>                                                     
-                                                    <a id="<?= $comment->id ?>" class="comment_reply">Ответить</a>
+                                                <?php if($isauthorize): ?>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <a id="<?= $comment->id ?>" class="comment_reply">Ответить</a>
+                                                    </div>
+                                                    <div class="col-md-6 text-right">
+                                                        <p class="m-0"><?= date("d-m-Y", strtotime($comment->date)); ?></p>
+                                                    </div>
+                                                </div>
+                                                <?php else: ?>
+                                                <div class="row">
+                                                    <div class="col-md-12 text-right">
+                                                        <p class="m-0"><?= date("d-m-Y", strtotime($comment->date)); ?></p>
+                                                    </div>
+                                                </div>
                                                 <?php endif; ?>
                                                 <?php if ($comment['load_photo']):?>
                                                     <hr class="commentsLine">
@@ -299,7 +311,7 @@ $iuser = new \common\models\User();
                                                            <div class="col-md-10">
                                                                <div class="c-reply-header">
                                                                    <p class="fio"><?= $iuser->getUserName($item->user_id); ?></p>
-                                                                   <p class="date"><?= $item->date ?></p>
+                                                                   <p class="date"><?= date("d-m-Y", strtotime($item->date)); ?></p>
                                                                </div>
                                                            </div>
                                                            <div class="offset-md-2 col-md-10">

@@ -1608,16 +1608,6 @@ a.btn_map:hover {
     text-align: center;
 }
 
-.comments_tour .col-md-9 > p {
-    display: inline-block;
-    letter-spacing: 2px;
-    white-space: nowrap;
-    width: 95px;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    float: right;
-}
 
 .comments_tour .col-md-9 > span {
     display: block;
@@ -2481,7 +2471,6 @@ form.CReply {
     color: #0093ff;
     margin-right: 0;
 }
-<<<<<<< HEAD
 
 c-reply .c-reply-thumb {
     display: flex;
@@ -2491,6 +2480,7 @@ c-reply .c-reply-thumb {
     height: 35px;
     margin: auto;
     border-radius: 100px;
+    overflow: hidden;
     box-shadow: 0 1px 1px #0000006b;
 }
 
@@ -2510,11 +2500,7 @@ c-reply .c-reply-header p.fio {
 }
 
 c-reply .c-reply-header p.date {
-    letter-spacing: 2px;
-    white-space: nowrap;
     margin: 0;
-    width: 95px;
-    overflow: hidden;
 }
 
 c-reply {
@@ -2530,20 +2516,5 @@ c-reply:nth-of-type(1) {
 }
 
 c-reply:last-child {
-    border-bottom:none;
-=======
-.col-md-2-5
-{
-
-            width: 20%;
-        flex: 0 0 20%;
-}
-@media screen and (max-width:768px)
-{
-    .col-md-2-5
-    {
-            width: 100%;
-        flex: 0 0 100%;
-    }
->>>>>>> 977c714397a5462c51b9270d87dad30441c4a36e
+    border-bottom: none;
 }

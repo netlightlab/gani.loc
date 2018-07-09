@@ -107,7 +107,8 @@ $context = $this->context;
             <div class="col-md-3 col-xs-3 text-right d-flex justify-content-end align-items-center d-none">
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
                     <li class="profile-button pl-0 pr-4" style="border: none;">
-                        <?= Html::a('КОРЗИНА ('.count(Yii::$app->session->get("tour_id")).')', Url::to(['cart/index']), ["class" => "nav-link"]) ?>
+<!--                        --><?//= Html::a('КОРЗИНА ('.count(Yii::$app->session->get("tour_id")).')', Url::to(['cart/index']), ["class" => "nav-link"]) ?>
+                        <?= Html::a('КОРЗИНА', Url::to(['cart/index']), ["class" => "nav-link"]) ?>
                     </li>
                     <li class="profile-button pl-0 pr-4" style="border: none;">
                         <?= Html::a('ПОИСК', ['site/index']) ?>
