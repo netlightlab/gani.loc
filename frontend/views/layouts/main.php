@@ -130,7 +130,7 @@ $context = $this->context;
         <div class="row pt-3 pb-3">
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <p class="copyright">© Eltourism.kz 2016 - 2017</p>
-                <a href="#">Договор публичной оферты</a>
+                <?= Html::a(Yii::t('app', 'Договор публичной оферты'), GSettings::widget(['param' => 'oferta'])) ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <? $form = \yii\widgets\ActiveForm::begin([
