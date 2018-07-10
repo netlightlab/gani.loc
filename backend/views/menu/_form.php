@@ -13,6 +13,8 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name_kz')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'link')->dropDownList($model->getAllLinks()) ?>
     <?= $form->field($model, 'slink')->textInput() ?>

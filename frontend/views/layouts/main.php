@@ -44,7 +44,7 @@ $context = $this->context;
                         <li class="profile-button">
                             <?php
                             if (Yii::$app->user->isGuest) {
-                                echo Html::a(Html::img('@web/common/img/header/enter_profile.png')."Войти", ["site/login"], ["class" => "nav-link"]);
+                                echo Html::a(Html::img('@web/common/img/header/enter_profile.png').Yii::t('app', 'Войти'), ["site/login"], ["class" => "nav-link"]);
                             } else {
                                 echo Menu::showCab();
                             }
@@ -53,12 +53,12 @@ $context = $this->context;
                         <li class="profile-button">
                             <?php
                             if (Yii::$app->user->isGuest) {
-                                echo Html::a(Html::img('@web/common/img/header/register_profile.png')."Регистрация", ["site/signup"], ["class" => "nav-link"]);
+                                echo Html::a(Html::img('@web/common/img/header/register_profile.png').Yii::t('app', 'Регистрация'), ["site/signup"], ["class" => "nav-link"]);
                             } else {
                                 echo
                                     Html::beginForm(['/site/logout'], 'post')
                                     . Html::submitButton(
-                                        Html::img('@web/common/img/header/logout.png')."ВЫЙТИ",
+                                        Html::img('@web/common/img/header/logout.png').Yii::t('app', 'Выйти'),
                                         ['class' => 'nav-link exit-account']
                                     )
                                     . Html::endForm();
@@ -108,11 +108,11 @@ $context = $this->context;
                 <ul class="profile-menu d-flex justify-content-center align-items-center">
                     <li class="profile-button pl-0 pr-4" style="border: none;">
 <!--                        --><?//= Html::a('КОРЗИНА ('.count(Yii::$app->session->get("tour_id")).')', Url::to(['cart/index']), ["class" => "nav-link"]) ?>
-                        <?= Html::a('КОРЗИНА', Url::to(['cart/index']), ["class" => "nav-link"]) ?>
+                        <?= Html::a(Yii::t('app','КОРЗИНА'), Url::to(['cart/index']), ["class" => "nav-link"]) ?>
                     </li>
-                    <li class="profile-button pl-0 pr-4" style="border: none;">
-                        <?= Html::a('ПОИСК', ['site/index']) ?>
-                    </li>
+                    <!--<li class="profile-button pl-0 pr-4" style="border: none;">
+                        <?/*= Html::a('ПОИСК', ['site/index']) */?>
+                    </li>-->
                 </ul>
             </div>
         </div> <!-- NAVBAR -->
@@ -130,14 +130,14 @@ $context = $this->context;
         <div class="row pt-3 pb-3">
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <p class="copyright">© Eltourism.kz 2016 - 2017</p>
-                <?= Html::a(Yii::t('app', 'Договор публичной оферты'), GSettings::widget(['param' => 'oferta'])) ?>
+                <?= Html::a(Yii::t('app', 'Договор публичной оферты'), Url::toRoute(GSettings::widget(['param' => 'oferta']))) ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2">
                 <? $form = \yii\widgets\ActiveForm::begin([
                     'action' => '/global-search/global-search/',
                     'method' => 'GET'
                 ]) ?>
-                <?= Html::input('text', 'param', '', ['class' => 'search-input-footer', 'placeholder' => 'Поиск']) ?>
+                <?= Html::input('text', 'param', '', ['class' => 'search-input-footer', 'placeholder' => Yii::t('app', 'Поиск')]) ?>
                 <? \yii\widgets\ActiveForm::end() ?>
             </div>
             <div class="col-md-3 col-xs-3 pt-2 pb-2 footPhone">

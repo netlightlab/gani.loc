@@ -381,6 +381,10 @@ div.boxTour-hit .tour_link {
     z-index:9;
 }
 
+a.tour_link {
+    text-transform: uppercase;
+}
+
 div.boxTour-hit:hover .tour-img .tour-info span.h4 {
     left:15px;
 }

@@ -17,6 +17,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
+ * @property string $name_kz
+ * @property string $name_en
  * @property string $link
  * @property string $slink
  * @property int $sort
@@ -38,8 +40,8 @@ class Menu extends ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name','name_en','name_kz'], 'required'],
+            [['name','name_en','name_kz'], 'string', 'max' => 255],
             [['link'], 'string', 'max' => 150],
             [['slink'], 'string', 'max' => 150],
             [['sort'], 'integer'],

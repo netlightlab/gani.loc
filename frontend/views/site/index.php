@@ -16,7 +16,7 @@ $category = new Categories();
     <div class="container">
         <div class="row header-description-block">
             <div class="col-md-12 col-xs-12 text-center">
-                <h1 id="flick" class="header-description">ТУРЫ ПО КАЗАХСТАНУ</h1>
+                <h1 id="flick" class="header-description"><?= Yii::t('app', 'ТУРЫ ПО КАЗАХСТАНУ') ?></h1>
             </div>
         </div>
         <?php $form = \yii\widgets\ActiveForm::begin([
@@ -34,7 +34,7 @@ $category = new Categories();
                     <?= Html::dropDownList('city_id', '', $searchForm['cities'], ['class' => 'form-control']) ?>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 bg-white pb-3 position-relative">
-                    <?= Html::submitButton('Поиск тура', ['class' => 'search-tour-btn']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Поиск тура'), ['class' => 'search-tour-btn']) ?>
                     <img src="common/img/header/search.png" class="search-tour-img">
                 </div>
             </div> <!-- BLOCK TOUR -->
@@ -71,8 +71,7 @@ $category = new Categories();
         <!-- POPULAR TOUR -->
         <div class="row">
             <div class="col-md-12 col-xs-12 popular">
-                <span class="popular-description">ПОПУЛЯРНЫЕ</span>
-                <span>направления</span>
+                <?= Yii::t('app', '<span class="popular-description">ПОПУЛЯРНЫЕ</span><span>направления</span>') ?>
             </div>
         </div>
         <div class="row">
@@ -94,15 +93,14 @@ $category = new Categories();
                 </articles>
             <?php endforeach; ?>
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-                <?= Html::a('Все туры', ['tours/search'], ['class' => 'btn-all']) ?>
+                <?= Html::a(Yii::t('app', 'Все туры'), ['tours/search'], ['class' => 'btn-all']) ?>
             </div>
         </div>
         <!-- POPULAR TOUR END -->
         <!-- ADS -->
         <div class="row">
             <div class="col-md-12 col-xs-12 popular">
-                <span class="popular-description">Объявления</span>
-                <span>пользователей</span>
+                <?= Yii::t('app', '<span class="popular-description">Объявления</span><span>пользователей</span>') ?>
             </div>
             <?php foreach ($ads as $item): ?>
                 <div class="col-md-3 col-sm-4 my-3">
@@ -119,7 +117,7 @@ $category = new Categories();
                 </div>
             <?php endforeach; ?>
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-                <?= Html::a('Все объявления', ['ads/index'], ['class' => 'btn-all']) ?>
+                <?= Html::a(Yii::t('app', 'Все объявления'), ['ads/index'], ['class' => 'btn-all']) ?>
             </div>
         </div>
         <!-- ADS END -->
@@ -141,8 +139,7 @@ $category = new Categories();
 <section class="bg-category-tour">
     <!-- CATEGORY TOUR -->
     <div class="col-md-12 col-xs-12 category">
-        <span class="category-description">КАТЕГОРИЯ</span>
-        <span>тура</span>
+        <?= Yii::t('app', '<span class="category-description">КАТЕГОРИЯ</span><span>тура</span>') ?>
     </div>
     <!-- CATEGORY TOUR END -->
     <div class="container">
@@ -151,52 +148,52 @@ $category = new Categories();
                 <img src="common/img/tour-category/map.png" width="100%" height="auto">
                 <div class="jungle-icon">
                     <img src="common/img/tour-category/jungle.png"><br>
-                    <?= Html::a('ПРИРОДА', ['/tours/search', 'filter_categories[]' => 1], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app', 'Природа'), ['/tours/search', 'filter_categories[]' => 1], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="kupatsya-icon">
                     <img src="common/img/tour-category/kupatsya.png"><br>
-                    <?= Html::a('ПЛЯЖНЫЙ ОТДЫХ', ['/tours/search', 'filter_categories[]' => 6], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Пляжный отдых'), ['/tours/search', 'filter_categories[]' => 6], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="smile-icon">
                     <img src="common/img/tour-category/smile.png"><br>
-                    <?= Html::a('РАЗВЛЕЧЕНИЯ', ['/tours/search', 'filter_categories[]' => 2], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Развлечения'), ['/tours/search', 'filter_categories[]' => 2], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="babies-icon">
                     <img src="common/img/tour-category/babies.png"><br>
-                    <?= Html::a('ИСТОРИЧЕСКИЕ ТУРЫ', ['/tours/search', 'filter_categories[]' => 8], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Исторические туры'), ['/tours/search', 'filter_categories[]' => 8], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="fish-icon">
                     <img src="common/img/tour-category/fish.png"><br>
-                    <?= Html::a('АКТИВНЫЙ ОТДЫХ', ['/tours/search', 'filter_categories[]' => 4], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Активный отдых'), ['/tours/search', 'filter_categories[]' => 4], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="sport-icon">
                     <img src="common/img/tour-category/sport.png"><br>
-                    <?= Html::a('МНОГОДНЕВНЫЕ ТУРЫ', ['/tours/search', 'filter_categories[]' => 3], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Многодневные туры'), ['/tours/search', 'filter_categories[]' => 3], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="shrine-icon">
                     <img src="common/img/tour-category/shrine.png"><br>
-                    <?= Html::a('САКРАЛЬНЫЙ ТУРИЗМ', ['/tours/search', 'filter_categories[]' => 9], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Сакральный туризм'), ['/tours/search', 'filter_categories[]' => 9], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="sanatoriy-icon">
                     <img src="common/img/tour-category/sanatoriy.png"><br>
-                    <?= Html::a('БАЗЫ ОТДЫХА, САНАТОРИИ', ['/tours/search', 'filter_categories[]' => 10], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Базы отдыха, санатории'), ['/tours/search', 'filter_categories[]' => 10], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="photo-icon">
                     <img src="common/img/tour-category/photo.png"><br>
-                    <?= Html::a('ТРАНСПОРТ', ['/tours/search', 'filter_categories[]' => 7], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Транспорт'), ['/tours/search', 'filter_categories[]' => 7], ['class' => 'tour_link']) ?>
                 </div>
 
                 <div class="jeep-icon">
                     <img src="common/img/tour-category/babies.png"><br>
-                    <?= Html::a('ДЖИП-ТУРЫ', ['/tours/search', 'filter_categories[]' => 5], ['class' => 'tour_link']) ?>
+                    <?= Html::a(Yii::t('app','Джип-туры'), ['/tours/search', 'filter_categories[]' => 5], ['class' => 'tour_link']) ?>
                 </div>
             </div>
         </div>
@@ -219,8 +216,7 @@ $category = new Categories();
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12 about-preim">
-                <span>наши</span>
-                <span class="about-preim-description">ПРЕИМУЩЕСТВА</span>
+                <?= Yii::t('app', '<span>наши</span><span class="about-preim-description">ПРЕИМУЩЕСТВА</span>') ?>
             </div>
         </div>
 
@@ -228,47 +224,46 @@ $category = new Categories();
             <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/king.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Полезную информацию</span>
-                <p>Новости из мира туризма, а так же многое интересное, советы и рекомендации. Куда поехать и что увидеть</p>
-                <button class="about-preim-btn" type="submit">Подробнее</button>
+                <span class="h4 pt-3 pb-2"><?= Yii::t('app', 'Полезную информацию') ?></span>
+                <p><?= Yii::t('app', 'Новости из мира туризма, а так же многое интересное, советы и рекомендации. Куда поехать и что увидеть') ?> </p>
+                <button class="about-preim-btn" type="submit"><?= Yii::t('app', 'Подробнее') ?></button>
             </div>
 
             <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/online.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Покупай интересное</span>
-                <p>Самые интересные предложения туров и экскурсий от ведущих компаний по внутреннему и въездному туризму Казахстана, а так же выбери услугу, предоставляемую пользователями на частной основе.</p>
-                <button class="about-preim-btn" type="submit">Подробнее</button>
+                <span class="h4 pt-3 pb-2"><?= Yii::t('app', 'Покупай интересное') ?></span>
+                <p><?= Yii::t('app', 'Самые интересные предложения туров и экскурсий от ведущих компаний по внутреннему и въездному туризму Казахстана, а так же выбери услугу, предоставляемую пользователями на частной основе.') ?></p>
+                <button class="about-preim-btn" type="submit"><?= Yii::t('app', 'Подробнее') ?></button>
             </div>
 
             <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Продавай интересное</span>
-                <p>Если вам есть что предложить, размещайте бесплатные объявления. И если они хоть как-то связанны с туризмом Казахстана, мы обязательно опубликуем их.</p>
-                <button class="about-preim-btn" type="submit">Подробнее</button>
+                <span class="h4 pt-3 pb-2"><?= Yii::t('app', 'Продавай интересное') ?></span>
+                <p><?= Yii::t('app', 'Если вам есть что предложить, размещайте бесплатные объявления. И если они хоть как-то связанны с туризмом Казахстана, мы обязательно опубликуем их.') ?></p>
+                <button class="about-preim-btn" type="submit"><?= Yii::t('app', 'Подробнее') ?></button>
             </div>
 
             <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/rating.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Отзывы</span>
-                <p>Получите информацию от реальных туристов, от тех, кто уже был и видел. Задай им интересующие вопросы.</p>
-                <button class="about-preim-btn" type="submit">Подробнее</button>
+                <span class="h4 pt-3 pb-2"><?= Yii::t('app', 'Отзывы') ?></span>
+                <p><?= Yii::t('app', 'Получите информацию от реальных туристов, от тех, кто уже был и видел. Задай им интересующие вопросы.') ?></p>
+                <button class="about-preim-btn" type="submit"><?= Yii::t('app', 'Подробнее') ?></button>
             </div>
             <div class="col-md p-0 m-0 box-top-tour pt-4 pb-4">
                 <img src="common/img/preim/price.png">
                 <div class="about-preim-grayLine"></div>
-                <span class="h4 pt-3 pb-2">Лёгкая покупка</span>
-                <p>Пройди легкую и короткую регистрацию чтобы иметь возможность воспользоваться заинтересовавшим предложением. Нужен минимум. Для регистрации только электронный адрес, а для покупки желание!</p>
-                <button class="about-preim-btn" type="submit">Подробнее</button>
+                <span class="h4 pt-3 pb-2"><?= Yii::t('app', 'Лёгкая покупка') ?></span>
+                <p><?= Yii::t('app', 'Пройди легкую и короткую регистрацию чтобы иметь возможность воспользоваться заинтересовавшим предложением. Нужен минимум. Для регистрации только электронный адрес, а для покупки желание!') ?></p>
+                <button class="about-preim-btn" type="submit"><?= Yii::t('app', 'Подробнее') ?></button>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12 col-xs-12 vopros">
-                <span>задать</span>
-                <span class="vopros-description">ВОПРОС</span>
+                <?= Yii::t('app', '<span>задать</span><span class="vopros-description">ВОПРОС</span>') ?>
             </div>
         </div>
     </div>
@@ -278,8 +273,8 @@ $category = new Categories();
     <div class="container pt-5 pb-5">
         <div class="row beforeAndAfter">
             <div class="offset-md-2 col-md-8 d-flex justify-content-center align-items-center flex-column bg-vopros">
-                <span class="h5">У вас остались вопросы?</span>
-                <span class="h2"><strong>Мы ответим на них!</strong></span>
+                <span class="h5"><?= Yii::t('app', 'У вас остались вопросы?') ?></span>
+                <span class="h2"><strong><?= Yii::t('app', 'Мы ответим на них!') ?></strong></span>
                 <? $form = \yii\widgets\ActiveForm::begin([
                         'id' => 'main_form',
                         'action' => '/site/send-main-form'
@@ -296,7 +291,7 @@ $category = new Categories();
                                 <?= $form->field($mailForm, 'message', ['options' => ['class' => 'mz-div my-2']])->textarea(['class' => 'mt-2 mb-2', 'rows' => '5', 'placeholder' => 'Введите интересующий вас вопрос', 'required' => ''])->label(false) ?>
                             </div>
                             <div class="mt-3 offset-md-3 col-md-6">
-                                <?= Html::submitButton('Задать вопрос', ['class' => 'vopros-btn']) ?>
+                                <?= Html::submitButton(Yii::t('app', 'Задать вопрос'), ['class' => 'vopros-btn']) ?>
                             </div>
                         </div>
                     </div>
@@ -310,8 +305,7 @@ $category = new Categories();
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12 about-preim">
-                <span>наши</span>
-                <span class="about-preim-description">ОТЗЫВЫ</span>
+                <?= Yii::t('app', '<span>наши</span><span class="about-preim-description">ОТЗЫВЫ</span>') ?>
             </div>
             <div class="col-md-12">
                 <div class="owl-carousel">
