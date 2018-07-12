@@ -17,7 +17,7 @@ $iuser = new \common\models\User();
 
 ?>
 
-<?= $tour->back_image ? "<section class='section-header' style='background: url(../common/tour_img/".$tour->id. "/" . $tour->back_image ."')>" : "<section class='section-header' style='background: url(../common/users/no-image.png) no-repeat center; background-size: contain !important'".">" ?>
+<?= $tour->back_image ? "<section class='section-header' style='background: url(". Yii::getAlias('@web') ."/common/tour_img/".$tour->id. "/" . $tour->back_image ."')>" : "<section class='section-header' style='background: url(../common/users/no-image.png) no-repeat center; background-size: contain !important'".">" ?>
     <div class="parallax-tour">
         <div class="container">
             <div class="row">
@@ -27,7 +27,7 @@ $iuser = new \common\models\User();
                 </div>
                 <div class="col-md-4 col-sm-4 parallax-tour-price">
                     <p><?= $tour->price ?><span>₸</span></p>
-                    <span>*на человека</span>
+                    <span>*<?= Yii::t('app', 'на человека') ?></span>
                 </div>
             </div>
         </div>
@@ -58,8 +58,8 @@ $iuser = new \common\models\User();
                     <div id="single-fix" class="row">
                         <div class="col-md-12">
                             <ul id="w1" class="nav view_tour-tabs">
-                                <li><a class="tab-link active" href="#info" data-toggle="tab" aria-expanded="true"><span>Информация</span></a></li>
-                                <li><a class="tab-link" href="#reviews" data-toggle="tab" aria-expanded="true"><span>Отзывы ( <?= $reviews_count ?> )</span></a></li>
+                                <li><a class="tab-link active" href="#info" data-toggle="tab" aria-expanded="true"><span><?= Yii::t('app', 'Информация') ?></span></a></li>
+                                <li><a class="tab-link" href="#reviews" data-toggle="tab" aria-expanded="true"><span><?= Yii::t('app', 'Отзывы') ?> ( <?= $reviews_count ?> )</span></a></li>
                             </ul>
                             <div class="tab-content view_tour_content">
                                 <div id="info" class="tab-pane active">
@@ -67,7 +67,7 @@ $iuser = new \common\models\User();
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <span class="h3">Подробное описание</span>
+                                                    <span class="h3"><?= Yii::t('app', 'Подробное описание') ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@ $iuser = new \common\models\User();
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <span class="h3">Цены</span>
+                                                    <span class="h3"><?= Yii::t('app', 'Цены') ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,7 +177,7 @@ $iuser = new \common\models\User();
                                             <div class="col-md-3">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <span class="h3">Условия покупки</span>
+                                                        <span class="h3"><?= Yii::t('app','Условия покупки') ?></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,7 +196,7 @@ $iuser = new \common\models\User();
                                             <div class="col-md-3">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <span class="h3">Условия возврата</span>
+                                                        <span class="h3"><?= Yii::t('app','Условия возврата') ?></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,7 +214,7 @@ $iuser = new \common\models\User();
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <span class="h3">Категория тура</span>
+                                                    <span class="h3"><?= Yii::t('app','Категория тура') ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -385,7 +385,7 @@ $iuser = new \common\models\User();
                 </main>
                 <aside class="col-md-4">
                     <div id="sidebar">
-                        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="true" aria-controls="collapseMap">ПОКАЗАТЬ ТОЧКУ СБОРА</a>
+                        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="true" aria-controls="collapseMap"><?= Yii::t('app', 'Показать точку сбора') ?></a>
                         <? $form = ActiveForm::begin([
                             'method' => "POST",
                             'id' => 'addPost',
@@ -397,7 +397,7 @@ $iuser = new \common\models\User();
                             ]
                         ]); ?>
                         <?= Html::input('hidden', 'tour_id', (int)Yii::$app->request->get('id')) ?>
-                        <?= Html::submitButton('Купить',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
+                        <?= Html::submitButton(Yii::t('app','Купить'),['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
                         <?php ActiveForm::end(); ?>
                         <? $form = ActiveForm::begin([
                             'method' => "POST",
@@ -410,7 +410,7 @@ $iuser = new \common\models\User();
                             ]
                         ]); ?>
                         <?= Html::input('hidden', 'tour_id', (int)Yii::$app->request->get('id')) ?>
-                        <?= Html::submitButton('добавить в корзину',['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Добавить в корзину'),['class' => 'btn_map', 'style' => 'background: #ec3e3e']) ?>
                         <?php ActiveForm::end(); ?>
                         <div class="offer-company_details">
                             <div class="offer-company_header">
@@ -419,7 +419,7 @@ $iuser = new \common\models\User();
                             <div class="offer-company_content">
                                 <span>Компания:</span>
                                 <span class="h5"><?= $user->name_company ?></span>
-                                <?= Html::a('Другие объявления от компании', ['/tours/search/', 'user_id' => $user->id], ['class' => 'allTours_author']) ?>
+                                <?= Html::a(Yii::t('app','Другие объявления от компании'), ['/tours/search/', 'user_id' => $user->id], ['class' => 'allTours_author']) ?>
                             </div>
                         </div>
                     </div>

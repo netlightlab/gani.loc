@@ -1116,6 +1116,7 @@ header.sticky #top_line {
     margin: 0;
     padding: 0;
     position: relative;
+    text-transform: uppercase;
 }
 
 .parallax-header-text h2:before,

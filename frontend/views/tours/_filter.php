@@ -22,7 +22,7 @@ use yii\widgets\Pjax;
             'data-pjax' => true
         ]
     ]); ?>
-    <p>Сортировать</p>
+    <p><?= Yii::t('app', 'Сортировать') ?></p>
     <?= Html::dropDownList('sort', $formParams['sort'],[
             'sort' => '',
             'price' => 'Цена возрастание',
@@ -34,10 +34,10 @@ use yii\widgets\Pjax;
             'id' => 'sorter'
     ]) ?>
     <hr />
-    <p>Категории</p>
+    <p><?= Yii::t('app', 'Категории') ?></p>
     <?= Html::checkboxList('filter_categories', $formParams['filter_categories'], $categories) ?>
     <hr />
-    <p>Ценовой диапазон</p>
+    <p><?= Yii::t('app', 'Ценовой диапазон') ?></p>
     <div style="display: flex; justify-content: space-between;">
         <p>От <span id="price-from-value"></span></p>
         <p>До <span id="price-to-value"></span></p>
@@ -81,8 +81,8 @@ use yii\widgets\Pjax;
 ]) ?>
     <?= Html::input('hidden', 'price_from', '', ['id' => 'price_from']) ?>
     <?= Html::input('hidden', 'price_to', '', ['id' => 'price_to']) ?>
-    <?= Html::submitButton('Применить', ['style' => 'margin-top: 20px;']) ?>
-    <?= Html::a('Сбросить', ['tours/search'], ['data-pjax' => 1, 'id' => 'lll']) ?>
+    <?= Html::submitButton(Yii::t('app', 'Применить'), ['style' => 'margin-top: 20px;']) ?>
+    <?= Html::a(Yii::t('app', 'Сбросить'), ['tours/search'], ['data-pjax' => 1, 'id' => 'lll']) ?>
 <?php ActiveForm::end(); ?>
 <?// Pjax::end() ?>
 

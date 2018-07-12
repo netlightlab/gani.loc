@@ -84,7 +84,7 @@ $category = new Categories();
                             <?= $tour->mini_image ? Html::img('@web/common/tour_img/'.$tour->id.'/'.$tour->mini_image) : Html::img('@web/common/users/no-image.png') ?>
                             <div class="tour-info">
                                 <span><span style="font-weight:normal; font-size: 16px;">от</span> <?= $tour->price ?> <span style="font-weight:normal; font-size: 16px;">тг</span></span>
-                                <p>подробнее</p>
+                                <p><?= Yii::t('app', 'Подробнее') ?></p>
                                 <span class="h4"><?= $category->getCategoryName($tour->category_id) ?></span>
                             </div>
                         </div>

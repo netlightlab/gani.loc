@@ -21,12 +21,12 @@ $category = new Categories();
 
 ?>
 
-<section class="section-header" style="background: url('../common/img/header/parallax-alltours.jpg')">
+<section class="section-header" style="background: url(<?= Yii::getAlias('@web') ?>'/common/img/header/parallax-alltours.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h1>ПОИСК</h1>
+                    <h1><?= Yii::t('app', 'Поиск') ?></h1>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@ $category = new Categories();
                                     'data-pjax-timeout' => 10000
                             ]
                         ]) ?>
-                        <p>Найдено туров: <?= count($tours) ?></p>
+                        <p><?= Yii::t('app', 'Найдено туров') ?>: <?= count($tours) ?></p>
                         <?php foreach($tours as $tour) : ?>
                             <div class="alltours_box">
                                 <div class="row">
@@ -107,7 +107,7 @@ $category = new Categories();
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="alltours_price-list">
                                             <small>от <?= $tour->price ?> ₸</small>
-                                            <?= Html::a('подробнее', ['/tours/view/', 'id' => $tour->id], ['class' => 'alltours_btn-info']) ?>
+                                            <?= Html::a(Yii::t('app', 'Подробнее'), ['/tours/view/', 'id' => $tour->id], ['class' => 'alltours_btn-info']) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@ $category = new Categories();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="hidden_map">
-                                <a class="btn_map collapsed" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">ПОКАЗАТЬ НА КАРТЕ</a>
+                                <a class="btn_map collapsed" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap"><?= Yii::t('app', 'ПОКАЗАТЬ НА КАРТЕ') ?></a>
                             </div>
                         </div>
                         <div class="col-md-12 py-3">
