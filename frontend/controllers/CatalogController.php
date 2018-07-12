@@ -64,11 +64,12 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionView($alias){
-        if(is_numeric($alias)){
-            $item = $this->findModel($alias);
+//    public function actionView($alias){
+    public function actionView($id){
+        if(is_numeric($id)){
+            $item = $this->findModel($id);
         }else{
-            $item = Catalog::find()->where(['url' => $alias])->one();
+            $item = Catalog::find()->where(['url' => $id])->one();
         }
 
         $recomendations = Tours::find()->where(['category_id' => $item->recommended])->limit(4)->all();

@@ -253,7 +253,9 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionPage($alias)
+
+//    public function actionPage($alias)
+    public function actionPage($id)
     {
         /*$page = new Page();
         $data = $page->data();
@@ -270,13 +272,24 @@ class SiteController extends Controller
             "pageId" => $pageId,
             "fileType" => $this->bgFileExtension
         ]);*/
-        if($alias && is_numeric($alias)){
-            $model = Page::findOne(['id' => $alias]);
-        }elseif($alias && !is_numeric($alias)){
-            $model = Page::findOne(['url' => $alias]);
+        if($id && is_numeric($id)){
+            $model = Page::findOne(['id' => $id]);
+        }elseif($id && !is_numeric($id)){
+            $model = Page::findOne(['url' => $id]);
         }else{
             throw new BadRequestHttpException();
         }
+
+        $lang = Yii::$app->language;
+
+        if($lang === 'en'){
+            $model->title_en ? $model->title = $model->title_en : $model->title;
+            $model->content_en ? $model->content = $model->content_en : $model->content;
+        }elseif($lang === 'kz'){
+            $model->title_kz ? $model->title = $model->title_kz : $model->title;
+            $model->content_kz ? $model->content = $model->content_kz : $model->content;
+        }
+
         if(!$model)
             throw new BadRequestHttpException();
 

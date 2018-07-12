@@ -12,14 +12,24 @@ namespace frontend\models;
 use yii\db\ActiveRecord;
 use Yii;
 
+/**
+ * Page model
+ *
+ * @property integer $id
+ * @property string $content
+ * @property string $content_kz
+ * @property string $content_en
+ * @property string $title
+ * @property string $title_en
+ * @property string $title_kz
+ * @property integer $active
+ * @property integer $show
+ * @property string $background
+ * @property string $url
+ */
+
 class Page extends ActiveRecord
 {
-    /*public $id;
-    public $title;
-    public $content;
-    public $url;
-    public $background;*/
-
     public static function tableName() {
         return '{{%page}}';
     }

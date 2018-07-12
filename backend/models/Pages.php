@@ -18,7 +18,11 @@ use yii\helpers\FileHelper;
  *
  * @property integer $id
  * @property string $content
+ * @property string $content_kz
+ * @property string $content_en
  * @property string $title
+ * @property string $title_en
+ * @property string $title_kz
  * @property integer $active
  * @property integer $show
  * @property string $background
@@ -34,7 +38,7 @@ class Pages extends ActiveRecord
     public function rules()
     {
         return [
-            [['title','url'], 'trim'],
+            [['title','url', 'title_en', 'title_kz', 'content_en', 'content_kz'], 'trim'],
             [['title','content'], 'required'],
             [['active','show'], 'boolean'],
         ];
@@ -44,7 +48,11 @@ class Pages extends ActiveRecord
     {
         return [
             'title' => 'Заголовок',
+            'title_kz' => 'Заголовок kz',
+            'title_en' => 'Заголовок en',
             'content' => 'Текст',
+            'content_en' => 'Текст en',
+            'content_kz' => 'Текст kz',
             'background' => 'Изображение',
             'url' => 'url',
             'show' => 'Показать',

@@ -88,8 +88,8 @@ return [
 //                '<action>'=>'site/<action>',
                 'catalog' => 'catalog/index',
                 'news' => 'news/index',
-                '<alias:[\w\d\-]+>' => 'site/page',
-                'catalog/<alias:[\w\-]+>' => 'catalog/view',
+                '<id:[\w\d\-]+>' => 'site/page',
+                'catalog/<id:[\w\-]+>' => 'catalog/view',
                 'tours/<id:[\d\-]+>' => 'tours/view',
 //                'cart' => 'cart/index'
             ],

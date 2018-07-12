@@ -204,6 +204,7 @@ class UrlManager extends BaseUrlManager
      */
     public function createUrl($params)
     {
+//        print_r($params);
         if ($this->ignoreLanguageUrlPatterns) {
             $params = (array) $params;
             $route = trim($params[0], '/');

@@ -19,8 +19,8 @@ use Yii;
     <ul class="dropdown-menu">
         <li class="item-lang">
             <?= Html::a('English', array_merge(
-                Yii::$app->request->get(),
-                [Yii::$app->controller->route, 'language' => 'en']
+                    Yii::$app->request->get(),
+                    [Yii::$app->controller->route, 'language' => 'en']
             )); ?>
         </li>
         <li class="item-lang">

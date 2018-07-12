@@ -16,18 +16,52 @@ use mihaildev\elfinder\InputFile;
 
 <?php $form = ActiveForm::begin(['id' => 'form-page-create' , 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')->textInput(['placeholder' => 'Например: О нас'])->label('Название') ?>
+<?= $form->field($model, 'title_kz')->textInput(['placeholder' => 'Например: О нас'])->label('Название kz') ?>
+<?= $form->field($model, 'title_en')->textInput(['placeholder' => 'Например: О нас'])->label('Название en') ?>
 <? if($model->background): ?>
     <!--<img width="200px" src="@web/uploads/pages/2/<?/*= $model->background */?>" alt="">-->
     <?= Html::img('/frontend/web/common/pages/'. $model->id .'/'. $model->background, ['width' => 200]) ?>
 <? endif; ?>
 <?= $form->field($model, 'background')->fileInput()->label('Изображение') ?>
-<?= $form->field($model, 'content')->widget(CKEditor::class,[
-    'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
-        'preset' => 'full',
+
+<ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#home">ru</a></li>
+    <li><a data-toggle="pill" href="#kz">kz</a></li>
+    <li><a data-toggle="pill" href="#en">en</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <?= $form->field($model, 'content')->widget(CKEditor::class,[
+            'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
+                'preset' => 'full',
 //        'path' => 'web/uploads'
-    'language' => 'ru'
-    ]),
-]); ?>
+                'language' => 'ru'
+            ]),
+        ]); ?>
+    </div>
+    <div id="kz" class="tab-pane fade">
+        <?= $form->field($model, 'content_kz')->widget(CKEditor::class,[
+            'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
+                'preset' => 'full',
+//        'path' => 'web/uploads'
+                'language' => 'ru'
+            ]),
+        ]); ?>
+    </div>
+    <div id="en" class="tab-pane fade">
+        <?= $form->field($model, 'content_en')->widget(CKEditor::class,[
+            'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
+                'preset' => 'full',
+//        'path' => 'web/uploads'
+                'language' => 'ru'
+            ]),
+        ]); ?>
+    </div>
+</div>
+
+
+
 
 
 
