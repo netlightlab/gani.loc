@@ -59,6 +59,16 @@ class CatalogController extends Controller
     public function actionIndex(){
         $items = Catalog::find()->all();
 
+        $lang = Yii::$app->language;
+
+        foreach($items as $item){
+            if($lang === 'kz'){
+                $item->name_kz ? $item->name = $item->name_kz : $item->name;
+            }elseif($lang === 'en'){
+                $item->name_en ? $item->name = $item->name_en : $item->name;
+            }
+        }
+
         return $this->render('index', [
             'items' => $items
         ]);
@@ -70,6 +80,14 @@ class CatalogController extends Controller
             $item = $this->findModel($id);
         }else{
             $item = Catalog::find()->where(['url' => $id])->one();
+        }
+
+        $lang = Yii::$app->language;
+
+        if($lang === 'kz'){
+            $item->name_kz ? $item->name = $item->name_kz : $item->name;
+        }elseif($lang === 'en'){
+            $item->name_en ? $item->name = $item->name_en : $item->name;
         }
 
         $recomendations = Tours::find()->where(['category_id' => $item->recommended])->limit(4)->all();

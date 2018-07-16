@@ -92,6 +92,8 @@ class Tours extends ActiveRecord
 
             ['tour_language', 'trim'],
             ['tour_language', 'required', 'message' => 'Необходимо указать языки туров!'],
+            ['price_child', 'required', 'message' => 'Необходимо указать цену на детский билет!'],
+            ['price_child_free', 'required', 'message' => 'Необходимо указать возраст ребенка, подходящий для бесплатного билета!'],
 
             ['conditions', 'trim'],
             ['return_cond', 'trim'],

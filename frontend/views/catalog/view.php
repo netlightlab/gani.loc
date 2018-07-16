@@ -11,9 +11,29 @@ use common\widgets\Alert;
 use yii\helpers\Html;
 
 
-$this->title = $item->title;
-$this->registerMetaTag(['name' => 'description', 'content' => $item->description]);
-$this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
+$lang = Yii::$app->language;
+
+if($lang === 'ru'){
+    $title = $item->title;
+    $description = $item->description;
+    $keywords = $item->keywords;
+}elseif($lang === 'kz'){
+    $item->title_kz ? $title = $item->title_kz : $title = $item->title;
+    $item->description_kz ? $description = $item->description_kz : $description = $item->description;
+    $item->keywords_kz ? $keywords = $item->keywords_kz : $keywords = $item->keywords;
+}else{
+    $item->title_en ? $title = $item->title_en : $title = $item->title;
+    $item->description_en ? $description = $item->description_en : $description = $item->description;
+    $item->keywords_en ? $keywords = $item->keywords_en : $keywords = $item->keywords;
+}
+
+$this->title = $title;
+$this->registerMetaTag(['name' => 'description', 'content' => $description]);
+$this->registerMetaTag(['name' => 'keywords', 'content' => $keywords]);
+
+//$this->title = $item->title;
+//$this->registerMetaTag(['name' => 'description', 'content' => $item->description]);
+//$this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
 
 ?>
 
@@ -45,8 +65,16 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <?php $this->params['breadcrumbs'][] = [
+                    'label' => Yii::t('app','Каталог туров'),
+                    'url' => \yii\helpers\Url::toRoute('/catalog')
+                ]; ?>
                 <?php $this->params['breadcrumbs'][] = $item->name; ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </div>
@@ -67,7 +95,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
                 <div class="row">
                     <?php if($recomendations): ?>
                         <div class="col-md-12 pb-3">
-                            <span class="h4">Рекомендуемые туры:</span>
+                            <span class="h4"><?= Yii::t('app', 'Рекомендуемые туры') ?>:</span>
                         </div>
                         <?php foreach($recomendations as $recomendation): ?>
                             <div class="col-md-3">
@@ -81,7 +109,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $item->keywords]);
                             </div>
                         <?php endforeach; ?>
                         <div class="col-md-12 d-flex justify-content-center">
-                            <?= Html::a('Все туры категории', ['/tours/search', 'filter_categories[]' => $item->recommended], ['class' => 'btn-all']) ?>
+                            <?= Html::a(Yii::t('app', 'Все туры категории'), ['/tours/search', 'filter_categories[]' => $item->recommended], ['class' => 'btn-all']) ?>
                         </div>
                     <?php endif; ?>
                 </div>

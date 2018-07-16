@@ -21,7 +21,10 @@ use yii\base\Model;
  * @property integer $user_id
  * @property integer $phone
  * @property string $title
+ * @property string $title_en
+ * @property string $title_kz
  * @property string $description
+ * @property string $description_kz
  * @property string $description_en
  * @property string $mini_image
  * @property string $gallery
@@ -49,11 +52,14 @@ class Ads extends ActiveRecord
             ['phone', 'required', 'message' => 'Необходимо указать телефон'],
 
             ['title', 'trim'],
+            ['title_en', 'trim'],
+            ['title_kz', 'trim'],
             ['title', 'required'],
             ['title', 'string', 'max' => 80],
 
             ['description', 'trim'],
             ['description_en', 'trim'],
+            ['description_kz', 'trim'],
             ['description', 'required', 'message' => 'Необходимо указать описание'],
 
             ['mini_image', 'file'],
@@ -72,7 +78,11 @@ class Ads extends ActiveRecord
             'user_id'       => 'ID user',
             'phone'         => 'Phone number',
             'title'         => 'Title news',
+            'title_en'         => 'Title news',
+            'title_kz'         => 'Title news',
             'description'   => 'Ads description',
+            'description_en'   => 'Ads description',
+            'description_kz'   => 'Ads description',
             'mini_image'    => 'Back image',
             'gallery'       => 'Gallery images',
         ];

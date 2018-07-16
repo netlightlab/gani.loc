@@ -9,8 +9,26 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\helpers\Html;
 
-$this->title = $model -> title;
+$lang = Yii::$app->language;
 
+if($lang === 'ru'){
+    $title = $model->page_title;
+    $description = $model->page_description;
+    $keywords = $model->page_keywords;
+}elseif($lang === 'kz'){
+    $model->page_title_kz ? $title = $model->page_title_kz : $title = $model->page_title;
+    $model->page_description_kz ? $description = $model->page_description_kz : $description = $model->page_description;
+    $model->page_keywords_kz ? $keywords = $model->page_keywords_kz : $keywords = $model->page_keywords;
+}else{
+    $model->page_title_en ? $title = $model->page_title_en : $title = $model->page_title;
+    $model->page_description_en ? $description = $model->page_description_en : $description = $model->page_description;
+    $model->page_keywords_en ? $keywords = $model->page_keywords_en : $keywords = $model->page_keywords;
+}
+
+
+$this->title = $title;
+$this->registerMetaTag(['name' => 'description', 'content' => $description]);
+$this->registerMetaTag(['name' => 'keywords', 'content' => $keywords]);
 
 ?>
 
@@ -53,8 +71,12 @@ $this->title = $model -> title;
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?php $this->params['breadcrumbs'][] = $this->title; ?>
+                <?php $this->params['breadcrumbs'][] = $model->title; ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </div>

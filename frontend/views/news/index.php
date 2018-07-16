@@ -30,7 +30,7 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h1>Новости</h1>
+                    <h1><?= Yii::t('app', 'Новости') ?></h1>
                 </div>
             </div>
         </div>
@@ -41,8 +41,12 @@ use yii\helpers\Html;
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?php $this->params['breadcrumbs'][] = 'Новости'; ?>
+                <?php $this->params['breadcrumbs'][] = Yii::t('app', 'Новости'); ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </div>
@@ -60,8 +64,8 @@ use yii\helpers\Html;
                         <?php foreach($items as $item): ?>
                             <div class="col-md-3">
                                 <div class="boxTour-hit">
-                                    <?= Html::a('', ['/news/view', 'id' => $item->id], ['class' => 'tour_link']) ?>
-                                    <div class="news-date"><span>Опубликован: <strong><?= $item->date ?></strong></span></div>
+                                    <?= Html::a('', \yii\helpers\Url::to(['/news/view', 'id' => $item->url ? $item->url : $item->id]), ['class' => 'tour_link']) ?>
+                                    <div class="news-date"><span><?= Yii::t('app', 'Опубликован') ?>: <strong><?= $item->date ?></strong></span></div>
                                     <div class="catalog-img">
                                         <?= Html::img('/frontend/web/common/news/' . $item->id . '/' . $item->image) ?>
                                     </div>

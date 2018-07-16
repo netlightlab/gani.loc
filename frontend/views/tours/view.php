@@ -356,11 +356,13 @@ $iuser = new \common\models\User();
                                 </div>
                                 <div class="col-md-12">
                                     <?php
+                                    $urlImage = \yii\helpers\Url::to([Yii::$app->request->get('id')]);
                                     echo \kato\DropZone::widget([
                                         'options' => [
                                             'maxFilesize' => 10,
                                             'maxFiles' => 10,
-                                            'url' => '/tours/view?id='.Yii::$app->request->get('id'),
+//                                            'url' => '/tours/view?id='.Yii::$app->request->get('id'),
+                                            'url' => $urlImage,
                                             'uploadMultiple' => true,
                                             'parallelUploads' => 10,
                                             'autoProcessQueue' => false,
@@ -430,6 +432,9 @@ $iuser = new \common\models\User();
 
 <?php
 
+$addPostUrl = \yii\helpers\Url::to(['cart/add-post']);
+$cartAdd = \yii\helpers\Url::to(['/cart/add']);
+
 $script = <<<JS
     $(document).ready(function() {
        $('#ratingBarClick').css({width: 60+'%'});
@@ -488,7 +493,7 @@ $script = <<<JS
         var form = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '/cart/add',
+            url: "$cartAdd",
             data: form,
             success: function(response){
                 $('#addToCart button').text('Добавлено');
@@ -501,7 +506,8 @@ $script = <<<JS
         var form = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '/cart/add-post',
+            // url: '/cart/add-post',
+            url: "$addPostUrl",
             data: form
         });
         return false;

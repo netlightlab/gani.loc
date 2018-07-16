@@ -37,10 +37,14 @@ class AdsController extends Controller
         $ads = Ads::findOne($id);
         $lang = Yii::$app->language;
 
-        if($lang === 'ru'){
+        if($lang === 'kz'){
+            $ads->title_kz ? $ads->title = $ads->title_kz : $ads->title;
+            $ads->description_kz ? $ads->body = $ads->description_kz : $ads->body = $ads->description;
+        }elseif($lang === 'en'){
+            $ads->title_en ? $ads->title = $ads->title_en : $ads->title;
+            $ads->description_en ? $ads->body = $ads->description_en : $ads->body = $ads->description;
+        }elseif($lang === 'ru'){
             $ads->body = $ads->description;
-        }elseif ($lang === 'en'){
-            $ads->body = $ads->description_en;
         }
 
         $user = User::find()->where(['id' => $ads->user_id])->one();

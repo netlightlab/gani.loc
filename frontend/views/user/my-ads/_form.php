@@ -21,59 +21,90 @@ use mihaildev\ckeditor\CKEditor;
                 'class'     => 'ads-form'
         ]]
 ); ?>
-<div class="row">
+<!--<div class="row">-->
     <div class="col-md-12">
         <h4>Основная информация</h4>
     </div>
     <div class="col-md-12">
         <hr style="10px 0">
     </div>
-    <div class="col-md-12">
-        <?= $form->field($model, 'title')->textInput()->label('Название объявления:');?>
-    </div>
-    <div class="col-md-4">
-        <?= $form->field($model, 'phone')->label('телефон (сотовый)')->widget(\yii\widgets\MaskedInput::className(), [
-            'mask' => '9 (999) 999-9999',
-        ])->textInput(['placeholder' => 'Например: 8 (777) 777-7777']) ?>
-    </div>
-    <div class="col-md-4">
-        <span class="mb-3 d-flex">Основное изображение</span>
-        <?= $form->field($model, 'mini_image')->fileInput(['autoComplete' => 'off', 'id' => 'mini_image'])->label('') ?>
-    </div>
-    <div class="col-md-12">
-        <span class="mb-3 d-flex">Галерея фотографии</span>
-        <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-        <? if($gallery): ?>
-            <div class="gallery-container d-flex">
-                <? foreach($gallery as $key => $item): ?>
-                    <div class="gallery-image">
-                        <?= Html::img('/common/users/' . Yii::$app->user->id . '/ads/' . $item, ['style' => 'width:150px;']) ?>
-                        <?= Html::a('x', '#', ['class' => 'delete_image_link', 'data-delete' => $key]) ?>
-                    </div>
-                <? endforeach; ?>
+    <ul id="w2" class="cabinet-nav nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" href="#rus" data-toggle="tab" aria-expanded="true"><span>РУССКИЙ</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#kaz" data-toggle="tab" aria-expanded="true"><span>ҚАЗАҚША</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#eng" data-toggle="tab" aria-expanded="true"><span>ENGLISH</span></a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="rus" class="tab-pane set-tab-content active">
+            <div class="col-md-12">
+                <?= $form->field($model, 'title')->textInput()->label('Название объявления:');?>
             </div>
-        <? endif; ?>
+            <div class="col-md-12 my-3">
+                <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                    'editorOptions' => [
+                        'inline' => false,
+                        'preset' => 'standart',
+                    ],
+                ])->label('ОПИСАНИЕ*');?>
+            </div>
+        </div>
+        <div id="kaz" class="tab-pane set-tab-content">
+            <div class="col-md-12">
+                <?= $form->field($model, 'title_kz')->textInput()->label('Название объявления kz:'); ?>
+            </div>
+            <div class="col-md-12 my-3">
+                <?= $form->field($model, 'description_kz')->widget(CKEditor::className(), [
+                    'editorOptions' => [
+                        'inline' => false,
+                        'preset' => 'standart',
+                    ],
+                ])->label('ОПИСАНИЕ* kz'); ?>
+            </div>
+        </div>
+        <div id="eng" class="tab-pane set-tab-content">
+            <div class="col-md-12">
+                <?= $form->field($model, 'title_en')->textInput()->label('Название объявления eng:'); ?>
+            </div>
+            <div class="col-md-12 my-3">
+                <?= $form->field($model, 'description_en')->widget(CKEditor::className(), [
+                    'editorOptions' => [
+                        'inline' => false,
+                        'preset' => 'standart',
+                    ],
+                ])->label('ОПИСАНИЕ* eng'); ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'phone')->label('телефон (сотовый)')->widget(\yii\widgets\MaskedInput::className(), [
+                'mask' => '9 (999) 999-9999',
+            ])->textInput(['placeholder' => 'Например: 8 (777) 777-7777']) ?>
+        </div>
+        <div class="col-md-4">
+            <span class="mb-3 d-flex">Основное изображение</span>
+            <?= $form->field($model, 'mini_image')->fileInput(['autoComplete' => 'off', 'id' => 'mini_image'])->label('') ?>
+        </div>
+        <div class="col-md-12">
+            <span class="mb-3 d-flex">Галерея фотографии</span>
+            <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+            <? if($gallery): ?>
+                <div class="gallery-container d-flex">
+                    <? foreach($gallery as $key => $item): ?>
+                        <div class="gallery-image">
+                            <?= Html::img('/common/users/' . Yii::$app->user->id . '/ads/' . $item, ['style' => 'width:150px;']) ?>
+                            <?= Html::a('x', '#', ['class' => 'delete_image_link', 'data-delete' => $key]) ?>
+                        </div>
+                    <? endforeach; ?>
+                </div>
+            <? endif; ?>
+        </div>
+        <div class="col-md-12">
+            <?= Html::submitButton('Разместить объявление', ['class' => 'btn-refresh-profile']) ?>
+        </div>
     </div>
-    <div class="col-md-12 my-3">
-        <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-                'editorOptions' => [
-                    'inline' => false,
-                    'preset' => 'standart',
-                ],
-        ])->label('ОПИСАНИЕ*');?>
-    </div>
-    <div class="col-md-12 my-3">
-        <?= $form->field($model, 'description_en')->widget(CKEditor::className(), [
-            'editorOptions' => [
-                'inline' => false,
-                'preset' => 'standart',
-            ],
-        ])->label('ОПИСАНИЕ*');?>
-    </div>
-    <div class="col-md-12">
-        <?= Html::submitButton('Разместить объявление', ['class' => 'btn-refresh-profile']) ?>
-    </div>
-</div>
+
+
+
+
+<!--</div>-->
 <?php ActiveForm::end(); ?>
 
 

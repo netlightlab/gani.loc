@@ -48,25 +48,10 @@ $this->params['breadcrumbs'][] = 'Мои объявления'
             <div class="row">
                 <div class="col-md-12">
                     <?= Alert::widget() ?>
-                    <ul id="w2" class="cabinet-nav nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link active" href="#rus" data-toggle="tab" aria-expanded="true"><span>РУССКИЙ</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#kaz" data-toggle="tab" aria-expanded="true"><span>ҚАЗАҚША</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#eng" data-toggle="tab" aria-expanded="true"><span>ENGLISH</span></a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="rus" class="tab-pane set-tab-content active">
-                            <?= $this->render('_form', [
-                                'model' => $model,
-                                'gallery' => $gallery
-                            ]) ?>
-                        </div>
-                        <div id="kaz" class="tab-pane set-tab-content">
-                            <span style="color: red;">Whoops page is not working!</span>
-                        </div>
-                        <div id="eng" class="tab-pane set-tab-content">
-                            <span style="color: red;">Whoops page is not working!</span>
-                        </div>
-                    </div>
+                    <?= $this->render('_form', [
+                        'model' => $model,
+                        'gallery' => $gallery
+                    ]) ?>
                 </div>
             </div>
         </div>

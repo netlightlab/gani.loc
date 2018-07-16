@@ -31,7 +31,7 @@ use yii\helpers\Url;
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
-                    <h1>Каталог туров</h1>
+                    <h1><?= Yii::t('app', 'Каталог туров') ?></h1>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@ use yii\helpers\Url;
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?php $this->params['breadcrumbs'][] = 'Каталог туров'; ?>
+                <?php $this->params['breadcrumbs'][] = Yii::t('app', 'Каталог туров'); ?>
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>

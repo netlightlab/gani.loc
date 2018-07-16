@@ -13,6 +13,7 @@ use frontend\models\Ads;
 use frontend\models\Comments;
 use frontend\models\Tours;
 use frontend\models\UserProfile;
+use yii\db\Exception;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -170,8 +171,10 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $image = UploadedFile::getInstance($model,'mini_image');
             $gallery = UploadedFile::getInstances($model,'gallery');
-            if($image->saveAs($uploadPath . '/ads/' . $image->name)){
-                $model->mini_image = $image->name;
+            if($image){
+                if($image->saveAs($uploadPath . '/ads/' . $image->name)){
+                    $model->mini_image = $image->name;
+                }
             }
             $galleryArray = array();
             foreach($gallery as $item){
@@ -224,6 +227,7 @@ class UserController extends Controller
             }
 
             $galleryModel = UploadedFile::getInstances($model,'gallery');
+
             foreach($galleryModel as $item){
                 $gallery[] .= $item->name;
                 $item->saveAs($uploadPath . '/ads/' . $item->name);

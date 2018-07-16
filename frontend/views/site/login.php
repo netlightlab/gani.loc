@@ -10,14 +10,14 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\MaskedInput;
 
-$this->title = 'Авторизация';
+$this->title = Yii::t('app', 'Авторизация');
 ?>
 
 <section class="section-header" style="background: url('common/img/header/authorization.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="py-3 registr-description" align="center">Авторизация</h1>
+                <h1 class="py-3 registr-description" align="center"><?= $this->title ?></h1>
             </div>
         </div>
     </div>
@@ -29,6 +29,10 @@ $this->title = 'Авторизация';
             <div class="col-md-12">
                 <?php $this->params['breadcrumbs'][] = $this->title; ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </div>
@@ -42,7 +46,7 @@ $this->title = 'Авторизация';
         <div class="row">
             <div class="col-md-12">
                 <div class="text-left pt-3">
-                    <h3>Заполните данные для входа</h3>
+                    <h3><?= Yii::t('app', 'Заполните данные для входа') ?></h3>
                 </div>
                 <hr>
             </div>
@@ -66,7 +70,7 @@ $this->title = 'Авторизация';
                 </div>
                 <div class="offset-md-3 col-md-6 pt-2">
                     <div class="form-group">
-                        <?= Html::submitButton('Войти', ['class' => 'authorization-btn', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Войти'), ['class' => 'authorization-btn', 'name' => 'login-button']) ?>
                     </div>
                 </div>
                 <div class="offset-md-3 col-md-6 pb-3 text-right" >

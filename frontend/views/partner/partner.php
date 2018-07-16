@@ -18,10 +18,12 @@ use common\models\Categories;
 $cities = new Cities();
 $category = new Categories();
 
+$alias = Yii::getAlias('@web');
+
 $this->title = 'Личный кабинет';
 ?>
 
-<section class="section-header" style="background: url('../common/img/header/parallax-partner-cabinet.jpg')">
+<section class="section-header" style="background: url('<?= $alias ?>/common/img/header/parallax-partner-cabinet.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -53,11 +55,11 @@ $this->title = 'Личный кабинет';
             <div class="col-md-12">
                 <?= Alert::widget() ?>
                 <ul id="w1" class="cabinet-nav nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link" href="#statistics" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/stats.png"><span>Статистика</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#orders" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/list.png"><span>Заказы</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#my_tours" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/tours.png"><span>Мои туры/развлечения</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/locked.png"><span>Настройки</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/user.png"><span>Профиль</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#statistics" data-toggle="tab" aria-expanded="true"><img src="<?= $alias ?>/common/img/profile/stats.png"><span>Статистика</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#orders" data-toggle="tab" aria-expanded="true"><img src="<?= $alias ?>/common/img/profile/list.png"><span>Заказы</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#my_tours" data-toggle="tab" aria-expanded="true"><img src="<?= $alias ?>/common/img/profile/tours.png"><span>Мои туры/развлечения</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="<?= $alias ?>/common/img/profile/locked.png"><span>Настройки</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="<?= $alias ?>/common/img/profile/user.png"><span>Профиль</span></a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="statistics" class="tab-pane set-tab-content">

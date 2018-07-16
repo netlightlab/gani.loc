@@ -58,16 +58,42 @@ class NewsController extends Controller
     public function actionIndex(){
         $items = News::find()->all();
 
+        $lang = Yii::$app->language;
+
+        foreach($items as $model){
+            if($lang === 'en'){
+                $model->title_en ? $model->title = $model->title_en : $model->title;
+//            $model->description_en ? $model->description = $model->description_en : $model->description;
+            }elseif($lang === 'kz'){
+                $model->title_kz ? $model->title = $model->title_kz : $model->title;
+//            $model->description_kz ? $model->description = $model->description_kz : $model->description;
+            }
+        }
+
         return $this->render('index', [
             'items' => $items
         ]);
     }
 
     public function actionView($id){
-        $item = $this->findModel($id);
+        if(is_numeric($id)){
+            $model = $this->findModel($id);
+        }else{
+            $model = News::find()->where(['url' => $id])->one();
+        }
+
+        $lang = Yii::$app->language;
+
+        if($lang === 'en'){
+            $model->title_en ? $model->title = $model->title_en : $model->title;
+            $model->description_en ? $model->description = $model->description_en : $model->description;
+        }elseif($lang === 'kz'){
+            $model->title_kz ? $model->title = $model->title_kz : $model->title;
+            $model->description_kz ? $model->description = $model->description_kz : $model->description;
+        }
 
         return $this->render('view', [
-            'item' => $item,
+            'item' => $model,
         ]);
     }
 
@@ -76,7 +102,7 @@ class NewsController extends Controller
      * Finds the Menu model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Catalog the loaded model
+     * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

@@ -18,13 +18,13 @@ $this->title = $ads->title;
 
 ?>
 
-<section class="section-header" style="background: url('../common/img/header/parallax-ads.jpg')">
+<section class="section-header" style="background: url(<?= Yii::getAlias('@web') ?>'/common/img/header/parallax-ads.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="parallax-header-text">
                     <h1><?= $ads->title ?></h1>
-                    <p>Объявление от полльзователя "<b><?= $user['user_name'] ?></b>"</p>
+                    <p><?= Yii::t('app', 'Объявление от пользователя') ?> "<b><?= $user['user_name'] ?></b>"</p>
                 </div>
             </div>
         </div>
@@ -37,6 +37,10 @@ $this->title = $ads->title;
             <div class="col-md-12">
                 <?php $this->params['breadcrumbs'][] = $this->title; ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </div>

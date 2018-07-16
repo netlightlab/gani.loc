@@ -88,6 +88,7 @@ return [
 //                '<action>'=>'site/<action>',
                 'catalog' => 'catalog/index',
                 'news' => 'news/index',
+                'news/<id:[\w\d\-]+>' => 'news/view',
                 '<id:[\w\d\-]+>' => 'site/page',
                 'catalog/<id:[\w\-]+>' => 'catalog/view',
                 'tours/<id:[\d\-]+>' => 'tours/view',

@@ -12,17 +12,17 @@ use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 
-$this->title = 'Корзина';
+$this->title = Yii::t('app', 'Корзина');
 
 ?>
 
-    <section class="section-header" style="background: url('../common/img/header/ms.jpg')">
+    <section class="section-header" style="background: url(<?= Yii::getAlias('@web') ?>'/common/img/header/ms.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="parallax-header-text">
-                        <h2>КОРЗИНА</h2>
-                        <p>Здесь вы можете оформить тур.</p>
+                        <h2><?= Yii::t('app', 'КОРЗИНА') ?></h2>
+                        <p><?= Yii::t('app', 'Здесь вы можете оформить тур') ?></p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@ $this->title = 'Корзина';
 
     <section class="pt-5 pb-5" style="background: #f9f9f9;">
         <? if(is_array($orders)): ?>
-            <? $form = ActiveForm::begin(['method' => "POST", "action" => "/cart/checkout", 'options' => ['style' => 'width: 100%']]); ?>
+            <? $form = ActiveForm::begin(['method' => "POST", "action" => Url::to("checkout"), 'options' => ['style' => 'width: 100%']]); ?>
             <div class="container">
                 <div class="row">
                     <main class="col-md-9">
@@ -54,7 +54,9 @@ $this->title = 'Корзина';
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="basket_image">
-                                            <?= Html::img(['/common/tour_img/'.$order->id.'/'.$order->mini_image], ['style' => 'max-width: 100%']) ?>
+
+<!--                                            --><?//= Html::img(['/common/tour_img/'.$order->id.'/'.$order->mini_image], ['style' => 'max-width: 100%']) ?>
+                                            <?= Html::img(Url::to('/common/tour_img/'.$order->id.'/'.$order->mini_image), ['style' => 'max-width: 100%']) ?>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -65,10 +67,10 @@ $this->title = 'Корзина';
                                         </div>
                                         <div class="row" id="basket-price_info">
                                             <div class="col-md-4">
-                                                <span>Количество:</span>
+                                                <span><?= Yii::t('app', 'Количество') ?>:</span>
                                             </div>
                                             <div class="col-md-4">
-                                                <span>Сумма:</span>
+                                                <span><?= Yii::t('app', 'Сумма') ?>:</span>
                                             </div>
                                         </div>
                                         <div class="row" id="basket-price_inputs">
@@ -85,7 +87,7 @@ $this->title = 'Корзина';
                                                 <!--hidden fields-->
                                                 <?= $form->field($model, $order->id.'[tour_id]')->hiddenInput(['value' => $order->id])->label('') ?>
                                                 <!--#hidden fields-->
-                                                <?= Html::a('Удалить &times;', '#', ['class' => 'remove-from-cart', 'data-remove' => $order->id]) ?>
+                                                <?= Html::a(Yii::t('app', 'Удалить').' &times;', '#', ['class' => 'remove-from-cart', 'data-remove' => $order->id]) ?>
                                             </div>
                                         </div>
                                     </div>
@@ -96,12 +98,12 @@ $this->title = 'Корзина';
                     <aside class="col-md-3" id="fixed-basket">
                         <div class="row fixed-basket">
                             <div class="col-md-12">
-                                <span>Общая сумма</span>
+                                <span><?= Yii::t('app', 'Общая сумма') ?></span>
                                 <?= $form->field($model, 'total')->textInput(['value' => '', 'id' => 'total-price', 'readonly' => 'readonly'])->label(''); ?>
                             </div>
                             <div class="col-md-12">
-                                <?= Html::submitButton('Оформить заказ', ['class' => 'alltours_btn-info', 'style' => 'cursor: pointer; border: none;']) ?>
-								<?= Html::a('Информация о платеже', Url::to(['site/page', 'id' => 5]), ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none;']) ?>
+                                <?= Html::submitButton(Yii::t('app', 'Оформить заказ'), ['class' => 'alltours_btn-info', 'style' => 'cursor: pointer; border: none;']) ?>
+								<?= Html::a(Yii::t('app','Информация о платеже'), Url::to(['site/page', 'id' => 5]), ['class' => 'alltours_btn-info mt-3', 'target' => 'blank', 'style' => 'cursor: pointer; border: none;']) ?>
                             </div>
                         </div>
                     </aside>
@@ -120,6 +122,7 @@ $this->title = 'Корзина';
     </section>
 <?php
 
+$removeFromCart = Url::to(['cart/remove-from-cart']);
 
 $script = <<<JS
     $(document).ready(function(){
@@ -133,7 +136,8 @@ $script = <<<JS
             var id = $(this).attr('data-remove');
             $.ajax({
                 type: 'POST',
-                url: '/cart/remove-from-cart',
+                // url: '/cart/remove-from-cart',
+                url: "$removeFromCart",
                 data: { id: id },
                 success: function(response){
                     $('[data-row=' + id + ']').remove();

@@ -11,8 +11,26 @@ use common\widgets\Alert;
 use yii\helpers\Html;
 
 
-$this->title = $item->title;
-$this->registerMetaTag(['name' => 'description', 'content' => $item->description]);
+$lang = Yii::$app->language;
+
+if($lang === 'ru'){
+    $title = $item->page_title;
+    $description = $item->page_description;
+    $keywords = $item->page_keywords;
+}elseif($lang === 'kz'){
+    $item->page_title_kz ? $title = $item->page_title_kz : $title = $item->page_title;
+    $item->page_description_kz ? $description = $item->page_description_kz : $description = $item->page_description;
+    $item->page_keywords_kz ? $keywords = $item->page_keywords_kz : $keywords = $item->page_keywords;
+}else{
+    $item->page_title_en ? $title = $item->page_title_en : $title = $item->page_title;
+    $item->page_description_en ? $description = $item->page_description_en : $description = $item->page_description;
+    $item->page_keywords_en ? $keywords = $item->page_keywords_en : $keywords = $item->page_keywords;
+}
+
+
+$this->title = $title;
+$this->registerMetaTag(['name' => 'description', 'content' => $description]);
+$this->registerMetaTag(['name' => 'keywords', 'content' => $keywords]);
 
 ?>
 
@@ -44,8 +62,16 @@ $this->registerMetaTag(['name' => 'description', 'content' => $item->description
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?php $this->params['breadcrumbs'][] = 'Новость'; ?>
+                <?php $this->params['breadcrumbs'][] = [
+                        'label' => Yii::t('app','Новости'),
+                        'url' => \yii\helpers\Url::toRoute('/news')
+                ]; ?>
+                <?php $this->params['breadcrumbs'][] = $item->title; ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </div>

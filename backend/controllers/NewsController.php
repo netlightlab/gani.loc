@@ -112,6 +112,8 @@ class NewsController extends Controller
     {
         $model = $this->findModel($id);
 
+        $modelImage = $model->image;
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $url = str_replace('\\', '/', Yii::getAlias('@frontend'));
@@ -119,9 +121,12 @@ class NewsController extends Controller
             $dir = Yii::getAlias($url.'/web/common/news/' . $id);
 
             $image = UploadedFile::getInstance($model, 'image');
-            if($image !== NULL){
+//            print_r($image);
+            if($image){
                 $model->image = $image;
                 $model->image->saveAs($dir . '/' . $model->image->name);
+            }else{
+                $model->image = $modelImage;
             }
 
             $model->save(false);

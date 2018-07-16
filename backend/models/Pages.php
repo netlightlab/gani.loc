@@ -23,6 +23,15 @@ use yii\helpers\FileHelper;
  * @property string $title
  * @property string $title_en
  * @property string $title_kz
+ * @property string $page_title
+ * @property string $page_title_kz
+ * @property string $page_title_en
+ * @property string $page_description
+ * @property string $page_description_en
+ * @property string $page_description_kz
+ * @property string $page_keywords
+ * @property string $page_keywords_kz
+ * @property string $page_keywords_en
  * @property integer $active
  * @property integer $show
  * @property string $background
@@ -38,7 +47,7 @@ class Pages extends ActiveRecord
     public function rules()
     {
         return [
-            [['title','url', 'title_en', 'title_kz', 'content_en', 'content_kz'], 'trim'],
+            [['title','url', 'title_en', 'title_kz', 'content_en', 'content_kz', 'page_title', 'page_title_en', 'page_title_kz','page_description','page_description_en','page_description_kz','page_keywords','page_keywords_en','page_keywords_kz'], 'trim'],
             [['title','content'], 'required'],
             [['active','show'], 'boolean'],
         ];
@@ -50,6 +59,15 @@ class Pages extends ActiveRecord
             'title' => 'Заголовок',
             'title_kz' => 'Заголовок kz',
             'title_en' => 'Заголовок en',
+            'page_title' => 'Тайтл',
+            'page_title_en' => 'Тайтл en',
+            'page_title_kz' => 'Тайтл kz',
+            'page_description' => 'Дескрпишн',
+            'page_description_en' => 'Дескрпишн en',
+            'page_description_kz' => 'Дескрпишн kz',
+            'page_keywords' => 'Кейвордс',
+            'page_keywords_en' => 'Кейвордс en',
+            'page_keywords_kz' => 'Кейвордс kz',
             'content' => 'Текст',
             'content_en' => 'Текст en',
             'content_kz' => 'Текст kz',

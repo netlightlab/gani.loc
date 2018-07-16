@@ -86,7 +86,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $lang = Yii::$app->language;
+
         $ads = Ads::find()->where(['active' => 1])->orderBy(['id' => SORT_DESC])->limit(4)->all();
+
+
+        if($ads){
+            foreach($ads as $ad){
+                if($lang === 'kz'){
+                    $ad->description_kz ? $ad->description = $ad->description_kz : $ad->description;
+                }elseif($lang === 'en'){
+                    $ad->description_en ? $ad->description = $ad->description_en : $ad->description;
+                }
+            }
+        }
+
+
         $comments = Comments::find()->where(['active' => 1])->all();
         $mailForm = new Mainform();
 

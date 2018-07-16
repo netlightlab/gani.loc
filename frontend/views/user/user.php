@@ -11,7 +11,7 @@ $cities = new Cities();
 $this->title = 'Личный кабинет';
 
 ?>
-<section class="section-header" style="background: url('../common/img/header/profile.jpg')">
+<section class="section-header" style="background: url(<?= Yii::getAlias('@web') ?>'/common/img/header/profile.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -43,10 +43,10 @@ $this->title = 'Личный кабинет';
             <div class="col-md-12">
                 <?= Alert::widget() ?>
                 <ul id="w1" class="cabinet-nav nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link" href="#orders" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/list.png"><span>Заказы</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#ads" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/like.png"><span>Мои объявления</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/locked.png"><span>Настройки</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="../common/img/profile/user.png"><span>Профиль</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#orders" data-toggle="tab" aria-expanded="true"><img src="<?= Yii::getAlias('@web') ?>/common/img/profile/list.png"><span>Заказы</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ads" data-toggle="tab" aria-expanded="true"><img src="<?= Yii::getAlias('@web') ?>/common/img/profile/like.png"><span>Мои объявления</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" aria-expanded="true"><img src="<?= Yii::getAlias('@web') ?>/common/img/profile/locked.png"><span>Настройки</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#profile" data-toggle="tab" aria-expanded="true"><img src="<?= Yii::getAlias('@web') ?>/common/img/profile/user.png"><span>Профиль</span></a></li>
                 </ul>
                 <div id="cabinet-tab" class="tab-content">
                     <div id="orders" class="tab-pane set-tab-content">

@@ -52,9 +52,9 @@ class Categories extends \yii\db\ActiveRecord
             if($lang === 'ru'){
                 $result[$category['id']] = $category['name'];
             }elseif($lang === 'kz'){
-                $result[$category['id']] = $category['name_kz'];
+                 $category['name_kz'] ? $result[$category['id']] = $category['name_kz'] : $result[$category['id']] = $category['name'];
             }else{
-                $result[$category['id']] = $category['name_en'];
+                $category['name_en'] ? $result[$category['id']] = $category['name_en'] : $result[$category['id']] = $category['name'];
             }
         }
         return $result;

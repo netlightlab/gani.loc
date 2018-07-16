@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\MaskedInput;
 
-$this->title = 'Регистрация';
+$this->title = Yii::t('app', 'Регистрация');
 ?>
 
 
@@ -18,7 +18,7 @@ $this->title = 'Регистрация';
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="py-3 registr-description" align="center">Регистрация</h1>
+                <h1 class="py-3 registr-description" align="center"><?= $this->title ?></h1>
             </div>
         </div>
     </div>
@@ -30,6 +30,10 @@ $this->title = 'Регистрация';
             <div class="col-md-12">
                 <?php $this->params['breadcrumbs'][] = $this->title; ?>
                 <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => Yii::t('app', 'Главная'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
                 <?= Alert::widget() ?>
@@ -44,7 +48,7 @@ $this->title = 'Регистрация';
         <div class="row">
             <div class="col-md-12">
                 <div class="text-left pt-3">
-                    <h3>Информация для входа</h3>
+                    <h3><?= Yii::t('app', 'Информация для входа') ?></h3>
                 </div>
                 <hr>
             </div>
@@ -52,21 +56,21 @@ $this->title = 'Регистрация';
         <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             <div class="row">
                 <div class="offset-md-3 col-md-6">
-                    <?= $form->field($model, 'username')->textInput(['placeholder' => 'Например: Иван'])->label('Отображаемое имя*') ?>
+                    <?= $form->field($model, 'username')->textInput(['placeholder' => 'Например: Иван'])->label(Yii::t('app', 'Отображаемое имя').'*') ?>
                 </div>
                 <div class="offset-md-3 col-md-6">
                     <?= $form->field($model, 'email')->textInput(['placeholder' => 'Например: info@KazTravel.kz'])->label('E-mail*') ?>
                 </div>
                 <div class="offset-md-3 col-md-6">
-                    <?= $form->field($model, 'password')->passwordInput()->label('Придумайте пароль*') ?>
+                    <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Придумайте пароль').'*') ?>
                 </div>
                 <div class="offset-md-3 col-md-6">
                     <div class="form-group">
-                        <?= Html::submitButton('Зарегистрироваться', ['class' => 'authorization-btn', 'name' => 'signup-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Зарегистрироваться'), ['class' => 'authorization-btn', 'name' => 'signup-button']) ?>
                     </div>
                 </div>
                 <div class="offset-md-3 col-md-6 pb-3">
-                    <?= Html::a('Регистрация для партнера',['signup_company'], ['class' => 'registr-partner-btn']) ?>
+                    <?= Html::a(Yii::t('app','Регистрация для партнера'),['signup_company'], ['class' => 'registr-partner-btn']) ?>
                 </div>
             </div>
         <?php ActiveForm::end(); ?>
