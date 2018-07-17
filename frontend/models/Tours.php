@@ -22,13 +22,23 @@ use common\models\User;
  * @property integer $category_id
  * @property integer $city_id
  * @property string $name
+ * @property string $name_en
+ * @property string $name_kz
  * @property string $description
+ * @property string $description_en
+ * @property string $description_kz
  * @property string $mini_description
+ * @property string $mini_description_en
+ * @property string $mini_description_kz
  * @property string $dot_place
  * @property string $dot_place_addr
  * @property string $tour_language
  * @property string $conditions
+ * @property string $conditions_en
+ * @property string $conditions_kz
  * @property string $return_cond
+ * @property string $return_cond_en
+ * @property string $return_cond_kz
  * @property string $back_image
  * @property string $mini_image
  * @property string $gallery
@@ -78,12 +88,18 @@ class Tours extends ActiveRecord
             ['category_id', 'trim'],
             ['city_id', 'trim'],
 
+            ['name_en', 'trim'],
+            ['name_kz', 'trim'],
             ['name', 'trim'],
             ['name', 'required', 'message' => 'Необходимо указать название компании!'],
 
+            ['description_en', 'trim'],
+            ['description_kz', 'trim'],
             ['description', 'trim'],
             ['description', 'required', 'message' => 'Необходимо заполнить описание компании!'],
 
+            ['mini_description_en', 'trim'],
+            ['mini_description_kz', 'trim'],
             ['mini_description', 'trim'],
             ['mini_description', 'required', 'message' => 'Необходимо заполнить краткое описание компании!'],
 
@@ -96,7 +112,11 @@ class Tours extends ActiveRecord
             ['price_child_free', 'required', 'message' => 'Необходимо указать возраст ребенка, подходящий для бесплатного билета!'],
 
             ['conditions', 'trim'],
+            ['conditions_en', 'trim'],
+            ['conditions_kz', 'trim'],
             ['return_cond', 'trim'],
+            ['return_cond_en', 'trim'],
+            ['return_cond_kz', 'trim'],
             ['back_image', 'trim'],
             ['mini_image', 'trim'],
             ['gallery', 'trim'],

@@ -11,7 +11,22 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\models\Categories;
 
-$this->title = $tour->name;
+$lang = Yii::$app->language;
+if($lang === 'ru'){
+    $this->title = $tour->name;
+}elseif($lang === 'kz'){
+    $tour->name_kz ? $this->title = $tour->name_kz : $this->title;
+    $tour->name_kz ? $tour->name = $tour->name_kz : $tour->name;
+    $tour->description_kz ? $tour->description = $tour->description_kz : $tour->description;
+    $tour->conditions_kz ? $tour->conditions = $tour->conditions_kz : $tour->conditions;
+    $tour->return_cond_kz ? $tour->return_cond = $tour->return_cond_kz : $tour->return_cond;
+}elseif($lang === 'en'){
+    $tour->name_en ? $this->title = $tour->name_en : $this->title;
+    $tour->name_en ? $tour->name = $tour->name_en : $tour->name;
+    $tour->description_en ? $tour->description = $tour->description_en : $tour->description;
+    $tour->conditions_en ? $tour->conditions = $tour->conditions_en : $tour->conditions;
+    $tour->return_cond_en ? $tour->return_cond = $tour->return_cond_en : $tour->return_cond;
+}
 $category = new Categories();
 $iuser = new \common\models\User();
 
@@ -80,13 +95,13 @@ $iuser = new \common\models\User();
                                                     <?= $tour->description ?>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <span class="h4">Точка сбора:</span>
+                                                    <span class="h4"><?= Yii::t('app', 'Точка сбора') ?>:</span>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <p><?= $tour->dot_place_addr ?></p>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <span class="h4">Доступные языки тура или развлечения:</span>
+                                                    <span class="h4"><?= Yii::t('app', 'Доступные языки тура или развлечения') ?>:</span>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <p><?= $tour->tour_language ?></p>
@@ -98,7 +113,7 @@ $iuser = new \common\models\User();
                                                 </div>
                                                 <?php if ($tour->w_included): ?>
                                                     <div class="col-md-12">
-                                                        <span class="h4">Что входит в тур:</span>
+                                                        <span class="h4"><?= Yii::t('app', 'Что входит в тур') ?>:</span>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <p><?= $tour->w_included ?></p>
@@ -106,7 +121,7 @@ $iuser = new \common\models\User();
                                                 <?php endif; ?>
                                                 <?php if ($gallery):?>
                                                     <div class="col-md-12">
-                                                        <span class="h4">Галерея фотографии:</span>
+                                                        <span class="h4"><?= Yii::t('app', 'Галерея фотографий') ?>:</span>
                                                         <?php
                                                         echo newerton\fancybox\FancyBox::widget([
                                                             'target' => 'a[rel=fancybox]',
@@ -279,7 +294,7 @@ $iuser = new \common\models\User();
                                                 <?php if($isauthorize): ?>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <a id="<?= $comment->id ?>" class="comment_reply">Ответить</a>
+                                                        <a id="<?= $comment->id ?>" class="comment_reply"><?= Yii::t('app', 'Ответить') ?></a>
                                                     </div>
                                                     <div class="col-md-6 text-right">
                                                         <p class="m-0"><?= date("d-m-Y", strtotime($comment->date)); ?></p>
@@ -337,7 +352,7 @@ $iuser = new \common\models\User();
                         <div class="row">
                             <div class="col-md-12 mt-5">
                                 <?php $form = ActiveForm::begin(['id' => 'form-review', "action" => "", "options" => ['ecntype' => 'multipart/form-data']]); ?>
-                                <span class="h5">Оставить отзыв</span>
+                                <span class="h5"><?= Yii::t('app', 'Оставить отзыв') ?></span>
                                 <div class="col-md-12">
                                     <div class="rating_click">
                                         <?= Html::a(Html::img(["@web/common/img/tour-hit/likes.png"]), '#', ['id' => 1, 'data-value_rating' => "20"]) ?>
@@ -374,11 +389,11 @@ $iuser = new \common\models\User();
                                     ?>
                                 </div>
                                 <div class="col-md-4 mt-3">
-                                    <?= Html::submitButton('Отправить', ['class' => 'btn_map', 'name' => 'submit']) ?>
+                                    <?= Html::submitButton(Yii::t('app', 'Отправить'), ['class' => 'btn_map', 'name' => 'submit']) ?>
                                 </div>
                                 <div class="col-md-12 my-4">
-                                    <span style="color: red;">Важно!!</span>
-                                    <span>Данный отзыв будет рассмотрен модератором, после чего он появиться на сайте!</span>
+                                    <span style="color: red;"><?= Yii::t('app','Важно') ?>!!</span>
+                                    <span><?= Yii::t('app', 'Данный отзыв будет рассмотрен модератором, после чего он появиться на сайте') ?>!</span>
                                 </div>
                                 <?php ActiveForm::end(); ?>
                             </div>

@@ -7,6 +7,8 @@ $this->title = 'Туры и экскурсии по Казахстану по л
 use yii\helpers\Html;
 use common\models\Categories;
 
+$lang = Yii::$app->language;
+
 $category = new Categories();
 
 ?>
@@ -88,7 +90,16 @@ $category = new Categories();
                                 <span class="h4"><?= $category->getCategoryName($tour->category_id) ?></span>
                             </div>
                         </div>
-                        <span class="h5"><?= $tour->name ?></span>
+                        <span class="h5"><?
+                                if($lang === 'ru'){
+                                    echo $tour->name;
+                                }elseif($lang === 'kz'){
+                                    echo $tour->name_kz ? $tour->name_kz : $tour->name;
+                                }else{
+                                    echo $tour->name_en ? $tour->name_en : $tour->name;
+                                }
+
+                            ?></span>
                     </div>
                 </articles>
             <?php endforeach; ?>
