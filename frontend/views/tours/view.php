@@ -70,6 +70,7 @@ $iuser = new \common\models\User();
         <div class="container">
             <div class="row py-5">
                 <main id="single_tour_desc" class="col-md-8">
+                    <noindex>
                     <div id="single-fix" class="row">
                         <div class="col-md-12">
                             <ul id="w1" class="nav view_tour-tabs">
@@ -325,8 +326,12 @@ $iuser = new \common\models\User();
                                                            </div>
                                                            <div class="col-md-10">
                                                                <div class="c-reply-header">
-                                                                   <p class="fio"><?= $iuser->getUserName($item->user_id); ?></p>
-                                                                   <p class="date"><?= date("d-m-Y", strtotime($item->date)); ?></p>
+                                                                    <?php if($isauthorize): ?>
+                                                                        <p class="fio f-reply" data-comment="<?= $comment->id ?>"><?= $iuser->getUserName($item->user_id); ?></p>
+                                                                    <?php else: ?>
+                                                                        <p class="fio"><?= $iuser->getUserName($item->user_id); ?></p>
+                                                                    <?php endif; ?>
+                                                                    <p class="date"><?= date("d-m-Y", strtotime($item->date)); ?></p>
                                                                </div>
                                                            </div>
                                                            <div class="offset-md-2 col-md-10">
@@ -343,11 +348,11 @@ $iuser = new \common\models\User();
                                 <?php else: ?>
                                     <span class="h4" align="center">В данном туре отзывы отсутствуют, <span><b>будьте первыми!</b></span></span>
                                 <?php endif; ?>
-								</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-				
+                    </noindex>
                     <? if($isauthorize): ?>
                         <div class="row">
                             <div class="col-md-12 mt-5">
@@ -635,6 +640,53 @@ JS;
 
 $replyComment = <<<JS
 
+    $('p.f-reply').on('click', function(){
+        var id = $(this).attr('data-comment');
+        var fio = $(this)[0].innerText;
+        var elem = $(this).parent();
+
+        $('p.f-reply').parent().parent().next().find('form').remove();
+        
+        if (!$(this).parent().children('form')[0]) {
+            $('<form>', {class: 'nt-reply mt-3',method: 'post', id: id, enctype: 'multipart/form-data'}).appendTo($(this).parent().parent().next()).append(
+                '<span id="comment-prefix">@' + fio + ', </span>',
+            '<textarea id="formCReply" class="form-control cmReply-area" required="true" aria-required="true" autofocus autocomplete="off" required maxlength="1000" rows="1">').append(
+                '<div class="CReply-formGroup">' +
+                '<a class="closeCReply">Отменить</a>' +
+                '<input type="text" name="CommentsReply[comment_id]" value="'+id+'" hidden>' +
+                '<input id="h-comment" type="text" name="CommentsReply[comment]" hidden>' +
+                '<button type="submit" name="submit">Отправить</button>' +                
+                 '</div></form>'
+            );
+            
+            var w_prefix = $('span#comment-prefix').width();
+
+            $('textarea#formCReply').css('padding-left', w_prefix + 8 + 'px');
+            
+            $('form.nt-reply').on("submit", function(e){
+                $('input#h-comment').val($('span#comment-prefix')[0].innerText + ' ' + $('textarea.cmReply-area').val());
+                e.preventDefault();
+                var data = $(this).serialize();
+                console.log(data);
+                
+                $.ajax({
+                    url: '/tours/' + $tour->id,
+                    method: 'POST',
+                    data: data,
+                    success: function(response){
+                        $('p.f-reply').parent().parent().next().find('form').remove();
+                    }            
+                });
+            });
+        }
+        
+        setTimeout(function() {
+            $('span#comment-prefix').css({'left': 0, 'opacity': 1});
+            $('p.f-reply').parent().parent().next().find('.cmReply-area').css("width", "100%");
+        }, 100);
+        
+    })
+
      $('a.comment_reply').on('click', function(){
          var id = $(this).attr('id');
          var elem = $(this).parent();
@@ -680,17 +732,7 @@ $replyComment = <<<JS
         setTimeout(function() {
           elem.parent().find('.cmReply-area').css("width", "100%");
         }, 100);
-        
-        
-        
-        
-        
      });
-
-    
-
-  
-
 JS;
 
 $this->registerJs($replyComment);

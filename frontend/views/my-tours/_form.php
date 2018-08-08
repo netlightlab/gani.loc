@@ -90,11 +90,11 @@ $category = new Categories;
                 <p style="margin-bottom:1rem;"><strong>Для более корректного отображения Ваших изображений рекомендуется их подготовить учитывая</strong></p>
             </div>
             <div class="col-md-6 py-4">
-                <p style="margin-bottom:2rem;">ЗАГРУЗКА ИЗОБРАЖЕНИЯ (800 X 533)<span style="color: red;">*</span></p>
+                <p style="margin-bottom:2rem;">ЗАГРУЗКА ОБЛОЖКИ ИЗОБРАЖЕНИЯ (800 X 533)<span style="color: red;">*</span></p>
                 <?= $form->field($model, 'mini_image')->fileInput()->label('') ?>
             </div>
             <div class="col-md-6  py-4">
-                <p style="margin-bottom:2rem;">ЗАГРУЗКА ИЗОБРАЖЕНИЯ (1600 X 450)<span style="color: red;">*</span></p>
+                <p style="margin-bottom:2rem;">ЗАГРУЗКА ФОНОВОГО ИЗОБРАЖЕНИЯ (1600 X 450)<span style="color: red;">*</span></p>
                 <?= $form->field($model, 'back_image')->fileInput()->label('') ?>
             </div>
             <div class="col-md-12">

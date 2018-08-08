@@ -1814,6 +1814,10 @@ hr.commentsLine {
     border: 1px solid #ddd;
 }
 
+#form-review span.h5 {
+    display: block;
+}
+
 h3.order_number {
     padding: 5px;
     margin: 0;
@@ -2522,4 +2526,38 @@ c-reply:nth-of-type(1) {
 
 c-reply:last-child {
     border-bottom: none;
+}
+
+div#info div.row div.col-md-9 div {
+    max-width: 100%;
+}
+
+div#info div.row div.col-md-9 table,
+div#info div.row div.col-md-9 tbody,
+div#info div.row div.col-md-9 td,
+div#info div.row div.col-md-9 tr {
+    max-width: 100%;
+    width: 100% !important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #000;
+}
+
+form.nt-reply {
+    position: relative;
+}
+
+p.f-reply {
+    cursor: pointer;
+}
+
+form.nt-reply span#comment-prefix {
+    color: red;
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    transition: .5s;
+    opacity: 0;
 }

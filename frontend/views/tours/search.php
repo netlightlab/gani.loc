@@ -101,7 +101,7 @@ $category = new Categories();
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="alltours_description">
                                             <?= Html::a('<p class="h3">'.$tour->name.'</p>', ['/tours/view/', 'id' => $tour->id]) ?>
-                                            <span><?= $tour->mini_description ?></span>
+                                            <noindex><span><?= $tour->mini_description ?></span></noindex>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2">
