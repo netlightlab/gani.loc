@@ -29,6 +29,7 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
         'r' => 
         array (
             'rmrevin\\yii\\fontawesome\\' => 24,
+            'richardfan\\sortable\\' => 20,
         ),
         'p' => 
         array (
@@ -131,6 +132,10 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
         'rmrevin\\yii\\fontawesome\\' => 
         array (
             0 => __DIR__ . '/..' . '/rmrevin/yii2-fontawesome',
+        ),
+        'richardfan\\sortable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/richardfan1126/yii2-sortable-gridview',
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
@@ -443,7 +448,7 @@ class ComposerStaticInit33057934f3e7eaaa1ce2d53797277936
         'PHPUnit_Util_TestDox_ResultPrinter_Text' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/TestDox/ResultPrinter/Text.php',
         'PHPUnit_Util_TestSuiteIterator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/TestSuiteIterator.php',
         'PHPUnit_Util_Type' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Type.php',
-        'PHPUnit_Util_XML' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/XML.php',
+        'PHPUnit_Util_XML' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml.php',
         'PHP_CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'PHP_CodeCoverage_Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver.php',
         'PHP_CodeCoverage_Driver_HHVM' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver/HHVM.php',

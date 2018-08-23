@@ -43,7 +43,7 @@ class Search extends Tours
     public function search($params)
     {
 
-        $query = Tours::find();
+        $query = Tours::find()->orderBy(['tsort' => SORT_ASC]);
 
         // add conditions that should always apply here
 

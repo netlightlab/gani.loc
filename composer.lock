@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "6192e88018aaae5415ecebcb6e3ed2a3",
-=======
-    "content-hash": "3ef235f8fc0540bb17f16afedceca825",
->>>>>>> 46cc21e59cfb202c4add727115ac15a7881d5473
+    "content-hash": "c769710c38386da5d1118e7687e84308",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -182,7 +178,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -661,6 +657,51 @@
                 "yii2"
             ],
             "time": "2015-11-09T11:28:44+00:00"
+        },
+        {
+            "name": "richardfan1126/yii2-sortable-gridview",
+            "version": "v0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/richardfan1126/yii2-sortable-gridview.git",
+                "reference": "405061090b1d810146bf39cae521969ae56f22e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/richardfan1126/yii2-sortable-gridview/zipball/405061090b1d810146bf39cae521969ae56f22e5",
+                "reference": "405061090b1d810146bf39cae521969ae56f22e5",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "~2.0.0",
+                "yiisoft/yii2-jui": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "richardfan\\sortable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Fan",
+                    "email": "richardfan1126@gmail.com",
+                    "homepage": "https://fancy-digital.com"
+                }
+            ],
+            "description": "Sortable GridView for Yii2",
+            "keywords": [
+                "extension",
+                "gridview",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-04-19T06:20:33+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",

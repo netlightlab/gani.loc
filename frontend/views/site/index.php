@@ -2,7 +2,18 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+if($lang === 'ru'){
+	$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+	$this->registerMetaTag(['name' => 'description', 'content' => 'asdasd']);
+}elseif($lang === 'kz'){
+	$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+	$this->registerMetaTag(['name' => 'description', 'content' => 'asdasd']);
+}else{
+	$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+	$this->registerMetaTag(['name' => 'description', 'content' => 'asdasd']);
+}
+
+
 
 use yii\helpers\Html;
 use common\models\Categories;

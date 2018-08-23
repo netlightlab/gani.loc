@@ -16,6 +16,7 @@ use frontend\models\Tours;
 use yii\data\ActiveDataProvider;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
+use Yii;
 
 class ToursController extends Controller
 {
@@ -45,6 +46,7 @@ class ToursController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Tours::find(),
         ]);
+        $dataProvider->pagination = false;
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -64,6 +66,17 @@ class ToursController extends Controller
         \Yii::$app->session->setFlash('success', 'Тур был успешно удален!');
 
         return $this->redirect(['index']);
+    }
+
+    public function actionSortItem()
+    {
+        $req = Yii::$app->request->post('items');
+
+        foreach($req as $key => $item){
+            $model = $this->findModel($item);
+            $model->tsort = $key;
+            $model->save(false);
+        }
     }
 
     /**

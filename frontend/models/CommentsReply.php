@@ -13,6 +13,7 @@ use yii\db\ActiveRecord;
  * @property int $tour_id
  * @property string $comment
  * @property int $date
+ * @property boolean $active
  */
 class CommentsReply extends ActiveRecord
 {
@@ -30,6 +31,7 @@ class CommentsReply extends ActiveRecord
     public function rules()
     {
         return [
+            ['active', 'default', 'value' => 0],
             ['comment', 'required'],
             ['comment_id', 'trim'],
             ['comment', 'trim'],

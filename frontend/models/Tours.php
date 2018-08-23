@@ -48,6 +48,7 @@ use common\models\User;
  * @property integer $status
  * @property integer $price
  * @property string $official_name
+ * @property integer $tsort
  */
 class Tours extends ActiveRecord
 {
@@ -130,7 +131,7 @@ class Tours extends ActiveRecord
 
             ['official_name', 'trim'],
             ['official_name', 'required', 'message' => 'Укажите официальное название компании!'],
-
+            ['tsort', 'integer']
         ];
     }
 

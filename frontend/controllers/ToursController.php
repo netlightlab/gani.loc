@@ -142,7 +142,7 @@ class ToursController extends Controller
     }
 
     public function getCommetsReply() {
-        return CommentsReply::find()->where(['tour_id' => Yii::$app->request->get('id')])->all();
+        return CommentsReply::find()->where(['tour_id' => Yii::$app->request->get('id')])->andWhere(['active' => 1])->all();
     }
 
 

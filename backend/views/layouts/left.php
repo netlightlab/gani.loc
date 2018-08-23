@@ -40,6 +40,7 @@
                     ['label' => 'Каталог туров', 'icon' => 'map','url' => ['/catalog/index']],
                     ['label' => 'Туры', 'icon' => 'map','url' => ['/tours/index']],
                     ['label' => 'Комментарии', 'icon' => 'map','url' => ['/comments/index']],
+                    ['label' => 'Ответы на комментарии', 'icon' => 'map','url' => ['/comments-reply/index']],
                     ['label' => 'Объявления', 'icon' => 'map','url' => ['/ads/index']],
                     ['label' => 'Заказы', 'icon' => 'map','url' => ['/orders/index']],
                     ['label' => 'Новости', 'icon' => 'map','url' => ['/news/index']],

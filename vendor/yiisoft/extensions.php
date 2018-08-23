@@ -138,4 +138,13 @@ return array (
       '@newerton/fancybox' => $vendorDir . '/newerton/yii2-fancybox',
     ),
   ),
+  'richardfan1126/yii2-sortable-gridview' => 
+  array (
+    'name' => 'richardfan1126/yii2-sortable-gridview',
+    'version' => '0.0.5.0',
+    'alias' => 
+    array (
+      '@richardfan/sortable' => $vendorDir . '/richardfan1126/yii2-sortable-gridview',
+    ),
+  ),
 );

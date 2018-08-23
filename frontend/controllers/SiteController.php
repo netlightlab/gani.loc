@@ -128,7 +128,7 @@ class SiteController extends Controller
     }
 
     public function getMainTours() {
-        return Tours::find()->select('id, mini_image, price, name, name_en, name_kz, category_id')->orderBy(['id' => SORT_DESC])->limit(9)->all();
+        return Tours::find()->select('id, mini_image, price, name, name_en, name_kz, category_id')->orderBy(['tsort' => SORT_ASC])->limit(9)->all();
     }
 
     /**

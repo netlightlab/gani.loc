@@ -5,6 +5,17 @@
  * Date: 26.04.2018
  * Time: 10:32
  */
+ 
+if($lang === 'ru'){
+	$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+	$this->registerMetaTag(['name' => 'description', 'content' => 'asdasd']);
+}elseif($lang === 'kz'){
+	$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+	$this->registerMetaTag(['name' => 'description', 'content' => 'asdasd']);
+}else{
+	$this->title = 'Туры и экскурсии по Казахстану по лучшим ценам!';
+	$this->registerMetaTag(['name' => 'description', 'content' => 'asdasd']);
+}
 
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
