@@ -86,8 +86,10 @@ class CatalogController extends Controller
 
         if($lang === 'kz'){
             $item->name_kz ? $item->name = $item->name_kz : $item->name;
+            $item->text_kz ? $item->text = $item->text_kz : $item->text;
         }elseif($lang === 'en'){
             $item->name_en ? $item->name = $item->name_en : $item->name;
+            $item->text_en ? $item->text = $item->text_en : $item->text;
         }
 
         $recomendations = Tours::find()->where(['category_id' => $item->recommended])->limit(4)->all();
