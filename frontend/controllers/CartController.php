@@ -44,7 +44,7 @@ class CartController extends Controller
 
         $orders = Yii::$app->session->get('tour_id');
 
-        //print_r($_SESSION);
+        print_r($_SESSION);
 
         $model = new Orders();
 
@@ -164,7 +164,7 @@ class CartController extends Controller
 
     private $merchant_id = '10751';
     private $merchant_secret_key = 'pexabiqoqepujiqy';
-    private $test_pay = true;
+    private $test_pay = false;
     public function payOrder($orderId,$orderData){
         $arrReq = array();
         //print_r($orderData);

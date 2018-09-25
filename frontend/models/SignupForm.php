@@ -61,4 +61,32 @@ class SignupForm extends Model
 
         return null;
     }
+
+    /**
+     * Sends an email with a link, for resetting the password.
+     *
+     * @return bool whether the email was send
+     */
+    public function sendEmail() {
+
+        /* @var $user User */
+        $user = User::findOne([
+            'email' => $this->email,
+        ]);
+
+        if (!$user) {
+            return false;
+        }
+
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'signUp-html', 'text' => 'signUp-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'Eltourism.kz'])
+            ->setTo($this->email)
+            ->setSubject('Авторизационные данные для - Eltourism')
+            ->send();
+    }
 }
